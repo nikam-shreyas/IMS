@@ -1,0 +1,10 @@
+All requests forwarded to:
+localhost:4000/api
+
+1. /auth/register => register a student [post]
+2. /auth/login => login using username and password [post]
+3. /internships => get all internships [get]
+4. /internships => add a new internship [post] (requires bearer token)
+5. /internships/id => gets internship by id [get]
+6. /internships/student => gets students internships [get]
+7. /internships/id => delete internship by id [delete]

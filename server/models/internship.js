@@ -1,11 +1,35 @@
 const mongoose = require('mongoose');
 
 const internshipSchema = new mongoose.Schema({
-    user: {
+    student: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Student'
     },
-
+    application:{
+        submittedDate:{
+            type: Date,
+            required: true
+        },
+        approvedDate:{
+            type: Date
+        },
+        workplace: {
+            type: String,
+            required: true
+        },
+        durationOfInternship: {
+            type:String,
+            required: true
+        },
+        reference:{
+            type:String
+        },
+        offerLetter:{
+            type: String, //to be changed to Document in later stages
+            required: true
+        }
+    },
+    approvedBy:[],
     docs: {
         ApplicationStatus: {
             type: String,
