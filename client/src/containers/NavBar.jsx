@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {logout} from '../store/actions';
 import { store } from '../store';
 const Navbar=({auth,logout})=>(
-    
 <div className='navbar'>
     <div className='container'>
     <ul className='navbar-container'>

@@ -5,26 +5,26 @@ const studentSchema = new mongoose.Schema({
     name:{
         firstname:{
             type: String,
-            required: true,
+            required: false,
         },
         lastname:{
             type: String,
-            required: true,
+            required: false,
         }
     },
     class:{
         year:{
             type:Number,
-            required: true,
+            required: false,
         },
         div:{
             type: Number,
-            required: true
+            required: false,
         }
     },
     prevSemAttendance:{
         type:Number,
-        required:true,
+        required:false,
     },
     applicationsApproved:[],
     marksheets:[],
