@@ -1,19 +1,10 @@
-import {SET_CURRENT_USER} from '../actionTypes';
-
-const DEFAULT_STATE={
-    isAuthenticated:false,
-    user:{}
+import {ADD_ERROR,REMOVE_ERROR} from '../actionTypes';
+export default(state={message:null},action)=>{
+switch(action.type){
+    case ADD_ERROR:
+        return {...state,message: action.error};
+    case REMOVE_ERROR:
+        return {...state,message:null};
+    default:return state;
 }
-
-export default(state=DEFAULT_STATE,action)=>{
-    switch(action.type){
-        case SET_CURRENT_USER:
-            return{
-                isAuthenticated:!!Object.keys(action.user).length,
-                user:action.user
-            }
-            default:
-                return state;
-
-    }
 }
