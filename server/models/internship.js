@@ -29,7 +29,12 @@ const internshipSchema = new mongoose.Schema({
             required: true
         }
     },
-    approvedBy:[],
+    approvedBy:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'faculty',
+        }
+    ],
     docs: {
         ApplicationStatus: {
             type: String,
@@ -58,7 +63,7 @@ const internshipSchema = new mongoose.Schema({
         },
         holder: {
             type: String,
-            default: 'Class coordinator'
+            default: 'ClassCoordinator'
         }
     });
 

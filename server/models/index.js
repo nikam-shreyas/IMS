@@ -9,3 +9,5 @@ mongoose.connect('mongodb://localhost/internship');
 module.exports.Student = require('./student');
 
 module.exports.Internship = require('./internship');
+
+module.exports.Faculty = require('./faculty');

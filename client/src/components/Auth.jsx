@@ -1,13 +1,15 @@
 import React,{Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 
-import {authUser,logout} from '../store/actions';
+import {authUser,logout,authUser_f,logout_f,authUser_a} from '../store/actions';
+import { Redirect } from 'react-router-dom';
 class Auth extends Component{
     constructor(props){
         super(props);
         this.state={
             username:'',
-            password:''
+            password:'',
+            User_type:'1'
         };
         this.handleChange=this.handleChange.bind(this);
         this.handleSubmit=this.handleSubmit.bind(this);
@@ -15,16 +17,25 @@ class Auth extends Component{
 
 handleChange(e){
 this.setState({[e.target.name]: e.target.value});
+//console.log(this.state.User_type);
 }
 
 
 
 handleSubmit(e){
-const {username,password}=this.state;
+const {username,password,User_type}=this.state;
 const {authType}=this.props;
 e.preventDefault();
 console.log(username,password);
+if(User_type==='1'){
 this.props.authUser(authType || 'login',{username,password});
+}
+if(User_type==='2'){
+this.props.authUser_f('login_faculty',{username,password});
+}
+if(User_type==='3'){
+    this.props.authUser_a('login_admin',{username,password});
+    }
 }
 
 
@@ -49,6 +60,17 @@ this.props.authUser(authType || 'login',{username,password});
                 name="password" 
                 autoComplete="off"
                 onChange={this.handleChange}/>
+
+               
+                <select  name="User_type" defaultValue='1' onChange={this.handleChange}>
+                        {/* <option name="" value="0" selected>Select table</option> */}
+                        <option name="student" value="1" >STUDENT</option>
+                        <option name="faculty" value="2">FACULTY</option>
+                        <option name="admin" value="3">ADMIN</option>
+                </select>
+
+
+
                 <div className='button_center'>
                 <button className='button' type="submit">Submit</button>
                 </div>
@@ -60,5 +82,5 @@ this.props.authUser(authType || 'login',{username,password});
 
 export default connect(
     ()=>({}),
-    {authUser,logout}
+    {authUser,logout,authUser_f,logout_f,authUser_a}
     )(Auth);
