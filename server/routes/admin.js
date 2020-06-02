@@ -14,4 +14,10 @@ const auth = require('../middlewares/auth');
 // router.route('/findall')
 // .post(auth,handle.findall);
 
+//router.post('/login_faculty',handle.login_faculty);
+
+router.post('/register_faculty',handle.register_faculty);
+
+router.post('/login_admin',handle.login_admin);
+
 module.exports = router;
