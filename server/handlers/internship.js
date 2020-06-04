@@ -27,7 +27,8 @@ exports.addNewInternship = async (req,res,next)=>{
 
 exports.showInternships = async (req,res,next)=>{
     try {
-        const internships = await db.Internship.find().populate('student',['studentname','id']);
+        //const internships = await db.internships.find().populate('student',['studentname','id']);
+        const internships = await db.Internship.find().populate('internships');
         res.status(200).json(internships);
     } catch (err) {
         err.status(400);

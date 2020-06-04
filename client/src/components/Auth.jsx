@@ -1,5 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React,{Component} from 'react';
+import {connect} from 'react-redux';
+
+import {authUser,logout,authUser_f,logout_f,authUser_a} from '../store/actions';
+//import { Redirect } from 'react-router-dom';
+class Auth extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            username:'',
+            password:'',
+            User_type:'1'
+        };
+        this.handleChange=this.handleChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
+    }
+
+handleChange(e){
+this.setState({[e.target.name]: e.target.value});
+//console.log(this.state.User_type);
+}
 
 import {
   authUser,
