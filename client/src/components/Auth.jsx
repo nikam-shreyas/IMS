@@ -1,8 +1,8 @@
-import React,{Component, Fragment} from 'react';
+import React,{Component} from 'react';
 import {connect} from 'react-redux';
 
 import {authUser,logout,authUser_f,logout_f,authUser_a} from '../store/actions';
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 class Auth extends Component{
     constructor(props){
         super(props);
