@@ -47,10 +47,10 @@ class Auth extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div>
-        <form className="form" onSubmit={this.handleSubmit}>
+      <div className="container card mx-auto my-5">
+        <form className="form-group" onSubmit={this.handleSubmit}>
           <label className="form-label" htmlFor="username">
-            username
+            Username
           </label>
           <input
             className="input"
@@ -58,42 +58,47 @@ class Auth extends Component {
             value={username}
             name="username"
             autoComplete="off"
+            className="form-control"
             onChange={this.handleChange}
           />
 
           <label className="form-label" htmlFor="password">
-            password
+            Password
           </label>
           <input
             className="input"
             type="password"
             value={password}
             name="password"
+            className="form-control"
             autoComplete="off"
             onChange={this.handleChange}
           />
 
-          <select
-            name="User_type"
-            defaultValue="1"
-            onChange={this.handleChange}
-          >
-            {/* <option name="" value="0" selected>Select table</option> */}
-            <option name="student" value="1">
-              STUDENT
-            </option>
-            <option name="faculty" value="2">
-              FACULTY
-            </option>
-            <option name="admin" value="3">
-              ADMIN
-            </option>
-          </select>
-
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Role:</label>
+            <select
+              name="User_type"
+              defaultValue="1"
+              onChange={this.handleChange}
+              class="form-control"
+              id="exampleFormControlSelect1"
+            >
+              <option name="student" value="1">
+                STUDENT
+              </option>
+              <option name="faculty" value="2">
+                FACULTY
+              </option>
+              <option name="admin" value="3">
+                ADMIN
+              </option>
+            </select>
+          </div>
           {/* <Auth_Page User_type={this.state.User_type}/> */}
 
           <div className="button_center">
-            <button className="button" type="submit">
+            <button className="btn btn-dark" type="submit">
               Submit
             </button>
           </div>
