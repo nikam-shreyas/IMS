@@ -14,7 +14,7 @@ class Internships extends Component{
 
     render(){
        // const {auth,getInternships,getStudentInternships} =this.props;
-        const internships=this.props.internships.map(internship => <li  key={internship._id}>{internship.holder}</li>);
+        const internships=this.props.internships.map(internship => <li  key={internship._id}>{internship.student}</li>);
 
 
     return <Fragment><ul>{internships}hi</ul></Fragment>

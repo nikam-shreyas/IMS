@@ -11,13 +11,13 @@ const Navbar=({auth,logout})=>(
         <li>
             <Link className='navbar-brand' to='/'>Home</Link>
         </li>
-   {!auth.isAuthenticated && <Fragment><li> 
+   {(!auth.isAuthenticated && !auth.isAuthenticated_f && !auth.isAuthenticated_a)&& <Fragment><li> 
        <Link className="navbar-item" to='/Register'>Register</Link>
     </li>
    <li> 
        <Link className="navbar-item" to='/login'>Login</Link>
     </li></Fragment>}
-   {auth.isAuthenticated && <Fragment>
+   {(auth.isAuthenticated || auth.isAuthenticated_f || auth.isAuthenticated_a) && <Fragment>
        {/* <li>
        <Link className="navbar-item" to="/poll/new">Create Poll</Link>
    </li> */}
@@ -25,7 +25,7 @@ const Navbar=({auth,logout})=>(
        <a className="navbar-item" onClick={logout}>Logout</a>
    </li></Fragment>}
     </ul>
-{auth.isAuthenticated && (<p className='navbar-user'>Logged in as {auth.user.username}</p>)}
+{(auth.isAuthenticated || auth.isAuthenticated_f || auth.isAuthenticated_a) && (<p className='navbar-user'>Logged in as {auth.user.username}</p>)}
 </div>
 </div>
 );
