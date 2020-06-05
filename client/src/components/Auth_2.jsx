@@ -23,6 +23,15 @@ class Auth_2 extends Component {
     e.preventDefault();
     console.log(username, password);
     this.props.authUser(authType || "login", { username, password });
+    window.location = "/";
+  }
+
+  handleSubmit(e) {
+    const { username, password } = this.state;
+    const { authType } = this.props;
+    e.preventDefault();
+    console.log(username, password);
+    this.props.authUser(authType || "login", { username, password });
   }
 
   render() {

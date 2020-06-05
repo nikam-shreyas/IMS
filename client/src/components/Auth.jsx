@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+//import Auth_Page from '../pages/Auth_Page';
 import {
   authUser,
   logout,
@@ -7,6 +8,7 @@ import {
   logout_f,
   authUser_a,
 } from "../store/actions";
+//import { Redirect } from 'react-router-dom';
 
 class Auth extends Component {
   constructor(props) {
@@ -32,6 +34,13 @@ class Auth extends Component {
     console.log(username, password);
     if (User_type === "1") {
       this.props.authUser(authType || "login", { username, password });
+      console.log("helllo");
+    }
+    if (User_type === "2") {
+      this.props.authUser_f("login_faculty", { username, password });
+    }
+    if (User_type === "3") {
+      this.props.authUser_a("login_admin", { username, password });
     }
     if (User_type === "2") {
       this.props.authUser_f("login_faculty", { username, password });
@@ -58,33 +67,7 @@ class Auth extends Component {
             onChange={this.handleChange}
           />
 
-          <label className="form-label" htmlFor="password">
-            password
-          </label>
-          <input
-            className="input"
-            type="password"
-            value={password}
-            name="password"
-            autoComplete="off"
-            onChange={this.handleChange}
-          />
-
-          <select
-            name="User_type"
-            defaultValue="1"
-            onChange={this.handleChange}
-          >
-            <option name="student" value="1">
-              STUDENT
-            </option>
-            <option name="faculty" value="2">
-              FACULTY
-            </option>
-            <option name="admin" value="3">
-              ADMIN
-            </option>
-          </select>
+          {/* <Auth_Page User_type={this.state.User_type}/> */}
 
           <div className="button_center">
             <button className="button" type="submit">

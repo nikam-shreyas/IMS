@@ -11,34 +11,40 @@ const Navbar = ({ auth, logout }) => (
             Home
           </Link>
         </li>
-        {!auth.isAuthenticated && (
-          <Fragment>
-            <li>
-              <Link className="navbar-item" to="/Register">
-                Register
-              </Link>
-            </li>
-            <li>
-              <Link className="navbar-item" to="/login">
-                Login
-              </Link>
-            </li>
-          </Fragment>
-        )}
-        {auth.isAuthenticated && (
+        {!auth.isAuthenticated &&
+          !auth.isAuthenticated_f &&
+          !auth.isAuthenticated_a && (
+            <Fragment>
+              <li>
+                <Link className="navbar-item" to="/Register">
+                  Register
+                </Link>
+              </li>
+              <li>
+                <Link className="navbar-item" to="/login">
+                  Login
+                </Link>
+              </li>
+            </Fragment>
+          )}
+        {(auth.isAuthenticated ||
+          auth.isAuthenticated_f ||
+          auth.isAuthenticated_a) && (
           <Fragment>
             {/* <li>
        <Link className="navbar-item" to="/poll/new">Create Poll</Link>
    </li> */}
             <li>
-              <a className="navbar-item" href="#" onClick={logout}>
+              <a className="navbar-item" onClick={logout}>
                 Logout
               </a>
             </li>
           </Fragment>
         )}
       </ul>
-      {auth.isAuthenticated && (
+      {(auth.isAuthenticated ||
+        auth.isAuthenticated_f ||
+        auth.isAuthenticated_a) && (
         <p className="navbar-user">Logged in as {auth.user.username}</p>
       )}
     </div>
