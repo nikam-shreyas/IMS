@@ -42,12 +42,6 @@ class Auth extends Component {
     if (User_type === "3") {
       this.props.authUser_a("login_admin", { username, password });
     }
-    if (User_type === "2") {
-      this.props.authUser_f("login_faculty", { username, password });
-    }
-    if (User_type === "3") {
-      this.props.authUser_a("login_admin", { username, password });
-    }
   }
 
   render() {
@@ -66,6 +60,35 @@ class Auth extends Component {
             autoComplete="off"
             onChange={this.handleChange}
           />
+
+          <label className="form-label" htmlFor="password">
+            password
+          </label>
+          <input
+            className="input"
+            type="password"
+            value={password}
+            name="password"
+            autoComplete="off"
+            onChange={this.handleChange}
+          />
+
+          <select
+            name="User_type"
+            defaultValue="1"
+            onChange={this.handleChange}
+          >
+            {/* <option name="" value="0" selected>Select table</option> */}
+            <option name="student" value="1">
+              STUDENT
+            </option>
+            <option name="faculty" value="2">
+              FACULTY
+            </option>
+            <option name="admin" value="3">
+              ADMIN
+            </option>
+          </select>
 
           {/* <Auth_Page User_type={this.state.User_type}/> */}
 

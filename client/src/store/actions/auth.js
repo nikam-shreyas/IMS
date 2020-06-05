@@ -17,15 +17,6 @@ export const logout = () => {
     localStorage.clear();
     api.setToken(null);
     dispatch(setCurrentUser({}));
-    dispatch(removeError());
-  };
-};
-
-export const logout = () => {
-  return (dispatch) => {
-    localStorage.clear();
-    api.setToken(null);
-    dispatch(setCurrentUser({}));
     window.location = "/";
     dispatch(removeError());
   };
