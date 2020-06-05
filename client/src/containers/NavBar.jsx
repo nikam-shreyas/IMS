@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { MdSubdirectoryArrowLeft } from "react-icons/md";
 import { logout } from "../store/actions";
 const Navbar = ({ auth, logout }) => (
   <div className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -50,6 +51,9 @@ const Navbar = ({ auth, logout }) => (
           auth.isAuthenticated_a) && (
           <Fragment>
             <li className="nav-item">
+              <span className="mx-2">
+                <MdSubdirectoryArrowLeft />
+              </span>
               <a onClick={logout}>Logout</a>
             </li>
           </Fragment>
