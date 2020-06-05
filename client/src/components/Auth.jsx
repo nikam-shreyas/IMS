@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-
+//import Auth_Page from '../pages/Auth_Page';
 import {authUser,logout,authUser_f,logout_f,authUser_a} from '../store/actions';
 //import { Redirect } from 'react-router-dom';
+
 class Auth extends Component{
     constructor(props){
         super(props);
@@ -29,6 +30,7 @@ e.preventDefault();
 console.log(username,password);
 if(User_type==='1'){
 this.props.authUser(authType || 'login',{username,password});
+console.log('helllo');
 }
 if(User_type==='2'){
 this.props.authUser_f('login_faculty',{username,password});
@@ -69,7 +71,7 @@ if(User_type==='3'){
                         <option name="admin" value="3">ADMIN</option>
                 </select>
 
-
+                {/* <Auth_Page User_type={this.state.User_type}/> */}
 
                 <div className='button_center'>
                 <button className='button' type="submit">Submit</button>

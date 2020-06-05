@@ -25,6 +25,7 @@ const {authType}=this.props;
 e.preventDefault();
 console.log(username,password);
 this.props.authUser(authType || 'login',{username,password});
+window.location='/';
 }
 
 
