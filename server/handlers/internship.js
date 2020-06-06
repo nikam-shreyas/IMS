@@ -53,8 +53,12 @@ exports.getInternship = async (req, res, next) => {
     const { id } = req.params;
 
     const internship = await db.Internship.findById(id).populate("student", [
-      "studentname",
-      "id",
+      "name",
+      "class",
+      "prevSemAttendance",
+      "applicationsApproved",
+      "marksheets",
+      "rollNo",
     ]);
     if (!internship) {
       throw new Error("No internship found");

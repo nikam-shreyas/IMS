@@ -8,7 +8,7 @@ class Student_Home extends Component {
     return (
       <div className="row no-gutters h-100">
         <div className="col-sm-2 sidenav">
-          <Sidenav />
+          <Sidenav activeComponent="1" />
         </div>
         <div className="col-sm-10">
           <MainContent />

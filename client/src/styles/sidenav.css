@@ -36,7 +36,13 @@ ul {
   float: left;
   padding: 0;
 }
-
+.sidenav-active {
+  color: white;
+  border-left: 0.3rem solid white;
+}
+.sidenav-active svg {
+  fill: white;
+}
 li {
   color: gray;
   padding: 0.5rem;

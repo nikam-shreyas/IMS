@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { Link, Router, Route } from "react-router-dom";
 import { getStudentInternships, deleteInternship } from "../store/actions";
 class MainContent extends Component {
   constructor(props) {
@@ -13,12 +14,12 @@ class MainContent extends Component {
   }
   handleClick(id) {
     if (window.confirm("Are you sure you want to delete this application?")) {
-      console.log(id);
       const { deleteInternship } = this.props;
       deleteInternship(id);
       window.location.reload(false);
     }
   }
+  handleView(id) {}
   render() {
     const internships = this.props.internships.map((internship) => (
       <div
@@ -116,7 +117,14 @@ class MainContent extends Component {
           >
             Delete
           </div>
-          <button className="btn btn-primary btn-sm mx-2">Update</button>
+          <Link
+            to={{
+              pathname: `/internshipdetails/${internship._id}`,
+            }}
+            className="btn btn-primary btn-sm mx-2"
+          >
+            View
+          </Link>
         </div>
       </div>
     ));
