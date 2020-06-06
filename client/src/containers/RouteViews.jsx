@@ -1,13 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Switch, Route, withRouter } from "react-router-dom";
-import Auth from "../components/Auth";
 import Student_Home from "../pages/Student_Home";
 import Faculty_Home from "../pages/Faculty_Home";
 import Admin_Home from "../pages/Admin_Home";
 import Auth_Page from "../pages/Auth_Page";
 import Auth_Page_2 from "../pages/Auth_Page_2";
-import Auth_2 from "../components/Auth_2";
 import Internships from "../components/internships";
 //import { internships } from '../store/reducers/internships';
 const RouteViews = ({ auth }) => (

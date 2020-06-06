@@ -6,7 +6,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { setCurrentUser, addError, setToken } from "../store/actions";
 import RouteViews from "./RouteViews";
 import Navbar from "./NavBar";
-import StudentDashboard from "../pages/StudentDashboard";
 
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);

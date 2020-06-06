@@ -23,15 +23,6 @@ class Auth_2 extends Component {
     e.preventDefault();
     console.log(username, password);
     this.props.authUser(authType || "login", { username, password });
-    window.location = "/";
-  }
-
-  handleSubmit(e) {
-    const { username, password } = this.state;
-    const { authType } = this.props;
-    e.preventDefault();
-    console.log(username, password);
-    this.props.authUser(authType || "login", { username, password });
   }
 
   render() {
@@ -45,7 +36,6 @@ class Auth_2 extends Component {
               Username
             </label>
             <input
-              className="input"
               type="text"
               value={username}
               name="username"
@@ -58,7 +48,6 @@ class Auth_2 extends Component {
               Password
             </label>
             <input
-              className="input"
               type="password"
               value={password}
               name="password"

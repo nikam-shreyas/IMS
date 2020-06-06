@@ -1,9 +1,5 @@
 import { addError, removeError } from "./error";
-import {
-  SET_CURRENT_USER,
-  SET_CURRENT_TEACHER,
-  SET_CURRENT_ADMIN,
-} from "../actionTypes";
+import { SET_CURRENT_TEACHER, SET_CURRENT_ADMIN } from "../actionTypes";
 import api from "../../services/api";
 
 export const setCurrentUser_f = (user) => ({

@@ -5,11 +5,11 @@ import { MdSubdirectoryArrowLeft } from "react-icons/md";
 import { logout } from "../store/actions";
 const Navbar = ({ auth, logout }) => (
   <div className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
+    <a className="navbar-brand" href="#">
       PICT IMS
     </a>
     <button
-      class="navbar-toggler"
+      className="navbar-toggler"
       type="button"
       data-toggle="collapse"
       data-target="#navbarTogglerDemo03"
@@ -17,10 +17,10 @@ const Navbar = ({ auth, logout }) => (
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <span className="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul className="navbar-nav ml-auto">
         {(auth.isAuthenticated ||
           auth.isAuthenticated_f ||

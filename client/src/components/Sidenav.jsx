@@ -15,7 +15,7 @@ class Sidenav extends Component {
             <span className="mx-2">
               <MdDns />
             </span>
-            Review Applications
+            My Applications
           </li>
           <li>
             <span className="mx-2">

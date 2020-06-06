@@ -31,10 +31,8 @@ class Auth extends Component {
     const { username, password, User_type } = this.state;
     const { authType } = this.props;
     e.preventDefault();
-    console.log(username, password);
     if (User_type === "1") {
       this.props.authUser(authType || "login", { username, password });
-      console.log("helllo");
     }
     if (User_type === "2") {
       this.props.authUser_f("login_faculty", { username, password });
@@ -77,13 +75,13 @@ class Auth extends Component {
               onChange={this.handleChange}
             />
 
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Role:</label>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlSelect1">Role:</label>
               <select
                 name="User_type"
                 defaultValue="1"
                 onChange={this.handleChange}
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlSelect1"
               >
                 <option name="student" value="1">
