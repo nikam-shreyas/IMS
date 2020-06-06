@@ -16,6 +16,7 @@ class MainContent extends Component {
       console.log(id);
       const { deleteInternship } = this.props;
       deleteInternship(id);
+      window.location.reload(false);
     }
   }
   render() {
