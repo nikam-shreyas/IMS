@@ -8,6 +8,7 @@ import Auth_Page from "../pages/Auth_Page";
 import Auth_Page_2 from "../pages/Auth_Page_2";
 import Internships from "../components/internships";
 import InternshipDetails from "../pages/InternshipDetails";
+import InternshipApplication from "../pages/InternshipApplication";
 //import { internships } from '../store/reducers/internships';
 const RouteViews = ({ auth }) => (
   <main>
@@ -43,6 +44,7 @@ const RouteViews = ({ auth }) => (
         path="/internshipdetails/:internshipid"
         render={() => <InternshipDetails />}
       />
+      <Route exact path="/apply" render={() => <InternshipApplication />} />
     </Switch>
   </main>
 );

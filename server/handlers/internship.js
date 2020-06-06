@@ -2,21 +2,24 @@ const db = require("../models");
 
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
-  const { docs, completionStatus, holder, application } = req.body;
+  const { completionStatus, holder, application } = req.body;
   try {
     const student = await db.Student.findById(id);
+
+    console.log({ student, completionStatus, holder, application });
     const internship = await db.Internship.create({
-      docs,
       student,
       completionStatus,
       holder,
       application,
     });
+    console.log("done");
     student.internships.push(internship._id);
     await student.save();
 
     return res.status(201).json({ ...internship._doc, student: student._id });
   } catch (err) {
+    console.log(err);
     next({
       status: 400,
       message: err.message,

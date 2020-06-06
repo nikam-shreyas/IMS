@@ -41,7 +41,9 @@ export const getStudentInternships = () => {
 export const createInternship = (data) => {
   return async (dispatch) => {
     try {
+      console.log("data", data);
       const internship = await api.call("post", "internships", data);
+      console.log(data, internship);
       dispatch(setInternships(internship));
       dispatch(removeError());
     } catch (err) {
