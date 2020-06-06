@@ -41,7 +41,7 @@ export const getStudentInternships = () => {
 export const createInternship = (data) => {
   return async (dispatch) => {
     try {
-      const internship = await api.call("post", "internship", data);
+      const internship = await api.call("post", "internships", data);
       dispatch(setCurrentInternship(internship));
       dispatch(removeError());
     } catch (err) {
@@ -54,8 +54,21 @@ export const createInternship = (data) => {
 export const getCurrentInternship = (path) => {
   return async (dispatch) => {
     try {
-      const internship = await api.call("get", `internship/${path}`);
+      const internship = await api.call("get", `internships/${path}`);
       dispatch(setCurrentInternship(internship));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const deleteInternship = (path) => {
+  return async (dispatch) => {
+    try {
+      const internship = await api.call("delete", `internships/${path}`);
+      dispatch(setCurrentInternship({ internship }));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;

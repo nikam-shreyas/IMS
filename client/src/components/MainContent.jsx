@@ -1,17 +1,23 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { getStudentInternships } from "../store/actions";
-
+import { getStudentInternships, deleteInternship } from "../store/actions";
 class MainContent extends Component {
   constructor(props) {
     super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     const { getStudentInternships } = this.props;
     getStudentInternships();
   }
-
+  handleClick(id) {
+    if (window.confirm("Are you sure you want to delete this application?")) {
+      console.log(id);
+      const { deleteInternship } = this.props;
+      deleteInternship(id);
+    }
+  }
   render() {
     const internships = this.props.internships.map((internship) => (
       <div
@@ -103,7 +109,12 @@ class MainContent extends Component {
           </small>
         </div>
         <div className="card-footer text-right">
-          <div className="btn btn-danger btn-sm mx-2">Delete</div>
+          <div
+            className="btn btn-danger btn-sm mx-2"
+            onClick={() => this.handleClick(internship._id)}
+          >
+            Delete
+          </div>
           <button className="btn btn-primary btn-sm mx-2">Update</button>
         </div>
       </div>
@@ -127,5 +138,5 @@ export default connect(
     auth: store.auth,
     internships: store.internships,
   }),
-  { getStudentInternships }
+  { getStudentInternships, deleteInternship }
 )(MainContent);
