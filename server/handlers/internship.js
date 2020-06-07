@@ -55,10 +55,10 @@ exports.getInternship = async (req, res, next) => {
       "name",
       "class",
       "prevSemAttendance",
-      "applicationsApproved",
       "marksheets",
       "rollNo",
     ]);
+    console.log("inside", internship);
     if (!internship) {
       throw new Error("No internship found");
     }
