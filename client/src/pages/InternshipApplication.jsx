@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
-
+import { withRouter } from "react-router-dom";
 class InternshipApplication extends Component {
   state = {};
   constructor(props) {
@@ -23,12 +23,13 @@ class InternshipApplication extends Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = "tyguhjbnk";
-    data["holder"] = "cc";
-    data["completionStatus"] = "N";
+    data["application"]["durationOfInternship"] += "month(s)";
+    data["application"]["offerLetter"] = "TemporaryString";
     console.log(data);
     const { createInternship } = this.props;
-    createInternship(data).then(console.log("H"));
+    createInternship(data).then(() => {
+      this.props.history.push("/student");
+    });
   }
   render() {
     return (
@@ -59,14 +60,19 @@ class InternshipApplication extends Component {
                     </div>
                     <div className="col-sm-6">
                       Duration:
-                      <input
-                        type="text"
-                        name="durationOfInternship"
-                        id="durationOfInternship"
-                        placeholder="1 Month"
-                        className="form-control"
-                        required
-                      />
+                      <div className="input-group">
+                        <input
+                          type="number"
+                          name="durationOfInternship"
+                          id="durationOfInternship"
+                          placeholder="1"
+                          className="form-control"
+                          required
+                        />
+                        <div className="input-group-append">
+                          <span className="input-group-text">month(s)</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="form-row my-2">
@@ -82,7 +88,7 @@ class InternshipApplication extends Component {
                           </span>
                         </div>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control"
                           id="stipend"
                           name="stipend"
@@ -143,9 +149,14 @@ class InternshipApplication extends Component {
                   </div>
                 </div>
                 <hr />
-                <button type="submit" className="btn btn-dark">
-                  Submit
-                </button>
+                <div className="text-right">
+                  <button className="btn border-dark mx-2" type="reset">
+                    Reset
+                  </button>
+                  <button type="submit" className="btn btn-dark">
+                    Submit
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -155,10 +166,12 @@ class InternshipApplication extends Component {
   }
 }
 
-export default connect(
-  (store) => ({
-    auth: store.auth,
-    internships: store.internships,
-  }),
-  { createInternship }
-)(InternshipApplication);
+export default withRouter(
+  connect(
+    (store) => ({
+      auth: store.auth,
+      internships: store.internships,
+    }),
+    { createInternship }
+  )(InternshipApplication)
+);

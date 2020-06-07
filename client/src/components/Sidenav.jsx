@@ -21,12 +21,14 @@ class Sidenav extends Component {
               My Applications
             </li>
           </Link>
-          <li className={activeNow == 2 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdPermIdentity />
-            </span>
-            Profile
-          </li>
+          <Link to="/studentprofile">
+            <li className={activeNow == 2 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdPermIdentity />
+              </span>
+              Profile
+            </li>
+          </Link>
           <Link to="/apply">
             <li className={activeNow == 3 ? "sidenav-active" : ""}>
               <span className="mx-2">
