@@ -7,29 +7,30 @@ import { MdAddCircle } from "react-icons/md";
 class Sidenav extends Component {
   state = {};
   render() {
+    const activeNow = this.props.activeComponent;
     return (
       <div className="sidenav">
         <p>Menu</p>
         <ul>
-          <li>
+          <li className={activeNow == 1 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdDns />
             </span>
-            Review Applications
+            My Applications
           </li>
-          <li>
+          <li className={activeNow == 2 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdPermIdentity />
             </span>
             Profile
           </li>
-          <li>
+          <li className={activeNow == 3 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdAddCircle />
             </span>
             Apply
           </li>
-          <li>
+          <li className={activeNow == 4 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdDescription />
             </span>

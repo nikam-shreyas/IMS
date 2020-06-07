@@ -1,7 +1,6 @@
 import { addError, removeError } from "./error";
 import { SET_CURRENT_USER } from "../actionTypes";
 import api from "../../services/api";
-import { Redirect } from "react-router-dom";
 
 export const setCurrentUser = (user) => ({
   type: SET_CURRENT_USER,
