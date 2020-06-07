@@ -21,3 +21,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.card{
+  overflow-x: scroll;
+}

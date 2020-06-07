@@ -9,6 +9,7 @@ import Auth_Page_2 from "../pages/Auth_Page_2";
 import Internships from "../components/internships";
 import InternshipDetails from "../pages/InternshipDetails";
 //import { internships } from '../store/reducers/internships';
+
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
