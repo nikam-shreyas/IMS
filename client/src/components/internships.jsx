@@ -26,35 +26,48 @@ class Internships extends Component{
             <td>{internship.completionStatus}</td>
             <td>{internship.holder}</td>
             <td>{internship.student}</td>
-            <td><pre>{JSON.stringify(internship.application.submittedDate,null,2)}</pre></td>
-            <td>{internship.__v}</td>
+            {/* <td><pre>{JSON.stringify(internship.application.submittedDate,null,2)}</pre></td> */}
+            <td>{new Date(internship.application.submittedDate).toLocaleDateString()}</td>
+            <td>{new Date(internship.application.approvedDate).toLocaleDateString()}</td>
+            <td>{internship.application.workplace}</td>
+            <td>{internship.application.durationOfInternship}</td>
+            <td>{internship.application.reference}</td>
+            <td>{internship.application.offerLetter}</td>
+            {/* <td>{internship.__v}</td> */}
         </tr>);
 
 
     return <Fragment>
        
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-            
-        <table  class="table">
-            <thead class="thead-dark">
+            <div className="card" style={{margin:"2rem"}}>
+        <table  className="table">
+            <thead className="thead-dark">
                 <tr>
-                <th>ApplicationStatus</th>
-                <th>UndertakingStatus</th>
-                <th>OfferLetterStatus</th>
-                <th>MarksheetsStatus</th>
-                <th>AttendanceStatus</th>
-                <th>approvedBy</th>
-                <th>completionStatus</th>
-                <th>holder</th>
-                <th>student</th>
-                <th>submittedDate</th>
-                <th>approvedDate</th>
-                <th>workplace</th>
-                <th>durationOfInternship</th>
-                <th>offerLetter</th>
+                    <th colSpan="5" style={{border:"2px solid white"},{textAlign:"center"}}>DOCUMENT DETAILS</th>
+                    <th colSpan="4"></th>
+                    <th colSpan="6" style={{border:"1px solid white"},{textAlign:"center"}}>APPLICATION DETAILS</th>
+                </tr>
+                <tr>
+                <th >Application Status</th>
+                <th>Undertaking Status</th>
+                <th>Offer Letter Status</th>
+                <th>Marksheets Status</th>
+                <th>Attendance Status</th>
+                <th>Approved By</th>
+                <th>Completion Status</th>
+                <th>Holder</th>
+                <th>Student</th>
+                <th>Submitted Date</th>
+                <th>Approved Date</th>
+                <th>Workplace</th>
+                <th>Duration Of Internship</th>
+                <th>Reference</th>
+                <th>OfferLetter</th>
                 </tr>
             </thead>
-        {internships}</table></Fragment>
+        {internships}</table></div></Fragment>
+        
     }
 
 }
