@@ -2,18 +2,14 @@ const db = require("../models");
 
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
-  const { completionStatus, holder, application } = req.body;
+  const { application } = req.body;
   try {
     const student = await db.Student.findById(id);
 
-    console.log({ student, completionStatus, holder, application });
     const internship = await db.Internship.create({
       student,
-      completionStatus,
-      holder,
       application,
     });
-    console.log("done");
     student.internships.push(internship._id);
     await student.save();
 

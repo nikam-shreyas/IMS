@@ -1,7 +1,28 @@
 import React, { Component } from "react";
 import Sidenav from "../components/Sidenav";
-
+import { updateStudent } from "../store/actions";
+import { connect } from "react-redux";
 class StudentProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    const { updateStudent } = this.props;
+    var formData = new FormData(event.target);
+    const data = {};
+    data["name"] = {
+      firstname: formData.get("firstname"),
+      lastname: formData.get("lastname"),
+    };
+    data["class"] = { year: formData.get("year"), div: formData.get("div") };
+    data["prevSemAttendance"] = formData.get("prevSemAttendance");
+    data["rollNo"] = formData.get("rollNo");
+    console.log(data);
+    updateStudent(data);
+    alert("Profile Updated!");
+  }
   state = {};
   render() {
     return (
@@ -114,4 +135,9 @@ class StudentProfile extends Component {
   }
 }
 
-export default StudentProfile;
+export default connect(
+  (store) => ({
+    auth: store.auth,
+  }),
+  { updateStudent }
+)(StudentProfile);
