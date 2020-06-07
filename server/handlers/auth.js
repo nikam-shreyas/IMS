@@ -41,13 +41,31 @@ exports.updateStudent = async (req, res, next) => {
     for (var key of Object.keys(details)) {
       student[key.toString()] = details[key];
     }
-    console.log(student);
     student.save();
-
-    res.status(200).json(student);
+    const { name, currentClass, rollNo, prevSemAttendance } = student;
+    res.status(200).json({ name, currentClass, rollNo, prevSemAttendance });
   } catch (err) {
     console.log(err);
     err.message = "Could not update";
     next(err);
+  }
+};
+
+exports.getStudentDetails = async (req, res, next) => {
+  try {
+    const { id } = req.decoded;
+
+    const student = await db.Student.findById(id);
+    if (!student) {
+      throw new Error("No student found");
+    }
+
+    const { name, currentClass, rollNo, prevSemAttendance } = student;
+    res.status(200).json({ name, currentClass, rollNo, prevSemAttendance });
+  } catch (err) {
+    next({
+      status: 400,
+      message: err.message,
+    });
   }
 };

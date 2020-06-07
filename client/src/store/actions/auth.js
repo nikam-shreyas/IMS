@@ -48,3 +48,16 @@ export const updateStudent = (data) => {
     }
   };
 };
+
+export const getStudent = () => {
+  return async (dispatch) => {
+    try {
+      const user = await api.call("get", "auth/student");
+      dispatch(setCurrentUser(user));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};

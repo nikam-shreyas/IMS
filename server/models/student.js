@@ -14,7 +14,7 @@ const studentSchema = new mongoose.Schema({
   rollNo: {
     type: Number,
   },
-  class: {
+  currentClass: {
     year: {
       type: String,
       required: false,
