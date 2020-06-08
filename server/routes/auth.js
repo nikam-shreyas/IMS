@@ -7,4 +7,6 @@ router.post('/login',handle.login);
 //router.post('/register_faculty',handle.register_faculty);
 router.post('/login_faculty',handle.login_faculty);
 
+// router.post('/register_faculty',handle.register_faculty);
+
 module.exports = router;
