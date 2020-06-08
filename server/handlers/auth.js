@@ -42,8 +42,11 @@ exports.updateStudent = async (req, res, next) => {
       student[key.toString()] = details[key];
     }
     student.save();
-    const { name, currentClass, rollNo, prevSemAttendance } = student;
-    res.status(200).json({ name, currentClass, rollNo, prevSemAttendance });
+    console.log(student);
+    const { name, currentClass, rollNo, prevSemAttendance, emailId } = student;
+    res
+      .status(200)
+      .json({ name, currentClass, rollNo, prevSemAttendance, emailId });
   } catch (err) {
     err.message = "Could not update";
     next(err);
@@ -59,8 +62,10 @@ exports.getStudentDetails = async (req, res, next) => {
       throw new Error("No student found");
     }
 
-    const { name, currentClass, rollNo, prevSemAttendance } = student;
-    res.status(200).json({ name, currentClass, rollNo, prevSemAttendance });
+    const { name, currentClass, rollNo, prevSemAttendance, emailId } = student;
+    res
+      .status(200)
+      .json({ name, currentClass, rollNo, prevSemAttendance, emailId });
   } catch (err) {
     next({
       status: 400,
