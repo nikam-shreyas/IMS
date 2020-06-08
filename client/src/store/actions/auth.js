@@ -35,3 +35,29 @@ export const authUser = (path, data) => {
     }
   };
 };
+
+export const updateStudent = (data) => {
+  return async (dispatch) => {
+    try {
+      const user = await api.call("post", "auth/student", data);
+      dispatch(setCurrentUser(user));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const getStudent = () => {
+  return async (dispatch) => {
+    try {
+      const user = await api.call("get", "auth/student");
+      dispatch(setCurrentUser(user));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};

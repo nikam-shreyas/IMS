@@ -2,14 +2,12 @@ const db = require("../models");
 
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
-  const { docs, completionStatus, holder, application } = req.body;
+  const { application } = req.body;
   try {
     const student = await db.Student.findById(id);
+
     const internship = await db.Internship.create({
-      docs,
       student,
-      completionStatus,
-      holder,
       application,
     });
     student.internships.push(internship._id);
@@ -17,6 +15,7 @@ exports.addNewInternship = async (req, res, next) => {
 
     return res.status(201).json({ ...internship._doc, student: student._id });
   } catch (err) {
+    console.log(err);
     next({
       status: 400,
       message: err.message,
@@ -56,10 +55,10 @@ exports.getInternship = async (req, res, next) => {
       "name",
       "class",
       "prevSemAttendance",
-      "applicationsApproved",
       "marksheets",
       "rollNo",
     ]);
+    console.log("inside", internship);
     if (!internship) {
       throw new Error("No internship found");
     }

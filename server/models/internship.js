@@ -24,9 +24,11 @@ const internshipSchema = new mongoose.Schema({
     reference: {
       type: String,
     },
+    stipend: {
+      type: Number,
+    },
     offerLetter: {
       type: String, //to be changed to Document in later stages
-      required: true,
     },
   },
   approvedBy: [
