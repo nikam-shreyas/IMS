@@ -16,6 +16,7 @@ class StudentProfile extends Component {
       },
       rollNo: "31241",
       prevSemAttendance: ">75",
+      emailId: "example@gmail.com",
     },
   };
   constructor(props) {
@@ -29,7 +30,8 @@ class StudentProfile extends Component {
       .then(() => this.loadData(this.props.auth.user));
   }
   loadData(user) {
-    if (user.prevSemAttendance !== undefined) this.setState({ data: user });
+    if (user.emailId !== undefined) this.setState({ data: user });
+    console.log(user);
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -47,6 +49,7 @@ class StudentProfile extends Component {
     data["prevSemAttendance"] =
       formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
     data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
+    data["emailId"] = formData.get("emailId") || this.state.data.emailId;
     updateStudent(data);
     alert("Profile Updated!");
     window.location.reload(false);
@@ -74,7 +77,7 @@ class StudentProfile extends Component {
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
-                  Personal Details:
+                  Fill in the details:
                   <hr />
                   <div className="container">
                     <div className="form-row my-2">
@@ -153,6 +156,19 @@ class StudentProfile extends Component {
                           name="div"
                           id="div"
                           placeholder={this.state.data.currentClass.div}
+                          className="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row my-2">
+                      <div className="col-sm-12">
+                        Email Id:
+                        <input
+                          readOnly
+                          type="email"
+                          name="emailId"
+                          id="emailId"
+                          placeholder={this.state.data.emailId}
                           className="form-control"
                         />
                       </div>

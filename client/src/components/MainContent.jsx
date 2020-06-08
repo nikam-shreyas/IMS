@@ -134,7 +134,10 @@ class MainContent extends Component {
               class="btn-group btn-group-toggle btn-sm float-right"
               data-toggle="buttons"
             >
-              <label class="btn btn-light btn-sm" onClick={this.enableListview}>
+              <label
+                class="btn btn-secondary btn-sm"
+                onClick={this.enableListview}
+              >
                 <input
                   type="radio"
                   name="options"
@@ -145,7 +148,7 @@ class MainContent extends Component {
                 <MdFormatListBulleted color="white" />
               </label>
               <label
-                class="btn btn-light active btn-sm"
+                class="btn btn-secondary active btn-sm"
                 onClick={this.enableCardview}
               >
                 <input

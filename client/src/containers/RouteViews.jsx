@@ -10,11 +10,13 @@ import Internships from "../components/internships";
 import InternshipDetails from "../pages/InternshipDetails";
 import InternshipApplication from "../pages/InternshipApplication";
 import StudentProfile from "../pages/StudentProfile";
+import TestPage from "../pages/testPage";
 //import { internships } from '../store/reducers/internships';
 
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
+      <Route exact path="/test" render={() => <TestPage />} />
       <Route
         exact
         path="/login"
