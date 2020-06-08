@@ -1,16 +1,11 @@
-import React from "react";
-
-// const Admin_Home = ({ authType, isAthenticated }) => {
-  
-  
-  
-//   return <p>This is Admin homepage</p>;
-// };
+import React, { Component } from "react";
+import Sidenav from "../components/Sidenav";
+import MainContent from "../components/MainContent";
 
 class Admin_Home extends Component {
   state = {};
-  constructor(props){
-      super(props);
+  constructor(props) {
+    super(props);
   }
   render() {
     return (
