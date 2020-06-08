@@ -11,6 +11,7 @@ import InternshipDetails from "../pages/InternshipDetails";
 import InternshipApplication from "../pages/InternshipApplication";
 import StudentProfile from "../pages/StudentProfile";
 //import { internships } from '../store/reducers/internships';
+
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
