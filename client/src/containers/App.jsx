@@ -10,7 +10,6 @@ import Navbar from "./NavBar";
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);
   try {
-    console.log(decode(localStorage.jwtToken));
     store.dispatch(setCurrentUser(decode(localStorage.jwtToken)));
   } catch (err) {
     store.dispatch(setCurrentUser({}));

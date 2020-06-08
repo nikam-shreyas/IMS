@@ -29,7 +29,6 @@ class StudentProfile extends Component {
       .then(() => this.loadData(this.props.auth.user));
   }
   loadData(user) {
-    console.log(user);
     if (user.prevSemAttendance !== undefined) this.setState({ data: user });
   }
   handleSubmit(event) {
@@ -71,7 +70,7 @@ class StudentProfile extends Component {
           </div>
           <div className="col-sm-10">
             <div className="container">
-              <h4>My Profile</h4>
+              <h4 className="mt-2">My Profile</h4>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>

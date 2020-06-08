@@ -45,7 +45,6 @@ exports.updateStudent = async (req, res, next) => {
     const { name, currentClass, rollNo, prevSemAttendance } = student;
     res.status(200).json({ name, currentClass, rollNo, prevSemAttendance });
   } catch (err) {
-    console.log(err);
     err.message = "Could not update";
     next(err);
   }
