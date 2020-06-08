@@ -14,9 +14,9 @@ const studentSchema = new mongoose.Schema({
   rollNo: {
     type: Number,
   },
-  class: {
+  currentClass: {
     year: {
-      type: Number,
+      type: String,
       required: false,
     },
     div: {
@@ -27,6 +27,9 @@ const studentSchema = new mongoose.Schema({
   prevSemAttendance: {
     type: Number,
     required: false,
+  },
+  emailId: {
+    type: String,
   },
   applicationsApproved: [],
   marksheets: [],

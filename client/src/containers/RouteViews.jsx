@@ -8,6 +8,8 @@ import Auth_Page from "../pages/Auth_Page";
 import Auth_Page_2 from "../pages/Auth_Page_2";
 import Internships from "../components/internships";
 import InternshipDetails from "../pages/InternshipDetails";
+import InternshipApplication from "../pages/InternshipApplication";
+import StudentProfile from "../pages/StudentProfile";
 //import { internships } from '../store/reducers/internships';
 
 const RouteViews = ({ auth }) => (
@@ -27,7 +29,19 @@ const RouteViews = ({ auth }) => (
       />
       <Route
         exact
-        path="/Register"
+        path="/"
+        render={() => (
+          <Auth_Page
+            authType="login"
+            isAuthenticated={auth.isAuthenticated}
+            isAuthenticated_f={auth.isAuthenticated_f}
+            isAuthenticated_a={auth.isAuthenticated_a}
+          />
+        )}
+      />
+      <Route
+        exact
+        path="/register"
         render={() => (
           <Auth_Page_2
             authType="register"
@@ -35,6 +49,8 @@ const RouteViews = ({ auth }) => (
           />
         )}
       />
+
+      <Route exact path="/internships" render={() => <Internships />} />
       <Route exact path="/internships" render={() => <Internships />} />
       <Route exact path="/student" render={() => <Student_Home />} />
       <Route exact path="/faculty" render={() => <Faculty_Home />} />
@@ -44,6 +60,8 @@ const RouteViews = ({ auth }) => (
         path="/internshipdetails/:internshipid"
         render={() => <InternshipDetails />}
       />
+      <Route exact path="/apply" render={() => <InternshipApplication />} />
+      <Route exact path="/studentprofile" render={() => <StudentProfile />} />
     </Switch>
   </main>
 );
