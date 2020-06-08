@@ -49,6 +49,8 @@ const RouteViews = ({ auth }) => (
           />
         )}
       />
+
+      <Route exact path="/internships" render={() => <Internships />} />
       <Route exact path="/internships" render={() => <Internships />} />
       <Route exact path="/student" render={() => <Student_Home />} />
       <Route exact path="/faculty" render={() => <Faculty_Home />} />
