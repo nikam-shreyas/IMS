@@ -25,7 +25,6 @@ class InternshipApplication extends Component {
     data["application"]["submittedDate"] = new Date().toUTCString();
     data["application"]["durationOfInternship"] += "month(s)";
     data["application"]["offerLetter"] = "TemporaryString";
-    console.log(data);
     const { createInternship } = this.props;
     createInternship(data).then(() => {
       this.props.history.push("/student");
@@ -40,7 +39,7 @@ class InternshipApplication extends Component {
           </div>
           <div className="col-sm-10">
             <div className="container">
-              <h4>Apply</h4>
+              <h4 className="mt-2">Apply</h4>
               <hr />
               <form onSubmit={this.handleSubmit}>
                 Internship Details:

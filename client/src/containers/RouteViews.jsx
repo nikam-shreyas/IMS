@@ -41,7 +41,7 @@ const RouteViews = ({ auth }) => (
       />
       <Route
         exact
-        path="/Register"
+        path="/register"
         render={() => (
           <Auth_Page_2
             authType="register"

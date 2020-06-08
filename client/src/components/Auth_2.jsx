@@ -21,7 +21,6 @@ class Auth_2 extends Component {
     const { username, password } = this.state;
     const { authType } = this.props;
     e.preventDefault();
-    console.log(username, password);
     this.props.authUser(authType || "login", { username, password });
   }
 
