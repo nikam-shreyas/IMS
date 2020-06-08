@@ -64,30 +64,25 @@ exports.addFaculty=async(req,res,next)=>{
   }
 }
 
-exports.findFacultyById=async(req,res,next)=>{
+exports.findFaculty=async(req,res,next)=>{
 try {
-  const {facID}=req.params;
-  console.log(facID)  
-  const faculty=db.Faculty.findOne({username:facID});
-  console.log(faculty)
+  const {user}=req.params;
+  const faculty=await db.Faculty.findOne({username:user});
   if(!faculty){
     throw new Error("Faculty not found")
   }
-  res.status(200).json(faculty);
+  return res.status(200).json(faculty);
 } catch (error) {
   next({
     status:400,
     message:error.message
   }); 
 }
-
 }
 
 exports.findAll=async(req,res,next)=>{
   try {
-    console.log("welom")
-    const faculties = await db.Faculty.find();
-    console.log(faculties)
+    const faculties = await db.Faculty.find().populate("faculties");
     res.status(200).json(faculties);
   } catch (err) {
     err.status(400);
@@ -95,12 +90,29 @@ exports.findAll=async(req,res,next)=>{
   }
 }
 
+exports.deleteFaculty=async (req,res,next)=>{
+  try {
+    const {user}=req.params;
+    const faculty=await db.Faculty.findOne({username:user});
+    if (!faculty) throw new Error("faculty not found");
+    await faculty.remove();
+    return res.status(200).json("faculty deleted");
+  } catch (error) {
+    next({
+      status:400,
+      message:error.message
+    }); 
+  }
+}
+
 exports.showProfile=async(req,res,next)=>{
   try {
     const { id } = req.params;
-    const Profile = await db.Faculty.findById(id);
+    const Profile = await db.Faculty.findOne({_id:id,designation:'Admin'});
     if(Profile){
-      res.json(Profile)
+      return res.json(Profile)
+    }else{
+      throw new Error("Not an admin");    
     }
   } catch (error) {
     next({

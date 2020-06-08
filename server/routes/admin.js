@@ -2,18 +2,18 @@ const router = require('express').Router();
 const handle = require('../handlers');
 const auth = require('../middlewares/auth');
 
+router.route("/all")
+.get(auth,handle.findAll);
+
 router.route("/:id")
 .get(auth,handle.showProfile);
 
 router.route("/add")
 .post(auth,handle.addFaculty);
 
-router.route("/find/:facID")
-.get(auth,handle.findFacultyById);
-
-
-router.route("/find")
-.get(auth,handle.findAll);
+router.route("/find/:user")
+.get(auth,handle.findFaculty)
+.delete(auth,handle.deleteFaculty);
 
 //router.post('/login_faculty',handle.login_faculty);
 
