@@ -28,37 +28,39 @@ class Auth_2 extends Component {
     return (
       <div className="container">
         <div className="card mx-auto my-5 bg-light">
-          <div className="card-header">Register as a student...</div>
-          <form className="form-group mx-3 my-3" onSubmit={this.handleSubmit}>
-            <label className="form-label" htmlFor="username">
-              Username
-            </label>
-            <input
-              type="text"
-              value={username}
-              name="username"
-              className="form-control"
-              autoComplete="off"
-              onChange={this.handleChange}
-            />
+          <div className="card-body">
+            <h2 className="card-title">Register as a student.</h2>
+            <form className="form-group my-3" onSubmit={this.handleSubmit}>
+              <label className="form-label" htmlFor="username">
+                Username
+              </label>
+              <input
+                type="text"
+                value={username}
+                name="username"
+                className="form-control"
+                autoComplete="off"
+                onChange={this.handleChange}
+              />
 
-            <label className="form-label" htmlFor="password">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              name="password"
-              className="form-control"
-              autoComplete="off"
-              onChange={this.handleChange}
-            />
-            <div className="button_center">
-              <button className="btn btn-dark mx-auto mt-3" type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
+              <label className="form-label" htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                name="password"
+                className="form-control"
+                autoComplete="off"
+                onChange={this.handleChange}
+              />
+              <div className="button_center">
+                <button className="btn btn-dark mx-auto mt-3" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );

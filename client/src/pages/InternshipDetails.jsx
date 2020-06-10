@@ -48,6 +48,7 @@ class InternshipDetails extends Component {
     let internshipId = c[4];
     getCurrentInternship(internshipId)
       .then(this.setState({ isLoading: false }))
+      .then(console.log(this.props))
       .then(() => this.loadData(this.props.internships));
   }
   handleClick(id) {

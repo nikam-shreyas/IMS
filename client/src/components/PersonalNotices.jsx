@@ -12,9 +12,6 @@ class PersonalNotices extends Component {
       },
     ],
   };
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     const { getStudentNotices } = this.props;
