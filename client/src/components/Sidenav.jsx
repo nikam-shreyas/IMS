@@ -50,13 +50,15 @@ class Sidenav extends Component {
               Documents
             </li>
           </Link>
-          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdNotifications />
-            </span>
-            Notifications
-          </li>
-          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+          <Link to="/notifications">
+            <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdNotifications />
+              </span>
+              Notifications
+            </li>
+          </Link>
+          <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdSettings />
             </span>

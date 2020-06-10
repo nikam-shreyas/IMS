@@ -58,8 +58,13 @@ exports.showNotices = async (req, res, next) => {
 exports.studentsNotices = async (req, res, next) => {
   try {
     const { id } = req.decoded;
-    const student = await db.Student.findById(id).populate("comments");
-    res.status(200).json(student.comments);
+    console.log(id);
+    const studentComments = await db.Student.findById(id).populate(
+      "itnernships",
+      "comments"
+    );
+    console.log("scom", studentComments);
+    res.status(200).json(studentComments);
   } catch (err) {
     return next({
       status: 400,

@@ -1,17 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { getNotices, getStudentNotices } from "../store/actions";
+import { getNotices } from "../store/actions";
 import {
-  MdNotificationsNone,
-  MdViewAgenda,
-  MdWhatshot,
   MdLink,
   MdAccessTime,
   MdLocationCity,
   MdContactPhone,
   MdMailOutline,
 } from "react-icons/md";
-class MainContent extends Component {
+class Notices extends Component {
   state = {
     notices: [
       {
@@ -43,25 +40,13 @@ class MainContent extends Component {
   loadData(notices) {
     this.setState({ notices: notices });
   }
-  enableListview() {
-    var elements = document.getElementsByClassName("card-body");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.display = "none";
-    }
-  }
-  enableCardview() {
-    var elements = document.getElementsByClassName("card-body");
-    for (let i = 0; i < elements.length; i++) {
-      elements[i].style.display = "block";
-    }
-  }
 
   render() {
     return (
       <Fragment>
-        <div clasName="container m-5" id="accordion">
+        <div id="accordion">
           {this.state.notices.map((notice) => (
-            <div className="card m-2">
+            <div key={notice._id} className="card my-2">
               <div
                 className="card-header"
                 id={notice._id}
@@ -82,7 +67,7 @@ class MainContent extends Component {
 
               <div
                 id={"collapse" + notice._id}
-                class="collapse"
+                className="collapse"
                 aria-labelledby={notice._id}
                 data-parent="#accordion"
               >
@@ -172,7 +157,7 @@ class MainContent extends Component {
                     </div>
                   )}
                   {notice.stipend && (
-                    <button class="btn btn-success mt-2">
+                    <button className="btn btn-success mt-2">
                       Rs. {notice.stipend}/month
                       <br />
                     </button>
@@ -192,5 +177,5 @@ export default connect(
     auth: store.auth,
     notices: store.notices,
   }),
-  { getNotices, getStudentNotices }
-)(MainContent);
+  { getNotices }
+)(Notices);

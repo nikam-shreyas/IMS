@@ -12,12 +12,19 @@ import StudentProfile from "../pages/StudentProfile";
 import StudentDocuments from "../pages/StudentDocuments";
 import TestPage from "../pages/testPage";
 import CreateNotice from "../pages/CreateNotice";
-import Notices from "../pages/Notices";
+import Notices from "../components/Notices";
+import StudentNotifications from "../pages/StudentNotifications";
 //import { internships } from '../store/reducers/internships';
 
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
+      <Route
+        exact
+        path="/notifications"
+        render={() => <StudentNotifications />}
+      />
+
       <Route exact path="/test" render={() => <TestPage />} />
       <Route exact path="/studentDocs" render={() => <StudentDocuments />} />
       <Route
