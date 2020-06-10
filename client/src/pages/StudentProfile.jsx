@@ -31,7 +31,6 @@ class StudentProfile extends Component {
   }
   loadData(user) {
     if (user.emailId !== undefined) this.setState({ data: user });
-    console.log(user);
   }
   handleSubmit(event) {
     event.preventDefault();

@@ -19,7 +19,6 @@ export const getInternships = () => {
       dispatch(setInternships(internships));
       dispatch(removeError());
     } catch (err) {
-      console.log("error", err);
       const error = err.response.data;
       dispatch(addError(error.message));
     }

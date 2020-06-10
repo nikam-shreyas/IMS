@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import { authUser, logout } from "../store/actions";
 class Auth_2 extends Component {
   constructor(props) {

@@ -6,6 +6,7 @@ import {
   MdNotifications,
   MdAddCircle,
   MdDns,
+  MdSettings,
 } from "react-icons/md";
 
 class Sidenav extends Component {
@@ -40,17 +41,26 @@ class Sidenav extends Component {
               Apply
             </li>
           </Link>
-          <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdDescription />
-            </span>
-            Documents
-          </li>
+
+          <Link to="/studentDocs">
+            <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdDescription />
+              </span>
+              Documents
+            </li>
+          </Link>
           <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdNotifications />
             </span>
             Notifications
+          </li>
+          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+            <span className="mx-2">
+              <MdSettings />
+            </span>
+            Settings
           </li>
         </ul>
       </div>

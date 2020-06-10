@@ -5,7 +5,6 @@ export const internships = (state = [], action) => {
   switch (action.type) {
     case SET_INTERNSHIPS:
       return action.internships;
-
     default:
       return state;
   }
