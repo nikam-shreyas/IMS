@@ -7,9 +7,9 @@ export const setNotices = (notices) => ({
   notices,
 });
 
-export const setStudentNotices = (notices) => ({
+export const setStudentNotices = (studentNotices) => ({
   type: SET_STUDENTS_NOTICES,
-  notices,
+  studentNotices,
 });
 
 export const getNotices = () => {
@@ -29,8 +29,9 @@ export const getNotices = () => {
 export const getStudentNotices = () => {
   return async (dispatch) => {
     try {
-      const notices = await api.call("get", "notices/student");
-      dispatch(setStudentNotices(notices));
+      const studentNotices = await api.call("get", "notices/student");
+      console.log("actions", studentNotices);
+      dispatch(setStudentNotices(studentNotices));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;

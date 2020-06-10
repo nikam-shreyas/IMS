@@ -9,10 +9,10 @@ export const notices = (state = [], action) => {
   }
 };
 
-export const studentsNotices = (state = {}, action) => {
+export const studentsNotices = (state = [], action) => {
   switch (action.type) {
     case SET_STUDENTS_NOTICES:
-      return action.notices;
+      return action.studentNotices;
     default:
       return state;
   }

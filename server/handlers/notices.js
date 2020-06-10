@@ -59,12 +59,12 @@ exports.studentsNotices = async (req, res, next) => {
   try {
     const { id } = req.decoded;
     console.log(id);
-    const studentComments = await db.Student.findById(id).populate(
-      "itnernships",
+    const studentInternships = await db.Student.findById(id).populate(
+      "internships",
       "comments"
     );
-    console.log("scom", studentComments);
-    res.status(200).json(studentComments);
+    console.log(studentInternships["internships"]);
+    res.status(200).json(studentInternships["internships"]);
   } catch (err) {
     return next({
       status: 400,
