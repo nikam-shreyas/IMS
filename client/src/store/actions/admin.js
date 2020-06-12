@@ -1,5 +1,9 @@
 import api from "../../services/api";
-import { SET_CURRENT_ADMIN } from "../actionTypes";
+import {
+  SET_CURRENT_ADMIN,
+  SET_CURRENT_TEACHER,
+  SET_FACULTY,
+} from "../actionTypes";
 import { addError, removeError } from "./error";
 
 export const setCurrentAdmin = (admin) => ({
@@ -7,23 +11,77 @@ export const setCurrentAdmin = (admin) => ({
   admin,
 });
 
+export const setFaculty = (faculty) => ({
+  type: SET_FACULTY,
+  faculty,
+});
 
-export const addFaculty=()=>{
-    return async (dispatch)=>{
+export const setCurrentTeacher = (teacher) => ({
+  type: SET_CURRENT_TEACHER,
+  teacher,
+});
 
-    };
-};
-
-export const showProfile=()=>{
-  return async (dispatch)=>{
+export const getAdmin = (path) => {
+  return async (dispatch) => {
     try {
-      const admin = await api.call("get", "showProfile");
-      dispatch(setInternships(admin));
+      const admin = await api.call("get", `admin/${path}`);
+      dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
-      console.log("error", err);
       const error = err.response.data;
       dispatch(addError(error.message));
     }
-  };  
+  };
+};
+
+export const getFaculty = () => {
+  return async (dispatch) => {
+    try {
+      const faculty = await api.call("get", "admin/all");
+      dispatch(setFaculty(faculty));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const createTeacher = (data) => {
+  return async (dispatch) => {
+    try {
+      const teacher = await api.call("post", "admin/add", data);
+      dispatch(setCurrentTeacher(teacher));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const getCurrentTeacher = (path) => {
+  return async (dispatch) => {
+    try {
+      const teacher = await api.call("get", `admin/find/${path}`);
+      dispatch(setCurrentTeacher(teacher));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const deleteTeacher = (path) => {
+  return async (dispatch) => {
+    try {
+      const teacher = await api.call("delete", `admin/find/${path}`);
+      dispatch(setCurrentTeacher(teacher));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
 };

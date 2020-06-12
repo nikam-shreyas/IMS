@@ -7,9 +7,9 @@ export const setCurrentUser_f = (user) => ({
   user,
 });
 
-export const setCurrentUser_a = (user) => ({
+export const setCurrentUser_a = (admin) => ({
   type: SET_CURRENT_ADMIN,
-  user,
+  admin,
 });
 
 export const setToken_f = (token) => {
@@ -51,6 +51,7 @@ export const authUser_a = (path, data) => {
       dispatch(setCurrentUser_a(user));
       dispatch(removeError());
     } catch (err) {
+      console.log(err);
       const error = err.response.data;
       dispatch(addError(error.message));
     }
