@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Sidenav from "../components/Sidenav";
 import MainContent from "../components/MainContent";
+import Admin_Sidenav from "../components/Admin_Sidenav";
 
 class Admin_Home extends Component {
   state = {};
@@ -11,10 +11,11 @@ class Admin_Home extends Component {
     return (
       <div className="row no-gutters h-100">
         <div className="col-sm-2 sidenav">
-          <Sidenav activeComponent="1" />
+          <Admin_Sidenav activeComponent="1" />
         </div>
         <div className="col-sm-10">
           <MainContent />
+ 
         </div>
       </div>
     );

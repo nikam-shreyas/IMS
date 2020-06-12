@@ -1,34 +1,18 @@
-import React, { Component, useState } from "react";
-import Sidenav from "../components/Sidenav";
-import { updateStudent, getStudent } from "../store/actions";
+import React,{Component} from "react";
+import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-class StudentProfile extends Component {
-  state = {
-    isLoading: true,
-    data: {
-      name: {
-        firstname: "Shreyas",
-        lastname: "Nikam",
-      },
-      currentClass: {
-        year: "TE",
-        div: "2",
-      },
-      rollNo: "31241",
-      prevSemAttendance: ">75",
-      emailId: "example@gmail.com",
-    },
-  };
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  async componentDidMount() {
-    const { getStudent } = this.props;
-    getStudent()
-      .then(this.setState({ isLoading: false }))
-      .then(() => this.loadData(this.props.auth.user));
-  }
+
+class AddFaculty extends Component{
+constructor(props){
+super(props);
+this.handleSubmit = this.handleSubmit.bind(this);
+}
+// async componentDidMount() {
+//     const { getStudent } = this.props;
+//     getStudent()
+//       .then(this.setState({ isLoading: false }))
+//       .then(() => this.loadData(this.props.auth.user));
+//   }
   loadData(user) {
     if (user.emailId !== undefined) this.setState({ data: user });
     console.log(user);
@@ -54,26 +38,16 @@ class StudentProfile extends Component {
     alert("Profile Updated!");
     window.location.reload(false);
   }
-  editform() {
-    var form = document.getElementById("form");
-    var elements = form.elements;
-    for (var i = 0, len = elements.length; i < len; ++i) {
-      elements[i].readOnly = !elements[i].readOnly;
-    }
-    var editButton = document.getElementById("editButton");
-    editButton.classList.toggle("btn-danger");
-    editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
-  }
-  render() {
+render(){
     return (
-      <div>
-        <div className="row no-gutters">
-          <div className="col-sm-2">
-            <Sidenav activeComponent="2" />
-          </div>
-          <div className="col-sm-10">
+        <div>
+            <div className="row no-gutters">
+                <div className="col-sm-2">
+                    <Admin_Sidenav activeComponent="3" />
+                </div>
+                <div className="col-sm-10">
             <div className="container">
-              <h4 className="mt-2">My Profile</h4>
+              <h4 className="mt-2">Add New Faculty</h4>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
@@ -84,53 +58,46 @@ class StudentProfile extends Component {
                       <div className="col-sm-6">
                         First Name:
                         <input
-                          readOnly
                           type="text"
                           name="firstname"
                           id="firstname"
                           className="form-control"
-                          placeholder={this.state.data.name.firstname}
+                          placeholder="Enter first name"
                         />
                       </div>
                       <div className="col-sm-6">
                         Last Name:
                         <input
-                          readOnly
                           type="text"
                           name="lastname"
                           id="lastname"
-                          placeholder={this.state.data.name.lastname}
+                          placeholder="Enter last name"
                           className="form-control"
                         />
                       </div>
                     </div>
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        Roll No:
+                       Designation:
                         <input
-                          readOnly
-                          type="number"
+                          type="text"
                           className="form-control"
-                          id="rollNo"
-                          name="rollNo"
-                          placeholder={this.state.data.rollNo}
+                          id="designation"
+                          name="designation"
+                          placeholder="Enter designation"
                         />
                       </div>
                       <div className="col-sm-6">
-                        Attendance:
+                        Department:
                         <div className="input-group">
                           <div className="input-group">
                             <input
-                              readOnly
                               type="number"
-                              name="prevSemAttendance"
-                              id="prevSemAttendance"
-                              placeholder={this.state.data.prevSemAttendance}
+                              name="department"
+                              id="department"
+                              placeholder="Enter department"
                               className="form-control"
                             />
-                            <div className="input-group-append">
-                              <span className="input-group-text">%</span>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -140,22 +107,20 @@ class StudentProfile extends Component {
                       <div className="col-sm-6">
                         Year:
                         <input
-                          readOnly
                           type="text"
                           name="year"
                           id="year"
-                          placeholder={this.state.data.currentClass.year}
+                          placeholder="Enter year"
                           className="form-control"
                         />
                       </div>
                       <div className="col-sm-6">
                         Division:
                         <input
-                          readOnly
                           type="number"
                           name="div"
                           id="div"
-                          placeholder={this.state.data.currentClass.div}
+                          placeholder="Enter division"
                           className="form-control"
                         />
                       </div>
@@ -164,11 +129,10 @@ class StudentProfile extends Component {
                       <div className="col-sm-12">
                         Email Id:
                         <input
-                          readOnly
                           type="email"
                           name="emailId"
                           id="emailId"
-                          placeholder={this.state.data.emailId}
+                          placeholder="Enter email"
                           className="form-control"
                         />
                       </div>
@@ -176,34 +140,25 @@ class StudentProfile extends Component {
                   </div>
                   <hr />
                   <div className="text-right">
-                    <button
-                      type="button"
-                      id="editButton"
-                      className="btn btn-secondary"
-                      onClick={this.editform}
-                    >
-                      Edit
-                    </button>
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
                     <button type="submit" className="btn btn-dark">
-                      Update Profile
+                      Add Profile
                     </button>
                   </div>
                 </form>
               }
             </div>
           </div>
+
+
+            </div>
         </div>
-      </div>
     );
-  }
+}
 }
 
-export default connect(
-  (store) => ({
-    auth: store.auth,
-  }),
-  { updateStudent, getStudent }
-)(StudentProfile);
+export default connect ((store)=>({
+    auth:store.auth,
+    }),{})(AddFaculty);

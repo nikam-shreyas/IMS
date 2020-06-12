@@ -11,7 +11,11 @@ import InternshipDetails from "../pages/InternshipDetails";
 import InternshipApplication from "../pages/InternshipApplication";
 import StudentProfile from "../pages/StudentProfile";
 import TestPage from "../pages/testPage";
+import AdminProfile from "../pages/AdminProfile";
+import AddFaculty from "../pages/AddFaculty"
+import UpDelFaculty from "../pages/UpDelFaculty"
 //import { internships } from '../store/reducers/internships';
+import FacultyList from "../pages/FacultyList"
 
 const RouteViews = ({ auth }) => (
   <main>
@@ -57,6 +61,11 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/student" render={() => <Student_Home />} />
       <Route exact path="/faculty" render={() => <Faculty_Home />} />
       <Route exact path="/admin" render={() => <Admin_Home />} />
+      <Route exact path="/admin/:id" render={() => <AdminProfile />} />
+      <Route exact path="/add" render={() => <AddFaculty />} />
+      <Route exact path="/find/:user" render={() => <UpDelFaculty />} />
+      <Route exact path="/all" render={() => <FacultyList />} />
+     
       <Route
         exact
         path="/internshipdetails/:internshipid"
