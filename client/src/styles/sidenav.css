@@ -30,13 +30,7 @@ h3 {
   float: left;
   padding: 0;
 }
-.sidenav-active {
-  color: white;
-  border-left: 0.3rem solid white;
-}
-.sidenav-active svg {
-  fill: white;
-}
+
 #li {
   color: gray;
   padding: 0.5rem;
@@ -44,6 +38,13 @@ h3 {
 #li:hover {
   color: white;
   cursor: pointer;
+}
+#li.sidenav-active {
+  color: white;
+  border-left: 0.3rem solid white;
+}
+.sidenav-active svg {
+  fill: white;
 }
 
 #li:hover #svg {

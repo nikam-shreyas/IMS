@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import Sidenav from "../components/Sidenav";
 import { updateStudent, getStudent } from "../store/actions";
 import { connect } from "react-redux";
@@ -31,7 +31,6 @@ class StudentProfile extends Component {
   }
   loadData(user) {
     if (user.emailId !== undefined) this.setState({ data: user });
-    console.log(user);
   }
   handleSubmit(event) {
     event.preventDefault();

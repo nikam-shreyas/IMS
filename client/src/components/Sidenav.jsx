@@ -6,6 +6,7 @@ import {
   MdNotifications,
   MdAddCircle,
   MdDns,
+  MdSettings,
 } from "react-icons/md";
 
 class Sidenav extends Component {
@@ -17,7 +18,7 @@ class Sidenav extends Component {
         <p>Menu</p>
         <ul id="ul">
           <Link to="/student">
-            <li id="li" className={activeNow == 1 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdDns />
               </span>
@@ -25,7 +26,7 @@ class Sidenav extends Component {
             </li>
           </Link>
           <Link to="/studentprofile">
-            <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === "2" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdPermIdentity />
               </span>
@@ -33,24 +34,35 @@ class Sidenav extends Component {
             </li>
           </Link>
           <Link to="/apply">
-            <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAddCircle />
               </span>
               Apply
             </li>
           </Link>
-          <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
+
+          <Link to="/studentDocs">
+            <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdDescription />
+              </span>
+              Documents
+            </li>
+          </Link>
+          <Link to="/notifications">
+            <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdNotifications />
+              </span>
+              Notifications
+            </li>
+          </Link>
+          <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
             <span className="mx-2">
-              <MdDescription />
+              <MdSettings />
             </span>
-            Documents
-          </li>
-          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdNotifications />
-            </span>
-            Notifications
+            Settings
           </li>
         </ul>
       </div>
