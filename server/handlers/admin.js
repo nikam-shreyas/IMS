@@ -1,5 +1,5 @@
 const db = require("../models");
-
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.register_faculty = async (req, res, next) => {
@@ -120,4 +120,59 @@ exports.showProfile = async (req, res, next) => {
       message: error.message,
     });
   }
-};
+
+}
+
+exports.updateProfile=async(req,res,next)=>{
+  try {
+    const { id }=req.params
+    const Profile = await db.Faculty.findOneAndUpdate({_id:id},{
+      $set:{
+       'name.firstname':req.body.firstname,
+        'name.lastname':req.body.lastname,
+        username:req.body.username,
+        department:req.body.department,
+        designation:req.body.designation
+      }
+    },{new : true});
+    if(Profile){
+      return res.status(200).json(Profile)
+    }else{
+      throw new Error("Not an admin");    
+    }
+  } catch (error) {
+    next({
+      status:400,
+      message:error.message
+    });
+  }
+
+}
+
+exports.resetPassword=async(req,res,next)=>{
+  const { oldpassword,newpassword }=req.body
+  const { id }=req.params
+  try {
+    const Fac = await db.Faculty.findById({ _id:id });
+    const valid = await Fac.comparePassword(oldpassword);
+    if (valid) {
+      const newhashed = await bcrypt.hash(newpassword, 10);
+      const Profile=await db.Faculty.findOneAndUpdate({_id:id},{
+      $set:{
+       password:newhashed
+      }
+    },{new : true});
+    if(Profile){
+      return res.status(200).json(Profile)
+    }else{
+      throw new Error("Admin not found");    
+    }
+    } else {
+      throw new Error("Old password wrong");
+    }
+  } catch (err) {
+    // err.message = "Invalid username/password";
+    next(err);
+  }
+ 
+}

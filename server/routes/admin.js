@@ -4,14 +4,26 @@ const auth = require("../middlewares/auth");
 
 router.route("/all").get(auth, handle.findAll);
 
-router.route("/:id").get(auth, handle.showProfile);
+router.route("/:id")
+.get(auth,handle.showProfile);
 
-router.route("/add").post(auth, handle.addFaculty);
+router.route("/update/:id")
+.put(auth,handle.updateProfile);
+
+router.route("/add")
+.post(auth,handle.addFaculty);
 
 router
   .route("/find/:user")
   .get(auth, handle.findFaculty)
   .delete(auth, handle.deleteFaculty);
+
+router.route("/update/:id")
+.put(auth,handle.updateProfile);
+
+router.route("/reset/:id")
+.put(auth,handle.resetPassword);
+
 
 //router.post('/login_faculty',handle.login_faculty);
 
