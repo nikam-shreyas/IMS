@@ -1,13 +1,13 @@
 import api from "../../services/api";
 import {
-  SET_CURRENT_ADMIN,
-  SET_CURRENT_TEACHER,
+  SET_CURRENT_SELECTED_ADMIN,
+  SET_CURRENT_SELECTED_TEACHER,
   SET_FACULTY,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 
 export const setCurrentAdmin = (admin) => ({
-  type: SET_CURRENT_ADMIN,
+  type: SET_CURRENT_SELECTED_ADMIN,
   admin,
 });
 
@@ -17,7 +17,7 @@ export const setFaculty = (faculty) => ({
 });
 
 export const setCurrentTeacher = (teacher) => ({
-  type: SET_CURRENT_TEACHER,
+  type: SET_CURRENT_SELECTED_TEACHER,
   teacher,
 });
 

@@ -7,9 +7,9 @@ export const setCurrentUser_f = (user) => ({
   user,
 });
 
-export const setCurrentUser_a = (admin) => ({
+export const setCurrentUser_a = (user) => ({
   type: SET_CURRENT_ADMIN,
-  admin,
+  user,
 });
 
 export const setToken_f = (token) => {
