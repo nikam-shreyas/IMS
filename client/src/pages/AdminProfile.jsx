@@ -108,35 +108,6 @@ class AdminProfile extends Component {
                   </div>
                   <div className="form-row my-2">
                     <div className="col-sm-6">
-                      Year:
-                      <input
-                        readOnly
-                        type="text"
-                        className="form-control"
-                        id="year"
-                        name="year"
-                        placeholder={this.state.data.class.year}
-                      />
-                    </div>
-                    <div className="col-sm-6">
-                      Div:
-                      <div className="input-group">
-                        <div className="input-group">
-                          <input
-                            readOnly
-                            type="text"
-                            name="div"
-                            id="div"
-                            placeholder={this.state.data.class.div}
-                            className="form-control"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-row my-2">
-                    <div className="col-sm-6">
                       Designation:
                       <input
                         readOnly
