@@ -1,12 +1,12 @@
 import {
-  SET_CURRENT_ADMIN,
+  SET_CURRENT_SELECTED_ADMIN,
   SET_FACULTY,
-  SET_CURRENT_TEACHER,
+  SET_CURRENT_SELECTED_TEACHER,
 } from "../actionTypes";
 
 export const currentAdmin = (state = {}, action) => {
   switch (action.type) {
-    case SET_CURRENT_ADMIN:
+    case SET_CURRENT_SELECTED_ADMIN:
       return action.admin;
     default:
       return state;
@@ -24,7 +24,7 @@ export const faculty = (state = [], action) => {
 
 export const currentTeacher = (state = {}, action) => {
   switch (action.type) {
-    case SET_CURRENT_TEACHER:
+    case SET_CURRENT_SELECTED_TEACHER:
       return action.teacher;
     default:
       return state;
