@@ -164,6 +164,7 @@ class InternshipApplication extends Component {
     );
   }
 }
+
 export default withRouter(
   connect(
     (store) => ({

@@ -43,6 +43,7 @@ export const updateStudent = (data) => {
       dispatch(setCurrentUser(user));
       dispatch(removeError());
     } catch (err) {
+      console.log(err);
       const error = err.response.data;
       dispatch(addError(error.message));
     }
@@ -56,6 +57,7 @@ export const getStudent = () => {
       dispatch(setCurrentUser(user));
       dispatch(removeError());
     } catch (err) {
+      console.log(err);
       const error = err.response.data;
       dispatch(addError(error.message));
     }
