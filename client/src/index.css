@@ -44,16 +44,16 @@ code {
   background: rgb(58, 54, 54);
 }
 
-input[type="radiobox"] + label {
+input[type="checkbox"] + label {
   display: block;
   margin: 0.2em;
 }
 
-input[type="radiobox"] {
+input[type="checkbox"] {
   display: none;
 }
 
-input[type="radio"].accept + label:before {
+input[type="checkbox"].accept + label:before {
   content: "\2714"; /*274c*/
 
   border: 0.1em solid #000;
@@ -68,7 +68,7 @@ input[type="radio"].accept + label:before {
   color: transparent;
 }
 
-input[type="radio"].reject + label:before {
+input[type="checkbox"].reject + label:before {
   content: "\274c"; /*274c*/
 
   border: 0.1em solid #000;
@@ -76,20 +76,20 @@ input[type="radio"].reject + label:before {
   display: inline-block;
   width: 2em;
   height: 2em;
-  padding-left: 0.5em;
-  padding-bottom: 0.2em;
+  padding-left: 0.4em;
+  padding-bottom: 0.3em;
   /*margin-right: 0.2em;*/
   vertical-align: bottom;
   color: transparent;
 }
 
-input[type="radio"]:checked.accept + label:before {
+input[type="checkbox"]:checked.accept + label:before {
   background-color: mediumseagreen;
   color: #fff;
   border-color: mediumseagreen;
 }
 
-input[type="radio"]:checked.reject + label:before {
+input[type="checkbox"]:checked.reject + label:before {
   background-color: red;
   color: #fff;
   border-color: red;

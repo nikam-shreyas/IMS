@@ -28,6 +28,9 @@ const studentSchema = new mongoose.Schema({
     type: Number,
     required: false,
   },
+  emailId: {
+    type: String,
+  },
   applicationsApproved: [],
   marksheets: [],
   username: {

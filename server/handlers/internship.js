@@ -52,7 +52,7 @@ exports.getInternship = async (req, res, next) => {
 
     const internship = await db.Internship.findById(id).populate("student", [
       "name",
-      "class",
+      "currentClass",
       "prevSemAttendance",
       "marksheets",
       "rollNo",

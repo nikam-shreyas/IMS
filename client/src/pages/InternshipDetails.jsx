@@ -26,7 +26,7 @@ class InternshipDetails extends Component {
           firstname: null,
           lastname: null,
         },
-        class: {
+        currentClass: {
           year: null,
           div: null,
         },
@@ -48,6 +48,7 @@ class InternshipDetails extends Component {
     let internshipId = c[4];
     getCurrentInternship(internshipId)
       .then(this.setState({ isLoading: false }))
+      .then(console.log(this.props))
       .then(() => this.loadData(this.props.internships));
   }
   handleClick(id) {
@@ -71,7 +72,6 @@ class InternshipDetails extends Component {
           <div className="col-sm-10 of">
             <div className="card m-3 border-dark" id="card">
               {this.state.isLoading && <>Loading...</>}
-
               {
                 <>
                   <div className="card-header">
@@ -90,9 +90,9 @@ class InternshipDetails extends Component {
                         this.state.data.student.name.lastname}
                       <br />
                       <small className="text-muted">
-                        {this.state.data.student.class.year +
+                        {this.state.data.student.currentClass.year +
                           " " +
-                          this.state.data.student.class.div}
+                          this.state.data.student.currentClass.div}
                       </small>
                     </div>
                     <table className="table table-hover table-striped table-bordered my-3">
@@ -114,7 +114,7 @@ class InternshipDetails extends Component {
                           <td>
                             {new Date(
                               this.state.data.application.submittedDate
-                            ).toLocaleDateString()}
+                            ).toDateString()}
                           </td>
                         </tr>
                         {this.state.data.application.approvedDate && (
@@ -124,7 +124,7 @@ class InternshipDetails extends Component {
                               <td>
                                 {new Date(
                                   this.state.data.application.approvedDate
-                                ).toLocaleDateString()}
+                                ).toDateString()}
                               </td>
                             </tr>
                           </>
@@ -219,7 +219,6 @@ class InternshipDetails extends Component {
     );
   }
 }
-
 export default withRouter(
   connect(
     (store) => ({

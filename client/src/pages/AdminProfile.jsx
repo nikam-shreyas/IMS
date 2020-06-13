@@ -1,74 +1,77 @@
-import React, { Component } from "react";
-import Sidenav from "../components/Sidenav";
-import { updateStudent, getStudent } from "../store/actions";
+import React, { Component, useState } from "react";
+// import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
-class StudentProfile extends Component {
+import Admin_Sidenav from "../components/Admin_Sidenav";
+class AdminProfile extends Component {
   state = {
     isLoading: true,
     data: {
       name: {
-        firstname: "Shreyas",
-        lastname: "Nikam",
+        firstname: "Srushti",
+        lastname: "Raybhoge",
       },
-      currentClass: {
+      class: {
         year: "TE",
         div: "2",
       },
-      rollNo: "31241",
-      prevSemAttendance: ">75",
-      emailId: "example@gmail.com",
+      department: "Computer",
+      designation: "Admin",
+      emailId: "srush@gmail.com",
     },
   };
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
   async componentDidMount() {
-    const { getStudent } = this.props;
-    getStudent()
-      .then(this.setState({ isLoading: false }))
-      .then(() => this.loadData(this.props.auth.user));
+    // const { getAdmin } = this.props;
+    // showProfile()
+    //   .then(this.setState({ isLoading: false }))
+    //   .then(() => this.loadData(this.props.auth.user));
   }
   loadData(user) {
-    if (user.emailId !== undefined) this.setState({ data: user });
+    // if (user.emailId !== undefined) this.setState({ data: user });
+    // console.log(user);
   }
   handleSubmit(event) {
-    event.preventDefault();
-    const { updateStudent } = this.props;
-    var formData = new FormData(event.target);
-    const data = {};
-    data["name"] = {
-      firstname: formData.get("firstname") || this.state.data.name.firstname,
-      lastname: formData.get("lastname") || this.state.data.name.lastname,
-    };
-    data["currentClass"] = {
-      year: formData.get("year") || this.state.data.currentClass.year,
-      div: formData.get("div") || this.state.data.currentClass.div,
-    };
-    data["prevSemAttendance"] =
-      formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
-    data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
-    data["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    updateStudent(data);
-    alert("Profile Updated!");
-    window.location.reload(false);
+    // event.preventDefault();
+    // const { updateStudent } = this.props;
+    // var formData = new FormData(event.target);
+    // const data = {};
+    // data["name"] = {
+    //   firstname: formData.get("firstname") || this.state.data.name.firstname,
+    //   lastname: formData.get("lastname") || this.state.data.name.lastname,
+    // };
+    // data["currentClass"] = {
+    //   year: formData.get("year") || this.state.data.currentClass.year,
+    //   div: formData.get("div") || this.state.data.currentClass.div,
+    // };
+    // data["prevSemAttendance"] =
+    //   formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
+    // data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
+    // data["emailId"] = formData.get("emailId") || this.state.data.emailId;
+    // updateStudent(data);
+    // alert("Profile Updated!");
+    // window.location.reload(false);
   }
+
   editform() {
-    var form = document.getElementById("form");
-    var elements = form.elements;
-    for (var i = 0, len = elements.length; i < len; ++i) {
-      elements[i].readOnly = !elements[i].readOnly;
-    }
-    var editButton = document.getElementById("editButton");
-    editButton.classList.toggle("btn-danger");
-    editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
+    // var form = document.getElementById("form");
+    // var elements = form.elements;
+    // for (var i = 0, len = elements.length; i < len; ++i) {
+    //   elements[i].readOnly = !elements[i].readOnly;
+    // }
+    // var editButton = document.getElementById("editButton");
+    // editButton.classList.toggle("btn-danger");
+    // editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
+
   render() {
     return (
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2">
-            <Sidenav activeComponent="2" />
+            <Admin_Sidenav activeComponent="1" />
           </div>
           <div className="col-sm-10">
             <div className="container">
@@ -76,7 +79,7 @@ class StudentProfile extends Component {
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
-                  Fill in the details:
+                  Click edit to fill in the details and update :
                   <hr />
                   <div className="container">
                     <div className="form-row my-2">
@@ -105,31 +108,28 @@ class StudentProfile extends Component {
                     </div>
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        Roll No:
+                        Year:
                         <input
                           readOnly
-                          type="number"
+                          type="text"
                           className="form-control"
-                          id="rollNo"
-                          name="rollNo"
-                          placeholder={this.state.data.rollNo}
+                          id="year"
+                          name="year"
+                          placeholder={this.state.data.class.year}
                         />
                       </div>
                       <div className="col-sm-6">
-                        Attendance:
+                        Div:
                         <div className="input-group">
                           <div className="input-group">
                             <input
                               readOnly
-                              type="number"
-                              name="prevSemAttendance"
-                              id="prevSemAttendance"
-                              placeholder={this.state.data.prevSemAttendance}
+                              type="text"
+                              name="div"
+                              id="div"
+                              placeholder={this.state.data.class.div}
                               className="form-control"
                             />
-                            <div className="input-group-append">
-                              <span className="input-group-text">%</span>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -137,24 +137,24 @@ class StudentProfile extends Component {
 
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        Year:
+                        Designation:
                         <input
                           readOnly
                           type="text"
-                          name="year"
-                          id="year"
-                          placeholder={this.state.data.currentClass.year}
+                          name="designation"
+                          id="designation"
+                          placeholder={this.state.data.designation}
                           className="form-control"
                         />
                       </div>
                       <div className="col-sm-6">
-                        Division:
+                        Department:
                         <input
                           readOnly
-                          type="number"
-                          name="div"
-                          id="div"
-                          placeholder={this.state.data.currentClass.div}
+                          type="text"
+                          name="department"
+                          id="department"
+                          placeholder={this.state.data.department}
                           className="form-control"
                         />
                       </div>
@@ -204,5 +204,5 @@ export default connect(
   (store) => ({
     auth: store.auth,
   }),
-  { updateStudent, getStudent }
-)(StudentProfile);
+  {}
+)(AdminProfile);

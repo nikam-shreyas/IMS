@@ -16,49 +16,44 @@ p {
   text-align: center;
 }
 hr {
-  border-color: darkslategray;
+  border-color: slategray;
 }
 h3 {
   color: whitesmoke;
   text-align: center;
 }
-img {
-  border-radius: 50%;
-  height: 100px;
-  margin-top: 20px;
-  border: 4px dotted rgb(185, 223, 255);
-}
 .line {
   border-left: 1px solid grey;
 }
-ul {
+#ul {
   list-style: none;
   float: left;
   padding: 0;
 }
-.sidenav-active {
+
+#li {
+  color: gray;
+  padding: 0.5rem;
+}
+#li:hover {
+  color: white;
+  cursor: pointer;
+}
+#li.sidenav-active {
   color: white;
   border-left: 0.3rem solid white;
 }
 .sidenav-active svg {
   fill: white;
 }
-li {
-  color: gray;
-  padding: 0.5rem;
-}
-li:hover {
-  color: white;
-  cursor: pointer;
-}
 
-li:hover svg {
+#li:hover #svg {
   fill: white;
 }
-svg {
+#svg {
   fill: grey;
 }
-svg:hover {
+#svg:hover {
   fill: white;
 }
 

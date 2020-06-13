@@ -3,6 +3,7 @@ import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
 class InternshipApplication extends Component {
   state = {};
   constructor(props) {
@@ -164,7 +165,6 @@ class InternshipApplication extends Component {
     );
   }
 }
-
 export default withRouter(
   connect(
     (store) => ({

@@ -1,7 +1,25 @@
-import React from "react";
+import React, { Component } from "react";
+import MainContent from "../components/MainContent";
+import Admin_Sidenav from "../components/Admin_Sidenav";
 
-const Admin_Home = ({ authType, isAthenticated }) => {
-  return <p>This is Admin homepage</p>;
-};
+class Admin_Home extends Component {
+  state = {};
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div className="row no-gutters h-100">
+        <div className="col-sm-2 sidenav">
+          <Admin_Sidenav activeComponent="1" />
+        </div>
+        <div className="col-sm-10">
+          <MainContent />
+ 
+        </div>
+      </div>
+    );
+  }
+}
 
 export default Admin_Home;

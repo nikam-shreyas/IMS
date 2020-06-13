@@ -27,9 +27,7 @@ const internshipSchema = new mongoose.Schema({
     stipend: {
       type: Number,
     },
-    offerLetter: {
-      type: String, //to be changed to Document in later stages
-    },
+    offerLetter: {},
   },
   approvedBy: [
     {
@@ -65,7 +63,7 @@ const internshipSchema = new mongoose.Schema({
   },
   holder: {
     type: String,
-    default: "ClassCoordinator",
+    default: "Class Coordinator",
   },
   comments: {
     type: String,
