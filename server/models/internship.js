@@ -59,12 +59,15 @@ const internshipSchema = new mongoose.Schema({
   },
   completionStatus: {
     type: String,
+    default: "N",
   },
   holder: {
     type: String,
+    default: "Class Coordinator",
   },
   comments: {
     type: String,
+    default: "",
   },
 });
 

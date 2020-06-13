@@ -3,6 +3,7 @@ import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+
 class InternshipApplication extends Component {
   state = {};
   constructor(props) {
@@ -32,7 +33,7 @@ class InternshipApplication extends Component {
   }
   render() {
     return (
-      <>
+  
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
             <Sidenav activeComponent="3" />
@@ -160,7 +161,6 @@ class InternshipApplication extends Component {
             </div>
           </div>
         </div>
-      </>
     );
   }
 }
