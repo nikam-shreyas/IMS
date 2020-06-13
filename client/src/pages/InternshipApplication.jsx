@@ -33,7 +33,7 @@ class InternshipApplication extends Component {
   }
   render() {
     return (
-      <>
+  
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
             <Sidenav activeComponent="3" />
@@ -161,7 +161,6 @@ class InternshipApplication extends Component {
             </div>
           </div>
         </div>
-      </>
     );
   }
 }
