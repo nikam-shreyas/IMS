@@ -4,7 +4,7 @@ const auth = require("../middlewares/auth");
 
 router.route("/all").get(auth, handle.findAll);
 
-router.route("/:id")
+router.route("/")
 .get(auth,handle.showProfile);
 
 router.route("/update/:id")

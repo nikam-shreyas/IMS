@@ -107,7 +107,8 @@ exports.deleteFaculty = async (req, res, next) => {
 
 exports.showProfile = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { id } = req.decoded;
+    console.log(id)
     const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });
     if (Profile) {
       return res.json(Profile);

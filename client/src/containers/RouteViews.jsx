@@ -71,8 +71,7 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/internships" render={() => <Internships />} />
       <Route exact path="/student" render={() => <Student_Home />} />
       <Route exact path="/faculty" render={() => <CreateNotice />} />
-      <Route exact path="/admin" render={() => <Admin_Home />} />
-      <Route exact path="/admin/:id" render={() => <AdminProfile />} />
+      <Route exact path="/admin/" render={() => <AdminProfile />} />
       <Route exact path="/add" render={() => <AddFaculty />} />
       <Route exact path="/find/:user" render={() => <UpDelFaculty />} />
       <Route exact path="/all" render={() => <FacultyList />} />
