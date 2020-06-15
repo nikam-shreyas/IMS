@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MainContent from "../components/MainContent";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 
 class Admin_Home extends Component {
@@ -13,10 +12,7 @@ class Admin_Home extends Component {
         <div className="col-sm-2 sidenav">
           <Admin_Sidenav activeComponent="1" />
         </div>
-        <div className="col-sm-10">
-          <MainContent />
- 
-        </div>
+        
       </div>
     );
   }

@@ -6,11 +6,10 @@ import {
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 
-export const setCurrentAdmin = (admin) => ({
+export const setCurrentAdmin = (admin) => ({  
   type: SET_CURRENT_SELECTED_ADMIN,
   admin,
 });
-
 export const setFaculty = (faculty) => ({
   type: SET_FACULTY,
   faculty,
@@ -24,7 +23,7 @@ export const setCurrentTeacher = (teacher) => ({
 export const getAdmin = (path) => {
   return async (dispatch) => {
     try {
-      const admin = await api.call("get", `admin/${path}`);
+      const admin = await api.call("get", `admin/`);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {

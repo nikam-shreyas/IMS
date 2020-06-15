@@ -7,7 +7,7 @@ const Auth_Page=({authType,isAuthenticated,isAuthenticated_f,isAuthenticated_a})
    
    if(isAuthenticated) return <Redirect to="/student" />
    if(isAuthenticated_f) return <Redirect to="/faculty" />
-   if(isAuthenticated_a) return <Redirect to="/admin" />
+   if(isAuthenticated_a) return <Redirect to="/admin/" />
 
    return (
        <div>

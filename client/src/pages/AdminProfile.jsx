@@ -2,17 +2,17 @@ import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
+import {
+  getAdmin,
+} from "../store/actions/admin";
 class AdminProfile extends Component {
   state = {
     isLoading: true,
     data: {
+      _id:null,
       name: {
         firstname: "Srushti",
         lastname: "Raybhoge",
-      },
-      class: {
-        year: "TE",
-        div: "2",
       },
       department: "Computer",
       designation: "Admin",
@@ -21,17 +21,34 @@ class AdminProfile extends Component {
   };
   constructor(props) {
     super(props);
-    // this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    console.log(this.props);
+    console.log(this.props.auth.user.id);
+
+    // const {
+    //   getAdmin
+    // } = this.props;
+
+    
+      // () => this.loadData(this.props.auth.user)
+   }
   async componentDidMount() {
-    // const { getAdmin } = this.props;
-    // showProfile()
+    
+    const {
+      getAdmin
+    } = this.props;
+    getAdmin()
+    .then(this.setState({ isLoading: false }))
+    .then(console.log(this.props))
+    .then(() => this.loadData(this.props.auth.user));
+    // console.log(this.props);
+    // getAdmin()
     //   .then(this.setState({ isLoading: false }))
     //   .then(() => this.loadData(this.props.auth.user));
-  }
+    //   console.log(this.props);
+    // this.handleSubmit = this.handleSubmit.bind(this);
+   }
   loadData(user) {
-    // if (user.emailId !== undefined) this.setState({ data: user });
-    // console.log(user);
+    this.setState({ data: user });
   }
   handleSubmit(event) {
     // event.preventDefault();
@@ -67,6 +84,7 @@ class AdminProfile extends Component {
   }
 
   render() {
+    console.log(this.props.admin)
     return (
       <div>
         <div className="row no-gutters">
@@ -91,7 +109,7 @@ class AdminProfile extends Component {
                           name="firstname"
                           id="firstname"
                           className="form-control"
-                          placeholder={this.state.data.name.firstname}
+                          // placeholder={this.state.data.firstname}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -101,41 +119,12 @@ class AdminProfile extends Component {
                           type="text"
                           name="lastname"
                           id="lastname"
-                          placeholder={this.state.data.name.lastname}
+                          // placeholder={this.state.data.lastname}
                           className="form-control"
                         />
                       </div>
                     </div>
-                    <div className="form-row my-2">
-                      <div className="col-sm-6">
-                        Year:
-                        <input
-                          readOnly
-                          type="text"
-                          className="form-control"
-                          id="year"
-                          name="year"
-                          placeholder={this.state.data.class.year}
-                        />
-                      </div>
-                      <div className="col-sm-6">
-                        Div:
-                        <div className="input-group">
-                          <div className="input-group">
-                            <input
-                              readOnly
-                              type="text"
-                              name="div"
-                              id="div"
-                              placeholder={this.state.data.class.div}
-                              className="form-control"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="form-row my-2">
+                   <div className="form-row my-2">
                       <div className="col-sm-6">
                         Designation:
                         <input
@@ -203,6 +192,9 @@ class AdminProfile extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
+    admin:store.admin,
   }),
-  {}
+  {
+    getAdmin,
+  }
 )(AdminProfile);

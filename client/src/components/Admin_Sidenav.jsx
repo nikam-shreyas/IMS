@@ -17,7 +17,7 @@ class Admin_Sidenav extends Component {
       <div className="sidenav">
         <p>Menu</p>
         <ul id="ul">
-          <Link to="/admin/:id">
+          <Link to="/admin/">
             <li id="li" className={activeNow == 1 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdPermIdentity />
