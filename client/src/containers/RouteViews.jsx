@@ -17,6 +17,7 @@ import UpDelFaculty from "../pages/UpDelFaculty";
 import CreateNotice from "../pages/CreateNotice";
 import Notices from "../components/Notices";
 import StudentNotifications from "../pages/StudentNotifications";
+import FacultyProfile from "../pages/FacultyProfile";
 //import { internships } from '../store/reducers/internships';
 import FacultyList from "../pages/FacultyList";
 
@@ -75,7 +76,7 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/add" render={() => <AddFaculty />} />
       <Route exact path="/find/:user" render={() => <UpDelFaculty />} />
       <Route exact path="/all" render={() => <FacultyList />} />
-
+      <Route exact path="/facultyprofile" render={() => <FacultyProfile />} />
       <Route
         exact
         path="/internshipdetails/:internshipid"

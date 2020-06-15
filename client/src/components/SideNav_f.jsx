@@ -8,8 +8,10 @@ import {
   MdDns,
   MdSettings,
 } from "react-icons/md";
+//import Not from "../components/NoticeForm";
+import { internships } from "../store/reducers/internships";
 
-class Sidenav extends Component {
+class Sidenav_f extends Component {
   state = {};
   render() {
     const activeNow = this.props.activeComponent;
@@ -17,15 +19,15 @@ class Sidenav extends Component {
       <div className="sidenav">
         <p>Menu</p>
         <ul id="ul">
-          <Link to="/student">
+          <Link to="/faculty">
             <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdDns />
+              <MdDns />
               </span>
-              My Applications
+              Send Notice
             </li>
           </Link>
-          <Link to="/studentprofile">
+          <Link to="/facultyprofile">
             <li id="li" className={activeNow === "2" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdPermIdentity />
@@ -33,12 +35,12 @@ class Sidenav extends Component {
               Profile
             </li>
           </Link>
-          <Link to="/apply">
+          <Link to="/internships">
             <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdAddCircle />
+                <internships />
               </span>
-              Apply
+              Student Internships
             </li>
           </Link>
 
@@ -48,14 +50,6 @@ class Sidenav extends Component {
                 <MdDescription />
               </span>
               Documents
-            </li>
-          </Link>
-          <Link to="/notifications">
-            <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
-              <span className="mx-2">
-                <MdNotifications />
-              </span>
-              Notifications
             </li>
           </Link>
           <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
@@ -70,4 +64,4 @@ class Sidenav extends Component {
   }
 }
 
-export default Sidenav;
+export default Sidenav_f;
