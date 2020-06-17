@@ -1,25 +1,37 @@
 import React,{Component} from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
+import {createTeacher} from '../store/actions/admin';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddFaculty extends Component{
 constructor(props){
 super(props);
-this.handleSubmit = this.handleSubmit.bind(this);
+this.state={
+  data: {
+    _id:null,
+    name: {
+      firstname: "s",
+      lastname: "s",
+    },
+    currentClass: {
+      year: "s",
+      div: "s",
+    },
+    department: "s",
+    designation: "s",
+    emailId: "srush@gmail.com",
+  },
 }
-// async componentDidMount() {
-//     const { getStudent } = this.props;
-//     getStudent()
-//       .then(this.setState({ isLoading: false }))
-//       .then(() => this.loadData(this.props.auth.user));
-//   }
-  loadData(user) {
-    if (user.emailId !== undefined) this.setState({ data: user });
-    console.log(user);
-  }
+
+this.handleSubmit = this.handleSubmit.bind(this);
+
+}
+
   handleSubmit(event) {
     event.preventDefault();
-    const { updateStudent } = this.props;
+    const { createTeacher } = this.props;
     var formData = new FormData(event.target);
     const data = {};
     data["name"] = {
@@ -30,12 +42,14 @@ this.handleSubmit = this.handleSubmit.bind(this);
       year: formData.get("year") || this.state.data.currentClass.year,
       div: formData.get("div") || this.state.data.currentClass.div,
     };
-    data["prevSemAttendance"] =
-      formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
-    data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
+    data["department"] = formData.get("department") || this.state.data.department;
+    data["designation"] = formData.get("designation") || this.state.data.designation;
+    data["username"] = formData.get("username") || this.state.data.username;
+    data["password"] = formData.get("password") || this.state.data.password;
     data["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    updateStudent(data);
-    alert("Profile Updated!");
+    console.log(data);
+    createTeacher(data).then( toast("Faculty Added!"));
+    // alert("Faculty Added!");
     window.location.reload(false);
   }
 render(){
@@ -79,20 +93,20 @@ render(){
                     <div className="form-row my-2">
                       <div className="col-sm-6">
                        Designation:
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="designation"
-                          name="designation"
-                          placeholder="Enter designation"
-                        />
+                       <select id="designation" name="designation" className="form-control">
+                        <option value="ClassCoordinator">Class Coordinator</option>
+                        <option value="DepartmentIntershipCoordinator">Department Intership Coordinator</option>
+                        <option value="CollegeInternshipCoordinator">College Internship Coordinator</option>
+                        <option value="Principal">Principal</option>
+                        <option value="Admin">Admin</option>
+                      </select>
                       </div>
                       <div className="col-sm-6">
                         Department:
                         <div className="input-group">
                           <div className="input-group">
                             <input
-                              type="number"
+                              type="text"
                               name="department"
                               id="department"
                               placeholder="Enter department"
@@ -126,7 +140,30 @@ render(){
                       </div>
                     </div>
                     <div className="form-row my-2">
-                      <div className="col-sm-12">
+                      <div className="col-sm-6">
+                       Username: <h6>(Should be unique)</h6>
+                        <input
+                          type="text"
+                          name="username"
+                          id="username"
+                          placeholder="Enter Username"
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="col-sm-6">
+                        Password: <h6>(Default password)</h6>
+                        <input
+                          type="password"
+                          name="password"
+                          id="password"
+                          placeholder="Enter Password"
+                          className="form-control"
+                        />
+                      </div>
+                      
+                    </div>
+                    <div className="form-row my-2">
+                    <div className="col-sm-12">
                         Email Id:
                         <input
                           type="email"
@@ -136,6 +173,7 @@ render(){
                           className="form-control"
                         />
                       </div>
+
                     </div>
                   </div>
                   <hr />
@@ -149,6 +187,7 @@ render(){
                   </div>
                 </form>
               }
+              <ToastContainer />
             </div>
           </div>
 
@@ -161,4 +200,5 @@ render(){
 
 export default connect ((store)=>({
     auth:store.auth,
-    }),{})(AddFaculty);
+    faculty:store.faculty
+    }),{createTeacher})(AddFaculty);

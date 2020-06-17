@@ -13,13 +13,13 @@ import StudentDocuments from "../pages/StudentDocuments";
 import TestPage from "../pages/testPage";
 import AdminProfile from "../pages/AdminProfile";
 import AddFaculty from "../pages/AddFaculty";
-import UpDelFaculty from "../pages/UpDelFaculty";
 import CreateNotice from "../pages/CreateNotice";
 import Notices from "../components/Notices";
 import StudentNotifications from "../pages/StudentNotifications";
 //import { internships } from '../store/reducers/internships';
 import FacultyList from "../pages/FacultyList";
-
+import DeleteFaculty from "../pages/DeleteFaculty";
+import AdminSetting from '../pages/AdminSetting';
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -73,8 +73,9 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/faculty" render={() => <CreateNotice />} />
       <Route exact path="/admin/" render={() => <AdminProfile />} />
       <Route exact path="/add" render={() => <AddFaculty />} />
-      <Route exact path="/find/:user" render={() => <UpDelFaculty />} />
       <Route exact path="/all" render={() => <FacultyList />} />
+      <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
+      <Route exact path="/settings" render={() => <AdminSetting />} />
 
       <Route
         exact

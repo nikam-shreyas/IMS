@@ -111,7 +111,7 @@ exports.showProfile = async (req, res, next) => {
     console.log(id)
     const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });
     if (Profile) {
-      return res.json(Profile);
+      return res.status(200).json(Profile);
     } else {
       throw new Error("Not an admin");
     }
@@ -130,7 +130,7 @@ exports.updateProfile=async(req,res,next)=>{
       $set:{
        'name.firstname':req.body.firstname,
         'name.lastname':req.body.lastname,
-        username:req.body.username,
+        emailId:req.body.emailId,
         department:req.body.department,
         designation:req.body.designation
       }

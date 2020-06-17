@@ -1,18 +1,51 @@
 const db = require("../models");
+let nodemailer = require("nodemailer");
+let transport = require("nodemailer-smtp-transport");
+require("dotenv").config();
+
+//mailing options and transportor
+var options = {
+  service: "gmail",
+  auth: {
+    user: process.env.EMAILFROM,
+    pass: process.env.PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+};
+let client = nodemailer.createTransport(transport(options));
 
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
   const { application } = req.body;
   try {
     const student = await db.Student.findById(id);
-
     const internship = await db.Internship.create({
       student,
       application,
     });
     student.internships.push(internship._id);
     await student.save();
+    
 
+    var email = {
+      from: process.env.EMAILFROM,
+      to:student.emailId,
+      subject: "new internship application",
+      text: 'You have a new internship application',
+      html: "<a href='http://localhost:3000/login'>Click here to login.</a>"
+    };
+    console.log(email);
+    client.sendMail(email, (err, info) => {
+        if(err){
+          console.log(err)
+        }
+        else if(info){
+          console.log(info)
+        }
+    });
+    
     return res.status(201).json({ ...internship._doc, student: student._id });
   } catch (err) {
     next({

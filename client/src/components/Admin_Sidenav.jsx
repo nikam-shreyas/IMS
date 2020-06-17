@@ -41,18 +41,22 @@ class Admin_Sidenav extends Component {
               Add New Faculty
             </li>
           </Link>
+          <Link to="/deleteFaculty">
           <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdEdit />
             </span>
-            Update/Delete Faculty
+            Delete Faculty
           </li>
+          </Link>
+          <Link to="/settings">
           <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
           <span className="mx-2">
             <MdSettings />
           </span>
           Settings
         </li>
+        </Link>
         </ul>
       </div>
     );

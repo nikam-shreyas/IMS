@@ -84,3 +84,29 @@ export const deleteTeacher = (path) => {
     }
   };
 };
+
+export const updateAdmin=(path,data)=>{
+return async (dispatch)=>{
+  try {
+    const admin = await api.call("put", `admin/update/${path}`,data);
+    dispatch(setCurrentAdmin(admin));
+    dispatch(removeError());
+  } catch (err) {
+    const error = err.response.data;
+    dispatch(addError(error.message));
+  }
+}
+};
+
+export const resetPassword=(path,data)=>{
+  return async (dispatch)=>{
+    try {
+      const admin = await api.call("put", `admin/reset/${path}`,data);
+      dispatch(setCurrentAdmin(admin));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  }
+};
