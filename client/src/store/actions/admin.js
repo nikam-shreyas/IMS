@@ -87,6 +87,7 @@ export const deleteTeacher = (path) => {
   };
 };
 
+<<<<<<< HEAD
 
 
 
@@ -96,11 +97,34 @@ export const getTeacher = (path) => {
       const admin = await api.call("get", "admin/teacher");
       
       console.log("can these be admin details "+admin.department);
+=======
+export const updateAdmin=(path,data)=>{
+return async (dispatch)=>{
+  try {
+    const admin = await api.call("put", `admin/update/${path}`,data);
+    dispatch(setCurrentAdmin(admin));
+    dispatch(removeError());
+  } catch (err) {
+    const error = err.response.data;
+    dispatch(addError(error.message));
+  }
+}
+};
+
+export const resetPassword=(path,data)=>{
+  return async (dispatch)=>{
+    try {
+      const admin = await api.call("put", `admin/reset/${path}`,data);
+>>>>>>> 4c6a179640d59361284700732d7ab57c6d217014
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));
     }
+<<<<<<< HEAD
   };
+=======
+  }
+>>>>>>> 4c6a179640d59361284700732d7ab57c6d217014
 };

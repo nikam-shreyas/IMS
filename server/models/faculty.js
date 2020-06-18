@@ -13,14 +13,19 @@ const facultySchema = new mongoose.Schema({
             required: false,
         }
     },
-    class:{
+    currentClass:{
         year:{
-            type:Number,
+            type:String,
+            required: false,
         },
         div:{
             type: Number,
+            required: false,
         }
     },
+    emailId: {
+        type: String,
+      },
     department:{
         type:String,
         required:true,

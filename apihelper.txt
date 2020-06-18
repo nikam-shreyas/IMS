@@ -9,7 +9,7 @@ localhost:4000/api
 6. /internships/student => gets students internships [get]
 7. /internships/id => delete internship by id [delete]
 8. /api/admin/login_admin => login admin using username and password [post]
-9. /api/admin/:id => get details of admin only with admin id [get]
+9. /api/admin/ => get details of admin only [get]
 10. /api/admin/all => get details of all faculty members [get]
 11. /api/admin/find/:user => get details of faculty member with his/her username [get]
 12. /apis/admin/find/:user => delete faculty member with his/her username [delete]
