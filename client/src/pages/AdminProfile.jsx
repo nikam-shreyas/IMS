@@ -21,9 +21,8 @@ class AdminProfile extends Component {
   };
   constructor(props) {
     super(props);
-    console.log(this.props);
-    console.log(this.props.auth.user.id);
-
+    //console.log(this.props);
+    
     // const {
     //   getAdmin
     // } = this.props;
@@ -38,10 +37,11 @@ class AdminProfile extends Component {
     } = this.props;
     getAdmin()
     .then(this.setState({ isLoading: false }))
-    .then(console.log(this.props))
+    .then(console.log("thisis props right here "+this.props))
     .then(() => this.loadData(this.props.auth.user));
     // console.log(this.props);
     // getAdmin()
+    console.log("fello"+this.props);
     //   .then(this.setState({ isLoading: false }))
     //   .then(() => this.loadData(this.props.auth.user));
     //   console.log(this.props);
@@ -84,7 +84,8 @@ class AdminProfile extends Component {
   }
 
   render() {
-    console.log(this.props.admin)
+    console.log("hi after this")
+    console.log(this.props.admin.designation)
     return (
       <div>
         <div className="row no-gutters">
@@ -109,7 +110,8 @@ class AdminProfile extends Component {
                           name="firstname"
                           id="firstname"
                           className="form-control"
-                          // placeholder={this.state.data.firstname}
+                          //value="sahil"
+                           //placeholder={admin.department}
                         />
                       </div>
                       <div className="col-sm-6">
@@ -132,7 +134,7 @@ class AdminProfile extends Component {
                           type="text"
                           name="designation"
                           id="designation"
-                          placeholder={this.state.data.designation}
+                          placeholder={this.props.admin.designation}
                           className="form-control"
                         />
                       </div>
@@ -192,7 +194,7 @@ class AdminProfile extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    admin:store.admin,
+    admin: store.currentAdmin,
   }),
 
   {

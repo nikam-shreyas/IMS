@@ -1,22 +1,16 @@
 import React, { Component } from "react";
 import Sidenav_f from "../components/SideNav_f";
 import { updateStudent, getStudent } from "../store/actions";
+import {getFacultyProfile} from "../store/actions/faculty"
 import { connect } from "react-redux";
 class FacultyProfile extends Component {
   state = {
     isLoading: true,
     data: {
-      name: {
-        firstname: "Shreyas",
-        lastname: "Nikam",
-      },
-      currentClass: {
-        year: "TE",
-        div: "2",
-      },
-      rollNo: "3129",
-      prevSemAttendance: ">75",
-      emailId: "example@gmail.com",
+      designation: "3129",
+      username: ">75",
+      department: "example@gmail.com",
+      created:"",
     },
   };
   constructor(props) {
@@ -24,46 +18,47 @@ class FacultyProfile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   async componentDidMount() {
-    const { getStudent } = this.props;
-    getStudent()
+    const { getFacultyProfile } = this.props;
+    getFacultyProfile()
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.auth.user));
   }
   loadData(user) {
-    if (user.emailId !== undefined) this.setState({ data: user });
+    if (user.designation !== undefined) this.setState({ data: user });
   }
   handleSubmit(event) {
-    event.preventDefault();
-    const { updateStudent } = this.props;
-    var formData = new FormData(event.target);
-    const data = {};
-    data["name"] = {
-      firstname: formData.get("firstname") || this.state.data.name.firstname,
-      lastname: formData.get("lastname") || this.state.data.name.lastname,
-    };
-    data["currentClass"] = {
-      year: formData.get("year") || this.state.data.currentClass.year,
-      div: formData.get("div") || this.state.data.currentClass.div,
-    };
-    data["prevSemAttendance"] =
-      formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
-    data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
-    data["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    updateStudent(data);
-    alert("Profile Updated!");
-    window.location.reload(false);
+    // event.preventDefault();
+    // const { updateStudent } = this.props;
+    // var formData = new FormData(event.target);
+    // const data = {};
+    // data["name"] = {
+    //   firstname: formData.get("firstname") || this.state.data.name.firstname,
+    //   lastname: formData.get("lastname") || this.state.data.name.lastname,
+    // };
+    // data["currentClass"] = {
+    //   year: formData.get("year") || this.state.data.currentClass.year,
+    //   div: formData.get("div") || this.state.data.currentClass.div,
+    // };
+    // data["prevSemAttendance"] =
+    //   formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
+    // data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
+    // data["emailId"] = formData.get("emailId") || this.state.data.emailId;
+    // updateStudent(data);
+    // alert("Profile Updated!");
+    // window.location.reload(false);
   }
   editform() {
-    var form = document.getElementById("form");
-    var elements = form.elements;
-    for (var i = 0, len = elements.length; i < len; ++i) {
-      elements[i].readOnly = !elements[i].readOnly;
-    }
-    var editButton = document.getElementById("editButton");
-    editButton.classList.toggle("btn-danger");
-    editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
+    // var form = document.getElementById("form");
+    // var elements = form.elements;
+    // for (var i = 0, len = elements.length; i < len; ++i) {
+    //   elements[i].readOnly = !elements[i].readOnly;
+    // }
+    // var editButton = document.getElementById("editButton");
+    // editButton.classList.toggle("btn-danger");
+    // editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
   render() {
+    console.log("im in faculty "+this.props.faculty.department);
     return (
       <div>
         <div className="row no-gutters">
@@ -81,42 +76,42 @@ class FacultyProfile extends Component {
                   <div className="container">
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        First Name:
+                        UserName
                         <input
                           readOnly
                           type="text"
                           name="firstname"
                           id="firstname"
                           className="form-control"
-                          placeholder={this.state.data.name.firstname}
+                          placeholder={this.props.faculty.username}
                         />
                       </div>
                       <div className="col-sm-6">
-                        Last Name:
+                        Designation
                         <input
                           readOnly
                           type="text"
                           name="lastname"
                           id="lastname"
-                          placeholder={this.state.data.name.lastname}
+                          placeholder={this.props.faculty.designation}
                           className="form-control"
                         />
                       </div>
                     </div>
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        Roll No:
+                        ID:
                         <input
                           readOnly
                           type="number"
                           className="form-control"
                           id="rollNo"
                           name="rollNo"
-                          placeholder={this.state.data.rollNo}
+                          placeholder={this.props.faculty._id}
                         />
                       </div>
                       <div className="col-sm-6">
-                        Attendance:
+                       Department:
                         <div className="input-group">
                           <div className="input-group">
                             <input
@@ -124,7 +119,7 @@ class FacultyProfile extends Component {
                               type="number"
                               name="prevSemAttendance"
                               id="prevSemAttendance"
-                              placeholder={this.state.data.prevSemAttendance}
+                              placeholder={this.props.faculty.department}
                               className="form-control"
                             />
                             <div className="input-group-append">
@@ -137,29 +132,29 @@ class FacultyProfile extends Component {
 
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        Year:
+                        Username:
                         <input
                           readOnly
                           type="text"
                           name="year"
                           id="year"
-                          placeholder={this.state.data.currentClass.year}
+                          placeholder={this.state.data.department}
                           className="form-control"
                         />
                       </div>
                       <div className="col-sm-6">
-                        Division:
+                      Email Id:
                         <input
                           readOnly
                           type="number"
                           name="div"
                           id="div"
-                          placeholder={this.state.data.currentClass.div}
+                          placeholder={this.state.data.department}
                           className="form-control"
                         />
                       </div>
                     </div>
-                    <div className="form-row my-2">
+                    {/* <div className="form-row my-2">
                       <div className="col-sm-12">
                         Email Id:
                         <input
@@ -171,7 +166,7 @@ class FacultyProfile extends Component {
                           className="form-control"
                         />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <hr />
                   <div className="text-right">
@@ -203,6 +198,7 @@ class FacultyProfile extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
+    faculty: store.get_Faculty_Profile,
   }),
-  { updateStudent, getStudent }
+  { getFacultyProfile }
 )(FacultyProfile);

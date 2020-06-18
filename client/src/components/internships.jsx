@@ -9,7 +9,9 @@ class Internships extends Component {
 
   componentDidMount() {
     const { getInternships } = this.props;
-    getInternships();
+    getInternships()
+    .then(console.log("im here"))
+    .then(console.log(this.props));
   }
 
   render() {

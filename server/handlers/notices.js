@@ -58,12 +58,12 @@ exports.showNotices = async (req, res, next) => {
 exports.studentsNotices = async (req, res, next) => {
   try {
     const { id } = req.decoded;
-    console.log(id);
+   // console.log(id);
     const studentInternships = await db.Student.findById(id).populate(
       "internships",
       "comments"
     );
-    console.log(studentInternships["internships"]);
+  //console.log(studentInternships["internships"]);
     res.status(200).json(studentInternships["internships"]);
   } catch (err) {
     return next({
@@ -87,3 +87,4 @@ exports.deleteNotice = async (req, res, next) => {
     });
   }
 };
+

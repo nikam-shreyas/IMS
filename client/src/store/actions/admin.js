@@ -23,7 +23,9 @@ export const setCurrentTeacher = (teacher) => ({
 export const getAdmin = (path) => {
   return async (dispatch) => {
     try {
-      const admin = await api.call("get", `admin/`);
+      const admin = await api.call("get", "admin/");
+      
+      console.log("can these be admin details "+admin.department);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
@@ -77,6 +79,24 @@ export const deleteTeacher = (path) => {
     try {
       const teacher = await api.call("delete", `admin/find/${path}`);
       dispatch(setCurrentTeacher(teacher));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+
+
+
+export const getTeacher = (path) => {
+  return async (dispatch) => {
+    try {
+      const admin = await api.call("get", "admin/teacher");
+      
+      console.log("can these be admin details "+admin.department);
+      dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;

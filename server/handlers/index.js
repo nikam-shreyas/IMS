@@ -3,6 +3,7 @@ module.exports = {
   ...require("./internship"),
   ...require("./admin"),
   ...require("./notices"),
+  ...require("./Faculty"),
 };
 
 module.exports.notFound = (req, res, next) => {

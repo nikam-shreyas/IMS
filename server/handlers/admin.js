@@ -82,6 +82,7 @@ exports.findFaculty = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   try {
+    //console.log("im in server waiting");
     const faculties = await db.Faculty.find().populate("faculties");
     res.status(200).json(faculties);
   } catch (err) {
@@ -108,8 +109,9 @@ exports.deleteFaculty = async (req, res, next) => {
 exports.showProfile = async (req, res, next) => {
   try {
     const { id } = req.decoded;
-    console.log(id)
+    //console.log("here is the id "+id)
     const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });
+    //console.log("This is profile "+Profile);
     if (Profile) {
       return res.json(Profile);
     } else {
@@ -177,3 +179,4 @@ exports.resetPassword=async(req,res,next)=>{
   }
  
 }
+//console
