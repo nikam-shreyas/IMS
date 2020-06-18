@@ -26,15 +26,16 @@ exports.addNewInternship = async (req, res, next) => {
       application,
     });
     student.internships.push(internship._id);
-    await student.save();
-    
+    await student.save();    
 
+    let link="<h4>You have a new internship application.</h4><br/>"
+    link=link+"<a href='http://localhost:3000/login'>Click here to login and check.</a>";
     var email = {
       from: process.env.EMAILFROM,
       to:student.emailId,
-      subject: "new internship application",
-      text: 'You have a new internship application',
-      html: "<a href='http://localhost:3000/login'>Click here to login.</a>"
+      subject: "New Application",
+      // text: 'You have a new internship application',
+      html: "<a href='http://localhost:3000/login'>Click here to login.</a>",
     };
     console.log(email);
     client.sendMail(email, (err, info) => {

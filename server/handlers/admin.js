@@ -1,6 +1,22 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+let nodemailer = require("nodemailer");
+let transport = require("nodemailer-smtp-transport");
+require("dotenv").config();
+
+//mailing options and transportor
+var options = {
+  service: "gmail",
+  auth: {
+    user: process.env.EMAILFROM,
+    pass: process.env.PASSWORD,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+};
+let client = nodemailer.createTransport(transport(options));
 
 exports.register_faculty = async (req, res, next) => {
   try {
@@ -55,13 +71,32 @@ exports.login_admin = async (req, res, next) => {
 exports.addFaculty = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.create(req.body);
-    return res.status(200).json(Fac);
+    console.log(Fac.emailId);
+    let link="<h4>Your have been added to IMS as a faculty member.</h4><br/>"
+    link=link+"Your default username is : <b>"+Fac.username+"</b><br/>Your default password is : <b>"+req.body.password+"</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
+    var email = {
+      from: process.env.EMAILFROM,
+      to:Fac.emailId,
+      subject: 'IMS notification',
+      // text:'You have been added to IMS',
+      html: link,
+    };
+    console.log(email);
+    client.sendMail(email, (err, info) => {
+        if(err){
+          err.message = "Could not send email"+err;
+        }
+        else if(info){
+          // console.log(info)
+          return res.status(200).json(Fac);
+        }
+    });
   } catch (err) {
     if (err.code === 11000) {
       err.message = "Sorry username is already taken.";
     }
     next(err);
-  }
+  }consolec
 };
 
 exports.findFaculty = async (req, res, next) => {
