@@ -7,6 +7,7 @@ class Auth_2 extends Component {
     this.state = {
       username: "",
       password: "",
+      
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,6 +55,24 @@ class Auth_2 extends Component {
                 autoComplete="off"
                 onChange={this.handleChange}
               />
+
+
+
+            {/* <label className="form-label" htmlFor="Email">
+                Email
+              </label>
+              <input
+                type="text"
+                value={emailId}
+                name="emailId"
+                className="form-control"
+                autoComplete="off"
+                onChange={this.handleChange}
+              /> */}
+
+
+
+
               <div className="button_center">
                 <button className="btn btn-dark mx-auto mt-3" type="submit">
                   Submit

@@ -2,10 +2,12 @@ const router = require("express").Router();
 const handle = require("../handlers");
 const auth = require("../middlewares/auth");
 
-router.route("/all").get(auth, handle.findAll);
 
 router.route("/")
 .get(auth,handle.showProfile);
+
+router.route("/all").get(auth, handle.findAll);
+
 
 router.route("/update/:id")
 .put(auth,handle.updateProfile);

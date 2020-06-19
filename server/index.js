@@ -11,11 +11,14 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json());
 
+
+
 app.get("/", (req, res) => res.json({ hello: "World" }));
 app.use("/api/auth", routes.auth);
 app.use("/api/internships", routes.internships);
 app.use("/api/admin", routes.admin);
 app.use("/api/notices", routes.notices);
+app.use("/api/faculty", routes.Faculty);
 app.use(handle.notFound);
 app.use(handle.errors);
 

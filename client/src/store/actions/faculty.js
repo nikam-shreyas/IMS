@@ -1,5 +1,5 @@
 import { addError, removeError } from "./error";
-import { SET_CURRENT_TEACHER, SET_CURRENT_ADMIN } from "../actionTypes";
+import { SET_CURRENT_TEACHER, SET_CURRENT_ADMIN,GET_FACULTY_PROFILE ,SET_CURRENT_SELECTED_FACULTY} from "../actionTypes";
 import api from "../../services/api";
 
 export const setCurrentUser_f = (user) => ({
@@ -15,6 +15,22 @@ export const setCurrentUser_a = (user) => ({
 export const setToken_f = (token) => {
   api.setToken(token);
 };
+
+
+
+export const get_faculty_profile = (faculty) => ({  
+  type: GET_FACULTY_PROFILE,
+  faculty,
+});
+
+
+
+
+export const setCurrentFaculty = (faculty) => ({
+  type: SET_CURRENT_SELECTED_FACULTY,
+  faculty,
+});
+
 
 export const logout_f = () => {
   return (dispatch) => {
@@ -42,6 +58,7 @@ export const authUser_f = (path, data) => {
   };
 };
 
+
 export const authUser_a = (path, data) => {
   return async (dispatch) => {
     try {
@@ -57,3 +74,36 @@ export const authUser_a = (path, data) => {
     }
   };
 };
+
+
+
+export const getFacultyProfile = (path) => {
+  return async (dispatch) => {
+    try {
+      const faculty = await api.call("get", "faculty/profile");
+      console.log("im in actions "+faculty.name.firstname);
+
+      //console.log("can these be admin details "+faculty.department);
+      dispatch(get_faculty_profile(faculty));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+
+
+export const updateFaculty=(path,data)=>{
+  return async (dispatch)=>{
+    try {
+      const faculty = await api.call("put", `faculty/update/${path}`,data);
+      dispatch(setCurrentFaculty(faculty));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  }
+  };

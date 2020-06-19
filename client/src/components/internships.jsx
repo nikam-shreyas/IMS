@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { getInternships } from "../store/actions";
-
+import Sidenav_f from "./SideNav_f";
 class Internships extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +9,9 @@ class Internships extends Component {
 
   componentDidMount() {
     const { getInternships } = this.props;
-    getInternships();
+    getInternships()
+    .then(console.log("im here"))
+    .then(console.log(this.props));
   }
 
   render() {
@@ -69,45 +71,47 @@ class Internships extends Component {
           <b>{internship.application.offerLetter}</b>
         </td>
         <td>
-          <form>
-            <input
-              type="checkbox"
-              className="accept"
-              value="accept"
-              id={"accept" + p}
-              name="accept"
-            />
-            <label className="accept" htmlFor={"accept" + p}>
-              ACCEPT
-            </label>
+                
+                <form onSubmit={()=>this.On_Submit(internship._id)}>
+                <input style={{display:"none"}} type="radio" className="accept" value={"accept"+p} id={"accept"+p} name="option"/>
+                <label className="accept" htmlFor={"accept"+p}>ACCEPT</label>
+                
+                <input style={{display:"none"}} type="radio" className="reject" value={"reject"+p} id={"reject"+p} name="option"/>
+                <label className="reject" htmlFor={"reject"+p}>REJECT</label>
+                <div style={{textAlign:"center"}}>
+              
+                <button  className="btn btn-success">Submit</button>
+                
+                </div>
+                </form>
 
-            <input
-              type="checkbox"
-              className="reject"
-              value="reject"
-              id={"reject" + p}
-              name="reject"
-            />
-            <label className="reject" htmlFor={"reject" + p}>
-              REJECT
-            </label>
-          </form>
-        </td>
+               
+            </td>
         {p++}
       </tr>
     ));
 
     return (
       <Fragment>
-        <div style={({ textAlign: "center" }, { marginTop: "20px" })}>
-          <h3>
+        
+    
+        <div className="row no-gutters">
+        <div className="col-sm-2">
+            <Sidenav_f activeComponent="2"/>
+          </div>
+          <div className="col-sm-10">
+
+          <div style={({ textAlign: "center" }, { marginTop: "5px" })}>
+          <h2 style={{textAlign: "center"}}>
             Internship Detais
-            <hr />
-          </h3>
+            
+          </h2>
+          <hr />
         </div>
 
-        <div className="card" style={{ margin: "3rem" }}>
-          <table className="table">
+
+        <div className="card" style={{height: "100%"},{overflowX:"scroll"},{overflowY:"scroll"}}>
+          <table className="table table-hover table-responsive" style={{tableLayout:"fixed"}}>
             <thead className="thead-dark">
               <tr>
                 <th
@@ -151,7 +155,16 @@ class Internships extends Component {
             {internships}
           </table>
         </div>
+
+
+          </div>
+        </div>
       </Fragment>
+
+
+     
+
+
     );
   }
 }
@@ -163,3 +176,4 @@ export default connect(
   }),
   { getInternships }
 )(Internships);
+

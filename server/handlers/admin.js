@@ -52,12 +52,16 @@ exports.login_faculty = async (req, res, next) => {
 exports.login_admin = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.findOne({ username: req.body.username });
+    console.log("in admin");
     const { id, username, designation } = Fac;
+    console.log(id);
     if (designation !== "Admin") {
       throw new Error();
+      console.log("not admin");
     }
     const valid = await Fac.comparePassword(req.body.password);
     if (valid) {
+      console.log("im in here");
       const token = jwt.sign({ id, username }, process.env.SECRET);
       res.json({ id, username, token });
     } else {
@@ -117,6 +121,7 @@ exports.findFaculty = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   try {
+    //console.log("im in server waiting");
     const faculties = await db.Faculty.find().populate("faculties");
     res.status(200).json(faculties);
   } catch (err) {
@@ -143,8 +148,9 @@ exports.deleteFaculty = async (req, res, next) => {
 exports.showProfile = async (req, res, next) => {
   try {
     const { id } = req.decoded;
-    console.log(id)
+    //console.log("here is the id "+id)
     const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });
+    //console.log("This is profile "+Profile);
     if (Profile) {
       return res.status(200).json(Profile);
     } else {
@@ -156,11 +162,13 @@ exports.showProfile = async (req, res, next) => {
       message: error.message,
     });
   }
+
 }
 
 exports.updateProfile=async(req,res,next)=>{
   try {
     const { id }=req.params
+    console.log("im in update function ");
     const Profile = await db.Faculty.findOneAndUpdate({_id:id},{
       $set:{
        'name.firstname':req.body.firstname,
@@ -211,3 +219,4 @@ exports.resetPassword=async(req,res,next)=>{
   }
  
 }
+//console

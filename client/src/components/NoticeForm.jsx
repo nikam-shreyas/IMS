@@ -213,7 +213,6 @@ class NoticeForm extends Component {
     );
   }
 }
-
 export default withRouter(
   connect(
     (store) => ({

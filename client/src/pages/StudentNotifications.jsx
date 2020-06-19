@@ -28,5 +28,4 @@ class StudentNotifications extends Component {
     );
   }
 }
-
 export default StudentNotifications;

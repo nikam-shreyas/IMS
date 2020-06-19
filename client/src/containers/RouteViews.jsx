@@ -16,6 +16,7 @@ import AddFaculty from "../pages/AddFaculty";
 import CreateNotice from "../pages/CreateNotice";
 import Notices from "../components/Notices";
 import StudentNotifications from "../pages/StudentNotifications";
+import FacultyProfile from "../pages/FacultyProfile";
 //import { internships } from '../store/reducers/internships';
 import FacultyList from "../pages/FacultyList";
 import DeleteFaculty from "../pages/DeleteFaculty";
@@ -28,7 +29,6 @@ const RouteViews = ({ auth }) => (
         path="/notifications"
         render={() => <StudentNotifications />}
       />
-
       <Route exact path="/" render={() => <TestPage />} />
       <Route exact path="/test" render={() => <TestPage />} />
       <Route exact path="/studentDocs" render={() => <StudentDocuments />} />
@@ -74,6 +74,7 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/admin/" render={() => <AdminProfile />} />
       <Route exact path="/add" render={() => <AddFaculty />} />
       <Route exact path="/all" render={() => <FacultyList />} />
+      <Route exact path="/facultyprofile" render={() => <FacultyProfile />} />
       <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
       <Route exact path="/settings" render={() => <AdminSetting />} />
 

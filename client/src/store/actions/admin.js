@@ -23,7 +23,9 @@ export const setCurrentTeacher = (teacher) => ({
 export const getAdmin = (path) => {
   return async (dispatch) => {
     try {
-      const admin = await api.call("get", `admin/`);
+      const admin = await api.call("get", "admin/");
+      
+      console.log("can these be admin details "+admin.department);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {

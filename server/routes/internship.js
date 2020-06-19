@@ -6,7 +6,9 @@ router
   .get(handle.showInternships)
   .post(auth, handle.addNewInternship);
 
-router.get("/student", auth, handle.studentsInternships);
+router
+  .get("/student", auth, handle.studentsInternships);
+
 router
   .route("/:id")
   .get(handle.getInternship)

@@ -72,7 +72,6 @@ class InternshipDetails extends Component {
           <div className="col-sm-10 of">
             <div className="card m-3 border-dark" id="card">
               {this.state.isLoading && <>Loading...</>}
-
               {
                 <>
                   <div className="card-header">
@@ -220,7 +219,6 @@ class InternshipDetails extends Component {
     );
   }
 }
-
 export default withRouter(
   connect(
     (store) => ({

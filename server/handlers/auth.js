@@ -15,7 +15,7 @@ exports.register = async (req, res, next) => {
     next(err);
   }
 };
-
+//console
 exports.login = async (req, res, next) => {
   try {
     const student = await db.Student.findOne({ username: req.body.username });
@@ -42,7 +42,7 @@ exports.updateStudent = async (req, res, next) => {
       student[key.toString()] = details[key];
     }
     student.save();
-    console.log(student);
+    //console.log(student);
     const { name, currentClass, rollNo, prevSemAttendance, emailId } = student;
     res
       .status(200)
