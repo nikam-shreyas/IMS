@@ -100,21 +100,43 @@ class Internships extends Component {
             <Sidenav_f activeComponent="3"/>
           </div>
           <div className="col-sm-10" >
-          <div className="card" style={{width:"100%"},{height:"100%"}}>
+          <div className="card" style={{width:"100%"},{height:"70%"},{overflowX:"scroll"}}>
           <div class="card-header" style={{textAlign:"center"}}>
                 <h1>Internship Details</h1>
                 <hr/>
           </div>
-          <table style={{height:"80rem"}}>
-          <thead style={{position:"absolute"}}>
+          <table className="table table-hover table-responsive" style={{height:"80rem"},{border:"1px solid black"}}>
+          <thead className="thead-dark" style={{position:"absolute"}}>
             <tr>
-            <th colSpan="1"></th>
-            <th colSpan="4"></th>
-            <th colSpan="1"></th>
+            <th style={{textAlign:"center"}} colSpan="5">Documents Details</th>
             <th colSpan="1"></th>
             <th colSpan="1"></th>
-            <th colSpan="6"></th>
+            <th colSpan="1"></th>
+            <th style={{textAlign:"center"}} colSpan="6">Application</th>
+            <th colSpan="1"></th>
             </tr>
+            <tr>
+              <th>Application Status</th>
+              <th>Undertaking Status</th>
+              <th>OfferLetter Status</th>
+              <th>Marksheet Status</th>
+              <th>Attendance Status</th>
+              <th>Approved By</th>
+              <th>Completion Status</th>
+              <th>Student</th>
+              <th>Submitted Date</th>
+              <th>Approved Date</th>
+              <th>Workplace</th>
+              <th>Duration Of Internship</th>
+              <th>Referenece</th>
+              <th>Offer Letter</th>
+              <th>Accept/Reject</th>
+              
+              
+            </tr>
+            <tbody>
+              {internships}
+            </tbody>
           </thead>
           </table>
           </div>
