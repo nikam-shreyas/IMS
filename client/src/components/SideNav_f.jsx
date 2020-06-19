@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import { MdPermIdentity } from "react-icons/md";
 import { Link } from "react-router-dom";
-import {
-  MdDescription,
-  MdNotifications,
-  MdAddCircle,
-  MdDns,
-  MdSettings,
-} from "react-icons/md";
-//import Not from "../components/NoticeForm";
-import { internships } from "../store/reducers/internships";
+import { MdDescription, MdDns, MdSettings } from "react-icons/md";
 
 class Sidenav_f extends Component {
   state = {};
@@ -22,7 +14,7 @@ class Sidenav_f extends Component {
           <Link to="/faculty">
             <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
               <span className="mx-2">
-              <MdDns />
+                <MdDns />
               </span>
               Send Notice
             </li>
@@ -44,14 +36,6 @@ class Sidenav_f extends Component {
             </li>
           </Link>
 
-          <Link to="/studentDocs">
-            <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
-              <span className="mx-2">
-                <MdDescription />
-              </span>
-              Documents
-            </li>
-          </Link>
           <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdSettings />

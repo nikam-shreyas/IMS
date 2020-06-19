@@ -20,7 +20,7 @@ import FacultyProfile from "../pages/FacultyProfile";
 //import { internships } from '../store/reducers/internships';
 import FacultyList from "../pages/FacultyList";
 import DeleteFaculty from "../pages/DeleteFaculty";
-import AdminSetting from '../pages/AdminSetting';
+import AdminSetting from "../pages/AdminSetting";
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -29,7 +29,6 @@ const RouteViews = ({ auth }) => (
         path="/notifications"
         render={() => <StudentNotifications />}
       />
-      <Route exact path="/" render={() => <TestPage />} />
       <Route exact path="/test" render={() => <TestPage />} />
       <Route exact path="/studentDocs" render={() => <StudentDocuments />} />
       <Route
@@ -88,8 +87,6 @@ const RouteViews = ({ auth }) => (
     </Switch>
   </main>
 );
-
-//export default RouteViews;
 
 export default withRouter(
   connect((store) => ({ auth: store.auth }))(RouteViews)

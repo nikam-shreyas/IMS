@@ -9,9 +9,7 @@ class Internships extends Component {
 
   componentDidMount() {
     const { getInternships } = this.props;
-    getInternships()
-    .then(console.log("im here"))
-    .then(console.log(this.props));
+    getInternships().then(console.log(this.props));
   }
 
   render() {
@@ -71,100 +69,109 @@ class Internships extends Component {
           <b>{internship.application.offerLetter}</b>
         </td>
         <td>
-                
-                <form onSubmit={()=>this.On_Submit(internship._id)}>
-                <input style={{display:"none"}} type="radio" className="accept" value={"accept"+p} id={"accept"+p} name="option"/>
-                <label className="accept" htmlFor={"accept"+p}>ACCEPT</label>
-                
-                <input style={{display:"none"}} type="radio" className="reject" value={"reject"+p} id={"reject"+p} name="option"/>
-                <label className="reject" htmlFor={"reject"+p}>REJECT</label>
-                <div style={{textAlign:"center"}}>
-              
-                <button  className="btn btn-success">Submit</button>
-                
-                </div>
-                </form>
+          <form onSubmit={() => this.On_Submit(internship._id)}>
+            <input
+              style={{ display: "none" }}
+              type="radio"
+              className="accept"
+              value={"accept" + p}
+              id={"accept" + p}
+              name="option"
+            />
+            <label className="accept" htmlFor={"accept" + p}>
+              ACCEPT
+            </label>
 
-               
-            </td>
+            <input
+              style={{ display: "none" }}
+              type="radio"
+              className="reject"
+              value={"reject" + p}
+              id={"reject" + p}
+              name="option"
+            />
+            <label className="reject" htmlFor={"reject" + p}>
+              REJECT
+            </label>
+            <div style={{ textAlign: "center" }}>
+              <button className="btn btn-success">Submit</button>
+            </div>
+          </form>
+        </td>
         {p++}
       </tr>
     ));
 
     return (
       <Fragment>
-        
-    
         <div className="row no-gutters">
-        <div className="col-sm-2">
-            <Sidenav_f activeComponent="2"/>
+          <div className="col-sm-2">
+            <Sidenav_f activeComponent="2" />
           </div>
           <div className="col-sm-10">
+            <div style={({ textAlign: "center" }, { marginTop: "5px" })}>
+              <h2 style={{ textAlign: "center" }}>Internship Detais</h2>
+              <hr />
+            </div>
 
-          <div style={({ textAlign: "center" }, { marginTop: "5px" })}>
-          <h2 style={{textAlign: "center"}}>
-            Internship Detais
-            
-          </h2>
-          <hr />
-        </div>
+            <div
+              className="card"
+              style={
+                ({ height: "100%" },
+                { overflowX: "scroll" },
+                { overflowY: "scroll" })
+              }
+            >
+              <table
+                className="table table-hover table-responsive"
+                style={{ tableLayout: "fixed" }}
+              >
+                <thead className="thead-dark">
+                  <tr>
+                    <th
+                      colSpan="5"
+                      style={
+                        ({ border: "1px solid white" }, { textAlign: "center" })
+                      }
+                    >
+                      DOCUMENT DETAILS
+                    </th>
+                    <th colSpan="3"></th>
+                    <th
+                      colSpan="6"
+                      style={
+                        ({ border: "1px solid white" }, { textAlign: "center" })
+                      }
+                    >
+                      APPLICATION DETAILS
+                    </th>
+                    <th colSpan="1"></th>
+                  </tr>
+                  <tr>
+                    <th>Application Status</th>
+                    <th>Undertaking Status</th>
+                    <th>Offer Letter Status</th>
+                    <th>Marksheets Status</th>
+                    <th>Attendance Status</th>
+                    <th>Approved By</th>
+                    <th>Completion Status</th>
 
-
-        <div className="card" style={{height: "100%"},{overflowX:"scroll"},{overflowY:"scroll"}}>
-          <table className="table table-hover table-responsive" style={{tableLayout:"fixed"}}>
-            <thead className="thead-dark">
-              <tr>
-                <th
-                  colSpan="5"
-                  style={
-                    ({ border: "1px solid white" }, { textAlign: "center" })
-                  }
-                >
-                  DOCUMENT DETAILS
-                </th>
-                <th colSpan="3"></th>
-                <th
-                  colSpan="6"
-                  style={
-                    ({ border: "1px solid white" }, { textAlign: "center" })
-                  }
-                >
-                  APPLICATION DETAILS
-                </th>
-                <th colSpan="1"></th>
-              </tr>
-              <tr>
-                <th>Application Status</th>
-                <th>Undertaking Status</th>
-                <th>Offer Letter Status</th>
-                <th>Marksheets Status</th>
-                <th>Attendance Status</th>
-                <th>Approved By</th>
-                <th>Completion Status</th>
-
-                <th>Student</th>
-                <th>Submitted Date</th>
-                <th>Approved Date</th>
-                <th>Workplace</th>
-                <th>Duration Of Internship</th>
-                <th>Reference</th>
-                <th>OfferLetter</th>
-                <th>Approve/Reject</th>
-              </tr>
-            </thead>
-            {internships}
-          </table>
-        </div>
-
-
+                    <th>Student</th>
+                    <th>Submitted Date</th>
+                    <th>Approved Date</th>
+                    <th>Workplace</th>
+                    <th>Duration Of Internship</th>
+                    <th>Reference</th>
+                    <th>OfferLetter</th>
+                    <th>Approve/Reject</th>
+                  </tr>
+                </thead>
+                {internships}
+              </table>
+            </div>
           </div>
         </div>
       </Fragment>
-
-
-     
-
-
     );
   }
 }
@@ -176,4 +183,3 @@ export default connect(
   }),
   { getInternships }
 )(Internships);
-

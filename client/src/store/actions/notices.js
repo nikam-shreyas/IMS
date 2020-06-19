@@ -30,7 +30,6 @@ export const getStudentNotices = () => {
   return async (dispatch) => {
     try {
       const studentNotices = await api.call("get", "notices/student");
-      console.log("actions", studentNotices);
       dispatch(setStudentNotices(studentNotices));
       dispatch(removeError());
     } catch (err) {

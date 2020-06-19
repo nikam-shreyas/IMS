@@ -76,31 +76,36 @@ exports.addFaculty = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.create(req.body);
     console.log(Fac.emailId);
-    let link="<h4>Your have been added to IMS as a faculty member.</h4><br/>"
-    link=link+"Your default username is : <b>"+Fac.username+"</b><br/>Your default password is : <b>"+req.body.password+"</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
+    let link = "<h4>Your have been added to IMS as a faculty member.</h4><br/>";
+    link =
+      link +
+      "Your default username is : <b>" +
+      Fac.username +
+      "</b><br/>Your default password is : <b>" +
+      req.body.password +
+      "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
     var email = {
       from: process.env.EMAILFROM,
-      to:Fac.emailId,
-      subject: 'IMS notification',
+      to: Fac.emailId,
+      subject: "IMS notification",
       // text:'You have been added to IMS',
       html: link,
     };
     console.log(email);
     client.sendMail(email, (err, info) => {
-        if(err){
-          err.message = "Could not send email"+err;
-        }
-        else if(info){
-          // console.log(info)
-          return res.status(200).json(Fac);
-        }
+      if (err) {
+        err.message = "Could not send email" + err;
+      } else if (info) {
+        // console.log(info)
+        return res.status(200).json(Fac);
+      }
     });
   } catch (err) {
     if (err.code === 11000) {
       err.message = "Sorry username is already taken.";
     }
     next(err);
-  }consolec
+  }
 };
 
 exports.findFaculty = async (req, res, next) => {
@@ -162,54 +167,60 @@ exports.showProfile = async (req, res, next) => {
       message: error.message,
     });
   }
+};
 
-}
-
-exports.updateProfile=async(req,res,next)=>{
+exports.updateProfile = async (req, res, next) => {
   try {
-    const { id }=req.params
+    const { id } = req.params;
     console.log("im in update function ");
-    const Profile = await db.Faculty.findOneAndUpdate({_id:id},{
-      $set:{
-       'name.firstname':req.body.firstname,
-        'name.lastname':req.body.lastname,
-        emailId:req.body.emailId,
-        department:req.body.department,
-        designation:req.body.designation
-      }
-    },{new : true});
-    if(Profile){
-      return res.status(200).json(Profile)
-    }else{
-      throw new Error("Not an admin");    
+    const Profile = await db.Faculty.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          "name.firstname": req.body.firstname,
+          "name.lastname": req.body.lastname,
+          emailId: req.body.emailId,
+          department: req.body.department,
+          designation: req.body.designation,
+        },
+      },
+      { new: true }
+    );
+    if (Profile) {
+      return res.status(200).json(Profile);
+    } else {
+      throw new Error("Not an admin");
     }
   } catch (error) {
     next({
-      status:400,
-      message:error.message
+      status: 400,
+      message: error.message,
     });
   }
+};
 
-}
-
-exports.resetPassword=async(req,res,next)=>{
-  const { oldpassword,newpassword }=req.body
-  const { id }=req.params
+exports.resetPassword = async (req, res, next) => {
+  const { oldpassword, newpassword } = req.body;
+  const { id } = req.params;
   try {
-    const Fac = await db.Faculty.findById({ _id:id });
+    const Fac = await db.Faculty.findById({ _id: id });
     const valid = await Fac.comparePassword(oldpassword);
     if (valid) {
       const newhashed = await bcrypt.hash(newpassword, 10);
-      const Profile=await db.Faculty.findOneAndUpdate({_id:id},{
-      $set:{
-       password:newhashed
+      const Profile = await db.Faculty.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            password: newhashed,
+          },
+        },
+        { new: true }
+      );
+      if (Profile) {
+        return res.status(200).json(Profile);
+      } else {
+        throw new Error("Admin not found");
       }
-    },{new : true});
-    if(Profile){
-      return res.status(200).json(Profile)
-    }else{
-      throw new Error("Admin not found");    
-    }
     } else {
       throw new Error("Old password wrong");
     }
@@ -217,6 +228,5 @@ exports.resetPassword=async(req,res,next)=>{
     // err.message = "Invalid username/password";
     next(err);
   }
- 
-}
+};
 //console

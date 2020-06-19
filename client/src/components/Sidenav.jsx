@@ -62,7 +62,7 @@ class Sidenav extends Component {
             <span className="mx-2">
               <MdSettings />
             </span>
-            Settings
+            Change Password
           </li>
         </ul>
       </div>

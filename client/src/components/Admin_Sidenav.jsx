@@ -3,10 +3,9 @@ import { MdPermIdentity } from "react-icons/md";
 import { Link } from "react-router-dom";
 import {
   MdSettings,
-  MdNotifications,
   MdAddCircle,
-  MdList,
-  MdEdit
+  MdFormatListBulleted,
+  MdDelete,
 } from "react-icons/md";
 
 class Admin_Sidenav extends Component {
@@ -26,12 +25,12 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/all">
-          <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdList />
-            </span>
-            Faculty List
-          </li>
+            <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdFormatListBulleted />
+              </span>
+              Faculty List
+            </li>
           </Link>
           <Link to="/add">
             <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
@@ -42,21 +41,21 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/deleteFaculty">
-          <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdEdit />
-            </span>
-            Delete Faculty
-          </li>
+            <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdDelete />
+              </span>
+              Delete Faculty
+            </li>
           </Link>
           <Link to="/settings">
-          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
-          <span className="mx-2">
-            <MdSettings />
-          </span>
-          Settings
-        </li>
-        </Link>
+            <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdSettings />
+              </span>
+              Change Password
+            </li>
+          </Link>
         </ul>
       </div>
     );
