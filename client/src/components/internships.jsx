@@ -97,65 +97,31 @@ class Internships extends Component {
     
         <div className="row no-gutters">
         <div className="col-sm-2">
-            <Sidenav_f activeComponent="2"/>
+            <Sidenav_f activeComponent="3"/>
           </div>
-          <div className="col-sm-10">
-
-          <div style={({ textAlign: "center" }, { marginTop: "5px" })}>
-          <h2 style={{textAlign: "center"}}>
-            Internship Detais
-            
-          </h2>
-          <hr />
-        </div>
-
-
-        <div className="card" style={{height: "100%"},{overflowX:"scroll"},{overflowY:"scroll"}}>
-          <table className="table table-hover table-responsive" style={{tableLayout:"fixed"}}>
-            <thead className="thead-dark">
-              <tr>
-                <th
-                  colSpan="5"
-                  style={
-                    ({ border: "1px solid white" }, { textAlign: "center" })
-                  }
-                >
-                  DOCUMENT DETAILS
-                </th>
-                <th colSpan="3"></th>
-                <th
-                  colSpan="6"
-                  style={
-                    ({ border: "1px solid white" }, { textAlign: "center" })
-                  }
-                >
-                  APPLICATION DETAILS
-                </th>
-                <th colSpan="1"></th>
-              </tr>
-              <tr>
-                <th>Application Status</th>
-                <th>Undertaking Status</th>
-                <th>Offer Letter Status</th>
-                <th>Marksheets Status</th>
-                <th>Attendance Status</th>
-                <th>Approved By</th>
-                <th>Completion Status</th>
-
-                <th>Student</th>
-                <th>Submitted Date</th>
-                <th>Approved Date</th>
-                <th>Workplace</th>
-                <th>Duration Of Internship</th>
-                <th>Reference</th>
-                <th>OfferLetter</th>
-                <th>Approve/Reject</th>
-              </tr>
-            </thead>
-            {internships}
+          <div className="col-sm-10" >
+          <div className="card" style={{width:"100%"},{height:"100%"}}>
+          <div class="card-header" style={{textAlign:"center"}}>
+                <h1>Internship Details</h1>
+                <hr/>
+          </div>
+          <table style={{height:"80rem"}}>
+          <thead style={{position:"absolute"}}>
+            <tr>
+            <th colSpan="1"></th>
+            <th colSpan="4"></th>
+            <th colSpan="1"></th>
+            <th colSpan="1"></th>
+            <th colSpan="1"></th>
+            <th colSpan="6"></th>
+            </tr>
+          </thead>
           </table>
-        </div>
+          </div>
+          
 
+
+        
 
           </div>
         </div>
