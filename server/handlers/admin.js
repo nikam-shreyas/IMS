@@ -52,12 +52,16 @@ exports.login_faculty = async (req, res, next) => {
 exports.login_admin = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.findOne({ username: req.body.username });
+    console.log("in admin");
     const { id, username, designation } = Fac;
+    console.log(id);
     if (designation !== "Admin") {
       throw new Error();
+      console.log("not admin");
     }
     const valid = await Fac.comparePassword(req.body.password);
     if (valid) {
+      console.log("im in here");
       const token = jwt.sign({ id, username }, process.env.SECRET);
       res.json({ id, username, token });
     } else {
@@ -164,6 +168,7 @@ exports.showProfile = async (req, res, next) => {
 exports.updateProfile=async(req,res,next)=>{
   try {
     const { id }=req.params
+    console.log("im in update function ");
     const Profile = await db.Faculty.findOneAndUpdate({_id:id},{
       $set:{
        'name.firstname':req.body.firstname,

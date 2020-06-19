@@ -8,4 +8,8 @@ const auth = require("../middlewares/auth");
 
 router.route("/profile").get(auth, handle.showFacultyProfile);
 
+router.route("/update/:id")
+.put(auth,handle.updateFProfile);
+
+
 module.exports = router;

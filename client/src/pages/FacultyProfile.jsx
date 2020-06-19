@@ -2,11 +2,20 @@ import React, { Component } from "react";
 import Sidenav_f from "../components/SideNav_f";
 import { updateStudent, getStudent } from "../store/actions";
 import {getFacultyProfile} from "../store/actions/faculty"
+import {updateFaculty} from "../store/actions/faculty"
 import { connect } from "react-redux";
 class FacultyProfile extends Component {
   state = {
     isLoading: true,
     data: {
+      name:{
+        firstname:"sahil",
+        lastname:"patil"
+      },
+      currentClass:{
+        year:"TE",
+        div:"2"
+      },
       designation: "3129",
       username: ">75",
       department: "example@gmail.com",
@@ -21,44 +30,77 @@ class FacultyProfile extends Component {
     const { getFacultyProfile } = this.props;
     getFacultyProfile()
       .then(this.setState({ isLoading: false }))
-      .then(() => this.loadData(this.props.auth.user));
+      .then(() => this.loadData(this.props.faculty));
   }
   loadData(user) {
     if (user.designation !== undefined) this.setState({ data: user });
   }
   handleSubmit(event) {
-    // event.preventDefault();
-    // const { updateStudent } = this.props;
-    // var formData = new FormData(event.target);
-    // const data = {};
-    // data["name"] = {
+    //  event.preventDefault();
+    //  const { updateFaculty } = this.props;
+    //  var formData = new FormData(event.target);
+    //  const data1 = {};
+    //  data1["name"] = {
+    //    firstname: formData.get("firstname") || this.state.data.name.firstname,
+    //    lastname: formData.get("lastname") || this.state.data.name.lastname,
+    //  };
+    //  data1["currentClass"] = {
+    //    year: formData.get("year") || this.state.data.currentClass.year,
+    //    div: formData.get("div") || this.state.data.currentClass.div,
+    //  };
+    
+    //  data1["emailId"] = formData.get("emailId") || this.state.data.emailId;
+    //  data1["department"] = formData.get("department") || this.state.data.department;
+    //  data1["username"] = formData.get("username") || this.state.data.username;
+    //  data1["designation"] = formData.get("designation") || this.state.data.designation;
+
+    //  console.log("this is data 1 "+data1);
+    //  updateFaculty(this.state.data._id,data1);
+    // //  updateFaculty(data);
+    //  alert("Profile Updated!");
+     
+    //  window.location.reload(false);
+    //  console.log("this is data 1 "+data1);
+
+
+    event.preventDefault();
+    const { updateFaculty } = this.props;
+    var formData = new FormData(event.target);
+    const updatedata = {};
+    // updatedata["name"] = {
     //   firstname: formData.get("firstname") || this.state.data.name.firstname,
     //   lastname: formData.get("lastname") || this.state.data.name.lastname,
     // };
-    // data["currentClass"] = {
-    //   year: formData.get("year") || this.state.data.currentClass.year,
-    //   div: formData.get("div") || this.state.data.currentClass.div,
-    // };
-    // data["prevSemAttendance"] =
-    //   formData.get("prevSemAttendance") || this.state.data.prevSemAttendance;
-    // data["rollNo"] = formData.get("rollNo") || this.state.data.rollNo;
-    // data["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    // updateStudent(data);
-    // alert("Profile Updated!");
-    // window.location.reload(false);
+    updatedata["firstname"] = formData.get("firstname") || this.state.data.name.firstname;
+    updatedata["lastname"] = formData.get("lastname") || this.state.data.name.lastname;
+    updatedata["year"] = formData.get("year") || this.state.data.currentClass.year;
+    updatedata["div"] = formData.get("div") || this.state.data.currentClass.div;
+    updatedata["department"] = formData.get("department") || this.state.data.department;
+    updatedata["designation"] = formData.get("designation") || this.state.data.designation;
+    updatedata["username"] = formData.get("username") || this.state.data.username;
+    updatedata["emailId"] = formData.get("emailId") || this.state.data.emailId;
+    console.log(updatedata);
+    console.log(this.state.data._id);
+    updateFaculty(this.state.data._id,updatedata)
+    .then(console.log(this.props.faculty))
+    window.location.reload(false);
+
+
+
+
   }
   editform() {
-    // var form = document.getElementById("form");
-    // var elements = form.elements;
-    // for (var i = 0, len = elements.length; i < len; ++i) {
-    //   elements[i].readOnly = !elements[i].readOnly;
-    // }
-    // var editButton = document.getElementById("editButton");
-    // editButton.classList.toggle("btn-danger");
-    // editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
+    var form = document.getElementById("form");
+    var elements = form.elements;
+    for (var i = 0, len = elements.length; i < len; ++i) {
+      elements[i].readOnly = !elements[i].readOnly;
+    }
+    var editButton = document.getElementById("editButton");
+    editButton.classList.toggle("btn-danger");
+    editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
   render() {
-    console.log("im in faculty "+this.props.faculty.department);
+    console.log("im in faculty "+this.state.data.name.firstname);
     return (
       <div>
         <div className="row no-gutters">
@@ -76,80 +118,102 @@ class FacultyProfile extends Component {
                   <div className="container">
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        UserName
+                        Firstname:
                         <input
                           readOnly
                           type="text"
                           name="firstname"
                           id="firstname"
                           className="form-control"
-                          placeholder={this.props.faculty.username}
+                          placeholder={this.state.data.name.firstname}
                         />
                       </div>
                       <div className="col-sm-6">
-                        Designation
+                        Lastname:
                         <input
                           readOnly
                           type="text"
                           name="lastname"
                           id="lastname"
-                          placeholder={this.props.faculty.designation}
+                          placeholder={this.state.data.name.lastname}
                           className="form-control"
                         />
                       </div>
                     </div>
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        ID:
+                        Current Class Year:
                         <input
                           readOnly
                           type="number"
                           className="form-control"
-                          id="rollNo"
-                          name="rollNo"
-                          placeholder={this.props.faculty._id}
+                          id="year"
+                          name="year"
+                          placeholder={this.state.data.currentClass.year}
                         />
                       </div>
                       <div className="col-sm-6">
-                       Department:
+                       Current Class Division
                         <div className="input-group">
-                          <div className="input-group">
                             <input
                               readOnly
                               type="number"
-                              name="prevSemAttendance"
-                              id="prevSemAttendance"
-                              placeholder={this.props.faculty.department}
+                              name="div"
+                              id="div"
+                              placeholder={this.state.data.currentClass.div}
                               className="form-control"
                             />
-                            <div className="input-group-append">
-                              <span className="input-group-text">%</span>
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
 
                     <div className="form-row my-2">
                       <div className="col-sm-6">
-                        Username:
+                        emailId:
+                        <div className="input-group">
                         <input
                           readOnly
                           type="text"
-                          name="year"
-                          id="year"
+                          name="emailId"
+                          id="emailId"
+                          placeholder={this.state.data.emailId}
+                          className="form-control"
+                        />
+                        </div>
+                      </div>
+                      <div className="col-sm-6">
+                      Department:
+                        <input
+                          readOnly
+                          type="text"
+                          name="department"
+                          id="department"
                           placeholder={this.state.data.department}
                           className="form-control"
                         />
                       </div>
+                    </div>
+                    
+                    <div className="form-row my-2">
                       <div className="col-sm-6">
-                      Email Id:
+                        Username:
                         <input
                           readOnly
-                          type="number"
-                          name="div"
-                          id="div"
-                          placeholder={this.state.data.department}
+                          type="text"
+                          name="username"
+                          id="username"
+                          placeholder={this.state.data.username}
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="col-sm-6">
+                      Designation:
+                        <input
+                          readOnly
+                          type="text"
+                          name="designation"
+                          id="designation"
+                          placeholder={this.state.data.designation}
                           className="form-control"
                         />
                       </div>
@@ -200,5 +264,7 @@ export default connect(
     auth: store.auth,
     faculty: store.get_Faculty_Profile,
   }),
-  { getFacultyProfile }
+  { getFacultyProfile,
+    updateFaculty
+   }
 )(FacultyProfile);
