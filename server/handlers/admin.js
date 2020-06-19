@@ -52,16 +52,13 @@ exports.login_faculty = async (req, res, next) => {
 exports.login_admin = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.findOne({ username: req.body.username });
-    console.log("in admin");
     const { id, username, designation } = Fac;
     console.log(id);
     if (designation !== "Admin") {
       throw new Error();
-      console.log("not admin");
     }
     const valid = await Fac.comparePassword(req.body.password);
     if (valid) {
-      console.log("im in here");
       const token = jwt.sign({ id, username }, process.env.SECRET);
       res.json({ id, username, token });
     } else {
@@ -75,7 +72,6 @@ exports.login_admin = async (req, res, next) => {
 exports.addFaculty = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.create(req.body);
-    console.log(Fac.emailId);
     let link = "<h4>Your have been added to IMS as a faculty member.</h4><br/>";
     link =
       link +
@@ -91,7 +87,6 @@ exports.addFaculty = async (req, res, next) => {
       // text:'You have been added to IMS',
       html: link,
     };
-    console.log(email);
     client.sendMail(email, (err, info) => {
       if (err) {
         err.message = "Could not send email" + err;
@@ -139,9 +134,9 @@ exports.deleteFaculty = async (req, res, next) => {
   try {
     const { user } = req.params;
     const faculty = await db.Faculty.findOne({ username: user });
-    if (!faculty) throw new Error("faculty not found");
+    if (!faculty) throw new Error("Faculty not found");
     await faculty.remove();
-    return res.status(200).json("faculty deleted");
+    return res.status(200).json("Faculty deleted");
   } catch (error) {
     next({
       status: 400,
@@ -159,7 +154,7 @@ exports.showProfile = async (req, res, next) => {
     if (Profile) {
       return res.status(200).json(Profile);
     } else {
-      throw new Error("Not an admin");
+      throw new Error("Not an admin.");
     }
   } catch (error) {
     next({
@@ -172,7 +167,6 @@ exports.showProfile = async (req, res, next) => {
 exports.updateProfile = async (req, res, next) => {
   try {
     const { id } = req.params;
-    console.log("im in update function ");
     const Profile = await db.Faculty.findOneAndUpdate(
       { _id: id },
       {
@@ -189,7 +183,7 @@ exports.updateProfile = async (req, res, next) => {
     if (Profile) {
       return res.status(200).json(Profile);
     } else {
-      throw new Error("Not an admin");
+      throw new Error("Not an admin.");
     }
   } catch (error) {
     next({
@@ -219,10 +213,10 @@ exports.resetPassword = async (req, res, next) => {
       if (Profile) {
         return res.status(200).json(Profile);
       } else {
-        throw new Error("Admin not found");
+        throw new Error("Admin not found!");
       }
     } else {
-      throw new Error("Old password wrong");
+      throw new Error("Old password is wrong!");
     }
   } catch (err) {
     // err.message = "Invalid username/password";

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { createTeacher } from "../store/actions/admin";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ErrorMessage from "../components/ErrorMessage";
 
 class AddFaculty extends Component {
   constructor(props) {
@@ -48,24 +49,28 @@ class AddFaculty extends Component {
     data["username"] = formData.get("username") || this.state.data.username;
     data["password"] = formData.get("password") || this.state.data.password;
     data["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    createTeacher(data).then(toast("Faculty Added!"));
+
+    createTeacher(data);
     // alert("Faculty Added!");
-    window.location.reload(false);
+    // window.location.reload(false);
   }
   render() {
     return (
       <div>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Admin_Sidenav activeComponent="3" />
           </div>
-          <div className="col-sm-10">
+          <div className="col-sm-10 of">
             <div className="container">
               <h4 className="mt-2">Add New Faculty</h4>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
                   Fill in the details:
+                  <span>
+                    <ErrorMessage />
+                  </span>
                   <hr />
                   <div className="container">
                     <div className="form-row my-2">
@@ -77,7 +82,7 @@ class AddFaculty extends Component {
                           name="firstname"
                           id="firstname"
                           className="form-control"
-                          placeholder="Srushti"
+                          placeholder="eg. John"
                         />
                       </div>
                       <div className="col-sm-6">
@@ -87,7 +92,7 @@ class AddFaculty extends Component {
                           type="text"
                           name="lastname"
                           id="lastname"
-                          placeholder="Raybhoge"
+                          placeholder="eg. Doe"
                           className="form-control"
                         />
                       </div>
@@ -122,7 +127,7 @@ class AddFaculty extends Component {
                               type="text"
                               name="department"
                               id="department"
-                              placeholder="Computer"
+                              placeholder="eg. Computer"
                               className="form-control"
                             />
                           </div>
@@ -138,7 +143,7 @@ class AddFaculty extends Component {
                           type="text"
                           name="year"
                           id="year"
-                          placeholder="TE"
+                          placeholder="eg. TE"
                           className="form-control"
                         />
                       </div>
@@ -149,7 +154,7 @@ class AddFaculty extends Component {
                           type="number"
                           name="div"
                           id="div"
-                          placeholder="2"
+                          placeholder="eg. 2"
                           className="form-control"
                         />
                       </div>

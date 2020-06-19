@@ -7,15 +7,15 @@ class StudentProfile extends Component {
     isLoading: true,
     data: {
       name: {
-        firstname: "Shreyas",
-        lastname: "Nikam",
+        firstname: "eg. John",
+        lastname: "eg. Doe",
       },
       currentClass: {
-        year: "TE",
-        div: "2",
+        year: "eg. TE",
+        div: "eg. 2",
       },
-      rollNo: "31241",
-      prevSemAttendance: "75.5",
+      rollNo: "eg. 31241",
+      prevSemAttendance: "eg. 75.5",
       emailId: "example@gmail.com",
     },
   };

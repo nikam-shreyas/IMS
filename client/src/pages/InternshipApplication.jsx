@@ -67,7 +67,7 @@ class InternshipApplication extends Component {
                       name="workplace"
                       id="workplace"
                       className="form-control"
-                      placeholder="Google"
+                      placeholder="eg. Google"
                       required
                     />
                   </div>
@@ -78,7 +78,7 @@ class InternshipApplication extends Component {
                         type="number"
                         name="durationOfInternship"
                         id="durationOfInternship"
-                        placeholder="1"
+                        placeholder="eg. 1"
                         className="form-control"
                         required
                       />
@@ -105,7 +105,7 @@ class InternshipApplication extends Component {
                         className="form-control"
                         id="stipend"
                         name="stipend"
-                        placeholder="10000"
+                        placeholder="eg. 10000"
                         aria-describedby="inputGroupPrependRs"
                         required
                       />
@@ -130,7 +130,7 @@ class InternshipApplication extends Component {
                         name="reference"
                         id="reference"
                         aria-describedby="inputGroupPrependSalutation"
-                        placeholder="John Doe"
+                        placeholder="eg. John Doe"
                         className="form-control"
                       />
                     </div>

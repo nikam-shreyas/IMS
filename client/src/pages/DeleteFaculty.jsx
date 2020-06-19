@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 class DeleteFaulty extends Component {
   state = {
     showMessage: false,
+    errMessage: "",
     isLoading: true,
     data: {
       _id: null,
@@ -38,15 +39,8 @@ class DeleteFaulty extends Component {
     const { getCurrentTeacher } = this.props;
     var formData = new FormData(event.target);
     const username = formData.get("username") || null;
-    if (username === null) {
-      toast("Username cannot be empty !");
-    }
-    getCurrentTeacher(username)
-      .then(() => this.loadData(this.props.teacher))
-      .then(console.log(this.props.teacher))
-      .then(() => this.setState({ showMessage: true }));
-    // alert("Faculty Added!");
-    // window.location.reload(false);
+    console.log(username);
+    getCurrentTeacher(username).then(() => this.loadData(this.props.teacher));
   }
   //  handleChange({ target }) {
   //   this.setState({
@@ -63,8 +57,19 @@ class DeleteFaulty extends Component {
   //         .then(() => this.loadData(this.props.admin));
   //     }
   loadData(user) {
-    console.log(user);
-    this.setState({ data: user });
+    if (
+      user.department !== undefined &&
+      this.state.data !== user &&
+      this.state.username !== user.username
+    ) {
+      console.log(user);
+      this.setState({ data: user, showMessage: true, errMessage: "" });
+    } else {
+      this.setState({
+        showMessage: false,
+        errMessage: "Username does not exist.",
+      });
+    }
   }
   handleClick(username) {
     if (
@@ -93,6 +98,7 @@ class DeleteFaulty extends Component {
                     <div className="form-row my-2">
                       <div className="col-sm-6">
                         <input
+                          required
                           type="text"
                           name="username"
                           id="username"
@@ -113,6 +119,11 @@ class DeleteFaulty extends Component {
                   </form>
                   <hr />
                   <div>
+                    {this.state.errMessage && (
+                      <div className="alert alert-danger">
+                        {this.state.errMessage}
+                      </div>
+                    )}
                     {this.state.showMessage && (
                       <div>
                         <Card>

@@ -22,12 +22,12 @@ class FacultyList extends Component {
       isLoading: true,
       faculties: [
         {
-          name: { firstname: "Srushti", lastname: "raybhoge" },
-          currentClass: { year: "Te", div: 2 },
-          department: "comp",
-          username: "srush",
-          designation: "cc",
-          emailId: "s@gmail.com",
+          name: { firstname: "", lastname: "" },
+          currentClass: { year: "", div: "" },
+          department: "",
+          username: "",
+          designation: "",
+          emailId: "",
         },
       ],
     };
@@ -68,10 +68,10 @@ class FacultyList extends Component {
     return (
       <div>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Admin_Sidenav activeComponent="2" />
           </div>
-          <div className="col-sm-10">
+          <div className="col-sm-10 of">
             <div className="container">
               <h4 className="mt-2">Faculty List</h4>
               <hr />
