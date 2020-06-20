@@ -15,7 +15,9 @@ const Auth_Page = ({
 
   return (
     <div>
-      <ErrorMessage />
+      <div className="mt-4 text-center">
+        <ErrorMessage />
+      </div>
       <Auth authType={authType} />
     </div>
   );

@@ -34,7 +34,11 @@ class Internships extends Component {
           <b>{internship.docs.AttendanceStatus}</b>
         </td>
         <td>
-          <b>{internship.approvedBy}</b>
+          <ol>
+            {internship.approvedBy.map((p) => (
+              <li>{p.designation}</li>
+            ))}
+          </ol>
         </td>
         <td>
           <b>{internship.completionStatus}</b>
@@ -109,65 +113,69 @@ class Internships extends Component {
             <Sidenav_f activeComponent="2" />
           </div>
           <div className="col-sm-10">
-            <div style={({ textAlign: "center" }, { marginTop: "5px" })}>
-              <h2 style={{ textAlign: "center" }}>Internship Detais</h2>
-              <hr />
-            </div>
+            <div className="container of mt-2">
+              <div style={{ marginTop: "5px" }}>
+                <h4>Internship Applications</h4>
+                <hr />
+              </div>
 
-            <div
-              className="card"
-              style={
-                ({ height: "100%" },
-                { overflowX: "scroll" },
-                { overflowY: "scroll" })
-              }
-            >
-              <table
-                className="table table-hover table-responsive"
-                style={{ tableLayout: "fixed" }}
+              <div
+                className="card"
+                style={
+                  ({ height: "100%" },
+                  { overflowX: "scroll" },
+                  { overflowY: "scroll" })
+                }
               >
-                <thead className="thead-dark">
-                  <tr>
-                    <th
-                      colSpan="5"
-                      style={
-                        ({ border: "1px solid white" }, { textAlign: "center" })
-                      }
-                    >
-                      DOCUMENT DETAILS
-                    </th>
-                    <th colSpan="3"></th>
-                    <th
-                      colSpan="6"
-                      style={
-                        ({ border: "1px solid white" }, { textAlign: "center" })
-                      }
-                    >
-                      APPLICATION DETAILS
-                    </th>
-                    <th colSpan="1"></th>
-                  </tr>
-                  <tr>
-                    <th>Application Status</th>
-                    <th>Undertaking Status</th>
-                    <th>Offer Letter Status</th>
-                    <th>Marksheets Status</th>
-                    <th>Attendance Status</th>
-                    <th>Approved By</th>
-                    <th>Completion Status</th>
+                <table
+                  className="table table-hover table-responsive"
+                  style={{ tableLayout: "fixed" }}
+                >
+                  <thead className="thead-dark">
+                    <tr>
+                      <th
+                        colSpan="5"
+                        style={
+                          ({ border: "1px solid white" },
+                          { textAlign: "center" })
+                        }
+                      >
+                        DOCUMENT DETAILS
+                      </th>
+                      <th colSpan="3"></th>
+                      <th
+                        colSpan="6"
+                        style={
+                          ({ border: "1px solid white" },
+                          { textAlign: "center" })
+                        }
+                      >
+                        APPLICATION DETAILS
+                      </th>
+                      <th colSpan="1"></th>
+                    </tr>
+                    <tr>
+                      <th>Application Status</th>
+                      <th>Undertaking Status</th>
+                      <th>Offer Letter Status</th>
+                      <th>Marksheets Status</th>
+                      <th>Attendance Status</th>
+                      <th>Approved By</th>
+                      <th>Completion Status</th>
 
-                    <th>Student</th>
-                    <th>Submitted Date</th>
-                    <th>Approved Date</th>
-                    <th>Workplace</th>
-                    <th>Duration Of Internship</th>
-                    <th>Reference</th>
-                    <th>OfferLetter</th>
-                    <th>Approve/Reject</th>
-                  </tr>
-                </thead>
-                {internships}
-              </table>
+                      <th>Student</th>
+                      <th>Submitted Date</th>
+                      <th>Approved Date</th>
+                      <th>Workplace</th>
+                      <th>Duration Of Internship</th>
+                      <th>Reference</th>
+                      <th>OfferLetter</th>
+                      <th>Approve/Reject</th>
+                    </tr>
+                  </thead>
+                  {internships}
+                </table>
+              </div>
             </div>
           </div>
         </div>

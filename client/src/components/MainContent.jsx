@@ -50,7 +50,7 @@ class MainContent extends Component {
     getStudentInternships().then(this.setState(this.props.internships));
   }
   loadData(internships) {
-    this.setState({ internships: internships });
+    if (internships.length > 0) this.setState({ internships: internships });
   }
   enableListview() {
     var elements = document.getElementsByClassName("card-body");

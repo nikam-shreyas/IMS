@@ -80,7 +80,9 @@ class AdminSetting extends Component {
           </div>
           <div className="col-sm-10">
             <div className="container mt-2">
-              <ErrorMessage />
+              <div className="alert alert-danger">
+                <ErrorMessage />
+              </div>
               <h4>Change Password</h4>
               <hr />
               {

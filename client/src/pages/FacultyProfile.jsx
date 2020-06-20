@@ -106,7 +106,7 @@ class FacultyProfile extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2">
-            <Sidenav_f activeComponent="2" />
+            <Sidenav_f activeComponent="1" />
           </div>
           <div className="col-sm-10">
             <div className="container">

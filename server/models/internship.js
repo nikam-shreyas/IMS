@@ -31,8 +31,11 @@ const internshipSchema = new mongoose.Schema({
   },
   approvedBy: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "faculty",
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "faculty",
+      },
+      designation: String,
     },
   ],
   docs: {

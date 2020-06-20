@@ -1,4 +1,5 @@
 const db = require("../models");
+const chain = require("./chain");
 let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
 require("dotenv").config();
@@ -177,7 +178,6 @@ exports.approveInternship = async (req, res, next) => {
     faculty["applicationsApproved"].push(internshipId);
     await faculty.save();
     await internship.save();
-
     res.status(200).json(internship);
   } catch (err) {
     err.message = "Could not approve";
@@ -196,8 +196,19 @@ exports.forwardInternship = async (req, res, next) => {
       faculty["applicationsReceived"].indexOf(internshipId),
       1
     );
-
+    internship.approvedBy.push({
+      id: faculty._id,
+      designation: faculty.designation,
+    });
+    let nextPersonInChain =
+      chain.acceptanceChain.indexOf(faculty.designation) + 1;
+    let forwardToFaculty = db.Faculty.find({
+      designation: chain.acceptanceChain[nextPersonInChain],
+    });
+    forwardToFaculty.applicationsReceived.push(internshipId);
     await faculty.save();
+    await forwardToFaculty.save();
+    await internship.save();
     res.status(200).json(internship);
   } catch (err) {
     err.message = "Could not approve";
