@@ -60,6 +60,7 @@ exports.showInternships = async (req, res, next) => {
   try {
     //const internships = await db.internships.find().populate('student',['studentname','id']);
     const internships = await db.Internship.find().populate("internships");
+    console.log("im");
     res.status(200).json(internships);
   } catch (err) {
     err.status(400);
@@ -67,18 +68,7 @@ exports.showInternships = async (req, res, next) => {
   }
 };
 
-exports.studentsInternships = async (req, res, next) => {
-  try {
-    const { id } = req.decoded;
-    const student = await db.Student.findById(id).populate("internships");
-    res.status(200).json(student.internships);
-  } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
-  }
-};
+
 
 exports.getInternship = async (req, res, next) => {
   try {
@@ -124,6 +114,37 @@ exports.deleteInternship = async (req, res, next) => {
     await student.save();
     await internship.remove();
     return res.status(202).json({ internship, deleted: true });
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
+
+exports.getInternshipsFaculty = async (req, res, next) => {
+  try {
+    //const { id } = req.decoded;
+    console.log("Im here in fac get intern");
+    const internship = await db.Student.populate("internships");
+    //console.log("im here "+internship.internships.docs.ApplicationStatus);
+    res.status(200).json(internship.internships);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
+
+
+exports.studentsInternships = async (req, res, next) => {
+  try {
+    const { id } = req.decoded;
+    const student = await db.Student.findById(id).populate("internships");
+    res.status(200).json(student.internships);
   } catch (err) {
     return next({
       status: 400,

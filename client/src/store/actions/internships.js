@@ -15,7 +15,9 @@ export const setCurrentInternship = (internship) => ({
 export const getInternships = () => {
   return async (dispatch) => {
     try {
+      console.log("im in getInternships ");
       const internships = await api.call("get", "internships");
+      
       dispatch(setInternships(internships));
       dispatch(removeError());
     } catch (err) {
