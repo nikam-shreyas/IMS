@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { getFaculty } from "../store/actions/admin";
-import { MDBDataTable } from "mdbreact";
+import { Card, CardTitle, Button, CardBody, CardText } from "reactstrap";
+
 class FacultyList extends Component {
   //   state={
   //     isLoading: true,
@@ -22,6 +23,7 @@ class FacultyList extends Component {
       isLoading: true,
       faculties: [
         {
+          _id:'',
           name: { firstname: "", lastname: "" },
           currentClass: { year: "", div: "" },
           department: "",
@@ -41,9 +43,10 @@ class FacultyList extends Component {
   loadData(facultylist) {
     this.setState({ faculties: facultylist });
   }
-  renderTableData() {
+  renderCardData(){
     return this.state.faculties.map((faculty) => {
       const {
+        _id,
         username,
         name,
         currentClass,
@@ -52,18 +55,28 @@ class FacultyList extends Component {
         emailId,
       } = faculty; //destructuring
       return (
-        <tr key={username}>
-          <td>{username}</td>
-          <td>{name.firstname + " " + name.lastname}</td>
-          <td>{currentClass.year + " " + currentClass.div}</td>
-          <td>{department}</td>
-          <td>{designation}</td>
-          <td>{emailId}</td>
-        </tr>
+        <div className='col-md-6' key={_id}>
+        <Card  style={{margin:'1%',boxShadow:'5px 5px rgb(167,167,167)'}}>
+        <CardBody>
+        <CardTitle>
+        <h4>{username}</h4>
+        <small className="text-muted">
+        {_id}
+        </small>
+        </CardTitle>
+        <hr style={{ borderTop:' 1px solid black'}}/>
+        <b> Name : </b>{name.firstname + " " + name.lastname}<br/>
+        <b> Current Class : </b>{currentClass.year + " " + currentClass.div}<br/>
+        <b> Department : </b>{department}<br/>
+        <b> Designation : </b>{designation}<br/>
+        <b> EmailId : </b>{emailId}<br/>      
+        </CardBody>
+       </Card>
+       </div>
       );
     });
+   
   }
-
   render() {
     return (
       <div>
@@ -76,22 +89,8 @@ class FacultyList extends Component {
               {/* {<MDBDataTable dark data={this.state.faculties} />} */}
               <h4 className="mt-2">Faculty List</h4>
               <hr />
-              <div>
-                <div className="table-responsive-sm">
-                  <table className="table table-hover">
-                    <thead className="bg-dark text-white">
-                      <tr>
-                        <th scope="col">Username</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Department</th>
-                        <th scope="col">Designation</th>
-                        <th scope="col">Email ID</th>
-                      </tr>
-                    </thead>
-                    <tbody>{this.renderTableData()}</tbody>
-                  </table>
-                </div>
+              <div class='row'>
+                  {this.renderCardData()}                  
               </div>
             </div>
           </div>

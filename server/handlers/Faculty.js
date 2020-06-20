@@ -22,7 +22,34 @@ exports.showFacultyProfile = async (req, res, next) => {
   
   }
 
-
+  exports.resetPassword=async(req,res,next)=>{
+    const { oldpassword,newpassword }=req.body
+    const { id }=req.params
+    try {
+      const Fac = await db.Faculty.findById({ _id:id });
+      const valid = await Fac.comparePassword(oldpassword);
+      if (valid) {
+        const newhashed = await bcrypt.hash(newpassword, 10);
+        const Profile=await db.Faculty.findOneAndUpdate({_id:id},{
+        $set:{
+         password:newhashed
+        }
+      },{new : true});
+      if(Profile){
+        return res.status(200).json(Profile)
+      }else{
+        throw new Error("Admin not found");    
+      }
+      } else {
+        throw new Error("Old password wrong");
+      }
+    } catch (err) {
+      // err.message = "Invalid username/password";
+      next(err);
+    }
+   
+  }
+  
 // module.exports={
 //   showFacultyProfile:function(req,res){
 //     try {

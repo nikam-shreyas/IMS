@@ -10,4 +10,8 @@ router.post("/login_faculty", handle.login_faculty);
 router
   .post("/student", auth, handle.updateStudent)
   .get("/student", auth, handle.getStudentDetails);
+
+router.route("student/reset/:id")
+  .put(auth,handle.resetPassword);
+  
 module.exports = router;
