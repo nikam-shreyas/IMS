@@ -62,8 +62,11 @@ const internshipSchema = new mongoose.Schema({
     default: "N",
   },
   holder: {
-    type: String,
-    default: "Class Coordinator",
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "faculty",
+    },
+    designation: String,
   },
   comments: {
     type: String,

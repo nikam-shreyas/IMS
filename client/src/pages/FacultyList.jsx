@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { getFaculty } from "../store/actions/admin";
-
+import { MDBDataTable } from "mdbreact";
 class FacultyList extends Component {
   //   state={
   //     isLoading: true,
@@ -42,7 +42,7 @@ class FacultyList extends Component {
     this.setState({ faculties: facultylist });
   }
   renderTableData() {
-    return this.state.faculties.map((faculty, index) => {
+    return this.state.faculties.map((faculty) => {
       const {
         username,
         name,
@@ -73,22 +73,25 @@ class FacultyList extends Component {
           </div>
           <div className="col-sm-10 of">
             <div className="container">
+              {/* {<MDBDataTable dark data={this.state.faculties} />} */}
               <h4 className="mt-2">Faculty List</h4>
               <hr />
               <div>
-                <table className="table table-hover">
-                  <thead className="bg-dark text-white">
-                    <tr>
-                      <th scope="col">Username</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Class</th>
-                      <th scope="col">Department</th>
-                      <th scope="col">Designation</th>
-                      <th scope="col">Email ID</th>
-                    </tr>
-                  </thead>
-                  <tbody>{this.renderTableData()}</tbody>
-                </table>
+                <div className="table-responsive-sm">
+                  <table className="table table-hover">
+                    <thead className="bg-dark text-white">
+                      <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Designation</th>
+                        <th scope="col">Email ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>{this.renderTableData()}</tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

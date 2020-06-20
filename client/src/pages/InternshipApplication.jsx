@@ -23,7 +23,7 @@ class InternshipApplication extends Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["durationOfInternship"] += "month(s)";
+    data["application"]["durationOfInternship"] += " month(s)";
     data["application"]["offerLetter"] = "TemporaryString";
     const { createInternship } = this.props;
     createInternship(data).then(() => {

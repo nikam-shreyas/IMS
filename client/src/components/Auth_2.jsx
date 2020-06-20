@@ -43,7 +43,7 @@ class Auth_2 extends Component {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
       <div className="container">
-        <div className="card mx-auto my-5 bg-light">
+        <div className="card mx-auto my-5">
           <div className="card-body">
             <h2 className="card-title">Register as a student.</h2>
             <form className="form-group my-3" onSubmit={this.handleSubmit}>

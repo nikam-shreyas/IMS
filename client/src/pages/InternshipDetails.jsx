@@ -33,7 +33,7 @@ class InternshipDetails extends Component {
         rollNo: null,
         prevSemAttendance: null,
       },
-      holder: null,
+      holder: { id: null, designation: null },
       completionStatus: null,
       comments: null,
     },
@@ -198,7 +198,7 @@ class InternshipDetails extends Component {
                     {this.state.data.completionStatus === "N" && (
                       <>
                         Application is currently viewed by:{" "}
-                        {this.state.data.holder} <br />
+                        {this.state.data.holder.designation} <br />
                       </>
                     )}
                   </div>

@@ -36,7 +36,10 @@ class MainContent extends Component {
           rollNo: null,
           prevSemAttendance: null,
         },
-        holder: null,
+        holder: {
+          id: null,
+          designation: null,
+        },
         completionStatus: null,
         comments: null,
       },
@@ -110,7 +113,7 @@ class MainContent extends Component {
 
           <hr />
           <div>
-            {this.state.internships[0].holder !== null &&
+            {this.state.internships[0].holder.designation !== null &&
               this.state.internships.map((internship) => (
                 <div
                   key={internship._id}
@@ -202,8 +205,8 @@ class MainContent extends Component {
                     </table>
                     {internship.completionStatus === "N" && (
                       <>
-                        Application is currently viewed by: {internship.holder}{" "}
-                        <br />
+                        Application is currently viewed by:{" "}
+                        {internship.holder.designation} <br />
                       </>
                     )}
                   </div>
