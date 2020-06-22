@@ -35,6 +35,7 @@ class AdminProfile extends Component {
     this.setState({ data: user });
   }
   handleSubmit(event) {
+
     event.preventDefault();
     const { updateAdmin } = this.props;
     var formData = new FormData(event.target);
@@ -55,9 +56,8 @@ class AdminProfile extends Component {
     console.log(updatedata);
     console.log(this.state.data._id);
     updateAdmin(this.state.data._id, updatedata)
-      .then(console.log(this.props.admin))
-      .then(toast("Admin Details Updated!"));
-    window.location.reload(false);
+      .then(console.log(this.props));
+    // window.location.reload(false);
   }
 
   editform() {
@@ -68,6 +68,8 @@ class AdminProfile extends Component {
     for (var i = 0, len = elements.length; i < len; ++i) {
       elements[i].readOnly = !elements[i].readOnly;
     }
+    var submitButton = document.getElementById("submitButton");
+    submitButton.disabled = !submitButton.disabled;
 
     var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
@@ -180,7 +182,7 @@ class AdminProfile extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark">
+                    <button type="submit" id="submitButton" className="btn btn-dark" disabled>
                       Update Profile
                     </button>
                   </div>
@@ -189,7 +191,7 @@ class AdminProfile extends Component {
               <ToastContainer />
             </div>
           </div>
-        </div>
+        </div>        
       </div>
     );
   }
