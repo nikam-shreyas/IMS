@@ -79,7 +79,6 @@ exports.showInternships = async (req, res, next) => {
   try {
     //const internships = await db.internships.find().populate('student',['studentname','id']);
     const { id } = req.decoded;
-    let students = [];
     let faculty = await db.Faculty.findById(id).populate({
       path: "applicationsReceived",
       model: "Internship",
@@ -88,7 +87,6 @@ exports.showInternships = async (req, res, next) => {
         model: "Student",
       },
     });
-
     res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
     return next({

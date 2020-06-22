@@ -9,6 +9,12 @@ router
 router.get("/student", auth, handle.studentsInternships);
 
 router
+  .route("/faculty")
+  .post("/forward", auth, handle.forwardInternship)
+  .post("/approve", auth, handle.approveInternship)
+  .post("/update", auth, handle.updateInternship);
+
+router
   .route("/:id")
   .get(handle.getInternship)
   .delete(auth, handle.deleteInternship);
