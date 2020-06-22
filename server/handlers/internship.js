@@ -87,6 +87,7 @@ exports.showInternships = async (req, res, next) => {
         model: "Student",
       },
     });
+    console.log(id);
     res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
     return next({

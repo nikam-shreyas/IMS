@@ -17,7 +17,7 @@ export const getInternships = () => {
     try {
       console.log("im in getInternships ");
       const internships = await api.call("get", "internships");
-      
+      console.log(internships);
       dispatch(setInternships(internships));
       dispatch(removeError());
     } catch (err) {
