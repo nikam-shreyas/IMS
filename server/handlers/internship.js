@@ -201,7 +201,7 @@ exports.approveInternship = async (req, res, next) => {
     });
     await faculty.save();
     internship.comments =
-      "Congratulation! Your application has been <strong>approved</strong>.";
+      "Congratulations! Your application has been <strong>approved</strong>.";
     await internship.save();
     var email = {
       from: process.env.EMAILFROM,
@@ -229,7 +229,10 @@ exports.forwardInternship = async (req, res, next) => {
   const { _id: internshipId } = req.body;
   const { id: facultyId } = req.decoded;
   try {
-    let internship = await db.Internship.findById(internshipId);
+    let internship = await db.Internship.findById(internshipId).populate(
+      "student",
+      "emailId"
+    );
     let faculty = await db.Faculty.findById(facultyId);
 
     faculty["applicationsApproved"].push(internshipId);
@@ -240,11 +243,13 @@ exports.forwardInternship = async (req, res, next) => {
     internship.approvedBy.push({
       designation: faculty.designation,
     });
-    let nextPersonInChain =
-      chain["acceptanceChain"].indexOf(faculty.designation) + 1;
-    let forwardToFaculty = await db.Faculty.findOne({
-      designation: chain["acceptanceChain"][nextPersonInChain],
-    });
+    let forwardToFaculty = await db.Faculty.findOne(
+      chain.getNextPerson(faculty.designation, faculty.department)
+    );
+    console.log(forwardToFaculty.designation);
+    internship.holder = {
+      designation: forwardToFaculty.designation,
+    };
     internship.comments +=
       "<br />Application id: " +
       internship._id +
@@ -257,6 +262,7 @@ exports.forwardInternship = async (req, res, next) => {
     await faculty.save();
     await forwardToFaculty.save();
     await internship.save();
+    const emailId = internship.student.emailId;
     var email = {
       from: process.env.EMAILFROM,
       to: emailId,
