@@ -2,18 +2,15 @@ import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
-import {
-  getAdmin,
-  updateAdmin
-} from "../store/actions/admin";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { getAdmin, updateAdmin } from "../store/actions/admin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class AdminProfile extends Component {
   state = {
     isLoading: true,
     data: {
-      _id:null,
+      _id: null,
       name: {
         firstname: "s",
         lastname: "s",
@@ -21,21 +18,19 @@ class AdminProfile extends Component {
       department: "s",
       designation: "s",
       emailId: "srush@gmail.com",
-      username:'srush',
+      username: "srush",
     },
   };
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-   }
-  async componentDidMount() {    
-    const {
-      getAdmin
-    } = this.props;
+  }
+  async componentDidMount() {
+    const { getAdmin } = this.props;
     getAdmin()
-    .then(this.setState({ isLoading: false }))
-    .then(() => this.loadData(this.props.admin));
-   }
+      .then(this.setState({ isLoading: false }))
+      .then(() => this.loadData(this.props.admin));
+  }
   loadData(user) {
     this.setState({ data: user });
   }
@@ -48,35 +43,39 @@ class AdminProfile extends Component {
     //   firstname: formData.get("firstname") || this.state.data.name.firstname,
     //   lastname: formData.get("lastname") || this.state.data.name.lastname,
     // };
-    updatedata["firstname"] = formData.get("firstname") || this.state.data.name.firstname;
-    updatedata["lastname"] = formData.get("lastname") || this.state.data.name.lastname;
-    updatedata["department"] = formData.get("department") || this.state.data.department;
-    updatedata["designation"] = formData.get("designation") || this.state.data.designation;
+    updatedata["firstname"] =
+      formData.get("firstname") || this.state.data.name.firstname;
+    updatedata["lastname"] =
+      formData.get("lastname") || this.state.data.name.lastname;
+    updatedata["department"] =
+      formData.get("department") || this.state.data.department;
+    updatedata["designation"] =
+      formData.get("designation") || this.state.data.designation;
     updatedata["emailId"] = formData.get("emailId") || this.state.data.emailId;
     console.log(updatedata);
     console.log(this.state.data._id);
-    updateAdmin(this.state.data._id,updatedata)
-    .then(console.log(this.props.admin))
-    .then(toast("Admin Details Updated!"));
+    updateAdmin(this.state.data._id, updatedata)
+      .then(console.log(this.props.admin))
+      .then(toast("Admin Details Updated!"));
     window.location.reload(false);
   }
 
   editform() {
     var form = document.getElementById("form");
-    var select= document.getElementById("designation");
-    select.disabled=!select.disabled;
+    var select = document.getElementById("designation");
+    select.disabled = !select.disabled;
     var elements = form.elements;
     for (var i = 0, len = elements.length; i < len; ++i) {
       elements[i].readOnly = !elements[i].readOnly;
     }
-    
+
     var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
     editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
 
   render() {
-    console.log(this.state.data)
+    console.log(this.state.data);
     return (
       <div>
         <div className="row no-gutters">
@@ -84,13 +83,15 @@ class AdminProfile extends Component {
             <Admin_Sidenav activeComponent="1" />
           </div>
           <div className="col-sm-10">
-            <div className="container">
-              <h4 className="mt-2">My Profile</h4>
-              <h5>{this.state.data.username}</h5>
+            <div className="container mt-2">
+              <h4>{this.state.data.username} Profile</h4>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
-                  Click edit to fill in the details and update :
+                  <div className="alert alert-info">
+                    Click <strong>Edit</strong> to fill in the details and{" "}
+                    <strong>Update</strong> the information :
+                  </div>
                   <hr />
                   <div className="container">
                     <div className="form-row my-2">
@@ -117,16 +118,28 @@ class AdminProfile extends Component {
                         />
                       </div>
                     </div>
-                   <div className="form-row my-2">
+                    <div className="form-row my-2">
                       <div className="col-sm-6">
                         Designation:
-                        <select id="designation" defaultValue="Admin" name="designation" className="form-control" disabled>
-                        <option value="ClassCoordinator">Class Coordinator</option>
-                        <option value="DepartmentIntershipCoordinator">Department Intership Coordinator</option>
-                        <option value="CollegeInternshipCoordinator">College Internship Coordinator</option>
-                        <option value="Principal">Principal</option>
-                        <option value="Admin" >Admin</option>
-                      </select>
+                        <select
+                          id="designation"
+                          defaultValue="Admin"
+                          name="designation"
+                          className="form-control"
+                          disabled
+                        >
+                          <option value="ClassCoordinator">
+                            Class Coordinator
+                          </option>
+                          <option value="DepartmentIntershipCoordinator">
+                            Department Intership Coordinator
+                          </option>
+                          <option value="CollegeInternshipCoordinator">
+                            College Internship Coordinator
+                          </option>
+                          <option value="Principal">Principal</option>
+                          <option value="Admin">Admin</option>
+                        </select>
                       </div>
                       <div className="col-sm-6">
                         Department:
@@ -185,10 +198,10 @@ class AdminProfile extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    admin:store.currentAdmin,
+    admin: store.currentAdmin,
   }),
   {
     getAdmin,
-    updateAdmin
+    updateAdmin,
   }
 )(AdminProfile);

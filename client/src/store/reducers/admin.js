@@ -2,7 +2,7 @@ import {
   SET_CURRENT_SELECTED_ADMIN,
   SET_FACULTY,
   SET_CURRENT_SELECTED_TEACHER,
-  GET_FACULTY_PROFILE
+  GET_FACULTY_PROFILE,
 } from "../actionTypes";
 
 export const currentAdmin = (state = {}, action) => {
@@ -27,10 +27,8 @@ export const faculty = (state = [], action) => {
 export const currentTeacher = (state = {}, action) => {
   switch (action.type) {
     case SET_CURRENT_SELECTED_TEACHER:
-      console.log("Nooo!");
       return action.teacher;
     default:
       return state;
   }
 };
-

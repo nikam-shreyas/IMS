@@ -78,17 +78,3 @@ export const deleteInternship = (path) => {
     }
   };
 };
-
-// export const vote=(path,data)=>{
-//     return async dispatch=>{
-//         try{
-//         const internship=await api.call('post',`internship/${path}`,data);
-//         dispatch(setCurrentInternship(internship));
-//         dispatch(removeError());
-
-//     }catch(err){
-//         const error=err.response.data;
-//             dispatch(addError(error.message));
-//     }
-//     };
-// };

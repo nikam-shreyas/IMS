@@ -2,18 +2,18 @@ import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
-import {
-    getAdmin,
-    resetPassword
-} from "../store/actions/admin";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { getAdmin, resetPassword } from "../store/actions/admin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ErrorMessage from "../components/ErrorMessage";
 class AdminSetting extends Component {
   state = {
+    newpassword: "",
+    confirmPassword: "",
+    message: "",
     isLoading: true,
     data: {
-      _id:null,
+      _id: null,
       name: {
         firstname: "s",
         lastname: "s",
@@ -21,51 +21,57 @@ class AdminSetting extends Component {
       department: "s",
       designation: "s",
       emailId: "srush@gmail.com",
-      username:'srush',
+      username: "srush",
     },
   };
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-   }
-  async componentDidMount() {    
-    const {
-      getAdmin
-    } = this.props;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleconfirmPassword = this.handleconfirmPassword.bind(this);
+  }
+  async componentDidMount() {
+    const { getAdmin } = this.props;
     getAdmin()
-    .then(this.setState({ isLoading: false }))
-    .then(() => this.loadData(this.props.admin));
-   }
+      .then(this.setState({ isLoading: false }))
+      .then(() => this.loadData(this.props.admin));
+  }
   loadData(user) {
     this.setState({ data: user });
   }
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
   handleSubmit(event) {
     event.preventDefault();
-    const { resetPassword } = this.props;
-    var formData = new FormData(event.target);
-    const updatedata = {};
-    // updatedata["name"] = {
-    //   firstname: formData.get("firstname") || this.state.data.name.firstname,
-    //   lastname: formData.get("lastname") || this.state.data.name.lastname,
-    // };
-    updatedata["oldpassword"] = formData.get("oldpassword") || this.state.data.password;
-    updatedata["newpassword"] = formData.get("newpassword");
-    updatedata["newpasswordC"] = formData.get("newpasswordC");
-    
-    if(updatedata.newpassword!==updatedata.newpasswordC){
-        toast("Passwords don't match!!");
-    }else{
-        resetPassword(this.state.data._id,updatedata)
-        .then(console.log(this.props.admin))
-        .then(toast("Password Changed!"));
-        window.location.reload(false);
+    if (this.state.newpassword === this.state.confirmPassword) {
+      const { resetPassword } = this.props;
+      var formData = new FormData(event.target);
+      const updatedata = {};
+      // updatedata["name"] = {
+      //   firstname: formData.get("firstname") || this.state.data.name.firstname,
+      //   lastname: formData.get("lastname") || this.state.data.name.lastname,
+      // };
+      updatedata["oldpassword"] =
+        formData.get("oldpassword") || this.state.data.password;
+      updatedata["newpassword"] = formData.get("newpassword");
+      updatedata["newpasswordC"] = formData.get("newpasswordC");
+      resetPassword(this.state.data._id, updatedata).then();
     }
-   
   }
 
+  handleconfirmPassword(e) {
+    this.setState({ [e.target.name]: e.target.value });
 
+    if (this.state.newpassword !== e.target.value) {
+      this.setState({ message: "Passwords do not match!" });
+    } else {
+      this.setState({ message: "" });
+    }
+    this.setState({ confirmPassword: e.target.value });
+  }
   render() {
-    console.log(this.state.data)
+    console.log(this.state.data);
     return (
       <div>
         <div className="row no-gutters">
@@ -73,47 +79,59 @@ class AdminSetting extends Component {
             <Admin_Sidenav activeComponent="5" />
           </div>
           <div className="col-sm-10">
-            <div className="container">
-              <h4 className="mt-2">Change Password</h4>
+            <div className="container mt-2">
+              <div className="alert alert-danger">
+                <ErrorMessage />
+              </div>
+              <h4>Change Password</h4>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
                   <div className="container">
-                  <div className="form-row my-2">
-                  <div className="col-sm-6">
-                    Old Password:
-                    <input
-                      type="password"
-                      name="oldpassword"
-                      id="oldpassword"
-                      className="form-control"
-                      placeholder="Enter Old Password"
-                    />
-                  </div>
-                </div>                  
-                <div className="form-row my-2">
-                <div className="col-sm-6">
-                New Password:
-                <input
-                  type="password"
-                  name="newpassword"
-                  id="newpassword"
-                  placeholder="Enter New Password"
-                  className="form-control"
-                />
-                </div>
-                <div className="col-sm-6">
-                Confirm Password:
-                  <input
-                    type="password"
-                    name="newpasswordC"
-                    id="newpasswordC"
-                    placeholder="Confirm Password"
-                    className="form-control"
-                  />
-                </div>
-              </div>              
-
+                    <div className="form-row my-2">
+                      <div className="col-sm-6">
+                        Old Password:
+                        <input
+                          required
+                          type="password"
+                          name="oldpassword"
+                          id="oldpassword"
+                          className="form-control"
+                          placeholder="Enter Old Password"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-row my-2">
+                      <div className="col-sm-6">
+                        New Password:
+                        <input
+                          required
+                          type="password"
+                          name="newpassword"
+                          id="newpassword"
+                          onChange={this.handleChange}
+                          placeholder="Enter New Password"
+                          className="form-control"
+                        />
+                      </div>
+                      <div className="col-sm-6">
+                        Confirm Password:
+                        <span className="float-right">
+                          <small className="text-danger">
+                            {this.state.message}
+                          </small>
+                        </span>
+                        <input
+                          required
+                          type="password"
+                          name="newpasswordC"
+                          id="newpasswordC"
+                          onChange={this.handleconfirmPassword}
+                          placeholder="Confirm Password"
+                          className="form-control"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <hr />
                   <div className="text-right">
@@ -139,10 +157,10 @@ class AdminSetting extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    admin:store.currentAdmin,
+    admin: store.currentAdmin,
   }),
   {
     getAdmin,
-    resetPassword
+    resetPassword,
   }
 )(AdminSetting);

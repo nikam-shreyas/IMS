@@ -7,15 +7,15 @@ class StudentProfile extends Component {
     isLoading: true,
     data: {
       name: {
-        firstname: "Shreyas",
-        lastname: "Nikam",
+        firstname: "eg. John",
+        lastname: "eg. Doe",
       },
       currentClass: {
-        year: "TE",
-        div: "2",
+        year: "eg. TE",
+        div: "eg. 2",
       },
-      rollNo: "31241",
-      prevSemAttendance: ">75",
+      rollNo: "eg. 31241",
+      prevSemAttendance: "eg. 75.5",
       emailId: "example@gmail.com",
     },
   };
@@ -30,7 +30,9 @@ class StudentProfile extends Component {
       .then(() => this.loadData(this.props.auth.user));
   }
   loadData(user) {
-    if (user.emailId !== undefined) this.setState({ data: user });
+    if (user.prevSemAttendance !== undefined) this.setState({ data: user });
+
+    this.setState({ data: { ...this.state.data, emailId: user["emailId"] } });
   }
   handleSubmit(event) {
     event.preventDefault();

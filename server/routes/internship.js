@@ -3,11 +3,11 @@ const handle = require("../handlers");
 const auth = require("../middlewares/auth");
 router
   .route("/")
-  .get(auth,handle.getInternshipsFaculty )    // handle.getInternshipsFaculty  //handle.showInternships
+  .get(handle.showInternships)
   .post(auth, handle.addNewInternship);
 
 router
-  .get("/student", auth, handle.studentsInternships );  // handle.studentsInternships
+  .get("/student", auth, handle.studentsInternships);
 
 router
   .route("/:id")

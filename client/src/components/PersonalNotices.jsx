@@ -15,16 +15,17 @@ class PersonalNotices extends Component {
 
   componentDidMount() {
     const { getStudentNotices } = this.props;
-    getStudentNotices().then(() => this.loadData(this.props));
+    getStudentNotices().then(() => this.loadData(this.props.studentsNotices));
   }
   loadData(notices) {
+    let myNotices = [];
     for (let i = 0; i < notices.length; i++) {
       if (notices[i]["comments"] !== "") {
         this.setState({ noMessages: false });
-        this.setState({ studentsNotices: notices });
-        break;
+        myNotices.push(notices[i]);
       }
     }
+    this.setState({ studentsNotices: myNotices });
   }
 
   render() {
@@ -53,14 +54,12 @@ class PersonalNotices extends Component {
         )}
         {!this.state.noMessages &&
           this.state.studentsNotices.map((notice) => (
-            <>
-              <div className="alert alert-danger">
-                <span className="mx-2">
-                  <MdError />
-                </span>
-                {notice.comments}
-              </div>
-            </>
+            <div key={notice.comments} className="alert alert-danger">
+              <span className="mx-2">
+                <MdError />
+              </span>
+              {notice.comments}
+            </div>
           ))}
       </Fragment>
     );

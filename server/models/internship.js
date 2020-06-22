@@ -31,8 +31,11 @@ const internshipSchema = new mongoose.Schema({
   },
   approvedBy: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "faculty",
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "faculty",
+      },
+      designation: String,
     },
   ],
   docs: {
@@ -62,8 +65,11 @@ const internshipSchema = new mongoose.Schema({
     default: "N",
   },
   holder: {
-    type: String,
-    default: "Class Coordinator",
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "faculty",
+    },
+    designation: String,
   },
   comments: {
     type: String,
@@ -72,6 +78,3 @@ const internshipSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Internship", internshipSchema);
-
-
-

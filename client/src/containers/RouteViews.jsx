@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Switch, Route, withRouter } from "react-router-dom";
 import Student_Home from "../pages/Student_Home";
-import Admin_Home from "../pages/Admin_Home";
 import Auth_Page from "../pages/Auth_Page";
 import Auth_Page_2 from "../pages/Auth_Page_2";
 import Internships from "../components/internships";
@@ -17,10 +16,10 @@ import CreateNotice from "../pages/CreateNotice";
 import Notices from "../components/Notices";
 import StudentNotifications from "../pages/StudentNotifications";
 import FacultyProfile from "../pages/FacultyProfile";
-//import { internships } from '../store/reducers/internships';
 import FacultyList from "../pages/FacultyList";
 import DeleteFaculty from "../pages/DeleteFaculty";
-import AdminSetting from '../pages/AdminSetting';
+import AdminSetting from "../pages/AdminSetting";
+import FacultyNotices from "../pages/FacultyNotices";
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -29,7 +28,6 @@ const RouteViews = ({ auth }) => (
         path="/notifications"
         render={() => <StudentNotifications />}
       />
-      <Route exact path="/" render={() => <TestPage />} />
       <Route exact path="/test" render={() => <TestPage />} />
       <Route exact path="/studentDocs" render={() => <StudentDocuments />} />
       <Route
@@ -68,7 +66,6 @@ const RouteViews = ({ auth }) => (
       />
       <Route exact path="/notices" render={() => <Notices />} />
       <Route exact path="/internships" render={() => <Internships />} />
-      <Route exact path="/internships" render={() => <Internships />} />
       <Route exact path="/student" render={() => <Student_Home />} />
       <Route exact path="/faculty" render={() => <CreateNotice />} />
       <Route exact path="/admin/" render={() => <AdminProfile />} />
@@ -77,6 +74,7 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/facultyprofile" render={() => <FacultyProfile />} />
       <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
       <Route exact path="/settings" render={() => <AdminSetting />} />
+      <Route exact path="/facultyNotices" render={() => <FacultyNotices />} />
 
       <Route
         exact
@@ -88,8 +86,6 @@ const RouteViews = ({ auth }) => (
     </Switch>
   </main>
 );
-
-//export default RouteViews;
 
 export default withRouter(
   connect((store) => ({ auth: store.auth }))(RouteViews)

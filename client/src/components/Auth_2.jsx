@@ -7,10 +7,13 @@ class Auth_2 extends Component {
     this.state = {
       username: "",
       password: "",
-      
+      emailId: "",
+      confirmpassword: "",
+      message: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
   }
 
   handleChange(e) {
@@ -18,17 +21,29 @@ class Auth_2 extends Component {
   }
 
   handleSubmit(e) {
-    const { username, password } = this.state;
-    const { authType } = this.props;
-    e.preventDefault();
-    this.props.authUser(authType || "login", { username, password });
+    if (this.state.password == this.state.confirmpassword) {
+      const { username, password, emailId } = this.state;
+      const { authType } = this.props;
+      e.preventDefault();
+      this.props.authUser(authType || "login", { username, password, emailId });
+    } else {
+      alert("Error! Check form fields again...");
+    }
+  }
+  handleConfirmPassword(e) {
+    this.setState({ [e.target.name]: e.target.value });
+    if (this.state.password != e.target.value) {
+      this.setState({ message: "Passwords do not match!" });
+    } else {
+      this.setState({ message: "" });
+    }
   }
 
   render() {
-    const { username, password } = this.state;
+    const { username, password, emailId, confirmpassword } = this.state;
     return (
       <div className="container">
-        <div className="card mx-auto my-5 bg-light">
+        <div className="card mx-auto my-5">
           <div className="card-body">
             <h2 className="card-title">Register as a student.</h2>
             <form className="form-group my-3" onSubmit={this.handleSubmit}>
@@ -39,6 +54,17 @@ class Auth_2 extends Component {
                 type="text"
                 value={username}
                 name="username"
+                className="form-control"
+                autoComplete="off"
+                onChange={this.handleChange}
+              />
+              <label className="form-label" htmlFor="email">
+                Email ID
+              </label>
+              <input
+                type="email"
+                value={emailId}
+                name="emailId"
                 className="form-control"
                 autoComplete="off"
                 onChange={this.handleChange}
@@ -56,23 +82,20 @@ class Auth_2 extends Component {
                 onChange={this.handleChange}
               />
 
-
-
-            {/* <label className="form-label" htmlFor="Email">
-                Email
+              <label className="form-label" htmlFor="confirmpassword">
+                Confirm Password
               </label>
               <input
-                type="text"
-                value={emailId}
-                name="emailId"
+                type="password"
+                value={confirmpassword}
+                name="confirmpassword"
                 className="form-control"
                 autoComplete="off"
-                onChange={this.handleChange}
-              /> */}
-
-
-
-
+                onChange={this.handleConfirmPassword}
+              />
+              {this.state.message != "" && (
+                <small className="text-danger">{this.state.message}</small>
+              )}
               <div className="button_center">
                 <button className="btn btn-dark mx-auto mt-3" type="submit">
                   Submit

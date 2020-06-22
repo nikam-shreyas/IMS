@@ -1,4 +1,5 @@
 const db = require("../models");
+const chain = require("./chain");
 let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
 require("dotenv").config();
@@ -25,30 +26,47 @@ exports.addNewInternship = async (req, res, next) => {
       student,
       application,
     });
-    student.internships.push(internship._id);
-    await student.save();    
+    const faculty = await db.Faculty.findOne({
+      currentClass: {
+        year: student.currentClass.year,
+        div: student.currentClass.div,
+      },
+    });
+    internship.holder = { id: faculty._id, designation: faculty.designation };
 
-    let link="<h4>You have a new internship application.</h4><br/>"
-    link=link+"<a href='http://localhost:3000/login'>Click here to login and check.</a>";
+    faculty.applicationsReceived.push(internship._id);
+    student.internships.push(internship._id);
+    await student.save();
+    await faculty.save();
+    await internship.save();
     var email = {
       from: process.env.EMAILFROM,
-      to:student.emailId,
-      subject: "New Application",
-      // text: 'You have a new internship application',
-      html: "<a href='http://localhost:3000/login'>Click here to login.</a>",
+      to: student.emailId,
+      subject: "New Application Created!",
+      html:
+        "New Internship Application for <b>" +
+        application.durationOfInternship +
+        " months</b> at <b>" +
+        application.workplace +
+        "</b> created on <b>" +
+        new Date().toDateString() +
+        "</b>. <br /><br /> Your application is currently held by: Prof. <b>" +
+        faculty.name.firstname +
+        " " +
+        faculty.name.lastname +
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a>",
     };
-    console.log(email);
     client.sendMail(email, (err, info) => {
-        if(err){
-          console.log(err)
-        }
-        else if(info){
-          console.log(info)
-        }
+      if (err) {
+        console.log(err);
+      } else if (info) {
+        console.log(info);
+      }
     });
-    
+
     return res.status(201).json({ ...internship._doc, student: student._id });
   } catch (err) {
+    console.log(err);
     next({
       status: 400,
       message: err.message,
@@ -60,7 +78,6 @@ exports.showInternships = async (req, res, next) => {
   try {
     //const internships = await db.internships.find().populate('student',['studentname','id']);
     const internships = await db.Internship.find().populate("internships");
-    console.log("im");
     res.status(200).json(internships);
   } catch (err) {
     err.status(400);
@@ -68,7 +85,18 @@ exports.showInternships = async (req, res, next) => {
   }
 };
 
-
+exports.studentsInternships = async (req, res, next) => {
+  try {
+    const { id } = req.decoded;
+    const student = await db.Student.findById(id).populate("internships");
+    res.status(200).json(student.internships);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
 
 exports.getInternship = async (req, res, next) => {
   try {
@@ -122,33 +150,68 @@ exports.deleteInternship = async (req, res, next) => {
   }
 };
 
-
-exports.getInternshipsFaculty = async (req, res, next) => {
+exports.updateInternship = async (req, res, next) => {
   try {
-    //const { id } = req.decoded;
-    console.log("Im here in fac get intern");
-    const internship = await db.Student.populate("internships");
-    //console.log("im here "+internship.internships.docs.ApplicationStatus);
-    res.status(200).json(internship.internships);
+    const { id } = req.params;
+    const details = req.body;
+    let internship = await db.Internship.findById(id);
+
+    for (var key of Object.keys(details)) {
+      internship[key.toString()] = details[key];
+    }
+    await internship.save();
+    //console.log(internship);
+    res.status(200).json(internship);
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
-    });
+    err.message = "Could not update";
+    next(err);
   }
 };
 
-
-
-exports.studentsInternships = async (req, res, next) => {
+exports.approveInternship = async (req, res, next) => {
+  const { id: internshipId } = req.params;
+  const { id: facultyId } = req.decoded;
   try {
-    const { id } = req.decoded;
-    const student = await db.Student.findById(id).populate("internships");
-    res.status(200).json(student.internships);
+    let internship = await db.Internship.findById(internshipId);
+    internship["completionStatus"] = "Approved";
+    let faculty = await db.Faculty.findById(facultyId);
+    faculty["applicationsApproved"].push(internshipId);
+    await faculty.save();
+    await internship.save();
+    res.status(200).json(internship);
   } catch (err) {
-    return next({
-      status: 400,
-      message: err.message,
+    err.message = "Could not approve";
+    next(err);
+  }
+};
+
+exports.forwardInternship = async (req, res, next) => {
+  const { id: internshipId } = req.params;
+  const { id: facultyId } = req.decoded;
+  try {
+    let internship = await db.Internship.findById(internshipId);
+    let faculty = await db.Faculty.findById(facultyId);
+    faculty["applicationsApproved"].push(internshipId);
+    faculty["applicationsReceived"].splice(
+      faculty["applicationsReceived"].indexOf(internshipId),
+      1
+    );
+    internship.approvedBy.push({
+      id: faculty._id,
+      designation: faculty.designation,
     });
+    let nextPersonInChain =
+      chain.acceptanceChain.indexOf(faculty.designation) + 1;
+    let forwardToFaculty = db.Faculty.find({
+      designation: chain.acceptanceChain[nextPersonInChain],
+    });
+    forwardToFaculty.applicationsReceived.push(internshipId);
+    await faculty.save();
+    await forwardToFaculty.save();
+    await internship.save();
+    res.status(200).json(internship);
+  } catch (err) {
+    err.message = "Could not approve";
+    next(err);
   }
 };

@@ -6,7 +6,7 @@ import {
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 
-export const setCurrentAdmin = (admin) => ({  
+export const setCurrentAdmin = (admin) => ({
   type: SET_CURRENT_SELECTED_ADMIN,
   admin,
 });
@@ -24,8 +24,8 @@ export const getAdmin = (path) => {
   return async (dispatch) => {
     try {
       const admin = await api.call("get", "admin/");
-      
-      console.log("can these be admin details "+admin.department);
+
+      console.log("can these be admin details " + admin.department);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
@@ -87,28 +87,28 @@ export const deleteTeacher = (path) => {
   };
 };
 
-export const updateAdmin=(path,data)=>{
-return async (dispatch)=>{
-  try {
-    const admin = await api.call("put", `admin/update/${path}`,data);
-    dispatch(setCurrentAdmin(admin));
-    dispatch(removeError());
-  } catch (err) {
-    const error = err.response.data;
-    dispatch(addError(error.message));
-  }
-}
-};
-
-export const resetPassword=(path,data)=>{
-  return async (dispatch)=>{
+export const updateAdmin = (path, data) => {
+  return async (dispatch) => {
     try {
-      const admin = await api.call("put", `admin/reset/${path}`,data);
+      const admin = await api.call("put", `admin/update/${path}`, data);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));
     }
-  }
+  };
+};
+
+export const resetPassword = (path, data) => {
+  return async (dispatch) => {
+    try {
+      const admin = await api.call("put", `admin/reset/${path}`, data);
+      dispatch(setCurrentAdmin(admin));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
 };

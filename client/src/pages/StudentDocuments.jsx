@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Sidenav from "../components/Sidenav";
 class StudentDocuments extends Component {
   constructor(props) {
     super(props);
@@ -32,19 +33,28 @@ class StudentDocuments extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <h1>File Upload</h1>
-        <input
-          type="file"
-          className="custom-file-input"
-          name="myImage"
-          onChange={this.onChange}
-        />
-        {}
-        <button className="upload-button" type="submit">
-          Upload to DB
-        </button>
-      </form>
+      <div className="row">
+        <div className="col-sm-2">
+          <Sidenav activeComponent="4" />
+        </div>
+        <div className="col-sm-10">
+          <br />
+          <div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Documents</strong> page needs to be completed
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 }
