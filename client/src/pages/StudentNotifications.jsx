@@ -13,8 +13,7 @@ class StudentNotifications extends Component {
           </div>
           <div className="col-sm-10 of">
             <div className="container">
-              <hr />
-              <h4>Personal Notices:</h4>
+              <h4 className="mt-2">Personal Notices:</h4>
               <hr />
               <PersonalNotices />
               <hr />

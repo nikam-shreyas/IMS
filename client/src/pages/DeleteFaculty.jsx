@@ -62,7 +62,6 @@ class DeleteFaulty extends Component {
       this.state.data !== user &&
       this.state.username !== user.username
     ) {
-      console.log(user);
       this.setState({ data: user, showMessage: true, errMessage: "" });
     } else {
       this.setState({
@@ -77,6 +76,7 @@ class DeleteFaulty extends Component {
     ) {
       const { deleteTeacher } = this.props;
       deleteTeacher(username).then(toast("Faculty Deleted!"));
+      this.loadData({});
     }
   }
 
@@ -84,7 +84,7 @@ class DeleteFaulty extends Component {
     return (
       <div>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Admin_Sidenav activeComponent="4" />
           </div>
           <div className="col-sm-10">

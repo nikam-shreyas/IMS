@@ -33,25 +33,27 @@ class StudentDocuments extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-sm-2">
+      <div className="row no-gutters">
+        <div className="col-sm-2 sidenav">
           <Sidenav activeComponent="4" />
         </div>
         <div className="col-sm-10">
-          <br />
-          <div
-            class="alert alert-warning alert-dismissible fade show"
-            role="alert"
-          >
-            <strong>Documents</strong> page needs to be completed
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
+          <div className="container">
+            <br />
+            <div
+              class="alert alert-warning alert-dismissible fade show"
+              role="alert"
             >
-              <span aria-hidden="true">&times;</span>
-            </button>
+              <strong>Documents</strong> page needs to be completed
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

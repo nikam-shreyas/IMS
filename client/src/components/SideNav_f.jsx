@@ -7,18 +7,26 @@ import {
   MdDns,
   MdSettings,
 } from "react-icons/md";
+import { connect } from "react-redux";
+import { logout } from "../store/actions";
+import { RiLogoutBoxLine } from "react-icons/ri";
 
 class Sidenav_f extends Component {
   state = {};
-  handleToggle() {
-    console.log("Works");
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
   }
-
+  handleLogout() {
+    const { logout } = this.props;
+    logout();
+  }
   render() {
     const activeNow = this.props.activeComponent;
     return (
       <div className="sidenav">
-        <p>Menu</p>
+        <h4 className="text-light text-center mt-2">PICT IMS</h4>
+        <p className="mt-4">Menu</p>
         <ul id="ul">
           <Link to="/facultyprofile">
             <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
@@ -58,10 +66,18 @@ class Sidenav_f extends Component {
             </span>
             Settings
           </li>
+          <li id="li" className="nav-item">
+            <span className="mx-2">
+              <RiLogoutBoxLine />
+            </span>
+            <a onClick={this.handleLogout}>Logout</a>
+          </li>
         </ul>
       </div>
     );
   }
 }
 
-export default Sidenav_f;
+export default connect((store) => ({ auth: store.auth }), { logout })(
+  Sidenav_f
+);

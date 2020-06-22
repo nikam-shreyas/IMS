@@ -66,10 +66,10 @@ class Internships extends Component {
     return (
       <Fragment>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Sidenav_f activeComponent="2" />
           </div>
-          <div className="col-sm-10">
+          <div className="col-sm-10 of">
             <div className="container of mt-2">
               <h4>Internship Applications</h4>
               <hr />

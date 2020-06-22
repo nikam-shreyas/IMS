@@ -5,7 +5,7 @@
   padding: 0;
 }
 .of {
-  height: 88vh;
+  height: 98vh;
   overflow-y: auto;
 }
 body {
@@ -21,7 +21,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 /* width */
 ::-webkit-scrollbar {
   width: 20px;
@@ -43,7 +42,6 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(58, 54, 54);
 }
-
 
 input[type="radiobox"] + label {
   display: block;

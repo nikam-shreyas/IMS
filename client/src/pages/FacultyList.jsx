@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { getFaculty } from "../store/actions/admin";
-import { Card, CardTitle, Button, CardBody, CardText } from "reactstrap";
-
+import {
+  MdFormatListBulleted,
+  MdAssignmentInd,
+  MdSupervisorAccount,
+  MdViewAgenda,
+  MdLocalLibrary,
+  MdSettings,
+} from "react-icons/md";
 class FacultyList extends Component {
   //   state={
   //     isLoading: true,
@@ -23,7 +29,7 @@ class FacultyList extends Component {
       isLoading: true,
       faculties: [
         {
-          _id:'',
+          _id: "",
           name: { firstname: "", lastname: "" },
           currentClass: { year: "", div: "" },
           department: "",
@@ -43,7 +49,30 @@ class FacultyList extends Component {
   loadData(facultylist) {
     this.setState({ faculties: facultylist });
   }
-  renderCardData(){
+  handleListView() {
+    let elements = document.getElementsByClassName("card-body");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none";
+    }
+  }
+  handleCardView() {
+    let elements = document.getElementsByClassName("card-body");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "block";
+    }
+  }
+  expandInline(e) {
+    e.target.parentElement.lastChild.style.display = "block";
+  }
+  // handlefilter(e) {
+  //   if (e.target.value !== "") {
+  //     var elements = document.querySelectorAll(
+  //       "div[id='*" + e.target.value + "*']"
+  //     );
+  //     console.log(elements);
+  //   }
+  // }
+  renderCardData() {
     return this.state.faculties.map((faculty) => {
       const {
         _id,
@@ -55,27 +84,64 @@ class FacultyList extends Component {
         emailId,
       } = faculty; //destructuring
       return (
-        <div className='col-md-6' key={_id}>
-        <Card  style={{margin:'1%',boxShadow:'5px 5px rgb(167,167,167)'}}>
-        <CardBody>
-        <CardTitle>
-        <h4>{username}</h4>
-        <small className="text-muted">
-        {_id}
-        </small>
-        </CardTitle>
-        <hr style={{ borderTop:' 1px solid black'}}/>
-        <b> Name : </b>{name.firstname + " " + name.lastname}<br/>
-        <b> Current Class : </b>{currentClass.year + " " + currentClass.div}<br/>
-        <b> Department : </b>{department}<br/>
-        <b> Designation : </b>{designation}<br/>
-        <b> EmailId : </b>{emailId}<br/>      
-        </CardBody>
-       </Card>
-       </div>
+        <div
+          className="col-sm-6"
+          key={_id}
+          id={
+            username +
+            name.firstname +
+            name.lastname +
+            currentClass.year +
+            currentClass.div +
+            department +
+            designation
+          }
+        >
+          <div className="card my-2">
+            <div className="card-header" onClick={this.expandInline.bind(this)}>
+              Prof. {name.firstname + " " + name.lastname}
+              <span className="float-right">
+                {designation === "ClassCoordinator" ? (
+                  <span className="mx-1">
+                    <MdLocalLibrary size="24" color="firebrick" />
+                  </span>
+                ) : designation === "Admin" ? (
+                  <span className="mx-1">
+                    <MdSettings size="24" color="blue" />
+                  </span>
+                ) : designation === "DepartmentIntershipCoordinator" ? (
+                  <span className="mx-1">
+                    <MdAssignmentInd size="24" color="green" />
+                  </span>
+                ) : designation === "CollegeInternshipCoordinator" ? (
+                  <span className="mx-1">
+                    <MdSupervisorAccount size="24" color="orange" />
+                  </span>
+                ) : (
+                  <span></span>
+                )}
+              </span>
+              <br />
+              <small className="text-muted">Username: {username}</small>
+            </div>
+            <div className="card-body">
+              <b> Current Class : </b>
+              {currentClass.year + " " + currentClass.div}
+              <br />
+              <b> Department : </b>
+              {department}
+              <br />
+              <b> Designation : </b>
+              {designation}
+              <br />
+              <b> Email Id : </b>
+              {emailId}
+              <br />
+            </div>
+          </div>
+        </div>
       );
     });
-   
   }
   render() {
     return (
@@ -87,11 +153,42 @@ class FacultyList extends Component {
           <div className="col-sm-10 of">
             <div className="container">
               {/* {<MDBDataTable dark data={this.state.faculties} />} */}
-              <h4 className="mt-2">Faculty List</h4>
+              <h4 className="mt-2">
+                Faculty List
+                <div className="float-right">
+                  <div
+                    className="btn-group btn-group-toggle btn-sm"
+                    data-toggle="buttons"
+                  >
+                    <label
+                      className="btn btn-secondary btn-sm"
+                      onClick={this.handleListView}
+                    >
+                      <input
+                        type="radio"
+                        name="options"
+                        id="option1"
+                        autoComplete="off"
+                      />
+                      <MdFormatListBulleted color="white" />
+                    </label>
+                    <label
+                      className="btn btn-secondary btn-sm"
+                      onClick={this.handleCardView}
+                    >
+                      <input
+                        type="radio"
+                        name="options"
+                        id="option2"
+                        autoComplete="off"
+                      />
+                      <MdViewAgenda color="white" />
+                    </label>
+                  </div>
+                </div>
+              </h4>
               <hr />
-              <div class='row'>
-                  {this.renderCardData()}                  
-              </div>
+              <div class="row">{this.renderCardData()}</div>
             </div>
           </div>
         </div>

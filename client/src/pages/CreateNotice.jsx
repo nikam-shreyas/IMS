@@ -6,12 +6,14 @@ class CreateNotice extends Component {
   render() {
     return (
       <>
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
             <Sidenav_f activeComponent="3" />
           </div>
           <div className="col-sm-10 of">
-            <NoticeForm />
+            <div className="container">
+              <NoticeForm />
+            </div>
           </div>
         </div>
       </>
