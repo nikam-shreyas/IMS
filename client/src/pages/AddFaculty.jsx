@@ -50,10 +50,9 @@ class AddFaculty extends Component {
     data["password"] = formData.get("password") || this.state.data.password;
     data["emailId"] = formData.get("emailId") || this.state.data.emailId;
 
-    createTeacher(data)
-      .then(console.log(this.props))
-      // .catch(toast('Cannot update! Try again later.'));
-      // alert("Faculty Added!");
+    createTeacher(data).then(console.log(this.props));
+    // .catch(toast('Cannot update! Try again later.'));
+    // alert("Faculty Added!");
     // window.location.reload(false);
   }
   render() {
@@ -110,7 +109,7 @@ class AddFaculty extends Component {
                           <option value="ClassCoordinator">
                             Class Coordinator
                           </option>
-                          <option value="DepartmentIntershipCoordinator">
+                          <option value="DepartmentInternshipCoordinator">
                             Department Internship Coordinator
                           </option>
                           <option value="CollegeInternshipCoordinator">

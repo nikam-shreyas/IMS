@@ -79,7 +79,6 @@ exports.showInternships = async (req, res, next) => {
   try {
     //const internships = await db.internships.find().populate('student',['studentname','id']);
     const { id } = req.decoded;
-    let students = [];
     let faculty = await db.Faculty.findById(id).populate({
       path: "applicationsReceived",
       model: "Internship",
@@ -88,7 +87,6 @@ exports.showInternships = async (req, res, next) => {
         model: "Student",
       },
     });
-
     res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
     return next({
@@ -164,32 +162,62 @@ exports.deleteInternship = async (req, res, next) => {
 
 exports.updateInternship = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { _id: id } = req.body;
     const details = req.body;
     let internship = await db.Internship.findById(id);
 
     for (var key of Object.keys(details)) {
       internship[key.toString()] = details[key];
     }
+    internship.comments += "<br />Application status changed! Please check.";
     await internship.save();
+
     //console.log(internship);
     res.status(200).json(internship);
   } catch (err) {
+    console.log(err);
     err.message = "Could not update";
     next(err);
   }
 };
 
 exports.approveInternship = async (req, res, next) => {
-  const { id: internshipId } = req.params;
+  const { _id: internshipId } = req.body;
   const { id: facultyId } = req.decoded;
   try {
-    let internship = await db.Internship.findById(internshipId);
+    let internship = await db.Internship.findById(
+      internshipId
+    ).populate("student", ["emailId"]);
+    let emailId = internship.student.emailId;
     internship["completionStatus"] = "Approved";
     let faculty = await db.Faculty.findById(facultyId);
     faculty["applicationsApproved"].push(internshipId);
+    faculty["applicationsReceived"].splice(
+      faculty["applicationsReceived"].indexOf(internshipId),
+      1
+    );
+    internship.approvedBy.push({
+      designation: faculty.designation,
+    });
     await faculty.save();
+    internship.comments =
+      "Congratulations! Your application has been <strong>approved</strong>.";
     await internship.save();
+    var email = {
+      from: process.env.EMAILFROM,
+      to: emailId,
+      subject: "Internship Application Approved!",
+      html:
+        "Hello,<br /> " +
+        "Your internship application for <b>" +
+        internship.application.workplace +
+        "</b> has been approved.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+    };
+    client.sendMail(email, (err, info) => {
+      if (err) {
+      } else if (info) {
+      }
+    });
     res.status(200).json(internship);
   } catch (err) {
     err.message = "Could not approve";
@@ -198,32 +226,66 @@ exports.approveInternship = async (req, res, next) => {
 };
 
 exports.forwardInternship = async (req, res, next) => {
-  const { id: internshipId } = req.params;
+  const { _id: internshipId } = req.body;
   const { id: facultyId } = req.decoded;
   try {
-    let internship = await db.Internship.findById(internshipId);
+    let internship = await db.Internship.findById(internshipId).populate(
+      "student",
+      "emailId"
+    );
     let faculty = await db.Faculty.findById(facultyId);
+
     faculty["applicationsApproved"].push(internshipId);
     faculty["applicationsReceived"].splice(
       faculty["applicationsReceived"].indexOf(internshipId),
       1
     );
     internship.approvedBy.push({
-      id: faculty._id,
       designation: faculty.designation,
     });
-    let nextPersonInChain =
-      chain.acceptanceChain.indexOf(faculty.designation) + 1;
-    let forwardToFaculty = db.Faculty.find({
-      designation: chain.acceptanceChain[nextPersonInChain],
-    });
+    let forwardToFaculty = await db.Faculty.findOne(
+      chain.getNextPerson(faculty.designation, faculty.department)
+    );
+    console.log(forwardToFaculty.designation);
+    internship.holder = {
+      designation: forwardToFaculty.designation,
+    };
+    internship.comments +=
+      "<br />Application id: " +
+      internship._id +
+      " has been approved by " +
+      faculty.designation +
+      ". It is now reviewed by: " +
+      forwardToFaculty.designation +
+      ".";
     forwardToFaculty.applicationsReceived.push(internshipId);
     await faculty.save();
     await forwardToFaculty.save();
     await internship.save();
+    const emailId = internship.student.emailId;
+    var email = {
+      from: process.env.EMAILFROM,
+      to: emailId,
+      subject: "Internship Application Status Changed!",
+      html:
+        "Hello,<br /> " +
+        "Your internship application for <b>" +
+        internship.application.workplace +
+        "</b> has been approved by <b>" +
+        faculty.designation +
+        "</b>. It is reviewed by: <b>" +
+        forwardToFaculty.designation +
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+    };
+    client.sendMail(email, (err, info) => {
+      if (err) {
+      } else if (info) {
+      }
+    });
     res.status(200).json(internship);
   } catch (err) {
-    err.message = "Could not approve";
+    console.log(err);
+    err.message = "Could not forward";
     next(err);
   }
 };
