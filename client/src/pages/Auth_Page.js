@@ -15,7 +15,9 @@ const Auth_Page = ({
   if (isAuthenticated_a) return <Redirect to="/admin/" />;
 
   return (
+    
     <div>
+    <NavBar></NavBar>
       <div className="mt-4 text-center">
         <ErrorMessage />
       </div>

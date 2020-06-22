@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
+import image from "./assets/Pictlogo.jpeg";
 class Auth_2 extends Component {
   constructor(props) {
     super(props);
@@ -42,68 +43,62 @@ class Auth_2 extends Component {
   render() {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
-      <div className="container">
-        <div className="card mx-auto my-5">
-          <div className="card-body">
-            <h2 className="card-title">Register as a student.</h2>
-            <form className="form-group my-3" onSubmit={this.handleSubmit}>
-              <label className="form-label" htmlFor="username">
-                Username
-              </label>
-              <input
+          
+      <div class= "section">
+      
+      <div class="container">
+          <div class="user signinBx">
+            <div class="imgBx"><img src={image}/></div>
+            <div class="formBx">
+              <form onSubmit={this.handleSubmit}>
+                <h2>Register</h2>
+                <input
                 type="text"
                 value={username}
                 name="username"
+                placeholder="Username"
                 className="form-control"
                 autoComplete="off"
                 onChange={this.handleChange}
-              />
-              <label className="form-label" htmlFor="email">
-                Email ID
-              </label>
-              <input
+                />
+
+                <input
                 type="email"
                 value={emailId}
                 name="emailId"
+                placeholder ="Email ID"
                 className="form-control"
                 autoComplete="off"
                 onChange={this.handleChange}
-              />
-
-              <label className="form-label" htmlFor="password">
-                Password
-              </label>
-              <input
+                />
+                
+                <input
                 type="password"
                 value={password}
                 name="password"
+                placeholder= "Password"
                 className="form-control"
                 autoComplete="off"
                 onChange={this.handleChange}
-              />
+                />
 
-              <label className="form-label" htmlFor="confirmpassword">
-                Confirm Password
-              </label>
-              <input
+                <input
                 type="password"
                 value={confirmpassword}
                 name="confirmpassword"
+                placeholder = "Re-confirm Password"
                 className="form-control"
                 autoComplete="off"
                 onChange={this.handleConfirmPassword}
-              />
-              {this.state.message != "" && (
-                <small className="text-danger">{this.state.message}</small>
-              )}
-              <div className="button_center">
-                <button className="btn btn-dark mx-auto mt-3" type="submit">
-                  Submit
-                </button>
-              </div>
-            </form>
+                />
+                
+
+                <input type="submit" value="Register"/>
+                {/* <p class="signup"><a href="#ForgotPassword">Forgot password?</a></p> */}
+              </form>
+            </div>
           </div>
-        </div>
+      </div>
       </div>
     );
   }
