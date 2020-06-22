@@ -7,62 +7,70 @@ class Internships extends Component {
     super(props);
   }
 
+  state = {
+    internships: [
+      {
+        _id: null,
+        application: {
+          workplace: null,
+          submittedDate: null,
+          offerLetter: null,
+          durationOfInternship: null,
+        },
+        docs: {
+          ApplicationStatus: null,
+          UndertakingStatus: null,
+          OfferLetterStatus: null,
+          MarksheetsStatus: null,
+          AttendanceStatus: null,
+        },
+        student: {
+          name: {
+            firstname: null,
+            lastname: null,
+          },
+          currentClass: {
+            year: null,
+            div: null,
+          },
+          rollNo: null,
+          prevSemAttendance: null,
+        },
+        holder: {
+          id: null,
+          designation: null,
+        },
+        completionStatus: null,
+        comments: null,
+      },
+    ],
+  };
+
   componentDidMount() {
     const { getInternships } = this.props;
     getInternships().then(console.log(this.props));
   }
 
+  loadData(internships) {
+    if (internships.length > 0) this.setState({ internships: internships });
+  }
+
+
+  enableListview() {
+    var elements = document.getElementsByClassName("card-body");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none";
+    }
+  }
+  enableCardview() {
+    var elements = document.getElementsByClassName("card-body");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "block";
+    }
+  }
+
+
   render() {
-    console.log(this.props);
-    // var p = 0;
-
-    // const {auth,getInternships,getStudentInternships} =this.props;
-    // const internships = this.props.internships.map((internship) => (
-    //   <tr key={internship._id} style={{ height: "120px" }}>
-    //     <td>
-    //       <ol>
-    //         {internship.approvedBy.map((p) => (
-    //           <li>{p.designation}</li>
-    //         ))}
-    //       </ol>
-    //     </td>
-    //     <td>
-    //       <b>{internship.completionStatus}</b>
-    //     </td>
-
-    //     <td>
-    //       <b>{console.log(internship)}</b>
-    //     </td>
-    //     {/* <td><pre>{JSON.stringify(internship.application.submittedDate,null,2)}</pre></td> */}
-    //     <td>
-    //       <b>
-    //         {new Date(
-    //           internship.application.submittedDate
-    //         ).toLocaleDateString()}
-    //       </b>
-    //     </td>
-    //     <td>
-    //       <b>
-    //         {new Date(internship.application.approvedDate).toLocaleDateString()}
-    //       </b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.workplace}</b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.durationOfInternship}</b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.reference}</b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.offerLetter}</b>
-    //     </td>
-    //     <td></td>
-    //     {p++}
-    //   </tr>
-    // ));
-
     return (
       <Fragment>
         <div className="row no-gutters">
