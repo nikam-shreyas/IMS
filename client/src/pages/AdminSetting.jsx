@@ -11,7 +11,9 @@ class AdminSetting extends Component {
     newpassword: "",
     confirmPassword: "",
     message: "",
-    isLoading: true,
+    isLoading: true, 
+    showMessage: false,
+    errMessage: "",
     data: {
       _id: null,
       name: {
@@ -56,16 +58,18 @@ class AdminSetting extends Component {
         formData.get("oldpassword") || this.state.data.password;
       updatedata["newpassword"] = formData.get("newpassword");
       updatedata["newpasswordC"] = formData.get("newpasswordC");
-      resetPassword(this.state.data._id, updatedata).then();
+      resetPassword(this.state.data._id, updatedata).then(console.log(this.props));
     }
   }
 
   handleconfirmPassword(e) {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state.newpassword)
+    console.log(e.target.value)
 
     if (this.state.newpassword !== e.target.value) {
       this.setState({ message: "Passwords do not match!" });
-    } else {
+    } else{
       this.setState({ message: "" });
     }
     this.setState({ confirmPassword: e.target.value });
@@ -83,6 +87,11 @@ class AdminSetting extends Component {
               <div className="alert alert-danger">
                 <ErrorMessage />
               </div>
+              {this.state.errMessage && (
+                <div className="alert alert-danger">
+                  {this.state.errMessage}
+                </div>
+              )}
               <h4>Change Password</h4>
               <hr />
               {

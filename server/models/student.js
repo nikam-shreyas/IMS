@@ -30,7 +30,7 @@ const studentSchema = new mongoose.Schema({
   },
   emailId: {
     type: String,
-    //required:true,
+    required:true,
   },
   marksheets: [],
   username: {
