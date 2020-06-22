@@ -23,6 +23,7 @@ class FacultyList extends Component {
       isLoading: true,
       faculties: [
         {
+          
           _id:'',
           name: { firstname: "", lastname: "" },
           currentClass: { year: "", div: "" },
