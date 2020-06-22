@@ -43,70 +43,7 @@ class Auth_2 extends Component {
   render() {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
-      // <div className="container">
-      //   <div className="card mx-auto my-5">
-      //     <div className="card-body">
-      //       <h2 className="card-title">Register as a student.</h2>
-      //       <form className="form-group my-3" onSubmit={this.handleSubmit}>
-      //         <label className="form-label" htmlFor="username">
-      //           Username
-      //         </label>
-      //         <input
-      //           type="text"
-      //           value={username}
-      //           name="username"
-      //           className="form-control"
-      //           autoComplete="off"
-      //           onChange={this.handleChange}
-      //         />
-      //         <label className="form-label" htmlFor="email">
-      //           Email ID
-      //         </label>
-      //         <input
-      //           type="email"
-      //           value={emailId}
-      //           name="emailId"
-      //           className="form-control"
-      //           autoComplete="off"
-      //           onChange={this.handleChange}
-      //         />
-
-      //         <label className="form-label" htmlFor="password">
-      //           Password
-      //         </label>
-      //         <input
-      //           type="password"
-      //           value={password}
-      //           name="password"
-      //           className="form-control"
-      //           autoComplete="off"
-      //           onChange={this.handleChange}
-      //         />
-
-      //         <label className="form-label" htmlFor="confirmpassword">
-      //           Confirm Password
-      //         </label>
-      //         <input
-      //           type="password"
-      //           value={confirmpassword}
-      //           name="confirmpassword"
-      //           className="form-control"
-      //           autoComplete="off"
-      //           onChange={this.handleConfirmPassword}
-      //         />
-      //         {this.state.message != "" && (
-      //           <small className="text-danger">{this.state.message}</small>
-      //         )}
-      //         <div className="button_center">
-      //           <button className="btn btn-dark mx-auto mt-3" type="submit">
-      //             Submit
-      //           </button>
-      //         </div>
-      //       </form>
-      //     </div>
-      //   </div>
-      // </div>
-      
+          
       <div class= "section">
       
       <div class="container">

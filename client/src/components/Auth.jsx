@@ -50,69 +50,7 @@ class Auth extends Component {
     const { username, password } = this.state;
     return (
      
-      /*<div className="container">
-        <div className="card mx-auto my-5">
-          <div className="card-body">
-            <h2 className="card-title">Login</h2>
-            <form className="form-group my-3" onSubmit={this.handleSubmit}>
-              <label className="form-label" htmlFor="username">
-                Username
-              </label>
-              <input
-                className="input"
-                type="text"
-                value={username}
-                name="username"
-                autoComplete="off"
-                className="form-control"
-                onChange={this.handleChange}
-              />
-
-              <label className="form-label" htmlFor="password">
-                Password
-              </label>
-              <input
-                className="input"
-                type="password"
-                value={password}
-                name="password"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
-              />
-
-              <div className="form-group">
-                <label htmlFor="exampleFormControlSelect1">Role:</label>
-                <select
-                  name="User_type"
-                  defaultValue="1"
-                  onChange={this.handleChange}
-                  className="form-control"
-                  id="exampleFormControlSelect1"
-                >
-                  <option name="student" value="1">
-                    STUDENT
-                  </option>
-                  <option name="faculty" value="2">
-                    FACULTY
-                  </option>
-                  <option name="admin" value="3">
-                    ADMIN
-                  </option>
-                </select>
-              </div>
-              {/* <Auth_Page User_type={this.state.User_type}/> }    //comment this
-
-              <div className="button_center">
-                <button className="btn btn-dark" type="submit">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div> */
-      
+       
     <div class="section">
       
       <div class="container">
