@@ -6,11 +6,15 @@ class CreateNotice extends Component {
   render() {
     return (
       <>
-        <div className="col-sm-2 sidenav" style={{ float: "left" }}>
-          <Sidenav_f activeComponent="3" />
-        </div>
-        <div className="col-sm-10 of">
-          <NoticeForm style={{ float: "left" }} />
+        <div className="row no-gutters">
+          <div className="col-sm-2 sidenav">
+            <Sidenav_f activeComponent="3" />
+          </div>
+          <div className="col-sm-10 of">
+            <div className="container">
+              <NoticeForm />
+            </div>
+          </div>
         </div>
       </>
     );

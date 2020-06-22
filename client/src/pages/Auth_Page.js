@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 
 import Auth from "../components/Auth";
 import ErrorMessage from "../components/ErrorMessage";
+import NavBar from "../containers/NavBar";
 const Auth_Page = ({
   authType,
   isAuthenticated,

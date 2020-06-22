@@ -8,7 +8,7 @@ class FacultyNotices extends Component {
     return (
       <>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Sidenav_f activeComponent="4" />
           </div>
           <div className="col-sm-10">

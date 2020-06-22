@@ -20,6 +20,7 @@ import FacultyList from "../pages/FacultyList";
 import DeleteFaculty from "../pages/DeleteFaculty";
 import AdminSetting from "../pages/AdminSetting";
 import FacultyNotices from "../pages/FacultyNotices";
+import ForgotPassword from "../pages/ForgotPassword";
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -75,6 +76,7 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
       <Route exact path="/settings" render={() => <AdminSetting />} />
       <Route exact path="/facultyNotices" render={() => <FacultyNotices />} />
+      <Route exact path="/ForgotPassword" render={()=> <ForgotPassword/>}/>
 
       <Route
         exact

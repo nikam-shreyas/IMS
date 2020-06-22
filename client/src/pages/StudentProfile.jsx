@@ -69,7 +69,7 @@ class StudentProfile extends Component {
     return (
       <div>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Sidenav activeComponent="2" />
           </div>
           <div className="col-sm-10">

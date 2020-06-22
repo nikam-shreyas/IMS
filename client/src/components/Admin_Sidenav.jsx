@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { MdPermIdentity } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../store/actions";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import {
   MdSettings,
   MdAddCircle,
@@ -10,11 +13,20 @@ import {
 
 class Admin_Sidenav extends Component {
   state = {};
+  handleLogout() {
+    const { logout } = this.props;
+    logout();
+  }
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
   render() {
     const activeNow = this.props.activeComponent;
     return (
-      <div className="sidenav">
-        <p>Menu</p>
+      <>
+        <h4 className="text-light text-center mt-2">PICT IMS</h4>
+        <p className="mt-4">Menu</p>
         <ul id="ul">
           <Link to="/admin/">
             <li id="li" className={activeNow == 1 ? "sidenav-active" : ""}>
@@ -56,10 +68,18 @@ class Admin_Sidenav extends Component {
               Change Password
             </li>
           </Link>
+          <li id="li" className="nav-item">
+            <span className="mx-2">
+              <RiLogoutBoxLine />
+            </span>
+            <a onClick={this.handleLogout}>Logout</a>
+          </li>
         </ul>
-      </div>
+      </>
     );
   }
 }
 
-export default Admin_Sidenav;
+export default connect((store) => ({ auth: store.auth }), { logout })(
+  Admin_Sidenav
+);

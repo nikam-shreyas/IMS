@@ -10,6 +10,7 @@ const internshipSchema = new mongoose.Schema({
       type: Date,
       required: true,
     },
+
     approvedDate: {
       type: Date,
     },
