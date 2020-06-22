@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { logout } from "../store/actions";
 const Navbar = ({ auth, logout }) => (
-  <div className="navbar navbar-expand navbar-">
+  <div className="navbar navbar-expand navbar-dark bg-dark">
     <button
       className="navbar-toggler"
       type="button"
@@ -18,7 +18,8 @@ const Navbar = ({ auth, logout }) => (
     </button>
 
     <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul id="ul" className="navbar-nav mr-auto">
+      <div className="navbar-brand">PICT IMS</div>
+      <ul id="ul" className="navbar-nav ml-auto">
         {!auth.isAuthenticated &&
           !auth.isAuthenticated_f &&
           !auth.isAuthenticated_a && (

@@ -42,7 +42,7 @@ const facultySchema = new mongoose.Schema({
     type: String,
     enum: [
       "ClassCoordinator",
-      "DepartmentIntershipCoordinator",
+      "DepartmentInternshipCoordinator",
       "CollegeInternshipCoordinator",
       "Principal",
       "Admin",

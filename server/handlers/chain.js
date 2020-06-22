@@ -1,8 +1,6 @@
-exports.chain = {
-  acceptanceChain: [
-    "ClassCoordinator",
-    "DepartmentIntershipCoordinator",
-    "CollegeInternshipCoordinator",
-    "Principal",
-  ],
-};
+exports.acceptanceChain = [
+  "ClassCoordinator",
+  "DepartmentInternshipCoordinator",
+  "CollegeInternshipCoordinator",
+  "Principal",
+];

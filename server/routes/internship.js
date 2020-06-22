@@ -8,11 +8,9 @@ router
 
 router.get("/student", auth, handle.studentsInternships);
 
-router
-  .route("/faculty")
-  .post("/forward", auth, handle.forwardInternship)
-  .post("/approve", auth, handle.approveInternship)
-  .post("/update", auth, handle.updateInternship);
+router.route("/forward").post(auth, handle.forwardInternship);
+router.route("/update").post(auth, handle.updateInternship);
+router.route("/approve").post(auth, handle.approveInternship);
 
 router
   .route("/:id")
