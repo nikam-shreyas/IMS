@@ -4,7 +4,19 @@ import { connect } from "react-redux";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { logout } from "../store/actions";
 const Navbar = ({ auth, logout }) => (
-  <div className="navbar navbar-expand navbar-">
+  <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a className="navbar-brand" href="#"> 
+    PICT IMS
+    </a>
+    <div className="navbar-brand">
+    {(auth.isAuthenticated ||
+      auth.isAuthenticated_f ||
+      auth.isAuthenticated_a) && (
+        <div>
+        {auth.isAuthenticated_a}
+        </div>
+    )}      
+    </div>
     <button
       className="navbar-toggler"
       type="button"
@@ -17,8 +29,8 @@ const Navbar = ({ auth, logout }) => (
       <span className="navbar-toggler-icon"></span>
     </button>
 
-    <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-      <ul id="ul" className="navbar-nav mr-auto">
+    <div className="collapse navbar-collapse" id="navbarTogglerDemo03"> 
+    <ul id="ul" className="navbar-nav ml-auto">
         {!auth.isAuthenticated &&
           !auth.isAuthenticated_f &&
           !auth.isAuthenticated_a && (
@@ -45,7 +57,10 @@ const Navbar = ({ auth, logout }) => (
           auth.isAuthenticated_a) && (
           <Fragment>
             <li id="li" className="nav-item">
-              Welcome to Internship Management System
+              <span className="mx-2">
+                <RiLogoutBoxLine />
+              </span>
+              <a onClick={logout}>Logout</a>
             </li>
           </Fragment>
         )}
