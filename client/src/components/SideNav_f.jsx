@@ -10,6 +10,10 @@ import {
 
 class Sidenav_f extends Component {
   state = {};
+  handleToggle() {
+    console.log("Works");
+  }
+
   render() {
     const activeNow = this.props.activeComponent;
     return (
