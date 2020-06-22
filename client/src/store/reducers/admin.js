@@ -8,7 +8,6 @@ import {
 export const currentAdmin = (state = {}, action) => {
   switch (action.type) {
     case SET_CURRENT_SELECTED_ADMIN:
-      console.log("im in reducers");
       return action.admin;
     default:
       return state;

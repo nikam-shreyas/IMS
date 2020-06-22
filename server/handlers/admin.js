@@ -1,12 +1,12 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-let nodemailer = require("nodemailer");
-let transport = require("nodemailer-smtp-transport");
+const nodemailer = require("nodemailer");
+const transport = require("nodemailer-smtp-transport");
 require("dotenv").config();
 
 //mailing options and transportor
-var options = {
+const options = {
   service: "gmail",
   auth: {
     user: process.env.EMAILFROM,
@@ -16,7 +16,7 @@ var options = {
     rejectUnauthorized: false,
   },
 };
-let client = nodemailer.createTransport(transport(options));
+const client = nodemailer.createTransport(transport(options));
 
 exports.register_faculty = async (req, res, next) => {
   try {
@@ -71,14 +71,16 @@ exports.login_admin = async (req, res, next) => {
 };
 exports.addFaculty = async (req, res, next) => {
   try {
+    let password=req.body.password;
     const Fac = await db.Faculty.create(req.body);
-    let link = "<h4>Your have been added to IMS as a faculty member.</h4><br/>";
+    if(Fac){
+      let link = "<h4>Your have been added to IMS as a faculty member.</h4><br/>";
     link =
       link +
       "Your default username is : <b>" +
       Fac.username +
       "</b><br/>Your default password is : <b>" +
-      req.body.password +
+      password +
       "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
     var email = {
       from: process.env.EMAILFROM,
@@ -92,9 +94,16 @@ exports.addFaculty = async (req, res, next) => {
         err.message = "Could not send email" + err;
       } else if (info) {
         // console.log(info)
-        return res.status(200).json(Fac);
+        let message="Email sent successfully";
+        return res.status(200).json({Fac,message});
       }
     });
+    }else{
+      if (err.code === 11000) {
+        err.message = "Something went wrong try again!";
+      }
+      next(err);
+    }
   } catch (err) {
     if (err.code === 11000) {
       err.message = "Sorry username is already taken.";

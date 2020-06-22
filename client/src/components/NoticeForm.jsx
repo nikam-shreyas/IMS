@@ -30,7 +30,7 @@ class NoticeForm extends Component {
   render() {
     return (
       <>
-        <div className="container my-3">
+        <div className="container">
           <h4 className="mt-2">New Internship Opportunity: </h4>
           <hr />
           <form onSubmit={this.handleSubmit}>

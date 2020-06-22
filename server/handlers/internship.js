@@ -2,6 +2,7 @@ const db = require("../models");
 const chain = require("./chain");
 let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
+const { application } = require("express");
 require("dotenv").config();
 
 //mailing options and transportor
@@ -77,11 +78,23 @@ exports.addNewInternship = async (req, res, next) => {
 exports.showInternships = async (req, res, next) => {
   try {
     //const internships = await db.internships.find().populate('student',['studentname','id']);
-    const internships = await db.Internship.find().populate("internships");
-    res.status(200).json(internships);
+    const { id } = req.decoded;
+    let students = [];
+    let faculty = await db.Faculty.findById(id).populate({
+      path: "applicationsReceived",
+      model: "Internship",
+      populate: {
+        path: "student",
+        model: "Student",
+      },
+    });
+
+    res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
-    err.status(400);
-    next(err);
+    return next({
+      status: 400,
+      message: err.message,
+    });
   }
 };
 
@@ -101,7 +114,6 @@ exports.studentsInternships = async (req, res, next) => {
 exports.getInternship = async (req, res, next) => {
   try {
     const { id } = req.params;
-
     const internship = await db.Internship.findById(id).populate("student", [
       "name",
       "currentClass",

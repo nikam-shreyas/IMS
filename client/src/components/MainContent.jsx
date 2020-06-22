@@ -69,50 +69,59 @@ class MainContent extends Component {
       <Fragment>
         <div className="container my-1 of">
           <div className="mt-2 mr-2">
-            <h4>My Applications</h4>
-            <button
-              className="btn btn-sm mx-auto btn-secondary"
-              onClick={() => this.loadData(this.props.internships)}
-            >
-              <span className="mr-2">
-                <MdCached />
-              </span>
-              Fetch Data
-            </button>
-            <div
-              className="btn-group btn-group-toggle btn-sm float-right"
-              data-toggle="buttons"
-            >
-              <label
-                className="btn btn-secondary btn-sm"
-                onClick={this.enableListview}
-              >
-                <input
-                  type="radio"
-                  name="options"
-                  id="option1"
-                  autoComplete="off"
-                  checked
-                />
-                <MdFormatListBulleted color="white" />
-              </label>
-              <label
-                className="btn btn-secondary active btn-sm"
-                onClick={this.enableCardview}
-              >
-                <input
-                  type="radio"
-                  name="options"
-                  id="option2"
-                  autoComplete="off"
-                />
-                <MdViewAgenda color="white" />
-              </label>
-            </div>
+            <h4>
+              My Applications
+              <div className="float-right">
+                <div
+                  className="btn-group btn-group-toggle btn-sm"
+                  data-toggle="buttons"
+                >
+                  <label
+                    className="btn btn-secondary btn-sm"
+                    onClick={this.enableListview}
+                  >
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option1"
+                      autoComplete="off"
+                      checked
+                    />
+                    <MdFormatListBulleted color="white" />
+                  </label>
+                  <label
+                    className="btn btn-secondary active btn-sm"
+                    onClick={this.enableCardview}
+                  >
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option2"
+                      autoComplete="off"
+                    />
+                    <MdViewAgenda color="white" />
+                  </label>
+                </div>
+              </div>
+            </h4>
           </div>
 
           <hr />
           <div>
+            {this.state.internships[0].holder.designation === null && (
+              <div className="alert alert-info">
+                No internship applications found.{" "}
+                <b>
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => this.loadData(this.props.internships)}
+                  >
+                    Click here
+                  </span>
+                </b>{" "}
+                to refresh.
+              </div>
+            )}
             {this.state.internships[0].holder.designation !== null &&
               this.state.internships.map((internship) => (
                 <div

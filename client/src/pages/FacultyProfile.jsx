@@ -105,10 +105,10 @@ class FacultyProfile extends Component {
     return (
       <div>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Sidenav_f activeComponent="1" />
           </div>
-          <div className="col-sm-10">
+          <div className="col-sm-10 of">
             <div className="container">
               <h4 className="mt-2">My Profile</h4>
               <hr />

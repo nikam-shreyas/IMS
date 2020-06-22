@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { MdPermIdentity } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { logout } from "../store/actions";
+import { connect } from "react-redux";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import {
   MdDescription,
   MdNotifications,
@@ -10,12 +13,21 @@ import {
 } from "react-icons/md";
 
 class Sidenav extends Component {
+  constructor(props) {
+    super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+  handleLogout() {
+    const { logout } = this.props;
+    logout();
+  }
   state = {};
   render() {
     const activeNow = this.props.activeComponent;
     return (
       <div className="sidenav">
-        <p>Menu</p>
+        <h4 className="text-light text-center mt-2">PICT IMS</h4>
+        <p className="mt-4">Menu</p>
         <ul id="ul">
           <Link to="/student">
             <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
@@ -64,10 +76,16 @@ class Sidenav extends Component {
             </span>
             Change Password
           </li>
+          <li id="li" className="nav-item float-bottom">
+            <span className="mx-2">
+              <RiLogoutBoxLine />
+            </span>
+            <a onClick={this.handleLogout}>Logout</a>
+          </li>
         </ul>
       </div>
     );
   }
 }
 
-export default Sidenav;
+export default connect((store) => ({ auth: store.auth }), { logout })(Sidenav);

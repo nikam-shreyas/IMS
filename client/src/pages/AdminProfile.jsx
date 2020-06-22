@@ -54,10 +54,8 @@ class AdminProfile extends Component {
     updatedata["emailId"] = formData.get("emailId") || this.state.data.emailId;
     console.log(updatedata);
     console.log(this.state.data._id);
-    updateAdmin(this.state.data._id, updatedata)
-      .then(console.log(this.props.admin))
-      .then(toast("Admin Details Updated!"));
-    window.location.reload(false);
+    updateAdmin(this.state.data._id, updatedata).then(console.log(this.props));
+    // window.location.reload(false);
   }
 
   editform() {
@@ -68,6 +66,8 @@ class AdminProfile extends Component {
     for (var i = 0, len = elements.length; i < len; ++i) {
       elements[i].readOnly = !elements[i].readOnly;
     }
+    var submitButton = document.getElementById("submitButton");
+    submitButton.disabled = !submitButton.disabled;
 
     var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
@@ -79,12 +79,15 @@ class AdminProfile extends Component {
     return (
       <div>
         <div className="row no-gutters">
-          <div className="col-sm-2">
+          <div className="col-sm-2 sidenav">
             <Admin_Sidenav activeComponent="1" />
           </div>
           <div className="col-sm-10">
             <div className="container mt-2">
-              <h4>{this.state.data.username} Profile</h4>
+              <h4>My Profile</h4>
+              <div className="text-muted">
+                Username: {this.state.data.username}
+              </div>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
@@ -180,7 +183,12 @@ class AdminProfile extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark">
+                    <button
+                      type="submit"
+                      id="submitButton"
+                      className="btn btn-dark"
+                      disabled
+                    >
                       Update Profile
                     </button>
                   </div>
