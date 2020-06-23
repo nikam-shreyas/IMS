@@ -51,10 +51,10 @@ class InternshipView extends Component {
       .then(console.log(this.props))
       .then(() => this.loadData(this.props.internships));
   }
-  handleClick(id) {
+  handleClick(data) {
     if (window.confirm("Are you sure you want to forawrd this application?")) {
       const { forwardInternship } = this.props;
-      forwardInternship(id);
+      forwardInternship(data);
       alert("Applicaton Forwarded!");
       this.props.history.push("/faculty");
     }
@@ -82,11 +82,11 @@ class InternshipView extends Component {
                       <br />
                     </div>
                     <div className="card-body">
-                      {this.state.data.comments && (
+                      {/* {this.state.data.comments && (
                         <div className="alert alert-danger">
                           Reason: {this.state.data.comments}
                         </div>
-                      )}
+                      )} */}
                       <div className="card-title">
                         {this.state.data.student.name.firstname +
                           " " +
@@ -103,12 +103,14 @@ class InternshipView extends Component {
                           <tr>
                             <td>ID</td>
                             <td>{this.state.data._id}</td>
+                            
                           </tr>
                           <tr>
                             <td>Attendance</td>
                             <td>
                               {this.state.data.student.prevSemAttendance}%
                             </td>
+                            
                           </tr>
                           <tr>
                             <td>Roll No</td>
@@ -141,7 +143,10 @@ class InternshipView extends Component {
                           <tr>
                             <th>Status</th>
                             <th>
-                              {this.state.data.completionStatus === "N"
+                               
+                              {
+                              
+                              this.state.data.completionStatus === "N"
                                 ? "Pending"
                                 : "Approved"}
                             </th>
@@ -150,7 +155,7 @@ class InternshipView extends Component {
                         <tbody>
                           <tr
                             className={
-                              this.state.data.docs.AttendanceStatus === "N"
+                                  this.state.data.docs.AttendanceStatus === "N"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -200,19 +205,19 @@ class InternshipView extends Component {
                           </tr>
                         </tbody>
                       </table>
-                      {this.state.data.completionStatus === "N" && (
+                      {/* {this.state.data.completionStatus === "N" && (
                         <>
                           Application is currently viewed by:{" "}
                           {this.state.data.holder.designation} <br />
                         </>
-                      )}
+                      )} */}
                     </div>
                     <div className="card-footer text-right">
                       <div
-                        className="btn btn-danger btn-sm mx-2"
-                        onClick={() => this.handleClick(this.state.data._id)}
+                        className="btn btn-success btn-sm mx-2"
+                        onClick={() => this.handleClick(this.state.data)}
                       >
-                        Delete
+                        Forward
                       </div>
                     </div>
                   </>

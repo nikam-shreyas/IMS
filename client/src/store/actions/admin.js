@@ -5,6 +5,7 @@ import {
   SET_FACULTY,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
+import { addSuccess, removeSuccessMessage } from "./success";
 
 export const setCurrentAdmin = (admin) => ({
   type: SET_CURRENT_SELECTED_ADMIN,
@@ -24,8 +25,6 @@ export const getAdmin = (path) => {
   return async (dispatch) => {
     try {
       const admin = await api.call("get", "admin/");
-
-      console.log("can these be admin details " + admin.department);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
     } catch (err) {
@@ -53,9 +52,12 @@ export const createTeacher = (data) => {
     try {
       const teacher = await api.call("post", "admin/add", data);
       dispatch(setCurrentTeacher(teacher));
+      const success = "Faculty added!";
+      dispatch(addSuccess(success));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;
+      dispatch(removeSuccessMessage());
       dispatch(addError(error.message));
     }
   };
@@ -80,8 +82,11 @@ export const deleteTeacher = (path) => {
       const teacher = await api.call("delete", `admin/find/${path}`);
       dispatch(setCurrentTeacher(teacher));
       dispatch(removeError());
+      let success = "Deleted Successfully!";
+      dispatch(addSuccess(success));
     } catch (err) {
       const error = err.response.data;
+      dispatch(removeSuccessMessage());
       dispatch(addError(error.message));
     }
   };
@@ -106,8 +111,10 @@ export const resetPassword = (path, data) => {
       const admin = await api.call("put", `admin/reset/${path}`, data);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
+      dispatch(addSuccess("Password changed!"));
     } catch (err) {
       const error = err.response.data;
+      dispatch(removeSuccessMessage());
       dispatch(addError(error.message));
     }
   };

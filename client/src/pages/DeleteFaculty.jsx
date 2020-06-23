@@ -2,10 +2,15 @@ import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
-import { deleteTeacher, getCurrentTeacher } from "../store/actions/admin";
+import {
+  deleteTeacher,
+  getCurrentTeacher,
+  removeSuccess,
+} from "../store/actions";
 import { Card, CardTitle, Button, CardBody, CardText } from "reactstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SuccessMessage from "../components/SuccessMessage";
 class DeleteFaulty extends Component {
   state = {
     showMessage: false,
@@ -33,6 +38,10 @@ class DeleteFaulty extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleChange = this.handleChange.bind(this);
+  }
+  componentWillUnmount() {
+    const { removeSuccess } = this.props;
+    removeSuccess();
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -75,8 +84,7 @@ class DeleteFaulty extends Component {
       window.confirm("Are you sure you want to delete this faculty member?")
     ) {
       const { deleteTeacher } = this.props;
-      deleteTeacher(username).then(toast("Faculty Deleted!"));
-      this.loadData({});
+      deleteTeacher(username).then(this.setState({ showMessage: false }));
     }
   }
 
@@ -102,7 +110,7 @@ class DeleteFaulty extends Component {
                           type="text"
                           name="username"
                           id="username"
-                          placeholder="username"
+                          placeholder="Enter Username"
                           className="form-control"
                         />
                       </div>
@@ -120,10 +128,12 @@ class DeleteFaulty extends Component {
                   <hr />
                   <div>
                     {this.state.errMessage && (
-                      <div className="alert alert-danger">
+                      <div className="alert alert-danger mx-3">
                         {this.state.errMessage}
                       </div>
                     )}
+
+                    <SuccessMessage />
                     {this.state.showMessage && (
                       <div>
                         <Card>
@@ -215,5 +225,6 @@ export default connect(
   {
     deleteTeacher,
     getCurrentTeacher,
+    removeSuccess,
   }
 )(DeleteFaulty);

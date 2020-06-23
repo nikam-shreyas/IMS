@@ -19,9 +19,10 @@ export const currentInternship = (state = {}, action) => {
   }
 };
 
-export const forawrd_Internship=(state={},action)=>{
+export const forward_Internship=(state={},action)=>{
   switch(action.type){
     case FORWARD_INTERNSHIP:
+      console.log("in forward reducers ");
       return action.internship;
     default:
       return state;

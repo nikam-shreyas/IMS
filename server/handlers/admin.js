@@ -71,34 +71,33 @@ exports.login_admin = async (req, res, next) => {
 };
 exports.addFaculty = async (req, res, next) => {
   try {
-    let password=req.body.password;
+    let password = req.body.password;
     const Fac = await db.Faculty.create(req.body);
-    if(Fac){
-      let link = "<h4>Your have been added to IMS as a faculty member.</h4><br/>";
-    link =
-      link +
-      "Your default username is : <b>" +
-      Fac.username +
-      "</b><br/>Your default password is : <b>" +
-      password +
-      "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
-    var email = {
-      from: process.env.EMAILFROM,
-      to: Fac.emailId,
-      subject: "IMS notification",
-      // text:'You have been added to IMS',
-      html: link,
-    };
-    client.sendMail(email, (err, info) => {
-      if (err) {
-        err.message = "Could not send email" + err;
-      } else if (info) {
-        // console.log(info)
-        let message="Email sent successfully";
-        return res.status(200).json({Fac,message});
-      }
-    });
-    }else{
+    if (Fac) {
+      let link =
+        "<h4>Your have been added to IMS as a faculty member.</h4><br/>";
+      link =
+        link +
+        "Your default username is : <b>" +
+        Fac.username +
+        "</b><br/>Your default password is : <b>" +
+        password +
+        "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
+      var email = {
+        from: process.env.EMAILFROM,
+        to: Fac.emailId,
+        subject: "Registered to IMS.",
+        html: link,
+      };
+      client.sendMail(email, (err, info) => {
+        if (err) {
+          err.message = "Could not send email" + err;
+        } else if (info) {
+          let message = "Email sent successfully";
+          return res.status(200).json({ Fac, message });
+        }
+      });
+    } else {
       if (err.code === 11000) {
         err.message = "Something went wrong try again!";
       }
@@ -130,7 +129,6 @@ exports.findFaculty = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   try {
-    //console.log("im in server waiting");
     const faculties = await db.Faculty.find().populate("faculties");
     res.status(200).json(faculties);
   } catch (err) {

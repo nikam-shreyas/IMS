@@ -4,3 +4,4 @@ export * from "./faculty";
 export * from "./internships";
 export * from "./notices";
 export * from "./admin";
+export * from "./success";

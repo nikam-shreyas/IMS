@@ -21,10 +21,10 @@ class NoticeForm extends Component {
     for (var [key, value] of formData.entries()) {
       data[key] = value;
     }
-    console.log("data", data);
+    data["duration"] = formData["duration"] + " month(s)";
     const { createNotice } = this.props;
     createNotice(data).then(() => {
-      console.log(this.props);
+      this.props.history.push("/facultyNotices");
     });
   }
   render() {

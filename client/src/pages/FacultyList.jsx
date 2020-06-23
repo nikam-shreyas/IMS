@@ -175,7 +175,7 @@ class FacultyList extends Component {
                       <MdFormatListBulleted color="white" />
                     </label>
                     <label
-                      className="btn btn-secondary btn-sm"
+                      className="btn btn-secondary active btn-sm"
                       onClick={this.handleCardView}
                     >
                       <input
