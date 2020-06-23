@@ -21,6 +21,7 @@ import DeleteFaculty from "../pages/DeleteFaculty";
 import AdminSetting from "../pages/AdminSetting";
 import FacultyNotices from "../pages/FacultyNotices";
 import ForgotPassword from "../pages/ForgotPassword";
+import NotFoundPage from "../pages/NotFound";
 
 import InternshipView from "../pages/InternshipView";
 
@@ -97,6 +98,7 @@ const RouteViews = ({ auth }) => (
       />
       <Route exact path="/apply" render={() => <InternshipApplication />} />
       <Route exact path="/studentprofile" render={() => <StudentProfile />} />
+      <Route component={NotFoundPage} />
     </Switch>
   </main>
 );
