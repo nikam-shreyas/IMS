@@ -92,6 +92,7 @@ class InternshipView extends Component {
                         </div>
                       )} */}
                       <div className="card-title">
+                        Name:{" "}
                         {this.state.data.student.name.firstname +
                           " " +
                           this.state.data.student.name.lastname}
