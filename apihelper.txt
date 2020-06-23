@@ -1,0 +1,18 @@
+All requests forwarded to:
+localhost:4000/api
+
+1. /auth/register => register a student [post]
+2. /auth/login => login using username and password [post]
+3. /internships => get all internships [get]
+4. /internships => add a new internship [post] (requires bearer token)
+5. /internships/id => gets internship by id [get]
+6. /internships/student => gets students internships [get]
+7. /internships/id => delete internship by id [delete]
+8. /api/admin/login_admin => login admin using username and password [post]
+9. /api/admin/ => get details of admin only [get]
+10. /api/admin/all => get details of all faculty members [get]
+11. /api/admin/find/:user => get details of faculty member with his/her username [get]
+12. /apis/admin/find/:user => delete faculty member with his/her username [delete]
+13. /apis/admin/add => add new faculty [post]
+14. /apis/admin/update/:id => update admin profile with firstname,lastname,username,designation,department using id [put]
+15. /apis/admin/reset/:id => reset admin password [put]
