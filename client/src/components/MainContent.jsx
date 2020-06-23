@@ -64,6 +64,7 @@ class MainContent extends Component {
       elements[i].style.display = "block";
     }
   }
+  
   render() {
     return (
       <Fragment>

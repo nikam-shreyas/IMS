@@ -1,5 +1,5 @@
 import api from "../../services/api";
-import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS } from "../actionTypes";
+import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP } from "../actionTypes";
 import { addError, removeError } from "./error";
 
 export const setInternships = (internships) => ({
@@ -12,10 +12,20 @@ export const setCurrentInternship = (internship) => ({
   internship,
 });
 
+
+export const PushInternship = (internship) => ({
+  type: FORWARD_INTERNSHIP,
+  internship,
+});
+
+
+
 export const getInternships = () => {
   return async (dispatch) => {
     try {
+      console.log("im in getInternships ");
       const internships = await api.call("get", "internships");
+      console.log(internships);
       dispatch(setInternships(internships));
       dispatch(removeError());
     } catch (err) {
@@ -71,6 +81,22 @@ export const deleteInternship = (path) => {
       dispatch(setCurrentInternship(internship));
       dispatch(removeError());
     } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+
+export const forwardInternship=(data)=>{
+  return async(dispatch)=>{
+    try{
+      console.log("im in forward internship function in actions .....ok (:|) ")
+      const internship=await api.call("post","internships/forward",data);
+      dispatch(PushInternship(internship));
+      dispatch(removeError());
+    }
+    catch(err){
       const error = err.response.data;
       dispatch(addError(error.message));
     }
