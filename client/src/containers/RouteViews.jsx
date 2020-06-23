@@ -21,6 +21,7 @@ import DeleteFaculty from "../pages/DeleteFaculty";
 import AdminSetting from "../pages/AdminSetting";
 import FacultyNotices from "../pages/FacultyNotices";
 import ForgotPassword from "../pages/ForgotPassword";
+import InternshipView from "../pages/InternshipView";
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -82,6 +83,13 @@ const RouteViews = ({ auth }) => (
         exact
         path="/internshipdetails/:internshipid"
         render={() => <InternshipDetails />}
+      />
+
+
+        <Route
+        exact
+        path="/internshipview/:internshipid"
+        render={() => <InternshipView />}
       />
       <Route exact path="/apply" render={() => <InternshipApplication />} />
       <Route exact path="/studentprofile" render={() => <StudentProfile />} />

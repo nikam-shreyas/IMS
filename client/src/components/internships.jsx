@@ -145,7 +145,7 @@ class Internships extends Component {
                     <span className="float-right">
                       <Link
                         to={{
-                          pathname: `/internshipdetails/${internship._id}`,
+                          pathname: `/internshipview/${internship._id}`,
                         }}
                         className="btn btn-primary btn-border mx-2"
                       >
