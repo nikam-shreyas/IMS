@@ -137,7 +137,9 @@ class Notices extends Component {
                             <span className="mx-2">
                               <MdLink size="22" />
                             </span>
-                            <a href={notice.link}>{notice.link}</a>
+                            <a href={notice.link} target="_new">
+                              {notice.link}
+                            </a>
                             <br />
                           </div>
                         )}

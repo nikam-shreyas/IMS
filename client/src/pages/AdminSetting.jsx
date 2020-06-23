@@ -2,10 +2,11 @@ import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
-import { getAdmin, resetPassword } from "../store/actions/admin";
+import { getAdmin, resetPassword, removeSuccess } from "../store/actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
+import SuccessMessage from "../components/SuccessMessage";
 class AdminSetting extends Component {
   state = {
     newpassword: "",
@@ -38,6 +39,10 @@ class AdminSetting extends Component {
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.admin));
   }
+  componentWillUnmount() {
+    const { removeSuccess } = this.props;
+    removeSuccess();
+  }
   loadData(user) {
     this.setState({ data: user });
   }
@@ -58,9 +63,7 @@ class AdminSetting extends Component {
         formData.get("oldpassword") || this.state.data.password;
       updatedata["newpassword"] = formData.get("newpassword");
       updatedata["newpasswordC"] = formData.get("newpasswordC");
-      resetPassword(this.state.data._id, updatedata).then(
-        console.log(this.props)
-      );
+      resetPassword(this.state.data._id, updatedata).then();
     }
   }
 
@@ -110,6 +113,7 @@ class AdminSetting extends Component {
                       </div>
                       <div className="col-sm-6 mt-4">
                         <ErrorMessage />
+                        <SuccessMessage />
                       </div>
                     </div>
                     <div className="form-row my-2">
@@ -173,5 +177,6 @@ export default connect(
   {
     getAdmin,
     resetPassword,
+    removeSuccess,
   }
 )(AdminSetting);

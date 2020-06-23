@@ -64,7 +64,7 @@ class Sidenav_f extends Component {
             <span className="mx-2">
               <MdSettings />
             </span>
-            Settings
+            Change Password
           </li>
           <li id="li" className="nav-item">
             <span className="mx-2">

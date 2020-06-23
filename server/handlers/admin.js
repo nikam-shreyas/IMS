@@ -87,14 +87,12 @@ exports.addFaculty = async (req, res, next) => {
         from: process.env.EMAILFROM,
         to: Fac.emailId,
         subject: "Registered to IMS.",
-        // text:'You have been added to IMS',
         html: link,
       };
       client.sendMail(email, (err, info) => {
         if (err) {
           err.message = "Could not send email" + err;
         } else if (info) {
-          // console.log(info)
           let message = "Email sent successfully";
           return res.status(200).json({ Fac, message });
         }
@@ -131,7 +129,6 @@ exports.findFaculty = async (req, res, next) => {
 
 exports.findAll = async (req, res, next) => {
   try {
-    //console.log("im in server waiting");
     const faculties = await db.Faculty.find().populate("faculties");
     res.status(200).json(faculties);
   } catch (err) {

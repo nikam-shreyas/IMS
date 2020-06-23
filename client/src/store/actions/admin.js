@@ -52,9 +52,12 @@ export const createTeacher = (data) => {
     try {
       const teacher = await api.call("post", "admin/add", data);
       dispatch(setCurrentTeacher(teacher));
+      const success = "Faculty added!";
+      dispatch(addSuccess(success));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;
+      dispatch(removeSuccessMessage());
       dispatch(addError(error.message));
     }
   };
@@ -79,8 +82,8 @@ export const deleteTeacher = (path) => {
       const teacher = await api.call("delete", `admin/find/${path}`);
       dispatch(setCurrentTeacher(teacher));
       dispatch(removeError());
-      let sm = "Deleted Successfully!";
-      dispatch(addSuccess(sm));
+      let success = "Deleted Successfully!";
+      dispatch(addSuccess(success));
     } catch (err) {
       const error = err.response.data;
       dispatch(removeSuccessMessage());
@@ -108,8 +111,10 @@ export const resetPassword = (path, data) => {
       const admin = await api.call("put", `admin/reset/${path}`, data);
       dispatch(setCurrentAdmin(admin));
       dispatch(removeError());
+      dispatch(addSuccess("Password changed!"));
     } catch (err) {
       const error = err.response.data;
+      dispatch(removeSuccessMessage());
       dispatch(addError(error.message));
     }
   };

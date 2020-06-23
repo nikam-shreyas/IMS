@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { createTeacher } from "../store/actions/admin";
+import { createTeacher, removeSuccess } from "../store/actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
+import SuccessMessage from "../components/SuccessMessage";
 
 class AddFaculty extends Component {
   constructor(props) {
@@ -28,7 +29,10 @@ class AddFaculty extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  componentWillUnmount() {
+    const { removeSuccess } = this.props;
+    removeSuccess();
+  }
   handleSubmit(event) {
     event.preventDefault();
     const { createTeacher } = this.props;
@@ -71,6 +75,7 @@ class AddFaculty extends Component {
                   Fill in the details:
                   <span>
                     <ErrorMessage />
+                    <SuccessMessage />
                   </span>
                   <hr />
                   <div className="container">
@@ -225,5 +230,5 @@ export default connect(
     auth: store.auth,
     faculty: store.faculty,
   }),
-  { createTeacher }
+  { createTeacher, removeSuccess }
 )(AddFaculty);
