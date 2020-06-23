@@ -43,62 +43,61 @@ class Auth_2 extends Component {
   render() {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
-          
-      <div class= "section">
-      
-      <div class="container">
+      <div class="section">
+        <div class="container">
           <div class="user signinBx">
-            <div class="imgBx"><img src={image}/></div>
+            <div class="imgBx">
+              <img src={image} />
+            </div>
             <div class="formBx">
               <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <input
-                type="text"
-                value={username}
-                name="username"
-                placeholder="Username"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
+                  type="text"
+                  value={username}
+                  name="username"
+                  placeholder="Username"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleChange}
                 />
 
                 <input
-                type="email"
-                value={emailId}
-                name="emailId"
-                placeholder ="Email ID"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
-                />
-                
-                <input
-                type="password"
-                value={password}
-                name="password"
-                placeholder= "Password"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
+                  type="email"
+                  value={emailId}
+                  name="emailId"
+                  placeholder="Email ID"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleChange}
                 />
 
                 <input
-                type="password"
-                value={confirmpassword}
-                name="confirmpassword"
-                placeholder = "Re-confirm Password"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleConfirmPassword}
+                  type="password"
+                  value={password}
+                  name="password"
+                  placeholder="Password"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleChange}
                 />
-                
 
-                <input type="submit" value="Register"/>
+                <input
+                  type="password"
+                  value={confirmpassword}
+                  name="confirmpassword"
+                  placeholder="Re-confirm Password"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleConfirmPassword}
+                />
+
+                <input type="submit" value="Register" />
                 {/* <p class="signup"><a href="#ForgotPassword">Forgot password?</a></p> */}
               </form>
             </div>
           </div>
-      </div>
+        </div>
       </div>
     );
   }
