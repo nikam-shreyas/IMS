@@ -8,7 +8,7 @@ import {
   MdSupervisorAccount,
   MdViewAgenda,
   MdLocalLibrary,
-  MdSettings,
+  MdBuild,
 } from "react-icons/md";
 class FacultyList extends Component {
   //   state={
@@ -107,7 +107,7 @@ class FacultyList extends Component {
                   </span>
                 ) : designation === "Admin" ? (
                   <span className="mx-1">
-                    <MdSettings size="24" color="blue" />
+                    <MdBuild size="24" color="blue" />
                   </span>
                 ) : designation === "DepartmentIntershipCoordinator" ? (
                   <span className="mx-1">
