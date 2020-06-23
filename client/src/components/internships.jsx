@@ -1,93 +1,234 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { getInternships } from "../store/actions";
+import { Link, Router, Route } from "react-router-dom";
 import Sidenav_f from "./SideNav_f";
+import { MdFormatListBulleted, MdViewAgenda, MdCached } from "react-icons/md";
 class Internships extends Component {
   constructor(props) {
     super(props);
   }
+
+  state = {
+    internships: [
+      {
+        _id: null,
+        application: {
+          workplace: null,
+          submittedDate: null,
+          offerLetter: null,
+          durationOfInternship: null,
+        },
+        docs: {
+          ApplicationStatus: null,
+          UndertakingStatus: null,
+          OfferLetterStatus: null,
+          MarksheetsStatus: null,
+          AttendanceStatus: null,
+        },
+        student: {
+          name: {
+            firstname: null,
+            lastname: null,
+          },
+          currentClass: {
+            year: null,
+            div: null,
+          },
+          rollNo: null,
+          prevSemAttendance: null,
+        },
+        holder: {
+          id: null,
+          designation: null,
+        },
+        completionStatus: null,
+        comments: null,
+      },
+    ],
+  };
 
   componentDidMount() {
     const { getInternships } = this.props;
     getInternships().then(console.log(this.props));
   }
 
+  loadData(internships) {
+    if (internships.length > 0) this.setState({ internships: internships });
+  }
+
+
+  enableListview() {
+    var elements = document.getElementsByClassName("card-body");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "none";
+    }
+  }
+  enableCardview() {
+    var elements = document.getElementsByClassName("card-body");
+    for (let i = 0; i < elements.length; i++) {
+      elements[i].style.display = "block";
+    }
+  }
+
+
   render() {
-    console.log(this.props);
-    // var p = 0;
-
-    // const {auth,getInternships,getStudentInternships} =this.props;
-    // const internships = this.props.internships.map((internship) => (
-    //   <tr key={internship._id} style={{ height: "120px" }}>
-    //     <td>
-    //       <ol>
-    //         {internship.approvedBy.map((p) => (
-    //           <li>{p.designation}</li>
-    //         ))}
-    //       </ol>
-    //     </td>
-    //     <td>
-    //       <b>{internship.completionStatus}</b>
-    //     </td>
-
-    //     <td>
-    //       <b>{console.log(internship)}</b>
-    //     </td>
-    //     {/* <td><pre>{JSON.stringify(internship.application.submittedDate,null,2)}</pre></td> */}
-    //     <td>
-    //       <b>
-    //         {new Date(
-    //           internship.application.submittedDate
-    //         ).toLocaleDateString()}
-    //       </b>
-    //     </td>
-    //     <td>
-    //       <b>
-    //         {new Date(internship.application.approvedDate).toLocaleDateString()}
-    //       </b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.workplace}</b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.durationOfInternship}</b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.reference}</b>
-    //     </td>
-    //     <td>
-    //       <b>{internship.application.offerLetter}</b>
-    //     </td>
-    //     <td></td>
-    //     {p++}
-    //   </tr>
-    // ));
-
     return (
       <Fragment>
-        <div className="row no-gutters">
-          <div className="col-sm-2 sidenav">
-            <Sidenav_f activeComponent="2" />
+        <div className="container my-1 of">
+          <div className="mt-2 mr-2">
+            <h4>
+              My Applications
+              <div className="float-right">
+                <div
+                  className="btn-group btn-group-toggle btn-sm"
+                  data-toggle="buttons"
+                >
+                  <label
+                    className="btn btn-secondary btn-sm"
+                    onClick={this.enableListview}
+                  >
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option1"
+                      autoComplete="off"
+                      checked
+                    />
+                    <MdFormatListBulleted color="white" />
+                  </label>
+                  <label
+                    className="btn btn-secondary active btn-sm"
+                    onClick={this.enableCardview}
+                  >
+                    <input
+                      type="radio"
+                      name="options"
+                      id="option2"
+                      autoComplete="off"
+                    />
+                    <MdViewAgenda color="white" />
+                  </label>
+                </div>
+              </div>
+            </h4>
           </div>
-          <div className="col-sm-10 of">
-            <div className="container of mt-2">
-              <h4>Internship Applications</h4>
-              <hr />
 
-              <table className="table table-hover table-sm table-responsive">
-                <thead className="thead-dark">
-                  <tr>
-                    <th>Student</th>
-                    <th>Workplace</th>
-                    <th>Duration Of Internship</th>
-                    <th>OfferLetter</th>
-                    <th>Reference</th>
-                    <th>Approve/Reject</th>
-                  </tr>
-                </thead>
-                {/* <tbody>{internships}</tbody> */}
-              </table>
-            </div>
+          <hr />
+          <div>
+            {this.state.internships[0].holder.designation === null && (
+              <div className="alert alert-info">
+                No internship applications found.{" "}
+                <b>
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => this.loadData(this.props.internships)}
+                  >
+                    Click here
+                  </span>
+                </b>{" "}
+                to refresh.
+              </div>
+            )}
+            {this.state.internships[0].holder.designation !== null &&
+              this.state.internships.map((internship) => (
+                <div
+                  key={internship._id}
+                  className={
+                    internship.completionStatus === "N"
+                      ? "card my-3 border-secondary"
+                      : "card my-3 border-success"
+                  }
+                >
+                  <div className="card-header">
+                    {internship.application.workplace}
+                    <span className="float-right">
+                      <Link
+                        to={{
+                          pathname: `/internshipview/${internship._id}`,
+                        }}
+                        className="btn btn-primary btn-border mx-2"
+                      >
+                        View
+                      </Link>
+                    </span>
+                    <br />
+                    <small className="text-muted">{internship._id}</small>
+                  </div>
+                  <div className="card-body">
+                    <table className="table table-hover table-sm">
+                      <thead className="thead-dark">
+                        <tr>
+                          <th>Status</th>
+                          <th>
+                            {internship.completionStatus === "N"
+                              ? "Pending"
+                              : "Approved"}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          className={
+                            internship.docs.AttendanceStatus === "N"
+                              ? "table-warning"
+                              : "table-success"
+                          }
+                        >
+                          <td>Attendance</td>
+                          <td>{internship.docs.AttendanceStatus}</td>
+                        </tr>
+                        <tr
+                          className={
+                            internship.docs.ApplicationStatus === "N"
+                              ? "table-warning"
+                              : "table-success"
+                          }
+                        >
+                          <td>Application</td>
+                          <td>{internship.docs.ApplicationStatus}</td>
+                        </tr>
+                        <tr
+                          className={
+                            internship.docs.UndertakingStatus === "N"
+                              ? "table-warning"
+                              : "table-success"
+                          }
+                        >
+                          <td>Undertaking</td>
+                          <td>{internship.docs.UndertakingStatus}</td>
+                        </tr>
+                        <tr
+                          className={
+                            internship.docs.OfferLetterStatus === "N"
+                              ? "table-warning"
+                              : "table-success"
+                          }
+                        >
+                          <td>Offer Letter</td>
+                          <td>{internship.docs.OfferLetterStatus}</td>
+                        </tr>
+                        <tr
+                          className={
+                            internship.docs.MarksheetsStatus === "N"
+                              ? "table-warning"
+                              : "table-success"
+                          }
+                        >
+                          <td>Marksheets</td>
+                          <td>{internship.docs.MarksheetsStatus}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    {internship.completionStatus === "N" && (
+                      <>
+                        Application is currently viewed by:{" "}
+                        {internship.holder.designation} <br />
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
       </Fragment>

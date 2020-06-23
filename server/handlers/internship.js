@@ -87,6 +87,7 @@ exports.showInternships = async (req, res, next) => {
         model: "Student",
       },
     });
+    console.log(id);
     res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
     return next({
@@ -226,8 +227,10 @@ exports.approveInternship = async (req, res, next) => {
 };
 
 exports.forwardInternship = async (req, res, next) => {
+  console.log("im in srver *server ");
   const { _id: internshipId } = req.body;
   const { id: facultyId } = req.decoded;
+  //console.log(_id+"and "+ id);
   try {
     let internship = await db.Internship.findById(internshipId).populate(
       "student",
