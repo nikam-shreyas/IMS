@@ -1,8 +1,6 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import image from "./assets/Pictlogo.jpeg";
-import style from "./assets/style.css"
-import Auth_Page from '../pages/Auth_Page';
 //import NavBar from '../containers/NavBar';
 import {
   authUser,
@@ -15,7 +13,6 @@ import {
 //import { Redirect } from 'react-router-dom';
 
 class Auth extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -47,14 +44,10 @@ class Auth extends Component {
   }
 
   render() {
-  
     const { username, password } = this.state;
     return (
-     
-       
-    <div class="section">
-      
-      <div class="container">
+      <div class="section">
+        <div class="container">
           <div class="user signinBx">
             <div class="imgBx">
               <img src={image} />
@@ -109,9 +102,8 @@ class Auth extends Component {
               </form>
             </div>
           </div>
+        </div>
       </div>
-    </div>
-      
     );
   }
 }

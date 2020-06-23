@@ -93,15 +93,37 @@ class FacultyProfile extends Component {
   editform() {
     var form = document.getElementById("form");
     var elements = form.elements;
-    for (var i = 0, len = elements.length; i < len; ++i) {
+    for (var i = 0, len = elements.length - 3; i < len; ++i) {
       elements[i].readOnly = !elements[i].readOnly;
     }
+    elements[elements.length - 4].disabled = !elements[elements.length - 4]
+      .disabled;
     var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
     editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
   render() {
-    console.log("im in faculty " + this.state.data.name.firstname);
+    let dropdownOptions = [
+      "Class Coordinator",
+      "Department Internship Coordinator",
+      "College Internship Coordinator",
+      "Admin",
+      "Principal",
+    ];
+    let options = dropdownOptions.map((o) => {
+      return (
+        <option
+          value={o.replace(" ", "").replace(" ", "")}
+          selected={
+            o.replace(" ", "").replace(" ", "") === this.state.data.designation
+              ? "selected"
+              : ""
+          }
+        >
+          {o}
+        </option>
+      );
+    });
     return (
       <div>
         <div className="row no-gutters">
@@ -209,14 +231,14 @@ class FacultyProfile extends Component {
                       </div>
                       <div className="col-sm-6">
                         Designation:
-                        <input
-                          readOnly
-                          type="text"
-                          name="designation"
+                        <select
+                          disabled
                           id="designation"
-                          placeholder={this.state.data.designation}
+                          name="designation"
                           className="form-control"
-                        />
+                        >
+                          {options}
+                        </select>
                       </div>
                     </div>
                     {/* <div className="form-row my-2">

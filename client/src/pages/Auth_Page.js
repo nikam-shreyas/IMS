@@ -10,14 +10,13 @@ const Auth_Page = ({
   isAuthenticated_f,
   isAuthenticated_a,
 }) => {
-  if (isAuthenticated) return <Redirect to="/student" />;
+  if (isAuthenticated) return <Redirect to="/studentprofile" />;
   if (isAuthenticated_f) return <Redirect to="/faculty" />;
   if (isAuthenticated_a) return <Redirect to="/admin/" />;
 
   return (
-    
     <div>
-    <NavBar></NavBar>
+      <NavBar></NavBar>
       <div className="mt-4 text-center">
         <ErrorMessage />
       </div>
