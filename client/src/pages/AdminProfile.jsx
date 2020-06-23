@@ -52,9 +52,7 @@ class AdminProfile extends Component {
     updatedata["designation"] =
       formData.get("designation") || this.state.data.designation;
     updatedata["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    console.log(updatedata);
-    console.log(this.state.data._id);
-    updateAdmin(this.state.data._id, updatedata).then(console.log(this.props));
+    updateAdmin(this.state.data._id, updatedata);
     window.location.reload(false);
   }
 
@@ -73,7 +71,6 @@ class AdminProfile extends Component {
   }
 
   render() {
-    console.log(this.state.data);
     return (
       <div>
         <div className="row no-gutters">
