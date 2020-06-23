@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getCurrentInternship, deleteInternship,forwardInternship } from "../store/actions";
+import { getCurrentInternship, deleteInternship,forwardInternship ,approveInternship} from "../store/actions";
 import { connect } from "react-redux";
 import SideNav_f from "../components/SideNav_f";
 import { withRouter } from "react-router-dom";
@@ -53,9 +53,16 @@ class InternshipView extends Component {
   }
   handleClick(data) {
     if (window.confirm("Are you sure you want to forawrd this application?")) {
+        if(this.state.data.holder.designation!=="Principal"){
       const { forwardInternship } = this.props;
       forwardInternship(data);
       alert("Applicaton Forwarded!");
+        }
+        if(this.state.data.holder.designation==="Principal"){
+          const { approveInternship } = this.props;
+          approveInternship(data);
+          alert("Applicaton Approved!");
+        }
       this.props.history.push("/faculty");
     }
   }
@@ -236,6 +243,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { getCurrentInternship, deleteInternship ,forwardInternship}
+    { getCurrentInternship, deleteInternship ,forwardInternship,approveInternship}
   )(InternshipView)
 );

@@ -1,5 +1,5 @@
 import api from "../../services/api";
-import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP } from "../actionTypes";
+import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP, APPROVE_INTERNSHIP } from "../actionTypes";
 import { addError, removeError } from "./error";
 
 export const setInternships = (internships) => ({
@@ -15,6 +15,14 @@ export const setCurrentInternship = (internship) => ({
 
 export const PushInternship = (internship) => ({
   type: FORWARD_INTERNSHIP,
+  internship,
+});
+
+
+
+
+export const AllowInternship = (internship) => ({
+  type: APPROVE_INTERNSHIP,
   internship,
 });
 
@@ -102,3 +110,25 @@ export const forwardInternship=(data)=>{
     }
   };
 };
+
+
+
+export const approveInternship=(data)=>{
+  return async(dispatch)=>{
+    try{
+      console.log("im in forward internship function in actions .....ok (: ")
+      const internship=await api.call("post","internships/approve",data);
+      dispatch(AllowInternship(internship));
+      dispatch(removeError());
+    }
+    catch(err){
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+
+
+
+
