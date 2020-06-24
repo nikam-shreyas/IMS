@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { getInternships } from "../store/actions";
+import { getInternships,UpdateInternship } from "../store/actions";
 import { Link, Router, Route } from "react-router-dom";
 import Sidenav_f from "./SideNav_f";
 import { MdFormatListBulleted, MdViewAgenda, MdCached } from "react-icons/md";
@@ -70,6 +70,129 @@ class Internships extends Component {
       elements[i].style.display = "block";
     }
   }
+
+
+  updateFunction(stringId,internship){
+    const { UpdateInternship } = this.props;
+console.log("Heil Hitler");
+console.log(stringId);
+var ele=document.getElementById(stringId).checked;
+console.log(ele);
+var res=stringId.split("_");
+console.log("res[0] is "+res[0]+" res[1] is "+res[1]);
+const temp={};
+temp["ApplicationStatus"]=internship.docs.ApplicationStatus;
+temp["AttendanceStatus"]=internship.docs.AttendanceStatus;
+temp["UndertakingStatus"]=internship.docs.UndertakingStatus;
+temp["OfferLetterStatus"]=internship.docs.OfferLetterStatus;
+temp["MarksheetsStatus"]=internship.docs.MarksheetsStatus;
+
+console.log(temp["ApplicationStatus"]);
+if(ele===true){
+switch(res[0]){
+  case "Att":
+    console.log("only for attendance");
+    var obj={"_id":res[1], "docs":
+    { "AttendanceStatus":"Y",
+    "ApplicationStatus":temp["ApplicationStatus"],
+  "UndertakingStatus":temp["UndertakingStatus"],
+"OfferLetterStatus":temp["OfferLetterStatus"],
+"MarksheetsStatus":temp["MarksheetsStatus"] } };
+    UpdateInternship(obj);
+    break;
+    case "App":
+      var obj={"_id":res[1], "docs":
+    { "AttendanceStatus":temp["AttendanceStatus"],
+    "ApplicationStatus":"Y",
+  "UndertakingStatus":temp["UndertakingStatus"],
+"OfferLetterStatus":temp["OfferLetterStatus"],
+"MarksheetsStatus":temp["MarksheetsStatus"] } };
+    UpdateInternship(obj);
+    break;
+    case "Und":
+      var obj={"_id":res[1], "docs":
+    { "AttendanceStatus":temp["AttendanceStatus"],
+    "ApplicationStatus":temp["ApplicationStatus"],
+  "UndertakingStatus":"Y",
+"OfferLetterStatus":temp["OfferLetterStatus"],
+"MarksheetsStatus":temp["MarksheetsStatus"] } };
+    UpdateInternship(obj);
+    break;
+    case "Off":
+      var obj={"_id":res[1], "docs":
+    { "AttendanceStatus":temp["AttendanceStatus"],
+    "ApplicationStatus":temp["ApplicationStatus"],
+  "UndertakingStatus":temp["UndertakingStatus"],
+"OfferLetterStatus":"Y",
+"MarksheetsStatus":temp["MarksheetsStatus"] } };
+    UpdateInternship(obj);
+    break;
+    case "Mar":
+      var obj={"_id":res[1], "docs":
+    { "AttendanceStatus":temp["AttendanceStatus"],
+    "ApplicationStatus":temp["ApplicationStatus"],
+  "UndertakingStatus":temp["UndertakingStatus"],
+"OfferLetterStatus":temp["OfferLetterStatus"],
+"MarksheetsStatus":"Y" } };
+    UpdateInternship(obj);
+    break;
+
+}
+}else{
+  switch(res[0]){
+    case "Att":
+      console.log("only for attendance");
+      var obj={"_id":res[1], "docs":
+      { "AttendanceStatus":"N",
+      "ApplicationStatus":temp["ApplicationStatus"],
+    "UndertakingStatus":temp["UndertakingStatus"],
+  "OfferLetterStatus":temp["OfferLetterStatus"],
+  "MarksheetsStatus":temp["MarksheetsStatus"] } };
+      UpdateInternship(obj);
+      break;
+      case "App":
+        var obj={"_id":res[1], "docs":
+      { "AttendanceStatus":temp["AttendanceStatus"],
+      "ApplicationStatus":"N",
+    "UndertakingStatus":temp["UndertakingStatus"],
+  "OfferLetterStatus":temp["OfferLetterStatus"],
+  "MarksheetsStatus":temp["MarksheetsStatus"] } };
+      UpdateInternship(obj);
+      break;
+      case "Und":
+        var obj={"_id":res[1], "docs":
+      { "AttendanceStatus":temp["AttendanceStatus"],
+      "ApplicationStatus":temp["ApplicationStatus"],
+    "UndertakingStatus":"N",
+  "OfferLetterStatus":temp["OfferLetterStatus"],
+  "MarksheetsStatus":temp["MarksheetsStatus"] } };
+      UpdateInternship(obj);
+      break;
+      case "Off":
+        var obj={"_id":res[1], "docs":
+      { "AttendanceStatus":temp["AttendanceStatus"],
+      "ApplicationStatus":temp["ApplicationStatus"],
+    "UndertakingStatus":temp["UndertakingStatus"],
+  "OfferLetterStatus":"N",
+  "MarksheetsStatus":temp["MarksheetsStatus"] } };
+      UpdateInternship(obj);
+      break;
+      case "Mar":
+        var obj={"_id":res[1], "docs":
+      { "AttendanceStatus":temp["AttendanceStatus"],
+      "ApplicationStatus":temp["ApplicationStatus"],
+    "UndertakingStatus":temp["UndertakingStatus"],
+  "OfferLetterStatus":temp["OfferLetterStatus"],
+  "MarksheetsStatus":"N" } };
+      UpdateInternship(obj);
+      break;
+
+}
+  }
+  alert("the Internship Data is updated ");
+  //this.loadData(this.props.internships);
+}
+
 
   render() {
     return (
@@ -159,13 +282,22 @@ class Internships extends Component {
                     <div className="card-body">
                       <table className="table table-hover table-sm">
                         <thead className="thead-dark">
-                          <tr>
+                          <tr >
                             <th>Status</th>
+                            {internship.holder.designation!=="ClassCoordinator" &&
                             <th>
                               {internship.completionStatus === "N"
                                 ? "Pending"
                                 : "Approved"}
+                            </th>}
+                            {internship.holder.designation==="ClassCoordinator" && 
+                              <th colSpan="2">
+                              {internship.completionStatus === "N"
+                                ? "Pending"
+                                : "Approved"}
                             </th>
+                            }
+                            
                           </tr>
                         </thead>
                         <tbody>
@@ -177,7 +309,17 @@ class Internships extends Component {
                             }
                           >
                             <td>Attendance</td>
+                            { internship.holder.designation!=="ClassCoordinator" &&
                             <td>{internship.docs.AttendanceStatus}</td>
+                            }
+                              { internship.holder.designation==="ClassCoordinator" &&
+                              <>
+                            <td><input type="checkbox"  id={"Att_"+internship._id}/></td>
+                            <td><button type="button" onClick={this.updateFunction.bind(this,"Att_"+internship._id,internship)} className="btn btn-primary">Update</button></td>
+                            </>
+                            }
+                            
+                            
                           </tr>
                           <tr
                             className={
@@ -187,7 +329,16 @@ class Internships extends Component {
                             }
                           >
                             <td>Application</td>
+                            { internship.holder.designation!=="ClassCoordinator" &&
                             <td>{internship.docs.ApplicationStatus}</td>
+                          }
+                          {
+                            internship.holder.designation==="ClassCoordinator" &&
+                            <>
+                            <td><input type="checkbox"  id={"App_"+internship._id}/></td>
+                            <td><button type="button" onClick={this.updateFunction.bind(this,"App_"+internship._id,internship)} className="btn btn-primary">Update</button></td>
+                            </>
+                          }
                           </tr>
                           <tr
                             className={
@@ -197,7 +348,16 @@ class Internships extends Component {
                             }
                           >
                             <td>Undertaking</td>
+                            { internship.holder.designation!=="ClassCoordinator" &&
                             <td>{internship.docs.UndertakingStatus}</td>
+                          }
+                          {
+                            internship.holder.designation==="ClassCoordinator" &&
+                            <>
+                            <td><input type="checkbox"  id={"Und_"+internship._id}/></td>
+                            <td><button type="button" onClick={this.updateFunction.bind(this,"Und_"+internship._id,internship)} className="btn btn-primary">Update</button></td>
+                            </>
+                          }
                           </tr>
                           <tr
                             className={
@@ -207,7 +367,16 @@ class Internships extends Component {
                             }
                           >
                             <td>Offer Letter</td>
+                            { internship.holder.designation!=="ClassCoordinator" &&
                             <td>{internship.docs.OfferLetterStatus}</td>
+                          }
+                          {
+                            internship.holder.designation==="ClassCoordinator" &&
+                            <>
+                            <td><input type="checkbox"  id={"Off_"+internship._id}/></td>
+                            <td><button type="button" onClick={this.updateFunction.bind(this,"Off_"+internship._id,internship)} className="btn btn-primary">Update</button></td>
+                            </>
+                          }
                           </tr>
                           <tr
                             className={
@@ -217,7 +386,16 @@ class Internships extends Component {
                             }
                           >
                             <td>Marksheets</td>
+                            {internship.holder.designation!=="ClassCoordinator" &&
                             <td>{internship.docs.MarksheetsStatus}</td>
+                            }
+                            {
+                               internship.holder.designation==="ClassCoordinator" &&
+                               <>
+                              <td><input     type="checkbox" id={"Mar_"+internship._id}/></td>
+                            <td><button type="button" onClick={this.updateFunction.bind(this,"Mar_"+internship._id,internship)} className="btn btn-primary">Update</button></td>
+                               </>
+                            }
                           </tr>
                         </tbody>
                       </table>
@@ -234,6 +412,9 @@ class Internships extends Component {
           </div>
         </div>
       </div>
+
+
+
     );
   }
 }
@@ -243,5 +424,5 @@ export default connect(
     auth: store.auth,
     internships: store.internships,
   }),
-  { getInternships }
+  { getInternships,UpdateInternship }
 )(Internships);

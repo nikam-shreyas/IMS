@@ -1,4 +1,4 @@
-import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP,APPROVE_INTERNSHIP } from "../actionTypes";
+import { SET_CURRENT_INTERNSHIP,UPDATE_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP,APPROVE_INTERNSHIP } from "../actionTypes";
 //import { SET_CURRENT_INTERNSHIPS } from '../actionTypes';
 
 export const internships = (state = [], action) => {
@@ -35,6 +35,19 @@ export const approve_Internship=(state={},action)=>{
   switch(action.type){
     case APPROVE_INTERNSHIP:
       console.log("in approve reducers ");
+      return action.internship;
+    default:
+      return state;
+
+  }
+};
+
+
+
+export const update_Internship=(state={},action)=>{
+  switch(action.type){
+    case UPDATE_INTERNSHIP:
+      console.log("in update reducers ");
       return action.internship;
     default:
       return state;
