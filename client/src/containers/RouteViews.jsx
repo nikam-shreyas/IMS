@@ -25,8 +25,6 @@ import NotFoundPage from "../pages/NotFound";
 
 import InternshipView from "../pages/InternshipView";
 
-
-
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -82,7 +80,7 @@ const RouteViews = ({ auth }) => (
       <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
       <Route exact path="/settings" render={() => <AdminSetting />} />
       <Route exact path="/facultyNotices" render={() => <FacultyNotices />} />
-      <Route exact path="/ForgotPassword" render={() => <ForgotPassword />} />
+      <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
 
       <Route
         exact
@@ -90,8 +88,7 @@ const RouteViews = ({ auth }) => (
         render={() => <InternshipDetails />}
       />
 
-
-        <Route
+      <Route
         exact
         path="/internshipview/:internshipid"
         render={() => <InternshipView />}
