@@ -97,7 +97,7 @@ class Auth extends Component {
 
                 <input type="submit" value="Login" />
                 <p class="signup">
-                  <a href="#ForgotPassword">Forgot password?</a>
+                  <a href="ForgotPassword">Forgot password?</a>
                 </p>
               </form>
             </div>
