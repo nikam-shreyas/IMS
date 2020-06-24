@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import image from "./assets/Pictlogo.jpeg";
-//import NavBar from '../containers/NavBar';
+import style from "../styles/style.css"
+
 import {
   authUser,
   logout,
@@ -50,7 +50,8 @@ class Auth extends Component {
         <div class="container">
           <div class="user signinBx">
             <div class="imgBx">
-              <img src={image} />
+              {/* <img src={image} /> */}
+              <p>Internship Management System</p>
             </div>
             <div class="formBx">
               <form onSubmit={this.handleSubmit}>
@@ -76,7 +77,7 @@ class Auth extends Component {
                   autoComplete="off"
                   onChange={this.handleChange}
                 />
-
+                
                 <select
                   name="User_type"
                   defaultValue="1"

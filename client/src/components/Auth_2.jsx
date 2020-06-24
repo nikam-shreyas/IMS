@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
-import image from "./assets/Pictlogo.jpeg";
+
 class Auth_2 extends Component {
   constructor(props) {
     super(props);
@@ -43,12 +43,15 @@ class Auth_2 extends Component {
   render() {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
-          
+      
       <div class= "section">
       
       <div class="container">
           <div class="user signinBx">
-            <div class="imgBx"><img src={image}/></div>
+            <div class="imgBx">
+              {/* <img src={image}/> */}
+              <p>Internship Management System</p>
+            </div>
             <div class="formBx">
               <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>

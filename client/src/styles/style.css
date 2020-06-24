@@ -38,7 +38,7 @@
     position: relative;
     width: 50%;
     height: 100%;
-    background: #fff;
+    background: #2b2b2b;
     transition: 0.5s;
 }
 
@@ -50,6 +50,21 @@
     width: 80%;
     height: 80%;
     object-fit: contain;
+}
+
+.section .container .user .imgBx p
+{
+    /* top: 10%;
+    left: 10%;
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    object-fit: contain; */
+    margin-top: 25%;
+    font: 400 65px/1.3 'Lobster Two', Helvetica, sans-serif;
+    /* color: #2b2b2b; */
+    color: #fff;
+    text-shadow: 1px 1px 0px #ededed, 4px 4px 0px rgba(0,0,0,0.15);
 }
 
 .section .container .user .formBx
@@ -100,7 +115,7 @@
     width: 100%;
     padding:10px;
     background: #212121;
-    color: #333;
+    color: #777;
     border: none;
     outline: none;
     box-shadow: none;
