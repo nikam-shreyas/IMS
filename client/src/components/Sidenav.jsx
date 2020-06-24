@@ -70,12 +70,14 @@ class Sidenav extends Component {
               Notifications
             </li>
           </Link>
+          <Link to="/changepassword">
           <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdSettings />
             </span>
             Change Password
           </li>
+          </Link>
           <li id="li" className="nav-item float-bottom">
             <span className="mx-2">
               <RiLogoutBoxLine />

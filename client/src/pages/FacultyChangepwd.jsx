@@ -1,13 +1,13 @@
 import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
-import Admin_Sidenav from "../components/Admin_Sidenav";
-import { getAdmin, resetPassword, removeSuccess } from "../store/actions";
+import { getFacultyProfile, resetPassword, removeSuccess } from "../store/actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
-class AdminSetting extends Component {
+import SideNav_f from "../components/SideNav_f";
+class FacultyChangePassword extends Component {
   state = {
     newpassword: "",
     confirmPassword: "",
@@ -34,10 +34,10 @@ class AdminSetting extends Component {
     this.handleconfirmPassword = this.handleconfirmPassword.bind(this);
   }
   async componentDidMount() {
-    const { getAdmin } = this.props;
-    getAdmin()
+    const { getFacultyProfile } = this.props;
+    getFacultyProfile()
       .then(this.setState({ isLoading: false }))
-      .then(() => this.loadData(this.props.admin));
+      .then(() => this.loadData(this.props.faculty));
   }
   componentWillUnmount() {
     const { removeSuccess } = this.props;
@@ -85,7 +85,7 @@ class AdminSetting extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="5" />
+            <SideNav_f activeComponent="5" />
           </div>
           <div className="col-sm-10">
             <div className="container-fluid mt-2">
@@ -172,11 +172,11 @@ class AdminSetting extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    admin: store.currentAdmin,
+    faculty: store.get_Faculty_Profile,
   }),
   {
-    getAdmin,
+    getFacultyProfile,
     resetPassword,
     removeSuccess,
   }
-)(AdminSetting);
+)(FacultyChangePassword);

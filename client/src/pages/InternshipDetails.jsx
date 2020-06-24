@@ -70,7 +70,7 @@ class InternshipDetails extends Component {
             <Sidenav activeComponent="1" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container">
+            <div className="container-fluid">
               <h4 className="mt-2">Application:</h4>
               <hr />
               <div className="card m-3 border-dark" id="card">

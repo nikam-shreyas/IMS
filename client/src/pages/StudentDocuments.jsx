@@ -38,7 +38,7 @@ class StudentDocuments extends Component {
           <Sidenav activeComponent="4" />
         </div>
         <div className="col-sm-10">
-          <div className="container">
+          <div className="container-fluid">
             <br />
             <div
               class="alert alert-warning alert-dismissible fade show"
