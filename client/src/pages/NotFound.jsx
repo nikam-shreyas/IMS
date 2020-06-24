@@ -7,7 +7,7 @@ class NotFoundPage extends Component {
   }
   render() {
     return (
-      <div className="container">
+      <div className="container-fluid">
         <div className="jumbotron mt-5 text-center bg-secondary text-white">
           <h1 className="display-3 my-5">404, Not Found</h1>
           <hr />

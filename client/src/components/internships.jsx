@@ -78,7 +78,7 @@ class Internships extends Component {
           <SideNav_f activeComponent="2" />
         </div>
         <div className="col-sm-10 of">
-          <div className="container">
+          <div className="container-fluid">
             <h4 className="mt-2">
               My Applications
               <div className="float-right">

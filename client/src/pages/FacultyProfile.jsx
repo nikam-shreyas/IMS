@@ -98,7 +98,11 @@ class FacultyProfile extends Component {
     }
     elements[elements.length - 4].disabled = !elements[elements.length - 4]
       .disabled;
-    var editButton = document.getElementById("editButton");
+    
+      var updateButton = document.getElementById("updateBtn");
+      updateButton.disabled=!updateButton.disabled;
+      
+      var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
     editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
@@ -131,14 +135,14 @@ class FacultyProfile extends Component {
             <Sidenav_f activeComponent="1" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container">
+            <div className="container-fluid">
               <h4 className="mt-2">My Profile</h4>
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
                   Fill in the details:
                   <hr />
-                  <div className="container">
+                  <div className="container-fluid">
                     <div className="form-row my-2">
                       <div className="col-sm-6">
                         Firstname:
@@ -268,7 +272,7 @@ class FacultyProfile extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark">
+                    <button type="submit" className="btn btn-dark" id="updateBtn" disabled>
                       Update Profile
                     </button>
                   </div>

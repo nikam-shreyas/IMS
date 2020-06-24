@@ -47,7 +47,7 @@ class Auth extends Component {
     const { username, password } = this.state;
     return (
       <div class="section">
-        <div class="container">
+        <div class="container-fluid">
           <div class="user signinBx">
             <div class="imgBx">
               <img src={image} />

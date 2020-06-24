@@ -88,7 +88,7 @@ class AdminSetting extends Component {
             <Admin_Sidenav activeComponent="5" />
           </div>
           <div className="col-sm-10">
-            <div className="container mt-2">
+            <div className="container-fluid mt-2">
               {this.state.errMessage && (
                 <div className="alert alert-danger">
                   {this.state.errMessage}
@@ -98,7 +98,7 @@ class AdminSetting extends Component {
               <hr />
               {
                 <form id="form" onSubmit={this.handleSubmit}>
-                  <div className="container">
+                  <div className="container-fluid">
                     <div className="form-row my-2">
                       <div className="col-sm-6">
                         Old Password:
