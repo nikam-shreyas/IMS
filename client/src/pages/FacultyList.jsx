@@ -9,6 +9,7 @@ import {
   MdViewAgenda,
   MdLocalLibrary,
   MdBuild,
+  MdSearch,
 } from "react-icons/md";
 class FacultyList extends Component {
   //   state={
@@ -29,9 +30,7 @@ class FacultyList extends Component {
       isLoading: true,
       faculties: [
         {
-
           _id: "",
-
           name: { firstname: "", lastname: "" },
           currentClass: { year: "", div: "" },
           department: "",
@@ -55,6 +54,20 @@ class FacultyList extends Component {
     let elements = document.getElementsByClassName("card-body");
     for (let i = 0; i < elements.length; i++) {
       elements[i].style.display = "none";
+    }
+  }
+  filter(e) {
+    var filter, cards, cardContent, i;
+    filter = e.target.value.toUpperCase();
+    cards = document.getElementsByClassName("card");
+    for (i = 0; i < cards.length; i++) {
+      cardContent = cards[i].querySelector(".individual-card");
+      console.log(cardContent.innerText);
+      if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
+        cards[i].style.display = "";
+      } else {
+        cards[i].style.display = "none";
+      }
     }
   }
   handleCardView() {
@@ -100,45 +113,50 @@ class FacultyList extends Component {
           }
         >
           <div className="card my-2">
-            <div className="card-header" onClick={this.expandInline.bind(this)}>
-              Prof. {name.firstname + " " + name.lastname}
-              <span className="float-right">
-                {designation === "ClassCoordinator" ? (
-                  <span className="mx-1">
-                    <MdLocalLibrary size="24" color="firebrick" />
-                  </span>
-                ) : designation === "Admin" ? (
-                  <span className="mx-1">
-                    <MdBuild size="24" color="blue" />
-                  </span>
-                ) : designation === "DepartmentIntershipCoordinator" ? (
-                  <span className="mx-1">
-                    <MdAssignmentInd size="24" color="green" />
-                  </span>
-                ) : designation === "CollegeInternshipCoordinator" ? (
-                  <span className="mx-1">
-                    <MdSupervisorAccount size="24" color="orange" />
-                  </span>
-                ) : (
-                  <span></span>
-                )}
-              </span>
-              <br />
-              <small className="text-muted">Username: {username}</small>
-            </div>
-            <div className="card-body">
-              <b> Current Class : </b>
-              {currentClass.year + " " + currentClass.div}
-              <br />
-              <b> Department : </b>
-              {department}
-              <br />
-              <b> Designation : </b>
-              {designation}
-              <br />
-              <b> Email Id : </b>
-              {emailId}
-              <br />
+            <div className="individual-card">
+              <div
+                className="card-header"
+                onClick={this.expandInline.bind(this)}
+              >
+                Prof. {name.firstname + " " + name.lastname}
+                <span className="float-right">
+                  {designation === "ClassCoordinator" ? (
+                    <span className="mx-1">
+                      <MdLocalLibrary size="24" color="firebrick" />
+                    </span>
+                  ) : designation === "Admin" ? (
+                    <span className="mx-1">
+                      <MdBuild size="24" color="blue" />
+                    </span>
+                  ) : designation === "DepartmentIntershipCoordinator" ? (
+                    <span className="mx-1">
+                      <MdAssignmentInd size="24" color="green" />
+                    </span>
+                  ) : designation === "CollegeInternshipCoordinator" ? (
+                    <span className="mx-1">
+                      <MdSupervisorAccount size="24" color="orange" />
+                    </span>
+                  ) : (
+                    <span></span>
+                  )}
+                </span>
+                <br />
+                <small className="text-muted">Username: {username}</small>
+              </div>
+              <div className="card-body">
+                <b> Current Class : </b>
+                {currentClass.year + " " + currentClass.div}
+                <br />
+                <b> Department : </b>
+                {department}
+                <br />
+                <b> Designation : </b>
+                {designation}
+                <br />
+                <b> Email Id : </b>
+                {emailId}
+                <br />
+              </div>
             </div>
           </div>
         </div>
@@ -189,6 +207,26 @@ class FacultyList extends Component {
                   </div>
                 </div>
               </h4>
+              <hr />
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="filtersearch">
+                    <span>
+                      <MdSearch style={{ padding: -2, margin: -2 }} />
+                      {"  "} Search
+                    </span>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  name="filter"
+                  id="filter"
+                  className="form-control"
+                  placeholder="Filter Faculty"
+                  onChange={this.filter}
+                  aria-describedby="filtersearch"
+                />
+              </div>
               <hr />
               <div class="row">{this.renderCardData()}</div>
             </div>
