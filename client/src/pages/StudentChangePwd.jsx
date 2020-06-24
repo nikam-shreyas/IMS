@@ -1,32 +1,29 @@
 import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
-import Admin_Sidenav from "../components/Admin_Sidenav";
-import { getAdmin, resetPassword, removeSuccess } from "../store/actions";
+import { getStudent, resetStudentPassword, removeSuccess } from "../store/actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
-class AdminSetting extends Component {
-  state = {
-    newpassword: "",
-    confirmPassword: "",
-    message: "",
-    isLoading: true,
-    showMessage: false,
-    errMessage: "",
-    data: {
-      _id: null,
-      name: {
-        firstname: "s",
-        lastname: "s",
-      },
-      department: "s",
-      designation: "s",
-      emailId: "srush@gmail.com",
-      username: "srush",
-    },
-  };
+import SideNav from "../components/Sidenav";
+class ChangePassword extends Component {
+    state = {
+        isLoading: true,
+        data: {
+          name: {
+            firstname: "eg. John",
+            lastname: "eg. Doe",
+          },
+          currentClass: {
+            year: "eg. TE",
+            div: "eg. 2",
+          },
+          rollNo: "eg. 31241",
+          prevSemAttendance: "eg. 75.5",
+          emailId: "example@gmail.com",
+        },
+      };
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,10 +31,10 @@ class AdminSetting extends Component {
     this.handleconfirmPassword = this.handleconfirmPassword.bind(this);
   }
   async componentDidMount() {
-    const { getAdmin } = this.props;
-    getAdmin()
+    const { getStudent } = this.props;
+    getStudent()
       .then(this.setState({ isLoading: false }))
-      .then(() => this.loadData(this.props.admin));
+      .then(() => this.loadData(this.props.auth.user));
   }
   componentWillUnmount() {
     const { removeSuccess } = this.props;
@@ -45,6 +42,7 @@ class AdminSetting extends Component {
   }
   loadData(user) {
     this.setState({ data: user });
+    console.log(this.state.data);
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -52,18 +50,14 @@ class AdminSetting extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.newpassword === this.state.confirmPassword) {
-      const { resetPassword } = this.props;
+      const { resetStudentPassword } = this.props;
       var formData = new FormData(event.target);
       const updatedata = {};
-      // updatedata["name"] = {
-      //   firstname: formData.get("firstname") || this.state.data.name.firstname,
-      //   lastname: formData.get("lastname") || this.state.data.name.lastname,
-      // };
       updatedata["oldpassword"] =
         formData.get("oldpassword") || this.state.data.password;
       updatedata["newpassword"] = formData.get("newpassword");
       updatedata["newpasswordC"] = formData.get("newpasswordC");
-      resetPassword(this.state.data._id, updatedata).then();
+      resetStudentPassword(this.state.data._id, updatedata).then();
     }
   }
 
@@ -85,7 +79,7 @@ class AdminSetting extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="5" />
+            <SideNav activeComponent="6" />
           </div>
           <div className="col-sm-10">
             <div className="container-fluid mt-2">
@@ -172,11 +166,10 @@ class AdminSetting extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    admin: store.currentAdmin,
   }),
   {
-    getAdmin,
-    resetPassword,
+    getStudent,
+    resetStudentPassword,
     removeSuccess,
   }
-)(AdminSetting);
+)(ChangePassword);

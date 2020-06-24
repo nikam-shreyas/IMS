@@ -37,7 +37,7 @@ class InternshipApplication extends Component {
           <Sidenav activeComponent="3" />
         </div>
         <div className="col-sm-10">
-          <div className="container">
+          <div className="container-fluid">
             <h4 className="mt-2">Apply</h4>
             <div
               class="alert alert-secondary alert-dismissible fade show"
@@ -58,7 +58,7 @@ class InternshipApplication extends Component {
             <form onSubmit={this.handleSubmit}>
               Internship Details:
               <hr />
-              <div className="container">
+              <div className="container-fluid">
                 <div className="form-row my-2">
                   <div className="col-sm-6">
                     Company:

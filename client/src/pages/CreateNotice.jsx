@@ -11,7 +11,7 @@ class CreateNotice extends Component {
             <Sidenav_f activeComponent="3" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container">
+            <div className="container-fluid">
               <NoticeForm />
             </div>
           </div>

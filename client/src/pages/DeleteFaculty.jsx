@@ -96,7 +96,7 @@ class DeleteFaulty extends Component {
             <Admin_Sidenav activeComponent="4" />
           </div>
           <div className="col-sm-10">
-            <div className="container mt-2">
+            <div className="container-fluid mt-2">
               <h4>Delete faculty</h4>
               <hr />
               {

@@ -35,14 +35,15 @@ exports.register_faculty = async (req, res, next) => {
 exports.login_faculty = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.findOne({ username: req.body.username });
-    const { id, username } = Fac;
-    const valid = await Fac.comparePassword(req.body.password);
-    if (valid) {
-      const token = jwt.sign({ id, username }, process.env.SECRET);
-      res.json({ id, username, token });
-    } else {
-      throw new Error();
-    }
+      const { id, username } = Fac;
+      const valid = await Fac.comparePassword(req.body.password);
+      if (valid) {
+        const token = jwt.sign({ id, username }, process.env.SECRET);
+        res.json({ id, username, token });
+      } else {
+        throw new Error();
+      }
+   
   } catch (err) {
     err.message = "Invalid username/password";
     next(err);

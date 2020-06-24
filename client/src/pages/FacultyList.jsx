@@ -153,7 +153,7 @@ class FacultyList extends Component {
             <Admin_Sidenav activeComponent="2" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container">
+            <div className="container-fluid">
               {/* {<MDBDataTable dark data={this.state.faculties} />} */}
               <h4 className="mt-2">
                 Faculty List

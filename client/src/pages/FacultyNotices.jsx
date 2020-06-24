@@ -12,7 +12,7 @@ class FacultyNotices extends Component {
             <Sidenav_f activeComponent="4" />
           </div>
           <div className="col-sm-10">
-            <div className="container">
+            <div className="container-fluid">
               <h4 className="mt-2">Notices</h4>
               <hr />
               <Notices />
