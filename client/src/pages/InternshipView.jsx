@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { getCurrentInternship, deleteInternship,forwardInternship } from "../store/actions";
+import {
+  getCurrentInternship,
+  deleteInternship,
+  forwardInternship,
+} from "../store/actions";
 import { connect } from "react-redux";
 import SideNav_f from "../components/SideNav_f";
 import { withRouter } from "react-router-dom";
@@ -67,7 +71,7 @@ class InternshipView extends Component {
       <>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <SideNav_f activeComponent="1" />
+            <SideNav_f activeComponent="2" />
           </div>
           <div className="col-sm-10 of">
             <div className="container">
@@ -88,6 +92,7 @@ class InternshipView extends Component {
                         </div>
                       )} */}
                       <div className="card-title">
+                        Name:{" "}
                         {this.state.data.student.name.firstname +
                           " " +
                           this.state.data.student.name.lastname}
@@ -103,14 +108,12 @@ class InternshipView extends Component {
                           <tr>
                             <td>ID</td>
                             <td>{this.state.data._id}</td>
-                            
                           </tr>
                           <tr>
                             <td>Attendance</td>
                             <td>
                               {this.state.data.student.prevSemAttendance}%
                             </td>
-                            
                           </tr>
                           <tr>
                             <td>Roll No</td>
@@ -143,10 +146,7 @@ class InternshipView extends Component {
                           <tr>
                             <th>Status</th>
                             <th>
-                               
-                              {
-                              
-                              this.state.data.completionStatus === "N"
+                              {this.state.data.completionStatus === "N"
                                 ? "Pending"
                                 : "Approved"}
                             </th>
@@ -155,7 +155,7 @@ class InternshipView extends Component {
                         <tbody>
                           <tr
                             className={
-                                  this.state.data.docs.AttendanceStatus === "N"
+                              this.state.data.docs.AttendanceStatus === "N"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -236,6 +236,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { getCurrentInternship, deleteInternship ,forwardInternship}
+    { getCurrentInternship, deleteInternship, forwardInternship }
   )(InternshipView)
 );
