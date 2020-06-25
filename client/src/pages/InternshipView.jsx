@@ -68,12 +68,12 @@ class InternshipView extends Component {
         const { forwardInternship, updateInternship } = this.props;
         updateInternship(this.state.data);
         forwardInternship(data);
-        alert("Applicaton Forwarded!");
+        alert("Application Forwarded!");
       }
       if (this.state.data.holder.designation === "Principal") {
         const { approveInternship } = this.props;
         approveInternship(data);
-        alert("Applicaton Approved!");
+        alert("Application Approved!");
       }
       this.props.history.push("/faculty");
     }

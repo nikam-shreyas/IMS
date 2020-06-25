@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { getInternships } from "../store/actions";
-import { Link, Router, Route } from "react-router-dom";
-import Sidenav_f from "./SideNav_f";
+import { getApprovedInternships } from "../store/actions";
+import { Link } from "react-router-dom";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 import SideNav_f from "./SideNav_f";
 class Internships extends Component {
@@ -63,8 +62,8 @@ class Internships extends Component {
     }
   }
   componentDidMount() {
-    const { getInternships } = this.props;
-    getInternships().then(console.log(this.props));
+    const { getApprovedInternships } = this.props;
+    getApprovedInternships().then(console.log(this.props));
   }
 
   loadData(internships) {
@@ -93,7 +92,7 @@ class Internships extends Component {
         <div className="col-sm-10 of">
           <div className="container-fluid">
             <h4 className="mt-2">
-              Received Applications
+              Approved Applications
               <div className="float-right">
                 <div
                   className="btn-group btn-group-toggle btn-sm"
@@ -284,5 +283,5 @@ export default connect(
     auth: store.auth,
     internships: store.internships,
   }),
-  { getInternships }
+  { getApprovedInternships }
 )(Internships);

@@ -142,7 +142,10 @@ class Notices extends Component {
                           {notice.duration && (
                             <div>
                               <span className="mx-2">
-                                <MdAccessTime size="22" />
+                                <MdAccessTime
+                                  style={{ margin: -1, padding: -1 }}
+                                  size="22"
+                                />
                               </span>
                               {notice.duration}
                             </div>
@@ -150,7 +153,10 @@ class Notices extends Component {
                           {notice.location && (
                             <div>
                               <span className="mx-2">
-                                <MdLocationCity size="22" />
+                                <MdLocationCity
+                                  style={{ margin: -1, padding: -1 }}
+                                  size="22"
+                                />
                               </span>
                               {notice.location}
                             </div>
@@ -158,7 +164,10 @@ class Notices extends Component {
                           {notice.contact && (
                             <div>
                               <span className="mx-2">
-                                <MdContactPhone size="22" />
+                                <MdContactPhone
+                                  style={{ margin: -1, padding: -1 }}
+                                  size="22"
+                                />
                               </span>
                               {notice.contact}
                             </div>
@@ -166,7 +175,10 @@ class Notices extends Component {
                           {notice.emailId && (
                             <div>
                               <span className="mx-2">
-                                <MdMailOutline size="22" />
+                                <MdMailOutline
+                                  style={{ margin: -1, padding: -1 }}
+                                  size="22"
+                                />
                               </span>
                               {notice.emailId}
                             </div>
@@ -174,7 +186,10 @@ class Notices extends Component {
                           {notice.link && (
                             <div>
                               <span className="mx-2">
-                                <MdLink size="22" />
+                                <MdLink
+                                  style={{ margin: -1, padding: -1 }}
+                                  size="22"
+                                />
                               </span>
                               <a href={notice.link} target="_new">
                                 {notice.link}

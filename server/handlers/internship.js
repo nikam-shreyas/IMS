@@ -106,6 +106,23 @@ exports.showInternships = async (req, res, next) => {
   }
 };
 
+exports.showApprovedInternships = async (req, res, next) => {
+  try {
+    //const internships = await db.internships.find().populate('student',['studentname','id']);
+    const { id } = req.decoded;
+    let faculty = await db.Faculty.findById(id).populate({
+      path: "applicationsApproved",
+      model: "Internship",
+    });
+    res.status(200).json(faculty.applicationsReceived);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
 exports.studentsInternships = async (req, res, next) => {
   try {
     const { id } = req.decoded;

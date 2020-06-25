@@ -32,7 +32,7 @@ class Sidenav extends Component {
           <Link to="/student">
             <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdDns />
+                <MdDns style={{ margin: -1, padding: -1 }} />
               </span>
               My Applications
             </li>
@@ -40,7 +40,7 @@ class Sidenav extends Component {
           <Link to="/studentprofile">
             <li id="li" className={activeNow === "2" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdPermIdentity />
+                <MdPermIdentity style={{ margin: -1, padding: -1 }} />
               </span>
               Profile
             </li>
@@ -48,7 +48,7 @@ class Sidenav extends Component {
           <Link to="/apply">
             <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdAddCircle />
+                <MdAddCircle style={{ margin: -1, padding: -1 }} />
               </span>
               Apply
             </li>
@@ -57,7 +57,7 @@ class Sidenav extends Component {
           <Link to="/studentDocs">
             <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdDescription />
+                <MdDescription style={{ margin: -1, padding: -1 }} />
               </span>
               Documents
             </li>
@@ -65,22 +65,22 @@ class Sidenav extends Component {
           <Link to="/notifications">
             <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdNotifications />
+                <MdNotifications style={{ margin: -1, padding: -1 }} />
               </span>
               Notifications
             </li>
           </Link>
           <Link to="/changepassword">
-          <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdSettings />
-            </span>
-            Change Password
-          </li>
+            <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdSettings style={{ margin: -1, padding: -1 }} />
+              </span>
+              Change Password
+            </li>
           </Link>
           <li id="li" className="nav-item float-bottom">
             <span className="mx-2">
-              <RiLogoutBoxLine />
+              <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />
             </span>
             <a onClick={this.handleLogout}>Logout</a>
           </li>

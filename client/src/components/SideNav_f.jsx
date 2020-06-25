@@ -31,7 +31,7 @@ class Sidenav_f extends Component {
           <Link to="/facultyprofile">
             <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdPermIdentity />
+                <MdPermIdentity style={{ margin: -1, padding: -1 }} />
               </span>
               Profile
             </li>
@@ -39,7 +39,7 @@ class Sidenav_f extends Component {
           <Link to="/internships">
             <li id="li" className={activeNow === "2" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdViewList />
+                <MdViewList style={{ margin: -1, padding: -1 }} />
               </span>
               Applications
             </li>
@@ -47,7 +47,7 @@ class Sidenav_f extends Component {
           <Link to="/faculty">
             <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdDns />
+                <MdDns style={{ margin: -1, padding: -1 }} />
               </span>
               Send Notice
             </li>
@@ -55,22 +55,22 @@ class Sidenav_f extends Component {
           <Link to="/facultyNotices">
             <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdNotifications />
+                <MdNotifications style={{ margin: -1, padding: -1 }} />
               </span>
               Notices
             </li>
           </Link>
           <Link to="/facultysetting">
-          <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdSettings />
-            </span>
-            Change Password
-          </li>
+            <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdSettings style={{ margin: -1, padding: -1 }} />
+              </span>
+              Change Password
+            </li>
           </Link>
           <li id="li" className="nav-item">
             <span className="mx-2">
-              <RiLogoutBoxLine />
+              <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />
             </span>
             <a onClick={this.handleLogout}>Logout</a>
           </li>

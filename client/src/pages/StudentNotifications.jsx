@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Sidenav from "../components/Sidenav";
 import PersonalNotices from "../components/PersonalNotices";
 import Notices from "../components/Notices";
-import { MdSearch } from "react-icons/md";
 class StudentNotifications extends Component {
   state = {};
 

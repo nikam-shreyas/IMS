@@ -30,9 +30,21 @@ export const AllowInternship = (internship) => ({
 export const getInternships = () => {
   return async (dispatch) => {
     try {
-      console.log("im in getInternships ");
       const internships = await api.call("get", "internships");
       console.log(internships);
+      dispatch(setInternships(internships));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const getApprovedInternships = () => {
+  return async (dispatch) => {
+    try {
+      const internships = await api.call("get", "internships/approved");
       dispatch(setInternships(internships));
       dispatch(removeError());
     } catch (err) {

@@ -122,19 +122,35 @@ class FacultyList extends Component {
                 <span className="float-right">
                   {designation === "ClassCoordinator" ? (
                     <span className="mx-1">
-                      <MdLocalLibrary size="24" color="firebrick" />
+                      <MdLocalLibrary
+                        style={{ margin: -1, padding: -1 }}
+                        size="24"
+                        color="firebrick"
+                      />
                     </span>
                   ) : designation === "Admin" ? (
                     <span className="mx-1">
-                      <MdBuild size="24" color="blue" />
+                      <MdBuild
+                        style={{ margin: -1, padding: -1 }}
+                        size="24"
+                        color="blue"
+                      />
                     </span>
                   ) : designation === "DepartmentIntershipCoordinator" ? (
                     <span className="mx-1">
-                      <MdAssignmentInd size="24" color="green" />
+                      <MdAssignmentInd
+                        style={{ margin: -1, padding: -1 }}
+                        size="24"
+                        color="green"
+                      />
                     </span>
                   ) : designation === "CollegeInternshipCoordinator" ? (
                     <span className="mx-1">
-                      <MdSupervisorAccount size="24" color="orange" />
+                      <MdSupervisorAccount
+                        style={{ margin: -1, padding: -1 }}
+                        size="24"
+                        color="orange"
+                      />
                     </span>
                   ) : (
                     <span></span>
@@ -190,7 +206,10 @@ class FacultyList extends Component {
                         id="option1"
                         autoComplete="off"
                       />
-                      <MdFormatListBulleted color="white" />
+                      <MdFormatListBulleted
+                        style={{ margin: -1, padding: -1 }}
+                        color="white"
+                      />
                     </label>
                     <label
                       className="btn btn-secondary active btn-sm"
@@ -202,7 +221,10 @@ class FacultyList extends Component {
                         id="option2"
                         autoComplete="off"
                       />
-                      <MdViewAgenda color="white" />
+                      <MdViewAgenda
+                        style={{ margin: -1, padding: -1 }}
+                        color="white"
+                      />
                     </label>
                   </div>
                 </div>

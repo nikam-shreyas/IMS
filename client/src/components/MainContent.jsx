@@ -102,7 +102,10 @@ class MainContent extends Component {
                       autoComplete="off"
                       checked
                     />
-                    <MdFormatListBulleted color="white" />
+                    <MdFormatListBulleted
+                      style={{ margin: -1, padding: -1 }}
+                      color="white"
+                    />
                   </label>
                   <label
                     className="btn btn-secondary active btn-sm"
@@ -114,7 +117,10 @@ class MainContent extends Component {
                       id="option2"
                       autoComplete="off"
                     />
-                    <MdViewAgenda color="white" />
+                    <MdViewAgenda
+                      style={{ margin: -1, padding: -1 }}
+                      color="white"
+                    />
                   </label>
                 </div>
               </div>
