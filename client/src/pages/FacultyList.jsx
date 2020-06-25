@@ -208,9 +208,9 @@ class FacultyList extends Component {
                 </div>
               </h4>
               <hr />
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="filtersearch">
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="filtersearch">
                     <span>
                       <MdSearch style={{ padding: -2, margin: -2 }} />
                       {"  "} Search
@@ -228,7 +228,7 @@ class FacultyList extends Component {
                 />
               </div>
               <hr />
-              <div class="row">{this.renderCardData()}</div>
+              <div className="row">{this.renderCardData()}</div>
             </div>
           </div>
         </div>

@@ -123,9 +123,9 @@ class MainContent extends Component {
 
           <hr />
 
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="filtersearch">
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="filtersearch">
                 <span>
                   <MdSearch style={{ padding: -2, margin: -2 }} />
                   {"  "} Search

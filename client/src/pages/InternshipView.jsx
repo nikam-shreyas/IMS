@@ -215,7 +215,7 @@ class InternshipView extends Component {
                                   {this.state.data.docs.AttendanceStatus ===
                                   "N" ? (
                                     <input
-                                      class="form-check-input position-static"
+                                      className="form-check-input position-static"
                                       name="AttendanceStatus"
                                       type="checkbox"
                                       id="AttendanceStatus"
@@ -240,7 +240,7 @@ class InternshipView extends Component {
                                   {this.state.data.docs.ApplicationStatus ===
                                   "N" ? (
                                     <input
-                                      class="form-check-input position-static"
+                                      className="form-check-input position-static"
                                       name="ApplicationStatus"
                                       type="checkbox"
                                       id="ApplicationStatus"
@@ -265,7 +265,7 @@ class InternshipView extends Component {
                                   {this.state.data.docs.UndertakingStatus ===
                                   "N" ? (
                                     <input
-                                      class="form-check-input position-static"
+                                      className="form-check-input position-static"
                                       name="UndertakingStatus"
                                       type="checkbox"
                                       id="UndertakingStatus"
@@ -290,7 +290,7 @@ class InternshipView extends Component {
                                   {this.state.data.docs.OfferLetterStatus ===
                                   "N" ? (
                                     <input
-                                      class="form-check-input position-static"
+                                      className="form-check-input position-static"
                                       name="OfferLetterStatus"
                                       type="checkbox"
                                       id="OfferLetterStatus"
@@ -315,7 +315,7 @@ class InternshipView extends Component {
                                   {this.state.data.docs.MarksheetsStatus ===
                                   "N" ? (
                                     <input
-                                      class="form-check-input position-static"
+                                      className="form-check-input position-static"
                                       name="MarksheetsStatus"
                                       type="checkbox"
                                       id="MarksheetsStatus"

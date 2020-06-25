@@ -7,8 +7,25 @@ import {
   MdLocationCity,
   MdContactPhone,
   MdMailOutline,
+  MdSearch,
 } from "react-icons/md";
 class Notices extends Component {
+  filter(e) {
+    var filter, cards, cardContent, i;
+    filter = e.target.value.toUpperCase();
+    cards = document.getElementsByClassName("outer-card");
+    for (i = 0; i < cards.length; i++) {
+      cardContent = cards[i].querySelector(".individual-card");
+      if (
+        cardContent &&
+        cardContent.innerText.toUpperCase().indexOf(filter) > -1
+      ) {
+        cards[i].style.display = "";
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  }
   state = {
     notices: [
       {
@@ -44,9 +61,30 @@ class Notices extends Component {
   render() {
     return (
       <Fragment>
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <span className="input-group-text" id="filtersearch">
+              <span>
+                <MdSearch style={{ padding: -2, margin: -2 }} />
+                {"  "} Search
+              </span>
+            </span>
+          </div>
+          <input
+            type="text"
+            name="filter"
+            id="filter"
+            className="form-control"
+            placeholder="Filter Notices"
+            onChange={this.filter}
+            aria-describedby="filtersearch"
+          />
+        </div>
+        <hr />
+
         <div id="accordion">
           {this.state.notices.map((notice) => (
-            <div key={notice._id} className="card my-2">
+            <div key={notice._id} className="outer-card card my-2">
               <div className="individual-card">
                 <div
                   className="card-header"

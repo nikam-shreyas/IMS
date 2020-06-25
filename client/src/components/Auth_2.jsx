@@ -43,13 +43,13 @@ class Auth_2 extends Component {
   render() {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
-      <div class="section">
-        <div class="container-fluid">
-          <div class="user signinBx">
-            <div class="imgBx">
+      <div className="section">
+        <div className="container-fluid">
+          <div className="user signinBx">
+            <div className="imgBx">
               <img src={image} />
             </div>
-            <div class="formBx">
+            <div className="formBx">
               <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <input
@@ -93,7 +93,7 @@ class Auth_2 extends Component {
                 />
 
                 <input type="submit" value="Register" />
-                {/* <p class="signup"><a href="#ForgotPassword">Forgot password?</a></p> */}
+                {/* <p className="signup"><a href="#ForgotPassword">Forgot password?</a></p> */}
               </form>
             </div>
           </div>
