@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-
+const bcrypt = require("bcryptjs");
 const db = require("../models");
 const nodemailer = require("nodemailer");
 const transport = require("nodemailer-smtp-transport");
@@ -60,7 +60,7 @@ exports.register = async (req, res, next) => {
 //console
 exports.login = async (req, res, next) => {
   try {
-    const student = await db.Student.findOne({ username: req.body.username });
+    const student = await db.Student.findOne({ username: req.body.username});
     const { id, username } = student;
     const valid = await student.comparePassword(req.body.password);
     if (valid) {
@@ -105,14 +105,49 @@ exports.getStudentDetails = async (req, res, next) => {
       throw new Error("No student found");
     }
 
-    const { name, currentClass, rollNo, prevSemAttendance, emailId } = student;
+    // const { name, currentClass, rollNo, prevSemAttendance, emailId,_id } = student;
     res
       .status(200)
-      .json({ name, currentClass, rollNo, prevSemAttendance, emailId });
+      // .json({ name, currentClass, rollNo, prevSemAttendance, emailId,_id });
+      .json(student);
   } catch (err) {
     next({
       status: 400,
       message: err.message,
     });
+  }
+};
+
+
+exports.resetStudentPassword = async (req, res, next) => {
+  console.log('here')
+  const { oldpassword, newpassword } = req.body;
+  const { id } = req.decoded;
+  console.log(id)
+  try {
+    const Stud = await db.Student.findById({  _id:id });
+    const valid = await Stud.comparePassword(oldpassword);
+    if (valid) {
+      const newhashed = await bcrypt.hash(newpassword, 10);
+      const Profile = await db.Student.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            password: newhashed,
+          },
+        },
+        { new: true }
+      );
+      if (Profile) {
+        return res.status(200).json(Profile);
+      } else {
+        throw new Error("Student not found!");
+      }
+    } else {
+      throw new Error("Old password is wrong!");
+    }
+  } catch (err) {
+    // err.message = "Invalid username/password";
+    next(err);
   }
 };

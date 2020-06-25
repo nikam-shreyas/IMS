@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
+import style from "../styles/style.css";
 
 class Auth_2 extends Component {
   constructor(props) {
@@ -56,52 +57,51 @@ class Auth_2 extends Component {
               <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <input
-                type="text"
-                value={username}
-                name="username"
-                placeholder="Username"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
+                  type="text"
+                  value={username}
+                  name="username"
+                  placeholder="Username"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleChange}
                 />
 
                 <input
-                type="email"
-                value={emailId}
-                name="emailId"
-                placeholder ="Email ID"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
-                />
-                
-                <input
-                type="password"
-                value={password}
-                name="password"
-                placeholder= "Password"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleChange}
+                  type="email"
+                  value={emailId}
+                  name="emailId"
+                  placeholder="Email ID"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleChange}
                 />
 
                 <input
-                type="password"
-                value={confirmpassword}
-                name="confirmpassword"
-                placeholder = "Re-confirm Password"
-                className="form-control"
-                autoComplete="off"
-                onChange={this.handleConfirmPassword}
+                  type="password"
+                  value={password}
+                  name="password"
+                  placeholder="Password"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleChange}
                 />
-                
 
-                <input type="submit" value="Register"/>
+                <input
+                  type="password"
+                  value={confirmpassword}
+                  name="confirmpassword"
+                  placeholder="Re-confirm Password"
+                  className="form-control"
+                  autoComplete="off"
+                  onChange={this.handleConfirmPassword}
+                />
+
+                <input type="submit" value="Register" />
                 {/* <p class="signup"><a href="#ForgotPassword">Forgot password?</a></p> */}
               </form>
             </div>
           </div>
-      </div>
+        </div>
       </div>
     );
   }

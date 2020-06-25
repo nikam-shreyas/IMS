@@ -1,6 +1,7 @@
 import { addError, removeError } from "./error";
 import { SET_CURRENT_USER } from "../actionTypes";
 import api from "../../services/api";
+import { addSuccess, removeSuccessMessage } from "./success";
 
 export const setCurrentUser = (user) => ({
   type: SET_CURRENT_USER,
@@ -59,6 +60,21 @@ export const getStudent = () => {
     } catch (err) {
       console.log(err);
       const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const resetStudentPassword = (path, data) => {
+  return async (dispatch) => {
+    try {
+      const student = await api.call("put", `auth/student/reset/${path}`, data);
+      dispatch(setCurrentUser(student));
+      dispatch(removeError());
+      dispatch(addSuccess("Password changed!"));
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(removeSuccessMessage());
       dispatch(addError(error.message));
     }
   };

@@ -11,7 +11,7 @@ router
   .post("/student", auth, handle.updateStudent)
   .get("/student", auth, handle.getStudentDetails);
 
-router.route("student/reset/:id")
-  .put(auth,handle.resetPassword);
+router.route("/student/reset/:id")
+  .put(auth,handle.resetStudentPassword);
   
 module.exports = router;

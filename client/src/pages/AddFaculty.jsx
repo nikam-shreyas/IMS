@@ -67,7 +67,7 @@ class AddFaculty extends Component {
             <Admin_Sidenav activeComponent="3" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container">
+            <div className="container-fluid">
               <h4 className="mt-2">Add New Faculty</h4>
               <hr />
               {
@@ -78,7 +78,7 @@ class AddFaculty extends Component {
                     <SuccessMessage />
                   </span>
                   <hr />
-                  <div className="container">
+                  <div className="container-fluid">
                     <div className="form-row my-2">
                       <div className="col-sm-6">
                         First Name:

@@ -12,7 +12,7 @@ class StudentNotifications extends Component {
             <Sidenav activeComponent="5" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container">
+            <div className="container-fluid">
               <h4 className="mt-2">Personal Notices:</h4>
               <hr />
               <PersonalNotices />
