@@ -38,7 +38,7 @@ class PersonalNotices extends Component {
               role="alert"
             >
               <span className="mx-2">
-                <MdDoneAll />
+                <MdDoneAll style={{ margin: -1, padding: -1 }} />
               </span>
               No new messages.
               <button
@@ -54,9 +54,20 @@ class PersonalNotices extends Component {
         )}
         {!this.state.noMessages &&
           this.state.studentsNotices.map((notice) => (
-            <div key={notice.comments} className="alert alert-danger">
-              <span className="mx-2">
-                <MdError />
+            <div
+              key={notice.comments}
+              className={
+                notice.comments.includes("Congratulations")
+                  ? "alert alert-success"
+                  : "alert alert-danger"
+              }
+            >
+              <span className="mr-2">
+                {notice.comments.includes("Congratulations") ? (
+                  <MdDoneAll style={{ margin: -1, padding: -1 }} />
+                ) : (
+                  <MdError style={{ margin: -1, padding: -1 }} />
+                )}
               </span>
               {notice.comments}
             </div>

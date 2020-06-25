@@ -4,6 +4,7 @@ import PersonalNotices from "../components/PersonalNotices";
 import Notices from "../components/Notices";
 class StudentNotifications extends Component {
   state = {};
+
   render() {
     return (
       <>
@@ -14,6 +15,7 @@ class StudentNotifications extends Component {
           <div className="col-sm-10 of">
             <div className="container-fluid">
               <h4 className="mt-2">Personal Notices:</h4>
+
               <hr />
               <PersonalNotices />
               <hr />

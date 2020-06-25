@@ -55,7 +55,7 @@ class InternshipDetails extends Component {
     if (window.confirm("Are you sure you want to delete this application?")) {
       const { deleteInternship } = this.props;
       deleteInternship(id);
-      alert("Applicaton Deleted!");
+      alert("Application Deleted!");
       this.props.history.push("/student");
     }
   }
@@ -84,7 +84,7 @@ class InternshipDetails extends Component {
                     <div className="card-body">
                       {this.state.data.comments && (
                         <div className="alert alert-danger">
-                          Reason: {this.state.data.comments}
+                          {this.state.data.comments}
                         </div>
                       )}
                       <div className="card-title">
@@ -207,14 +207,16 @@ class InternshipDetails extends Component {
                         </>
                       )}
                     </div>
-                    <div className="card-footer text-right">
-                      <div
-                        className="btn btn-danger btn-sm mx-2"
-                        onClick={() => this.handleClick(this.state.data._id)}
-                      >
-                        Delete
+                    {this.state.data.completionStatus === "N" && (
+                      <div className="card-footer text-right">
+                        <div
+                          className="btn btn-danger btn-sm mx-2"
+                          onClick={() => this.handleClick(this.state.data._id)}
+                        >
+                          Delete
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </>
                 }
               </div>

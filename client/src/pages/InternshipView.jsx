@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 
-import { getCurrentInternship, deleteInternship,forwardInternship ,approveInternship} from "../store/actions";
+import {
+  getCurrentInternship,
+  deleteInternship,
+  forwardInternship,
+  approveInternship,
+  updateInternship,
+  rejectInternship,
+} from "../store/actions";
 
 import { connect } from "react-redux";
 import SideNav_f from "../components/SideNav_f";
@@ -8,6 +15,7 @@ import { withRouter } from "react-router-dom";
 class InternshipView extends Component {
   state = {
     isLoading: true,
+    showButton: false,
     data: {
       _id: null,
       application: {
@@ -43,6 +51,7 @@ class InternshipView extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
   }
   async componentDidMount() {
     const { getCurrentInternship } = this.props;
@@ -54,22 +63,72 @@ class InternshipView extends Component {
       .then(() => this.loadData(this.props.internships));
   }
   handleClick(data) {
-    if (window.confirm("Are you sure you want to forawrd this application?")) {
-        if(this.state.data.holder.designation!=="Principal"){
-      const { forwardInternship } = this.props;
-      forwardInternship(data);
-      alert("Applicaton Forwarded!");
-        }
-        if(this.state.data.holder.designation==="Principal"){
-          const { approveInternship } = this.props;
-          approveInternship(data);
-          alert("Applicaton Approved!");
-        }
+    if (window.confirm("Are you sure?")) {
+      if (this.state.data.holder.designation !== "Principal") {
+        const { forwardInternship, updateInternship } = this.props;
+        updateInternship(this.state.data);
+        forwardInternship(data);
+        alert("Application Forwarded!");
+      }
+      if (this.state.data.holder.designation === "Principal") {
+        const { approveInternship } = this.props;
+        approveInternship(data);
+        alert("Application Approved!");
+      }
       this.props.history.push("/faculty");
     }
   }
   loadData(internship) {
     this.setState({ data: internship });
+    for (const [key, value] of Object.entries(this.state.data.docs)) {
+      if (value === "N") this.setState({ showButton: true });
+    }
+  }
+  updateStatus(event) {
+    event.preventDefault();
+    var formData = new FormData(event.target);
+    if (
+      this.state.data.docs.AttendanceStatus === "N" &&
+      formData.get("AttendanceStatus") === "on"
+    ) {
+      this.state.data.docs.AttendanceStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.ApplicationStatus === "N" &&
+      formData.get("ApplicationStatus") === "on"
+    ) {
+      this.state.data.docs.ApplicationStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.UndertakingStatus === "N" &&
+      formData.get("UndertakingStatus") === "on"
+    ) {
+      this.state.data.docs.UndertakingStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.OfferLetterStatus === "N" &&
+      formData.get("OfferLetterStatus") === "on"
+    ) {
+      this.state.data.docs.OfferLetterStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.MarksheetsStatus === "N" &&
+      formData.get("MarksheetsStatus") === "on"
+    ) {
+      this.state.data.docs.MarksheetsStatus = "Approved";
+    }
+    alert("Updated!");
+  }
+  handleReject() {
+    let reason = prompt(
+      "Enter a reason for the rejection of this application."
+    );
+    if (reason) {
+      this.state.data.comments = reason;
+      const { rejectInternship } = this.props;
+      rejectInternship(this.state.data).then(alert("Application Rejected"));
+      this.props.history.push("/internships");
+    }
   }
   render() {
     return (
@@ -108,7 +167,7 @@ class InternshipView extends Component {
                             this.state.data.student.currentClass.div}
                         </small>
                       </div>
-                      <table className="table table-hover table-striped table-bordered my-3">
+                      <table className="table table-hover table-sm table-striped table-bordered my-3">
                         <tbody>
                           <tr>
                             <td>ID</td>
@@ -125,7 +184,7 @@ class InternshipView extends Component {
                             <td>{this.state.data.student.rollNo}</td>
                           </tr>
                           <tr>
-                            <td>Submitted On:</td>
+                            <td>Submitted On</td>
                             <td>
                               {new Date(
                                 this.state.data.application.submittedDate
@@ -146,70 +205,161 @@ class InternshipView extends Component {
                           )}
                         </tbody>
                       </table>
-                      <table className="table table-hover table-sm">
-                        <thead className="thead-dark">
-                          <tr>
-                            <th>Status</th>
-                            <th>
-                              {this.state.data.completionStatus === "N"
-                                ? "Pending"
-                                : "Approved"}
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr
-                            className={
-                              this.state.data.docs.AttendanceStatus === "N"
-                                ? "table-warning"
-                                : "table-success"
-                            }
-                          >
-                            <td>Attendance</td>
-                            <td>{this.state.data.docs.AttendanceStatus}</td>
-                          </tr>
-                          <tr
-                            className={
-                              this.state.data.docs.ApplicationStatus === "N"
-                                ? "table-warning"
-                                : "table-success"
-                            }
-                          >
-                            <td>Application</td>
-                            <td>{this.state.data.docs.ApplicationStatus}</td>
-                          </tr>
-                          <tr
-                            className={
-                              this.state.data.docs.UndertakingStatus === "N"
-                                ? "table-warning"
-                                : "table-success"
-                            }
-                          >
-                            <td>Undertaking</td>
-                            <td>{this.state.data.docs.UndertakingStatus}</td>
-                          </tr>
-                          <tr
-                            className={
-                              this.state.data.docs.OfferLetterStatus === "N"
-                                ? "table-warning"
-                                : "table-success"
-                            }
-                          >
-                            <td>Offer Letter</td>
-                            <td>{this.state.data.docs.OfferLetterStatus}</td>
-                          </tr>
-                          <tr
-                            className={
-                              this.state.data.docs.MarksheetsStatus === "N"
-                                ? "table-warning"
-                                : "table-success"
-                            }
-                          >
-                            <td>Marksheets</td>
-                            <td>{this.state.data.docs.MarksheetsStatus}</td>
-                          </tr>
-                        </tbody>
-                      </table>
+
+                      <form onSubmit={this.updateStatus}>
+                        <table className="table table-hover table-sm">
+                          <thead className="thead-dark">
+                            <tr>
+                              <th>Status</th>
+                              <th>
+                                {this.state.data.completionStatus === "N"
+                                  ? "Pending"
+                                  : "Approved"}
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr
+                              className={
+                                this.state.data.docs.AttendanceStatus === "N"
+                                  ? "table-warning"
+                                  : "table-success"
+                              }
+                            >
+                              <td>Attendance</td>
+                              <td>
+                                {this.state.data.docs.AttendanceStatus}
+                                <div className="float-right">
+                                  {this.state.data.docs.AttendanceStatus ===
+                                  "N" ? (
+                                    <input
+                                      className="form-check-input position-static"
+                                      name="AttendanceStatus"
+                                      type="checkbox"
+                                      id="AttendanceStatus"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr
+                              className={
+                                this.state.data.docs.ApplicationStatus === "N"
+                                  ? "table-warning"
+                                  : "table-success"
+                              }
+                            >
+                              <td>Application</td>
+                              <td>
+                                {this.state.data.docs.ApplicationStatus}
+                                <div className="float-right">
+                                  {this.state.data.docs.ApplicationStatus ===
+                                  "N" ? (
+                                    <input
+                                      className="form-check-input position-static"
+                                      name="ApplicationStatus"
+                                      type="checkbox"
+                                      id="ApplicationStatus"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr
+                              className={
+                                this.state.data.docs.UndertakingStatus === "N"
+                                  ? "table-warning"
+                                  : "table-success"
+                              }
+                            >
+                              <td>Undertaking</td>
+                              <td>
+                                {this.state.data.docs.UndertakingStatus}
+                                <div className="float-right">
+                                  {this.state.data.docs.UndertakingStatus ===
+                                  "N" ? (
+                                    <input
+                                      className="form-check-input position-static"
+                                      name="UndertakingStatus"
+                                      type="checkbox"
+                                      id="UndertakingStatus"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr
+                              className={
+                                this.state.data.docs.OfferLetterStatus === "N"
+                                  ? "table-warning"
+                                  : "table-success"
+                              }
+                            >
+                              <td>Offer Letter</td>
+                              <td>
+                                {this.state.data.docs.OfferLetterStatus}
+                                <div className="float-right">
+                                  {this.state.data.docs.OfferLetterStatus ===
+                                  "N" ? (
+                                    <input
+                                      className="form-check-input position-static"
+                                      name="OfferLetterStatus"
+                                      type="checkbox"
+                                      id="OfferLetterStatus"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+                            <tr
+                              className={
+                                this.state.data.docs.MarksheetsStatus === "N"
+                                  ? "table-warning"
+                                  : "table-success"
+                              }
+                            >
+                              <td>Marksheets</td>
+                              <td>
+                                {this.state.data.docs.MarksheetsStatus}
+                                <div className="float-right">
+                                  {this.state.data.docs.MarksheetsStatus ===
+                                  "N" ? (
+                                    <input
+                                      className="form-check-input position-static"
+                                      name="MarksheetsStatus"
+                                      type="checkbox"
+                                      id="MarksheetsStatus"
+                                    />
+                                  ) : (
+                                    <></>
+                                  )}
+                                </div>
+                              </td>
+                            </tr>
+
+                            {this.state.showButton && (
+                              <tr>
+                                <td colSpan="3" className="bg-dark">
+                                  <div className="float-right">
+                                    <button className="btn btn-success btn-sm">
+                                      Update Status
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </form>
                       {/* {this.state.data.completionStatus === "N" && (
                         <>
                           Application is currently viewed by:{" "}
@@ -218,12 +368,20 @@ class InternshipView extends Component {
                       )} */}
                     </div>
                     <div className="card-footer text-right">
-                      <div
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => this.handleReject(this.state.data)}
+                      >
+                        Reject
+                      </button>
+                      <button
                         className="btn btn-success btn-sm mx-2"
                         onClick={() => this.handleClick(this.state.data)}
                       >
-                        Forward
-                      </div>
+                        {this.state.data.holder.designation === "Principal"
+                          ? "Approve"
+                          : "Forward"}
+                      </button>
                     </div>
                   </>
                 }
@@ -242,7 +400,13 @@ export default withRouter(
       internships: store.internships,
     }),
 
-    { getCurrentInternship, deleteInternship ,forwardInternship,approveInternship}
-
+    {
+      getCurrentInternship,
+      deleteInternship,
+      forwardInternship,
+      approveInternship,
+      updateInternship,
+      rejectInternship,
+    }
   )(InternshipView)
 );

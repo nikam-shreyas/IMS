@@ -40,14 +40,14 @@ class InternshipApplication extends Component {
           <div className="container-fluid">
             <h4 className="mt-2">Apply</h4>
             <div
-              class="alert alert-secondary alert-dismissible fade show"
+              className="alert alert-secondary alert-dismissible fade show"
               role="alert"
             >
               <strong>P.S. </strong> Please complete your profile before
               applying.
               <button
                 type="button"
-                class="close"
+                className="close"
                 data-dismiss="alert"
                 aria-label="Close"
               >

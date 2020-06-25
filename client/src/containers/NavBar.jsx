@@ -45,11 +45,11 @@ const Navbar = ({ auth, logout }) => (
                   Login
                 </Link>
               </li>
-              <li id="li" className="nav-item">
+              {/* <li id="li" className="nav-item">
                 <Link className="nav-link" to="/test">
                   Test
                 </Link>
-              </li>
+              </li> */}
             </Fragment>
           )}
         {(auth.isAuthenticated ||

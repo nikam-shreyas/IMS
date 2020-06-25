@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
-import style from "../styles/style.css";
+
 
 class Auth_2 extends Component {
   constructor(props) {
@@ -44,16 +44,14 @@ class Auth_2 extends Component {
   render() {
     const { username, password, emailId, confirmpassword } = this.state;
     return (
-      
-      <div class= "section">
-      
-      <div class="container">
-          <div class="user signinBx">
-            <div class="imgBx">
-              {/* <img src={image}/> */}
+      <div className="section">
+        <div className="container">
+          <div className="user signinBx">
+            <div className="imgBx">
+              {/* <img src={image} /> */}
               <p>Internship Management System</p>
             </div>
-            <div class="formBx">
+            <div className="formBx">
               <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <input
@@ -97,7 +95,7 @@ class Auth_2 extends Component {
                 />
 
                 <input type="submit" value="Register" />
-                {/* <p class="signup"><a href="#ForgotPassword">Forgot password?</a></p> */}
+                
               </form>
             </div>
           </div>

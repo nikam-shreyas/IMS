@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import style from "../styles/style.css"
 
 import {
   authUser,
@@ -46,14 +45,14 @@ class Auth extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div class="section">
-        <div class="container-fluid">
-          <div class="user signinBx">
-            <div class="imgBx">
+      <div className="section">
+        <div className="container">
+          <div className="user signinBx">
+            <div className="imgBx">
               {/* <img src={image} /> */}
               <p>Internship Management System</p>
             </div>
-            <div class="formBx">
+            <div className="formBx">
               <form onSubmit={this.handleSubmit}>
                 <h2>Sign In</h2>
                 <input
@@ -95,11 +94,10 @@ class Auth extends Component {
                     ADMIN
                   </option>
                 </select>
-
-                <input type="submit" value="Login" />
-                <p class="signup">
+                <p className="signup">
                   <a href="ForgotPassword">Forgot password?</a>
                 </p>
+                <input type="submit" value="Login" />
               </form>
             </div>
           </div>

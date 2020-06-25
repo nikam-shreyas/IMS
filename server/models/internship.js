@@ -2,8 +2,38 @@ const mongoose = require("mongoose");
 
 const internshipSchema = new mongoose.Schema({
   student: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Student",
+    id: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
+    name: {
+      firstname: {
+        type: String,
+        required: false,
+      },
+      lastname: {
+        type: String,
+        required: false,
+      },
+    },
+    rollNo: {
+      type: Number,
+    },
+    currentClass: {
+      year: {
+        type: String,
+        required: false,
+      },
+      div: {
+        type: Number,
+        required: false,
+      },
+    },
+    prevSemAttendance: {
+      type: Number,
+      required: false,
+    },
+    emailId: {
+      type: String,
+      required: true,
+    },
   },
   application: {
     submittedDate: {
@@ -31,10 +61,6 @@ const internshipSchema = new mongoose.Schema({
   },
   approvedBy: [
     {
-      id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "faculty",
-      },
       designation: String,
     },
   ],
@@ -65,10 +91,6 @@ const internshipSchema = new mongoose.Schema({
     default: "N",
   },
   holder: {
-    id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "faculty",
-    },
     designation: String,
   },
   comments: {

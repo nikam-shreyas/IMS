@@ -16,7 +16,10 @@ class NotFoundPage extends Component {
           <hr />
           <button className="btn btn-dark" onClick={this.handleClick}>
             <span className="mr-2">
-              <MdKeyboardBackspace color="white"></MdKeyboardBackspace>
+              <MdKeyboardBackspace
+                style={{ margin: -1, padding: -1 }}
+                color="white"
+              ></MdKeyboardBackspace>
             </span>
             Click here to go back
           </button>

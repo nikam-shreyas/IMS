@@ -1,6 +1,7 @@
+@import './styles/style.css';
 @import "./styles/sidenav.css";
 @import "./styles/studentDashboard.css";
-@import "./styles/style.css";
+
 * {
   margin: 0;
   padding: 0;

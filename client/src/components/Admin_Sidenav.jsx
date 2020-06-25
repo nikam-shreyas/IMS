@@ -31,7 +31,7 @@ class Admin_Sidenav extends Component {
           <Link to="/admin/">
             <li id="li" className={activeNow == 1 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdPermIdentity />
+                <MdPermIdentity style={{ margin: -1, padding: -1 }} />
               </span>
               Profile
             </li>
@@ -39,7 +39,7 @@ class Admin_Sidenav extends Component {
           <Link to="/all">
             <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdFormatListBulleted />
+                <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
               </span>
               Faculty List
             </li>
@@ -47,7 +47,7 @@ class Admin_Sidenav extends Component {
           <Link to="/add">
             <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdAddCircle />
+                <MdAddCircle style={{ margin: -1, padding: -1 }} />
               </span>
               Add New Faculty
             </li>
@@ -55,7 +55,7 @@ class Admin_Sidenav extends Component {
           <Link to="/deleteFaculty">
             <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdDelete />
+                <MdDelete style={{ margin: -1, padding: -1 }} />
               </span>
               Delete Faculty
             </li>
@@ -63,14 +63,14 @@ class Admin_Sidenav extends Component {
           <Link to="/settings">
             <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdSettings />
+                <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>
               Change Password
             </li>
           </Link>
           <li id="li" className="nav-item">
             <span className="mx-2">
-              <RiLogoutBoxLine />
+              <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />
             </span>
             <a onClick={this.handleLogout}>Logout</a>
           </li>
