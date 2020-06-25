@@ -63,7 +63,7 @@ class InternshipView extends Component {
       .then(() => this.loadData(this.props.internships));
   }
   handleClick(data) {
-    if (window.confirm("Are you sure you want to forward this application?")) {
+    if (window.confirm("Are you sure?")) {
       if (this.state.data.holder.designation !== "Principal") {
         const { forwardInternship, updateInternship } = this.props;
         updateInternship(this.state.data);
@@ -87,18 +87,37 @@ class InternshipView extends Component {
   updateStatus(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
-    this.state.data.docs.AttendanceStatus =
-      formData.get("AttendanceStatus") === "on" ? "Approved" : "N";
-    this.state.data.docs.ApplicationStatus =
-      formData.get("ApplicationStatus") === "on" ? "Approved" : "N";
-    this.state.data.docs.UndertakingStatus =
-      formData.get("UndertakingStatus") === "on" ? "Approved" : "N";
-    this.state.data.docs.OfferLetterStatus =
-      formData.get("OfferLetterStatus") === "on" ? "Approved" : "N";
-    this.state.data.docs.MarksheetsStatus =
-      formData.get("MarksheetsStatus") === "on" ? "Approved" : "N";
-    alert("Approved!");
-    console.log(this.state);
+    if (
+      this.state.data.docs.AttendanceStatus === "N" &&
+      formData.get("AttendanceStatus") === "on"
+    ) {
+      this.state.data.docs.AttendanceStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.ApplicationStatus === "N" &&
+      formData.get("ApplicationStatus") === "on"
+    ) {
+      this.state.data.docs.ApplicationStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.UndertakingStatus === "N" &&
+      formData.get("UndertakingStatus") === "on"
+    ) {
+      this.state.data.docs.UndertakingStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.OfferLetterStatus === "N" &&
+      formData.get("OfferLetterStatus") === "on"
+    ) {
+      this.state.data.docs.OfferLetterStatus = "Approved";
+    }
+    if (
+      this.state.data.docs.MarksheetsStatus === "N" &&
+      formData.get("MarksheetsStatus") === "on"
+    ) {
+      this.state.data.docs.MarksheetsStatus = "Approved";
+    }
+    alert("Updated!");
   }
   handleReject() {
     let reason = prompt(
@@ -332,7 +351,7 @@ class InternshipView extends Component {
                                 <td colSpan="3" className="bg-dark">
                                   <div className="float-right">
                                     <button className="btn btn-success btn-sm">
-                                      Approve
+                                      Update Status
                                     </button>
                                   </div>
                                 </td>
@@ -359,7 +378,9 @@ class InternshipView extends Component {
                         className="btn btn-success btn-sm mx-2"
                         onClick={() => this.handleClick(this.state.data)}
                       >
-                        Forward
+                        {this.state.data.holder.designation === "Principal"
+                          ? "Approve"
+                          : "Forward"}
                       </button>
                     </div>
                   </>

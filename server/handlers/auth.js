@@ -21,35 +21,36 @@ const client = nodemailer.createTransport(transport(options));
 exports.register = async (req, res, next) => {
   try {
     const student = await db.Student.create(req.body);
-    if(student){
-      let link = "<h2>Welcome!!</h2><br/><h4>Your have been added to IMS as a student.</h4><br/>";
-    // link =
-    //   link +
-    //   "Your default username is : <b>" +
-    //   student.username +
-    //   "</b><br/>Your default password is : <b>" +
-    //   student.password +
-    //   "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
-    var email = {
-      from: process.env.EMAILFROM,
-      to: student.emailId,
-      subject: "IMS notification",
-      // text:'You have been added to IMS',
-      html: link,
-    };
-    client.sendMail(email, (err, info) => {
-      if (err) {
-        err.message = "Could not send email" + err;
-      } else if (info) {
-        const { id, username } = student;
-        const token = jwt.sign({ id, username }, process.env.SECRET);
-        res.status(201).json({ id, username, token });
-      }
-    });
-    }else{
-        err.message = "Something went wrong try again!";
+    if (student) {
+      let link =
+        "<h2>Welcome to IMS!</h2><br/><h4>Your registration to IMS as a student was successful.</h4><br/>";
+      // link =
+      //   link +
+      //   "Your default username is : <b>" +
+      //   student.username +
+      //   "</b><br/>Your default password is : <b>" +
+      //   student.password +
+      //   "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
+      var email = {
+        from: process.env.EMAILFROM,
+        to: student.emailId,
+        subject: "Registration Successful",
+        // text:'You have been added to IMS',
+        html: link,
+      };
+      client.sendMail(email, (err, info) => {
+        if (err) {
+          err.message = "Could not send email" + err;
+        } else if (info) {
+          const { id, username } = student;
+          const token = jwt.sign({ id, username }, process.env.SECRET);
+          res.status(201).json({ id, username, token });
+        }
+      });
+    } else {
+      err.message = "Something went wrong try again!";
       next(err);
-    }   
+    }
   } catch (err) {
     if (err.code === 11000) {
       err.message = "Sorry username is already taken.";
@@ -60,7 +61,7 @@ exports.register = async (req, res, next) => {
 //console
 exports.login = async (req, res, next) => {
   try {
-    const student = await db.Student.findOne({ username: req.body.username});
+    const student = await db.Student.findOne({ username: req.body.username });
     const { id, username } = student;
     const valid = await student.comparePassword(req.body.password);
     if (valid) {
@@ -118,14 +119,13 @@ exports.getStudentDetails = async (req, res, next) => {
   }
 };
 
-
 exports.resetStudentPassword = async (req, res, next) => {
-  console.log('here')
+  console.log("here");
   const { oldpassword, newpassword } = req.body;
   const { id } = req.decoded;
-  console.log(id)
+  console.log(id);
   try {
-    const Stud = await db.Student.findById({  _id:id });
+    const Stud = await db.Student.findById({ _id: id });
     const valid = await Stud.comparePassword(oldpassword);
     if (valid) {
       const newhashed = await bcrypt.hash(newpassword, 10);
