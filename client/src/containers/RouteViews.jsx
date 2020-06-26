@@ -24,6 +24,7 @@ import ChangePassword from "../pages/StudentChangePwd";
 import NotFoundPage from "../pages/NotFound";
 import InternshipView from "../pages/InternshipView";
 import FacultyChangePassword from "../pages/FacultyChangepwd";
+import ForgotPassword from "../pages/ForgotPassword";
 
 const RouteViews = ({ auth }) => (
   <main>
@@ -100,6 +101,7 @@ const RouteViews = ({ auth }) => (
       />
       <Route exact path="/apply" render={() => <InternshipApplication />} />
       <Route exact path="/studentprofile" render={() => <StudentProfile />} />
+      <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
       <Route component={NotFoundPage} />
     </Switch>
   </main>

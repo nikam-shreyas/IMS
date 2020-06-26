@@ -98,7 +98,7 @@ class Auth extends Component {
                   </option>
                 </select>
                 <p className="signup">
-                  <a href="ForgotPassword">Forgot password?</a>
+                  <a href="/forgotpassword">Forgot password?</a>
                 </p>
                 <div className="text-center">
                   <Link

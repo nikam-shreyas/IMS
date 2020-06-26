@@ -76,6 +76,68 @@ exports.login = async (req, res, next) => {
   }
 };
 
+exports.genPassword = () => {
+  var length = 10,
+    charset =
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()^_+{}[]<>?",
+    retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal;
+};
+
+exports.forgotPassword = async (req, res, next) => {
+  try {
+    const { username, emailId, role } = req.body;
+    var user;
+    if (role === "student") {
+      user = await db.Student.findOne({
+        username: username,
+        emailId: emailId,
+      });
+    } else {
+      user = await db.Faculty.findOne({
+        username: username,
+        emailId: emailId,
+      });
+    }
+    if (!user) {
+      let err = new Error();
+      err.message =
+        "Sorry, the credentials do not match with the one in the database.";
+      next(err);
+    } else {
+      let tempPwd = this.genPassword();
+      user.password = tempPwd;
+      user.save();
+      var email = {
+        from: process.env.EMAILFROM,
+        to: emailId,
+        subject: "Password Changed.",
+        html:
+          "Your request for password reset has been approved." +
+          "<br />You can login to IMS using this temporary password: <br /><b>" +
+          tempPwd +
+          "</b>",
+      };
+      client.sendMail(email, (err, info) => {
+        if (err) {
+          console.log(err);
+          err.message = "Could not send email" + err;
+        } else if (info) {
+          let message = "Email sent successfully";
+          return res.status(200).json({ message });
+        }
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    err.message = "Could not reset password. Please try again.";
+    next(err);
+  }
+};
+
 exports.updateStudent = async (req, res, next) => {
   try {
     const { id } = req.decoded;

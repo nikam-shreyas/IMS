@@ -79,3 +79,19 @@ export const resetStudentPassword = (path, data) => {
     }
   };
 };
+
+export const forgotPassword = (data) => {
+  return async (dispatch) => {
+    try {
+      await api.call("post", `auth/forgotpassword`, data);
+      dispatch(removeError());
+      dispatch(
+        addSuccess("Password change request has been sent to your Email!")
+      );
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(removeSuccessMessage());
+      dispatch(addError(error.message));
+    }
+  };
+};
