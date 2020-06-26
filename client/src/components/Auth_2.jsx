@@ -53,7 +53,7 @@ class Auth_2 extends Component {
             </div>
             <div className="formBx">
               <form onSubmit={this.handleSubmit}>
-                <h2>Register</h2>
+                <h2>Student Registration</h2>
                 <input
                   required
                   type="text"

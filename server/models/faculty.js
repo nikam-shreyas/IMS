@@ -24,6 +24,7 @@ const facultySchema = new mongoose.Schema({
   },
   emailId: {
     type: String,
+    unique: true,
   },
   department: {
     type: String,
