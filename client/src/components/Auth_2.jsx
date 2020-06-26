@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
-
-
+import { Link } from "react-router-dom";
+import { MdError } from "react-icons/md";
 class Auth_2 extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +55,7 @@ class Auth_2 extends Component {
               <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <input
+                  required
                   type="text"
                   value={username}
                   name="username"
@@ -65,6 +66,7 @@ class Auth_2 extends Component {
                 />
 
                 <input
+                  required
                   type="email"
                   value={emailId}
                   name="emailId"
@@ -75,6 +77,7 @@ class Auth_2 extends Component {
                 />
 
                 <input
+                  required
                   type="password"
                   value={password}
                   name="password"
@@ -85,17 +88,32 @@ class Auth_2 extends Component {
                 />
 
                 <input
+                  required
                   type="password"
                   value={confirmpassword}
                   name="confirmpassword"
-                  placeholder="Re-confirm Password"
+                  placeholder="Confirm Password"
                   className="form-control"
                   autoComplete="off"
                   onChange={this.handleConfirmPassword}
                 />
-
-                <input type="submit" value="Register" />
-                
+                {this.state.message && (
+                  <small className="text-danger">
+                    <span className="mr-1">
+                      <MdError
+                        style={{ margin: -2, padding: -2 }}
+                        color="crimson"
+                      />
+                    </span>
+                    {this.state.message}
+                  </small>
+                )}
+                <div className="text-center">
+                  <Link className="btn-custom mr-2" to="/login">
+                    <b>Login</b>
+                  </Link>
+                  <input type="submit" value="Register" />
+                </div>
               </form>
             </div>
           </div>

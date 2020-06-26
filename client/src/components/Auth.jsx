@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import {
   authUser,
@@ -56,6 +57,7 @@ class Auth extends Component {
               <form onSubmit={this.handleSubmit}>
                 <h2>Sign In</h2>
                 <input
+                  required
                   className="input"
                   type="text"
                   value={username}
@@ -67,6 +69,7 @@ class Auth extends Component {
                 />
 
                 <input
+                  required
                   className="input"
                   type="password"
                   value={password}
@@ -76,7 +79,7 @@ class Auth extends Component {
                   autoComplete="off"
                   onChange={this.handleChange}
                 />
-                
+
                 <select
                   name="User_type"
                   defaultValue="1"
@@ -85,19 +88,28 @@ class Auth extends Component {
                   id="exampleFormControlSelect1"
                 >
                   <option name="student" value="1">
-                    STUDENT
+                    Student
                   </option>
                   <option name="faculty" value="2">
-                    FACULTY
+                    Faculty
                   </option>
                   <option name="admin" value="3">
-                    ADMIN
+                    Admin
                   </option>
                 </select>
                 <p className="signup">
                   <a href="ForgotPassword">Forgot password?</a>
                 </p>
-                <input type="submit" value="Login" />
+                <div className="text-center">
+                  <Link
+                    className="btn-custom mr-2"
+                    style={{ textDecoration: "none" }}
+                    to="/register"
+                  >
+                    <b>Register</b>
+                  </Link>
+                  <input type="submit" value="Login" />
+                </div>
               </form>
             </div>
           </div>
