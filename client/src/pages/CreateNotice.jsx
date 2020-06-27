@@ -8,7 +8,7 @@ class CreateNotice extends Component {
       <>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Sidenav_f activeComponent="3" />
+            <Sidenav_f activeComponent="4" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid">
