@@ -6,6 +6,7 @@ import {
   MdPermIdentity,
   MdDns,
   MdSettings,
+  MdDoneAll,
 } from "react-icons/md";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -41,11 +42,19 @@ class Sidenav_f extends Component {
               <span className="mx-2">
                 <MdViewList style={{ margin: -1, padding: -1 }} />
               </span>
-              Applications
+              Received Applications
+            </li>
+          </Link>
+          <Link to="/approvedinternships">
+            <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdDoneAll style={{ margin: -1, padding: -1 }} />
+              </span>
+              Approved Applications
             </li>
           </Link>
           <Link to="/faculty">
-            <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdDns style={{ margin: -1, padding: -1 }} />
               </span>
@@ -53,7 +62,7 @@ class Sidenav_f extends Component {
             </li>
           </Link>
           <Link to="/facultyNotices">
-            <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdNotifications style={{ margin: -1, padding: -1 }} />
               </span>
@@ -61,7 +70,7 @@ class Sidenav_f extends Component {
             </li>
           </Link>
           <Link to="/facultysetting">
-            <li id="li" className={activeNow === "5" ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>

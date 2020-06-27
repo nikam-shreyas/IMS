@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { getCurrentInternship, deleteInternship } from "../store/actions";
 import { connect } from "react-redux";
-import Sidenav from "../components/Sidenav";
+import Sidenav_f from "../components/SideNav_f";
 import { withRouter } from "react-router-dom";
-class InternshipDetails extends Component {
+class ViewApprovedInternship extends Component {
   state = {
     isLoading: true,
     data: {
@@ -67,7 +67,7 @@ class InternshipDetails extends Component {
       <>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Sidenav activeComponent="1" />
+            <Sidenav_f activeComponent="3" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid">
@@ -82,11 +82,6 @@ class InternshipDetails extends Component {
                       <br />
                     </div>
                     <div className="card-body">
-                      {this.state.data.comments && (
-                        <div className="alert alert-danger">
-                          {this.state.data.comments}
-                        </div>
-                      )}
                       <div className="card-title">
                         {this.state.data.student.name.firstname +
                           " " +
@@ -215,16 +210,6 @@ class InternshipDetails extends Component {
                         </>
                       )}
                     </div>
-                    {this.state.data.completionStatus === "N" && (
-                      <div className="card-footer text-right">
-                        <div
-                          className="btn btn-danger btn-sm mx-2"
-                          onClick={() => this.handleClick(this.state.data._id)}
-                        >
-                          Delete
-                        </div>
-                      </div>
-                    )}
                   </>
                 }
               </div>
@@ -242,5 +227,5 @@ export default withRouter(
       internships: store.internships,
     }),
     { getCurrentInternship, deleteInternship }
-  )(InternshipDetails)
+  )(ViewApprovedInternship)
 );

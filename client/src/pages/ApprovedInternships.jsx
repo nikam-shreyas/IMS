@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getApprovedInternships } from "../store/actions";
 import { Link } from "react-router-dom";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
-import SideNav_f from "./SideNav_f";
+import SideNav_f from "../components/SideNav_f";
 class Internships extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,7 @@ class Internships extends Component {
           submittedDate: null,
           offerLetter: null,
           durationOfInternship: null,
+          startDate: null,
         },
         docs: {
           ApplicationStatus: null,
@@ -39,7 +40,6 @@ class Internships extends Component {
           prevSemAttendance: null,
         },
         holder: {
-          id: null,
           designation: null,
         },
         completionStatus: null,
@@ -87,7 +87,7 @@ class Internships extends Component {
     return (
       <div className="row no-gutters">
         <div className="col-sm-2 sidenav">
-          <SideNav_f activeComponent="2" />
+          <SideNav_f activeComponent="3" />
         </div>
         <div className="col-sm-10 of">
           <div className="container-fluid">
@@ -185,7 +185,7 @@ class Internships extends Component {
                         <span className="float-right">
                           <Link
                             to={{
-                              pathname: `/internshipview/${internship._id}`,
+                              pathname: `/internshipviewapproved/${internship._id}`,
                             }}
                             className="btn btn-primary btn-border mx-2"
                           >
@@ -193,7 +193,11 @@ class Internships extends Component {
                           </Link>
                         </span>
                         <br />
-                        <small className="text-muted">{internship._id}</small>
+                        <small className="text-muted">
+                          {internship.student.name.firstname +
+                            " " +
+                            internship.student.name.lastname}
+                        </small>
                       </div>
                       <div className="card-body">
                         <table className="table table-hover table-sm">

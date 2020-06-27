@@ -43,6 +43,9 @@ const internshipSchema = new mongoose.Schema({
     approvedDate: {
       type: Date,
     },
+    startDate: {
+      type: Date,
+    },
     workplace: {
       type: String,
       required: true,

@@ -114,7 +114,8 @@ exports.showApprovedInternships = async (req, res, next) => {
       path: "applicationsApproved",
       model: "Internship",
     });
-    res.status(200).json(faculty.applicationsReceived);
+    console.log(faculty.applicationsApproved);
+    res.status(200).json(faculty.applicationsApproved);
   } catch (err) {
     return next({
       status: 400,

@@ -21,7 +21,6 @@ class NoticeForm extends Component {
     for (var [key, value] of formData.entries()) {
       data[key] = value;
     }
-    data["duration"] = formData["duration"] + " month(s)";
     const { createNotice } = this.props;
     createNotice(data).then(() => {
       this.props.history.push("/facultyNotices");

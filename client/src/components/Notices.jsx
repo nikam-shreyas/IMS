@@ -147,7 +147,7 @@ class Notices extends Component {
                                   size="22"
                                 />
                               </span>
-                              {notice.duration}
+                              {notice.duration} months
                             </div>
                           )}
                           {notice.location && (

@@ -25,7 +25,8 @@ import NotFoundPage from "../pages/NotFound";
 import InternshipView from "../pages/InternshipView";
 import FacultyChangePassword from "../pages/FacultyChangepwd";
 import ForgotPassword from "../pages/ForgotPassword";
-
+import ApprovedInternships from "../pages/ApprovedInternships";
+import ViewApprovedInternship from "../pages/ViewApprovedInternship";
 const RouteViews = ({ auth }) => (
   <main>
     <Switch>
@@ -72,6 +73,11 @@ const RouteViews = ({ auth }) => (
       />
       <Route exact path="/notices" render={() => <Notices />} />
       <Route exact path="/internships" render={() => <Internships />} />
+      <Route
+        exact
+        path="/approvedinternships"
+        render={() => <ApprovedInternships />}
+      />
       <Route exact path="/student" render={() => <Student_Home />} />
       <Route exact path="/faculty" render={() => <CreateNotice />} />
       <Route exact path="/admin/" render={() => <AdminProfile />} />
@@ -98,6 +104,11 @@ const RouteViews = ({ auth }) => (
         exact
         path="/internshipview/:internshipid"
         render={() => <InternshipView />}
+      />
+      <Route
+        exact
+        path="/internshipviewapproved/:internshipid"
+        render={() => <ViewApprovedInternship />}
       />
       <Route exact path="/apply" render={() => <InternshipApplication />} />
       <Route exact path="/studentprofile" render={() => <StudentProfile />} />

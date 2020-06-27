@@ -184,6 +184,14 @@ class InternshipView extends Component {
                             <td>{this.state.data.student.rollNo}</td>
                           </tr>
                           <tr>
+                            <td>Start Date</td>
+                            <td>
+                              {new Date(
+                                this.state.data.application.startDate
+                              ).toDateString()}
+                            </td>
+                          </tr>
+                          <tr>
                             <td>Submitted On</td>
                             <td>
                               {new Date(

@@ -194,7 +194,11 @@ class Internships extends Component {
                           </Link>
                         </span>
                         <br />
-                        <small className="text-muted">{internship._id}</small>
+                        <small className="text-muted">
+                          {internship.student.name.firstname +
+                            " " +
+                            internship.student.name.lastname}
+                        </small>
                       </div>
                       <div className="card-body">
                         <table className="table table-hover table-sm">

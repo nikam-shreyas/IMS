@@ -23,7 +23,6 @@ class InternshipApplication extends Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["durationOfInternship"] += " month(s)";
     data["application"]["offerLetter"] = "TemporaryString";
     const { createInternship } = this.props;
     createInternship(data).then(() => {
@@ -71,7 +70,20 @@ class InternshipApplication extends Component {
                       required
                     />
                   </div>
-                  <div className="col-sm-6">
+                  <div className="col-sm-3">
+                    Start Date:
+                    <div className="input-group">
+                      <input
+                        type="date"
+                        name="startDate"
+                        id="startDate"
+                        placeholder="eg. 1"
+                        className="form-control"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
                     Duration:
                     <div className="input-group">
                       <input

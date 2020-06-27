@@ -11,7 +11,7 @@ class FacultyNotices extends Component {
           <div className="col-sm-2 sidenav">
             <Sidenav_f activeComponent="4" />
           </div>
-          <div className="col-sm-10">
+          <div className="col-sm-10 of">
             <div className="container-fluid">
               <h4 className="mt-2">Notices</h4>
               <hr />
