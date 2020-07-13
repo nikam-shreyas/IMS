@@ -65,8 +65,8 @@ class AdminProfile extends Component {
       elements[i].readOnly = !elements[i].readOnly;
     }
     var updateButton = document.getElementById("updateBtn");
-    updateButton.disabled=!updateButton.disabled;
-    
+    updateButton.disabled = !updateButton.disabled;
+
     var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
     editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
@@ -180,7 +180,12 @@ class AdminProfile extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark" id="updateBtn" disabled>
+                    <button
+                      type="submit"
+                      className="btn btn-dark"
+                      id="updateBtn"
+                      disabled
+                    >
                       Update Profile
                     </button>
                   </div>

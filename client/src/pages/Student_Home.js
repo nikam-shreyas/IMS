@@ -6,7 +6,7 @@ class Student_Home extends Component {
   state = {};
   render() {
     return (
-      <div className="row no-gutters h-100">
+      <div className="row no-gutters">
         <div className="col-sm-2 sidenav">
           <Sidenav activeComponent="1" />
         </div>

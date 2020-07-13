@@ -1,4 +1,4 @@
-@import './styles/style.css';
+@import "./styles/style.css";
 @import "./styles/sidenav.css";
 @import "./styles/studentDashboard.css";
 
@@ -10,6 +10,7 @@
   height: 98vh;
   overflow-y: auto;
 }
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

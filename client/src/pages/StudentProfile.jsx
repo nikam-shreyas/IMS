@@ -62,8 +62,8 @@ class StudentProfile extends Component {
       elements[i].readOnly = !elements[i].readOnly;
     }
     var updateButton = document.getElementById("updateBtn");
-    updateButton.disabled=!updateButton.disabled;
-    
+    updateButton.disabled = !updateButton.disabled;
+
     var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
     editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
@@ -76,7 +76,7 @@ class StudentProfile extends Component {
             <Sidenav activeComponent="2" />
           </div>
           <div className="col-sm-10">
-            <div className="container-fluid">
+            <div className="container-fluid ctb">
               <h4 className="mt-2">My Profile</h4>
               <hr />
               {
@@ -191,7 +191,12 @@ class StudentProfile extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark" id="updateBtn" disabled>
+                    <button
+                      type="submit"
+                      className="btn btn-dark"
+                      id="updateBtn"
+                      disabled
+                    >
                       Update Profile
                     </button>
                   </div>

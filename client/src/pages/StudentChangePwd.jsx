@@ -1,29 +1,33 @@
 import React, { Component, useState } from "react";
 // import { showProfile } from "../store/actions";
 import { connect } from "react-redux";
-import { getStudent, resetStudentPassword, removeSuccess } from "../store/actions";
+import {
+  getStudent,
+  resetStudentPassword,
+  removeSuccess,
+} from "../store/actions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
 import SideNav from "../components/Sidenav";
 class ChangePassword extends Component {
-    state = {
-        isLoading: true,
-        data: {
-          name: {
-            firstname: "eg. John",
-            lastname: "eg. Doe",
-          },
-          currentClass: {
-            year: "eg. TE",
-            div: "eg. 2",
-          },
-          rollNo: "eg. 31241",
-          prevSemAttendance: "eg. 75.5",
-          emailId: "example@gmail.com",
-        },
-      };
+  state = {
+    isLoading: true,
+    data: {
+      name: {
+        firstname: "eg. John",
+        lastname: "eg. Doe",
+      },
+      currentClass: {
+        year: "eg. TE",
+        div: "eg. 2",
+      },
+      rollNo: "eg. 31241",
+      prevSemAttendance: "eg. 75.5",
+      emailId: "example@gmail.com",
+    },
+  };
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);

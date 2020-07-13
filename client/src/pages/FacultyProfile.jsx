@@ -98,11 +98,11 @@ class FacultyProfile extends Component {
     }
     elements[elements.length - 4].disabled = !elements[elements.length - 4]
       .disabled;
-    
-      var updateButton = document.getElementById("updateBtn");
-      updateButton.disabled=!updateButton.disabled;
-      
-      var editButton = document.getElementById("editButton");
+
+    var updateButton = document.getElementById("updateBtn");
+    updateButton.disabled = !updateButton.disabled;
+
+    var editButton = document.getElementById("editButton");
     editButton.classList.toggle("btn-danger");
     editButton.innerHTML = editButton.innerHTML === "Edit" ? "Cancel" : "Edit";
   }
@@ -272,7 +272,12 @@ class FacultyProfile extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark" id="updateBtn" disabled>
+                    <button
+                      type="submit"
+                      className="btn btn-dark"
+                      id="updateBtn"
+                      disabled
+                    >
                       Update Profile
                     </button>
                   </div>

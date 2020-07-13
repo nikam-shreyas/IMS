@@ -4,12 +4,15 @@ import { getApprovedInternships } from "../store/actions";
 import { Link } from "react-router-dom";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 import SideNav_f from "../components/SideNav_f";
+import { RiThunderstormsLine } from "react-icons/ri";
 class Internships extends Component {
   constructor(props) {
     super(props);
   }
 
   state = {
+    displayCount: "null",
+    displayCountDiv: "none",
     internships: [
       {
         _id: null,
@@ -132,7 +135,6 @@ class Internships extends Component {
                 </div>
               </div>
             </h4>
-
             <hr />
             <div className="input-group mb-3">
               <div className="input-group-prepend">
@@ -154,6 +156,8 @@ class Internships extends Component {
               />
             </div>
             <hr />
+            {/* <span id="internshipCount" style={{ display: "none" }}></span>
+            <hr /> */}
             <div>
               {this.state.internships[0].holder.designation === null && (
                 <div className="alert alert-info">
@@ -171,108 +175,110 @@ class Internships extends Component {
               )}
               {this.state.internships[0].holder.designation !== null &&
                 this.state.internships.map((internship) => (
-                  <div
-                    key={internship._id}
-                    className={
-                      internship.completionStatus === "N"
-                        ? "card my-3 border-secondary"
-                        : "card my-3 border-success"
-                    }
-                  >
-                    <div className="individual-card">
-                      <div className="card-header">
-                        {internship.application.workplace}
-                        <span className="float-right">
-                          <Link
-                            to={{
-                              pathname: `/internshipviewapproved/${internship._id}`,
-                            }}
-                            className="btn btn-primary btn-border mx-2"
-                          >
-                            View
-                          </Link>
-                        </span>
-                        <br />
-                        <small className="text-muted">
-                          {internship.student.name.firstname +
-                            " " +
-                            internship.student.name.lastname}
-                        </small>
-                      </div>
-                      <div className="card-body">
-                        <table className="table table-hover table-sm">
-                          <thead className="thead-dark">
-                            <tr>
-                              <th>Status</th>
-                              <th>
-                                {internship.completionStatus === "N"
-                                  ? "Pending"
-                                  : "Approved"}
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr
-                              className={
-                                internship.docs.AttendanceStatus === "N"
-                                  ? "table-warning"
-                                  : "table-success"
-                              }
+                  <>
+                    <div
+                      key={internship._id}
+                      className={
+                        internship.completionStatus === "N"
+                          ? "card my-3 border-secondary"
+                          : "card my-3 border-success"
+                      }
+                    >
+                      <div className="individual-card">
+                        <div className="card-header">
+                          {internship.application.workplace}
+                          <span className="float-right">
+                            <Link
+                              to={{
+                                pathname: `/internshipviewapproved/${internship._id}`,
+                              }}
+                              className="btn btn-primary btn-border mx-2"
                             >
-                              <td>Attendance</td>
-                              <td>{internship.docs.AttendanceStatus}</td>
-                            </tr>
-                            <tr
-                              className={
-                                internship.docs.ApplicationStatus === "N"
-                                  ? "table-warning"
-                                  : "table-success"
-                              }
-                            >
-                              <td>Application</td>
-                              <td>{internship.docs.ApplicationStatus}</td>
-                            </tr>
-                            <tr
-                              className={
-                                internship.docs.UndertakingStatus === "N"
-                                  ? "table-warning"
-                                  : "table-success"
-                              }
-                            >
-                              <td>Undertaking</td>
-                              <td>{internship.docs.UndertakingStatus}</td>
-                            </tr>
-                            <tr
-                              className={
-                                internship.docs.OfferLetterStatus === "N"
-                                  ? "table-warning"
-                                  : "table-success"
-                              }
-                            >
-                              <td>Offer Letter</td>
-                              <td>{internship.docs.OfferLetterStatus}</td>
-                            </tr>
-                            <tr
-                              className={
-                                internship.docs.MarksheetsStatus === "N"
-                                  ? "table-warning"
-                                  : "table-success"
-                              }
-                            >
-                              <td>Marksheets</td>
-                              <td>{internship.docs.MarksheetsStatus}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        {internship.completionStatus === "N" && (
-                          <>
-                            Application is currently viewed by:{" "}
-                            {internship.holder.designation} <br />
-                          </>
-                        )}
+                              View
+                            </Link>
+                          </span>
+                          <br />
+                          <small className="text-muted">
+                            {internship.student.name.firstname +
+                              " " +
+                              internship.student.name.lastname}
+                          </small>
+                        </div>
+                        <div className="card-body">
+                          <table className="table table-hover table-sm">
+                            <thead className="thead-dark">
+                              <tr>
+                                <th>Status</th>
+                                <th>
+                                  {internship.completionStatus === "N"
+                                    ? "Pending"
+                                    : "Approved"}
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr
+                                className={
+                                  internship.docs.AttendanceStatus === "N"
+                                    ? "table-warning"
+                                    : "table-success"
+                                }
+                              >
+                                <td>Attendance</td>
+                                <td>{internship.docs.AttendanceStatus}</td>
+                              </tr>
+                              <tr
+                                className={
+                                  internship.docs.ApplicationStatus === "N"
+                                    ? "table-warning"
+                                    : "table-success"
+                                }
+                              >
+                                <td>Application</td>
+                                <td>{internship.docs.ApplicationStatus}</td>
+                              </tr>
+                              <tr
+                                className={
+                                  internship.docs.UndertakingStatus === "N"
+                                    ? "table-warning"
+                                    : "table-success"
+                                }
+                              >
+                                <td>Undertaking</td>
+                                <td>{internship.docs.UndertakingStatus}</td>
+                              </tr>
+                              <tr
+                                className={
+                                  internship.docs.OfferLetterStatus === "N"
+                                    ? "table-warning"
+                                    : "table-success"
+                                }
+                              >
+                                <td>Offer Letter</td>
+                                <td>{internship.docs.OfferLetterStatus}</td>
+                              </tr>
+                              <tr
+                                className={
+                                  internship.docs.MarksheetsStatus === "N"
+                                    ? "table-warning"
+                                    : "table-success"
+                                }
+                              >
+                                <td>Marksheets</td>
+                                <td>{internship.docs.MarksheetsStatus}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          {internship.completionStatus === "N" && (
+                            <>
+                              Application is currently viewed by:{" "}
+                              {internship.holder.designation} <br />
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </>
                 ))}
             </div>
           </div>

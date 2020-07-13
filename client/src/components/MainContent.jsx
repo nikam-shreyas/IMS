@@ -81,7 +81,7 @@ class MainContent extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className="ctb">
         <div className="container-fluid my-1 of">
           <div className="mt-2 mr-2">
             <h4>
@@ -267,7 +267,7 @@ class MainContent extends Component {
               ))}
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
