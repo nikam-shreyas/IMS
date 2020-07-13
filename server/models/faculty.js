@@ -45,6 +45,7 @@ const facultySchema = new mongoose.Schema({
       "ClassCoordinator",
       "DepartmentInternshipCoordinator",
       "CollegeInternshipCoordinator",
+      "HOD",
       "Principal",
       "Admin",
     ],

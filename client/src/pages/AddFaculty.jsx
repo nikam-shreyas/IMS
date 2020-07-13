@@ -117,6 +117,7 @@ class AddFaculty extends Component {
                           <option value="DepartmentInternshipCoordinator">
                             Department Internship Coordinator
                           </option>
+                          <option value="HOD">HOD</option>
                           <option value="CollegeInternshipCoordinator">
                             College Internship Coordinator
                           </option>
