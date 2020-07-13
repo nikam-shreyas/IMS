@@ -1,15 +1,26 @@
 import React, { Component } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-class InternshipApplication extends Component {
-  state = {};
+class InternshipApplication extends React.Component {
+  state = {
+    startDate: new Date()
+  };
   constructor(props) {
     super(props);
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
+  handleChange = date => {
+    this.setState({
+      startDate: date
+    });
+  };
+
   handleUpload(id, labelId) {
     var fileName = document.getElementById(id).value.split("\\").pop();
     document.getElementById(labelId).classList.add("selected");
@@ -25,6 +36,7 @@ class InternshipApplication extends Component {
     data["application"]["submittedDate"] = new Date().toUTCString();
     data["application"]["offerLetter"] = "TemporaryString";
     const { createInternship } = this.props;
+
     createInternship(data).then(() => {
       this.props.history.push("/student");
     });
@@ -72,14 +84,18 @@ class InternshipApplication extends Component {
                   </div>
                   <div className="col-sm-3">
                     Start Date:
-                    <div className="input-group">
-                      <input
-                        type="date"
+                    <div className="input-group">                           
+                      <DatePicker
                         name="startDate"
                         id="startDate"
-                        placeholder="eg. 1"
                         className="form-control"
-                        required
+                        dateFormat="dd/MM/yyyy"
+                        z-index = "10"
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        minDate={new Date()}
+                        // maxDate={addMonths(new Date(), 5)}
+                        showDisabledMonthNavigation
                       />
                     </div>
                   </div>
