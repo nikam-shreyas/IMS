@@ -39,10 +39,7 @@ class AdminProfile extends Component {
     const { updateAdmin } = this.props;
     var formData = new FormData(event.target);
     const updatedata = {};
-    // updatedata["name"] = {
-    //   firstname: formData.get("firstname") || this.state.data.name.firstname,
-    //   lastname: formData.get("lastname") || this.state.data.name.lastname,
-    // };
+
     updatedata["firstname"] =
       formData.get("firstname") || this.state.data.name.firstname;
     updatedata["lastname"] =
