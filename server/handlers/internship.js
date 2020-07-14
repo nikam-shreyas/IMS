@@ -2,6 +2,7 @@ const db = require("../models");
 const chain = require("./chain");
 let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
+const { application } = require("express");
 require("dotenv").config();
 
 //mailing options and transportor
@@ -84,13 +85,11 @@ exports.addNewInternship = async (req, res, next) => {
         "</b>. <br /><br /> received from <b>" +
         student.name.firstname +
         " " +
-        student.name.lastname +
-        +"</b> studying in  <b>" +
-        student.currentClass.year +
-        " " +
-        student.currentClass.div +
-        "  </b>" +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
+        student.name.lastname + 
+        +
+        "</b> studying in  <b>"+
+        student.currentClass.year+" "+student.currentClass.div+"  </b>"
+        + "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
     };
 
     client.sendMail(email, (err, info) => {
@@ -108,6 +107,7 @@ exports.addNewInternship = async (req, res, next) => {
         console.log(info);
       }
     });
+
 
     return res.status(201).json({ ...internship._doc, student: student._id });
   } catch (err) {
@@ -340,10 +340,7 @@ exports.forwardInternship = async (req, res, next) => {
       subject: "New Internship Application for Approval!",
       html:
         "You have a new internship application for approval. Application is approved and forwarded by <b>" +
-        faculty.name.firstname +
-        " " +
-        faculty.name.lastname +
-        " " +
+        faculty.name.firstname+" "+faculty.name.lastname+" "+
         "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
     };
     client.sendMail(email, (err, info) => {

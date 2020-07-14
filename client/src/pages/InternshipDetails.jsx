@@ -59,12 +59,6 @@ class InternshipDetails extends Component {
       this.props.history.push("/student");
     }
   }
-
-  handleUploadCertificate(id, labelId) {
-    var fileName = document.getElementById(id).value.split("\\").pop();
-    document.getElementById(labelId).classList.add("selected");
-    document.getElementById(labelId).innerHTML = fileName;
-  }
   loadData(internship) {
     this.setState({ data: internship });
   }
@@ -79,37 +73,6 @@ class InternshipDetails extends Component {
             <div className="container-fluid">
               <h4 className="mt-2">Application:</h4>
               <hr />
-              <div className="container">
-                {this.state.data.completionStatus !== "N" && (
-                  <>
-                    Upload Completion Certificate:
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        name="completionCertificate"
-                        id="completionCertificate"
-                        onChange={() =>
-                          this.handleUploadCertificate(
-                            "completionCertificate",
-                            "completionCertificateLabel"
-                          )
-                        }
-                        required
-                      />
-                      <label
-                        className="custom-file-label"
-                        id="completionCertificateLabel"
-                        htmlFor="completionCertificate"
-                      >
-                        Choose file
-                      </label>
-                    </div>
-                    <button className="btn btn-success mt-2">Upload</button>
-                    <hr />
-                  </>
-                )}
-              </div>
               <div className="card m-3 border-dark" id="card">
                 {this.state.isLoading && <>Loading...</>}
                 {
@@ -124,7 +87,6 @@ class InternshipDetails extends Component {
                           {this.state.data.comments}
                         </div>
                       )}
-
                       <div className="card-title">
                         {this.state.data.student.name.firstname +
                           " " +
@@ -246,22 +208,22 @@ class InternshipDetails extends Component {
                           </tr>
                         </tbody>
                       </table>
+                      {this.state.data.completionStatus === "N" && (
+                        <>
+                          Application is currently viewed by:{" "}
+                          {this.state.data.holder.designation} <br />
+                        </>
+                      )}
                     </div>
                     {this.state.data.completionStatus === "N" && (
-                      <>
-                        Application is currently viewed by:{" "}
-                        {this.state.data.holder.designation} <br />
-                        <div className="card-footer text-right">
-                          <div
-                            className="btn btn-danger btn-sm mx-2"
-                            onClick={() =>
-                              this.handleClick(this.state.data._id)
-                            }
-                          >
-                            Delete
-                          </div>
+                      <div className="card-footer text-right">
+                        <div
+                          className="btn btn-danger btn-sm mx-2"
+                          onClick={() => this.handleClick(this.state.data._id)}
+                        >
+                          Delete
                         </div>
-                      </>
+                      </div>
                     )}
                   </>
                 }

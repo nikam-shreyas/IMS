@@ -4,7 +4,6 @@ module.exports = {
   ...require("./admin"),
   ...require("./notices"),
   ...require("./Faculty"),
-  ...require("./file.js"),
 };
 
 module.exports.notFound = (req, res, next) => {

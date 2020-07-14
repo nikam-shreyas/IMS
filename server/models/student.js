@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const multer = require("multer");
-const crypto = require("crypto");
-const GridFsStorage = require("multer-gridfs-storage");
 const studentSchema = new mongoose.Schema({
   name: {
     firstname: {
@@ -70,24 +67,5 @@ studentSchema.methods.comparePassword = async function (attempt, next) {
     next(err);
   }
 };
-
-const storage = new GridFsStorage({
-  url: "mongodb://localhost/internship",
-  file: (req, res) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString("hex") + path.extname(file.originalname);
-        const fileInfo = {
-          filename: filename,
-          bucketName: "uploads",
-        };
-        resolve(fileInfo);
-      });
-    });
-  },
-});
 
 module.exports = mongoose.model("Student", studentSchema);
