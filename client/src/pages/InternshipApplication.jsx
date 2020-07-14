@@ -83,21 +83,17 @@ class InternshipApplication extends React.Component {
                     />
                   </div>
                   <div className="col-sm-3">
-                    Start Date:
-                    <div className="input-group">                           
+                    Start Date:                    
                       <DatePicker
                         name="startDate"
                         id="startDate"
                         className="form-control"
                         dateFormat="dd/MM/yyyy"
-                        z-index = "10"
                         selected={this.state.startDate}
                         onChange={this.handleChange}
                         minDate={new Date()}
-                        // maxDate={addMonths(new Date(), 5)}
                         showDisabledMonthNavigation
-                      />
-                    </div>
+                      />                    
                   </div>
                   <div className="col-sm-3">
                     Duration:
