@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { createInternship } from "../store/actions";
+import { createInternship,uploadDocument } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -13,6 +13,7 @@ class InternshipApplication extends React.Component {
     super(props);
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitFile=this.submitFile.bind(this);
   }
   
   handleChange = date => {
@@ -33,13 +34,26 @@ class InternshipApplication extends React.Component {
     for (var [key, value] of formData.entries()) {
       data["application"][key] = value;
     }
+    // data["application"]["startDate"] = formData.get('startDate');
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = "TemporaryString";
+    data["application"]["offerLetter"] = formData.get('offerLetter');
+    const { uploadDocument } = this.props;
+    // uploadDocument();
+    // console.log('heee')
+
+    console.log(data.application.offerLetter);
+
     const { createInternship } = this.props;
 
     createInternship(data).then(() => {
       this.props.history.push("/student");
     });
+  }
+  submitFile(event){
+    const { uploadDocument } = this.props;
+
+    uploadDocument();
+    console.log('heee')
   }
   render() {
     return (
@@ -165,28 +179,7 @@ class InternshipApplication extends React.Component {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="col-sm-12">
-                    Upload Offer Letter:
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        name="offerLetter"
-                        id="offerLetter"
-                        onChange={() =>
-                          this.handleUpload("offerLetter", "offerLetterLabel")
-                        }
-                        required
-                      />
-                      <label
-                        className="custom-file-label"
-                        id="offerLetterLabel"
-                        htmlFor="offerLetter"
-                      >
-                        Choose file
-                      </label>
-                    </div>
-                  </div>
+                
                 </div>
               </div>
               <hr />
@@ -198,7 +191,33 @@ class InternshipApplication extends React.Component {
                   Submit
                 </button>
               </div>
-            </form>
+           <div className="col-sm-12">
+                Upload Offer Letter:
+                <div className="custom-file">
+                <input
+                type="file"
+                        className="custom-file-input"
+                        name="offerLetter"
+                        id="offerLetter"
+                        onChange={() =>
+                          this.handleUpload("offerLetter", "offerLetterLabel")
+                        }
+                        required
+                        />
+                        <label
+                        className="custom-file-label"
+                        id="offerLetterLabel"
+                        htmlFor="offerLetter"
+                        >
+                        Choose file
+                        </label>
+                        </div>
+                        <button type="submit" className="btn btn-dark" style={{marginTop:'5px'}}>
+                        Submit File
+                      </button>
+                        </div>
+                        
+                        </form>
           </div>
         </div>
       </div>
@@ -212,6 +231,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { createInternship }
+    { createInternship,uploadDocument }
   )(InternshipApplication)
 );

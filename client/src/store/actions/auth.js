@@ -59,8 +59,8 @@ export const getStudent = () => {
       dispatch(removeError());
     } catch (err) {
       console.log(err);
-      const error = err.response.data;
-      dispatch(addError(error.message));
+      // const error = err.response.data;
+      // dispatch(addError(error.message));
     }
   };
 };

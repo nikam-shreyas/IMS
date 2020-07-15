@@ -269,6 +269,7 @@ class Internships extends Component {
                               </tr>
                             </tbody>
                           </table>
+                          
                           {internship.completionStatus === "N" && (
                             <>
                               Application is currently viewed by:{" "}

@@ -54,6 +54,17 @@ export const getApprovedInternships = () => {
     }
   };
 };
+export const uploadDocument = () => {
+  return async (dispatch) => {
+    try {
+      const doucment = await api.call("post", "internships/uploadDocument");
+    } catch (err) {
+      console.log(err);
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
 
 export const getStudentInternships = () => {
   return async (dispatch) => {
