@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 
 const imageFileFilter = (req, file, cb) => {
     if(!file.originalname.match(/\.(pdf)$/)) {
+       console.log("only pdf allowed")
         return cb(new Error('You can upload only pdf files!'), false);
     }
     cb(null, true);
@@ -35,6 +36,7 @@ router.route("/update").post(auth, handle.updateInternship);
 router.route("/approve").post(auth, handle.approveInternship);
 router.route("/reject").post(auth, handle.rejectInternship);
 router.route("/uploadDocument").post(auth,upload.single('offerLetter'), (req, res) => {
+  console.log(req.body)
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
   res.json(req.file);

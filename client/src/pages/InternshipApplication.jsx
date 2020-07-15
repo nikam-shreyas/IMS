@@ -3,9 +3,12 @@ import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import axios,{post} from 'axios';
+
 class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
+    fileName:""
   };
   constructor(props) {
     super(props);
@@ -42,10 +45,17 @@ class InternshipApplication extends React.Component {
     });
   }
   submitFile(event){
-    const { uploadDocument } = this.props;
+    let files=event.target.files;
+    console.log(files[0])
+    let reader=new FileReader();
+    reader.readAsDataURL(files[0]);
+    let formData = new FormData();
+    formData.append('offerLetter', files[0]);
 
-    uploadDocument();
-    console.log('heee')
+    axios.post("http://localhost:4002/api/internships/uploadDocument", formData)
+    .then((response) => {
+      console.log("done",response)
+    });
   }
   render() {
     return (
@@ -163,7 +173,13 @@ class InternshipApplication extends React.Component {
                   </div>
                 </div>
                 <div className="form-row">
-                
+               {/* <form method="post" encType="multipart/form-data" onSubmit="/internship/uploadDocument">
+                <input type="file" name="offerLetter" />
+                <button type="submit" className="btn btn-dark">
+                  Submit
+                </button>
+    </form>*/}
+              <input type="file" name="offerLetter" onChange={this.submitFile} />
                 </div>
               </div>
               <hr />
