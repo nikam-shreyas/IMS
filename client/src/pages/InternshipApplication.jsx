@@ -1,6 +1,6 @@
 import React from "react";
-import DatePicker from "react-datepicker"; 
-import "react-datepicker/dist/react-datepicker.css"; 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
@@ -19,7 +19,11 @@ class InternshipApplication extends React.Component {
       startDate: date,
     });
   };
+  // downloadFile(){
+  //   var x = new XMLHttpRequest();
+  //   x.open('GET','https:localhost:4002/index.js',true);
 
+  // }
   handleUpload(id, labelId) {
     var fileName = document.getElementById(id).value.split("\\").pop();
     document.getElementById(labelId).classList.add("selected");
@@ -78,25 +82,10 @@ class InternshipApplication extends React.Component {
                       id="workplace"
                       className="form-control"
                       placeholder="eg. Google"
-                      
                       required
                     />
                   </div>
-                  <div className="col-sm-3">
-                    Start Date:  
-                    <div className="input-group">                                                        
-                      <DatePicker
-                        name="startDate"
-                        id="startDate"
-                        className="form-control"
-                        dateFormat="yyyy/MM/dd"
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
-                        minDate={new Date()}
-                        showDisabledMonthNavigation
-                      />
-                    </div>                    
-                  </div>
+
                   <div className="col-sm-3">
                     Duration:
                     <div className="input-group">
@@ -111,6 +100,21 @@ class InternshipApplication extends React.Component {
                       <div className="input-group-append">
                         <span className="input-group-text">month(s)</span>
                       </div>
+                    </div>
+                  </div>
+                  <div className="col-sm-3">
+                    Start Date:
+                    <div className="input-group">
+                      <DatePicker
+                        name="startDate"
+                        id="startDate"
+                        className="form-control"
+                        dateFormat="yyyy/MM/dd"
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                      />
                     </div>
                   </div>
                 </div>
@@ -197,6 +201,7 @@ class InternshipApplication extends React.Component {
                 </button>
               </div>
             </form>
+            <button onClick={downloadFile()}>Download</button>
           </div>
         </div>
       </div>

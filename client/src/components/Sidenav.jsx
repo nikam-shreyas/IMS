@@ -29,14 +29,6 @@ class Sidenav extends Component {
         <h4 className="text-light text-center mt-2">PICT IMS</h4>
         <p className="mt-4">Menu</p>
         <ul id="ul">
-          <Link to="/student">
-            <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
-              <span className="mx-2">
-                <MdDns style={{ margin: -1, padding: -1 }} />
-              </span>
-              My Applications
-            </li>
-          </Link>
           <Link to="/studentprofile">
             <li id="li" className={activeNow === "2" ? "sidenav-active" : ""}>
               <span className="mx-2">
@@ -45,21 +37,20 @@ class Sidenav extends Component {
               Profile
             </li>
           </Link>
+          <Link to="/student">
+            <li id="li" className={activeNow === "1" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdDns style={{ margin: -1, padding: -1 }} />
+              </span>
+              My Applications
+            </li>
+          </Link>
           <Link to="/apply">
             <li id="li" className={activeNow === "3" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAddCircle style={{ margin: -1, padding: -1 }} />
               </span>
               Apply
-            </li>
-          </Link>
-
-          <Link to="/studentDocs">
-            <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
-              <span className="mx-2">
-                <MdDescription style={{ margin: -1, padding: -1 }} />
-              </span>
-              Documents
             </li>
           </Link>
           <Link to="/notifications">
