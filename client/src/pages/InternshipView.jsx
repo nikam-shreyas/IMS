@@ -43,6 +43,7 @@ class InternshipView extends Component {
         rollNo: null,
         prevSemAttendance: null,
       },
+      approvedBy: [],
       holder: { id: null, designation: null },
       completionStatus: null,
       comments: null,
@@ -63,6 +64,10 @@ class InternshipView extends Component {
       .then(() => this.loadData(this.props.internships));
   }
   handleClick(data) {
+    let remark = prompt("Enter a remark: ");
+    if (remark) {
+      this.state.data.remark = remark;
+    }
     if (window.confirm("Are you sure?")) {
       if (this.state.data.holder.designation !== "Principal") {
         const { forwardInternship, updateInternship } = this.props;
@@ -213,7 +218,21 @@ class InternshipView extends Component {
                           )}
                         </tbody>
                       </table>
-
+                      {this.state.data.approvedBy.length > 0 && (
+                        <>
+                          Remarks: <br />
+                          <table className="table tbale-sm">
+                            <tbody>
+                              {this.state.data.approvedBy.map((p) => (
+                                <tr key={p.designation}>
+                                  <td>@{p.designation}</td>
+                                  <td>{p.remark}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </>
+                      )}
                       <form onSubmit={this.updateStatus}>
                         <table className="table table-hover table-sm">
                           <thead className="thead-dark">

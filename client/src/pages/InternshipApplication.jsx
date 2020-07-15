@@ -1,23 +1,22 @@
-import React, { Component } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React from "react";
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css"; 
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 class InternshipApplication extends React.Component {
   state = {
-    startDate: new Date()
+    startDate: new Date(),
   };
   constructor(props) {
     super(props);
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  handleChange = date => {
+  handleChange = (date) => {
     this.setState({
-      startDate: date
+      startDate: date,
     });
   };
 
