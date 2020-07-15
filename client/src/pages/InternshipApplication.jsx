@@ -1,6 +1,4 @@
 import React from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
@@ -14,7 +12,6 @@ class InternshipApplication extends React.Component {
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange = (date) => {
     this.setState({
       startDate: date,
@@ -32,12 +29,7 @@ class InternshipApplication extends React.Component {
     const data = { application: {} };
     for (var [key, value] of formData.entries()) {
       data["application"][key] = value;
-
-      console.log(key, value);
     }
-    data["application"]["startDate"] = new Date(
-      formData["startDate"]
-    ).toUTCString();
     data["application"]["submittedDate"] = new Date().toUTCString();
     data["application"]["offerLetter"] = "TemporaryString";
     const { createInternship } = this.props;
@@ -89,18 +81,12 @@ class InternshipApplication extends React.Component {
                   </div>
                   <div className="col-sm-3">
                     Start Date:
-                    <div className="input-group">
-                      <DatePicker
-                        name="startDate"
-                        id="startDate"
-                        className="form-control"
-                        dateFormat="yyyy-mm-dd"
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
-                        minDate={new Date()}
-                        showDisabledMonthNavigation
-                      />
-                    </div>
+                    <input
+                      type="date"
+                      name="startDate"
+                      id="startDate"
+                      className="form-control"
+                    />
                   </div>
                   <div className="col-sm-3">
                     Duration:
