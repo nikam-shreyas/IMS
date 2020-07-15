@@ -1,4 +1,6 @@
 import React from "react";
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css"; 
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
@@ -76,17 +78,24 @@ class InternshipApplication extends React.Component {
                       id="workplace"
                       className="form-control"
                       placeholder="eg. Google"
+                      
                       required
                     />
                   </div>
                   <div className="col-sm-3">
-                    Start Date:
-                    <input
-                      type="date"
-                      name="startDate"
-                      id="startDate"
-                      className="form-control"
-                    />
+                    Start Date:  
+                    <div className="input-group">                                                        
+                      <DatePicker
+                        name="startDate"
+                        id="startDate"
+                        className="form-control"
+                        dateFormat="yyyy/MM/dd"
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                      />
+                    </div>                    
                   </div>
                   <div className="col-sm-3">
                     Duration:
