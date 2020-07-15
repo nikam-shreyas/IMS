@@ -3,8 +3,7 @@ import api from "../../services/api";
 import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP, APPROVE_INTERNSHIP ,UPDATE_INTERNSHIP} from "../actionTypes";
 
 import { addError, removeError } from "./error";
-//import { internships } from "../reducers/internships";
-//import { Internship } from "../../../server/models";
+
 
 export const setInternships = (internships) => ({
   type: SET_INTERNSHIPS,
