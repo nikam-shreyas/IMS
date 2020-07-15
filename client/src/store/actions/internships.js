@@ -6,6 +6,7 @@ import {
   APPROVE_INTERNSHIP,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
+import { addSuccess } from "./success";
 
 export const setInternships = (internships) => ({
   type: SET_INTERNSHIPS,
@@ -114,6 +115,20 @@ export const forwardInternship = (data) => {
       const internship = await api.call("post", "internships/forward", data);
       dispatch(PushInternship(internship));
       dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+export const uploadDocument=(data,config)=>{
+  return async (dispatch) => {
+    try {
+      console.log("im in upload ");
+      const internship = await api.call("post", "internships/uploadDocument", data,config);
+      dispatch(addSuccess("Document Uploaded Successfully"));
+      dispatch(removeError());   
     } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));
