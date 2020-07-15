@@ -37,7 +37,6 @@ class MainContent extends Component {
           prevSemAttendance: null,
         },
         holder: {
-          id: null,
           designation: null,
         },
         completionStatus: null,
