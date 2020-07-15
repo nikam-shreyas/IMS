@@ -67,6 +67,7 @@ const internshipSchema = new mongoose.Schema({
   approvedBy: [
     {
       designation: String,
+      remark: String,
     },
   ],
   docs: {

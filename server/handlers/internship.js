@@ -90,11 +90,13 @@ exports.addNewInternship = async (req, res, next) => {
         "</b>. <br /><br /> received from <b>" +
         student.name.firstname +
         " " +
-        student.name.lastname + 
-        +
-        "</b> studying in  <b>"+
-        student.currentClass.year+" "+student.currentClass.div+"  </b>"
-        + "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
+        student.name.lastname +
+        "</b> studying in <b>" +
+        student.currentClass.year +
+        " " +
+        student.currentClass.div +
+        "  </b>" +
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
     };
 
     client.sendMail(email, (err, info) => {
@@ -112,7 +114,6 @@ exports.addNewInternship = async (req, res, next) => {
         console.log(info);
       }
     });
-
 
     return res.status(201).json({ ...internship._doc, student: student._id });
   } catch (err) {
@@ -245,6 +246,7 @@ exports.approveInternship = async (req, res, next) => {
     let internship = await db.Internship.findById(internshipId);
     let emailId = internship.student.emailId;
     internship["completionStatus"] = "Approved";
+
     let faculty = await db.Faculty.findById(facultyId);
     faculty["applicationsApproved"].push(internshipId);
     faculty["applicationsReceived"].splice(
@@ -281,10 +283,8 @@ exports.approveInternship = async (req, res, next) => {
 };
 
 exports.forwardInternship = async (req, res, next) => {
-  console.log("im in srver *server ");
-  const { _id: internshipId } = req.body;
+  const { _id: internshipId, remark } = req.body;
   const { id: facultyId } = req.decoded;
-  //console.log(_id+"and "+ id);
   try {
     let internship = await db.Internship.findById(internshipId);
     let faculty = await db.Faculty.findById(facultyId);
@@ -296,6 +296,7 @@ exports.forwardInternship = async (req, res, next) => {
     );
     internship.approvedBy.push({
       designation: faculty.designation,
+      remark: remark,
     });
     let forwardToFaculty = await db.Faculty.findOne(
       chain.getNextPerson(faculty.designation, faculty.department)
@@ -345,7 +346,10 @@ exports.forwardInternship = async (req, res, next) => {
       subject: "New Internship Application for Approval!",
       html:
         "You have a new internship application for approval. Application is approved and forwarded by <b>" +
-        faculty.name.firstname+" "+faculty.name.lastname+" "+
+        faculty.name.firstname +
+        " " +
+        faculty.name.lastname +
+        " " +
         "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
     };
     client.sendMail(email, (err, info) => {
