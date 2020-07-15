@@ -36,7 +36,11 @@ const RouteViews = ({ auth }) => (
         render={() => <StudentNotifications />}
       />
       <Route exact path="/test" render={() => <TestPage />} />
-      <Route exact path="/studentDocs" render={() => <StudentDocuments />} />
+      <Route exact path="/studentDocs" render={() =>{
+        if(user==="student"){
+          return <StudentDocuments />
+        } else return <Restricted />
+      } } />
       <Route
         exact
         path="/login"
