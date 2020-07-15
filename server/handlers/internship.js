@@ -4,6 +4,8 @@ let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
 const { application } = require("express");
 require("dotenv").config();
+const multer=require('multer');
+
 
 //mailing options and transportor
 var options = {
@@ -21,6 +23,8 @@ let client = nodemailer.createTransport(transport(options));
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
   const { application } = req.body;
+  var path;
+
   try {
     const student = await db.Student.findById(id);
     const internship = await db.Internship.create({
@@ -40,6 +44,7 @@ exports.addNewInternship = async (req, res, next) => {
       },
       application,
     });
+
     const faculty = await db.Faculty.findOne({
       currentClass: {
         year: student.currentClass.year,
