@@ -95,3 +95,13 @@ export const forgotPassword = (data) => {
     }
   };
 };
+
+export const getUserType=(data)=>{
+  return async (dispatch) => {
+    try{
+      
+    } catch(err) {
+
+    }
+  }
+}
