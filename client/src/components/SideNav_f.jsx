@@ -53,7 +53,7 @@ class Sidenav_f extends Component {
               Approved Applications
             </li>
           </Link>
-          <Link to="/faculty">
+          <Link to="/createnotice">
             <li id="li" className={activeNow === "4" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdDns style={{ margin: -1, padding: -1 }} />

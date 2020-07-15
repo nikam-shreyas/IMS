@@ -27,96 +27,109 @@ import FacultyChangePassword from "../pages/FacultyChangepwd";
 import ForgotPassword from "../pages/ForgotPassword";
 import ApprovedInternships from "../pages/ApprovedInternships";
 import ViewApprovedInternship from "../pages/ViewApprovedInternship";
-const RouteViews = ({ auth }) => (
-  <main>
-    <Switch>
-      <Route
-        exact
-        path="/notifications"
-        render={() => <StudentNotifications />}
-      />
-      <Route exact path="/test" render={() => <TestPage />} />
-      <Route exact path="/studentDocs" render={() => <StudentDocuments />} />
-      <Route
-        exact
-        path="/login"
-        render={() => (
-          <Auth_Page
-            authType="login"
-            isAuthenticated={auth.isAuthenticated}
-            isAuthenticated_f={auth.isAuthenticated_f}
-            isAuthenticated_a={auth.isAuthenticated_a}
-          />
-        )}
-      />
-      <Route
-        exact
-        path="/"
-        render={() => (
-          <Auth_Page
-            authType="login"
-            isAuthenticated={auth.isAuthenticated}
-            isAuthenticated_f={auth.isAuthenticated_f}
-            isAuthenticated_a={auth.isAuthenticated_a}
-          />
-        )}
-      />
-      <Route
-        exact
-        path="/register"
-        render={() => (
-          <Auth_Page_2
-            authType="register"
-            isAuthenticated={auth.isAuthenticated}
-          />
-        )}
-      />
-      <Route exact path="/notices" render={() => <Notices />} />
-      <Route exact path="/internships" render={() => <Internships />} />
-      <Route
-        exact
-        path="/approvedinternships"
-        render={() => <ApprovedInternships />}
-      />
-      <Route exact path="/student" render={() => <Student_Home />} />
-      <Route exact path="/faculty" render={() => <CreateNotice />} />
-      <Route exact path="/admin/" render={() => <AdminProfile />} />
-      <Route exact path="/add" render={() => <AddFaculty />} />
-      <Route exact path="/all" render={() => <FacultyList />} />
-      <Route exact path="/facultyprofile" render={() => <FacultyProfile />} />
-      <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
-      <Route exact path="/settings" render={() => <AdminSetting />} />
-      <Route exact path="/facultyNotices" render={() => <FacultyNotices />} />
-      <Route exact path="/changepassword" render={() => <ChangePassword />} />
-      <Route
-        exact
-        path="/facultysetting"
-        render={() => <FacultyChangePassword />}
-      />
+import Restricted from "../pages/Restricted";
+const RouteViews = ({ auth }) => {
+  const user = localStorage.getItem("user");
 
-      <Route
-        exact
-        path="/internshipdetails/:internshipid"
-        render={() => <InternshipDetails />}
-      />
+  return (
+    <main>
+      <Switch>
+        <Route
+          exact
+          path="/notifications"
+          render={() => <StudentNotifications />}
+        />
+        <Route exact path="/test" render={() => <TestPage />} />
+        <Route
+          exact
+          path="/studentDocs"
+          render={() => {
+            if (user === "student") {
+              return <StudentDocuments />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/login"
+          render={() => (
+            <Auth_Page
+              authType="login"
+              isAuthenticated={auth.isAuthenticated}
+              isAuthenticated_f={auth.isAuthenticated_f}
+              isAuthenticated_a={auth.isAuthenticated_a}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <Auth_Page
+              authType="login"
+              isAuthenticated={auth.isAuthenticated}
+              isAuthenticated_f={auth.isAuthenticated_f}
+              isAuthenticated_a={auth.isAuthenticated_a}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/register"
+          render={() => (
+            <Auth_Page_2
+              authType="register"
+              isAuthenticated={auth.isAuthenticated}
+            />
+          )}
+        />
+        <Route exact path="/notices" render={() => <Notices />} />
+        <Route exact path="/internships" render={() => <Internships />} />
+        <Route
+          exact
+          path="/approvedinternships"
+          render={() => <ApprovedInternships />}
+        />
+        <Route exact path="/student" render={() => <Student_Home />} />
+        <Route exact path="/createnotice" render={() => <CreateNotice />} />
+        <Route exact path="/admin" render={() => <AdminProfile />} />
+        <Route exact path="/add" render={() => <AddFaculty />} />
+        <Route exact path="/all" render={() => <FacultyList />} />
+        <Route exact path="/facultyprofile" render={() => <FacultyProfile />} />
+        <Route exact path="/deleteFaculty" render={() => <DeleteFaculty />} />
+        <Route exact path="/settings" render={() => <AdminSetting />} />
+        <Route exact path="/facultyNotices" render={() => <FacultyNotices />} />
+        <Route exact path="/changepassword" render={() => <ChangePassword />} />
+        <Route
+          exact
+          path="/facultysetting"
+          render={() => <FacultyChangePassword />}
+        />
 
-      <Route
-        exact
-        path="/internshipview/:internshipid"
-        render={() => <InternshipView />}
-      />
-      <Route
-        exact
-        path="/internshipviewapproved/:internshipid"
-        render={() => <ViewApprovedInternship />}
-      />
-      <Route exact path="/apply" render={() => <InternshipApplication />} />
-      <Route exact path="/studentprofile" render={() => <StudentProfile />} />
-      <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
-      <Route component={NotFoundPage} />
-    </Switch>
-  </main>
-);
+        <Route
+          exact
+          path="/internshipdetails/:internshipid"
+          render={() => <InternshipDetails />}
+        />
+
+        <Route
+          exact
+          path="/internshipview/:internshipid"
+          render={() => <InternshipView />}
+        />
+        <Route
+          exact
+          path="/internshipviewapproved/:internshipid"
+          render={() => <ViewApprovedInternship />}
+        />
+        <Route exact path="/apply" render={() => <InternshipApplication />} />
+        <Route exact path="/studentprofile" render={() => <StudentProfile />} />
+        <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </main>
+  );
+};
 
 export default withRouter(
   connect((store) => ({ auth: store.auth }))(RouteViews)
