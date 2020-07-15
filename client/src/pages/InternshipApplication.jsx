@@ -5,14 +5,18 @@ import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import axios, { post } from "axios";
+
 class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
+    fileName: "",
   };
   constructor(props) {
     super(props);
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitFile = this.submitFile.bind(this);
   }
   handleChange = (date) => {
     this.setState({
@@ -37,12 +41,27 @@ class InternshipApplication extends React.Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = "TemporaryString";
+    data["application"]["offerLetter"] = formData.get("offerLetter");
+
     const { createInternship } = this.props;
 
     createInternship(data).then(() => {
       this.props.history.push("/student");
     });
+  }
+  submitFile(event) {
+    let files = event.target.files;
+    console.log(files[0]);
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    let formData = new FormData();
+    formData.append("offerLetter", files[0]);
+
+    axios
+      .post("http://localhost:4002/api/internships/uploadDocument", formData)
+      .then((response) => {
+        console.log("done", response);
+      });
   }
   render() {
     return (
@@ -167,28 +186,17 @@ class InternshipApplication extends React.Component {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="col-sm-12">
-                    Upload Offer Letter:
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        name="offerLetter"
-                        id="offerLetter"
-                        onChange={() =>
-                          this.handleUpload("offerLetter", "offerLetterLabel")
-                        }
-                        required
-                      />
-                      <label
-                        className="custom-file-label"
-                        id="offerLetterLabel"
-                        htmlFor="offerLetter"
-                      >
-                        Choose file
-                      </label>
-                    </div>
-                  </div>
+                  {/* <form method="post" encType="multipart/form-data" onSubmit="/internship/uploadDocument">
+                <input type="file" name="offerLetter" />
+                <button type="submit" className="btn btn-dark">
+                  Submit
+                </button>
+    </form>*/}
+                  <input
+                    type="file"
+                    name="offerLetter"
+                    onChange={this.submitFile}
+                  />
                 </div>
               </div>
               <hr />
@@ -201,7 +209,6 @@ class InternshipApplication extends React.Component {
                 </button>
               </div>
             </form>
-            <button onClick={downloadFile()}>Download</button>
           </div>
         </div>
       </div>

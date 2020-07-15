@@ -265,6 +265,20 @@ class Internships extends Component {
                             </tr>
                           </tbody>
                         </table>
+                        <form id="form" onSubmit={this.handleSubmit}>
+                        <div className="col-sm-12">
+                       Remark
+                        <input
+                          required
+                          type="text"
+                          name="remark"
+                          id="remark"
+                          placeholder=""
+                          className="form-control"
+                        />
+                      </div>
+                        </form>
+                        <br/>
                         {internship.completionStatus === "N" && (
                           <>
                             Application is currently viewed by:{" "}
