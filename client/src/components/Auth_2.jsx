@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
 import { Link } from "react-router-dom";
 import { MdError } from "react-icons/md";
+import { bool } from "prop-types";
 class Auth_2 extends Component {
   constructor(props) {
     super(props);
@@ -22,15 +23,33 @@ class Auth_2 extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  
+
   handleSubmit(e) {
-    if (this.state.password == this.state.confirmpassword) {
+    var str = this.state.username;
+    var str1 = str.substring(0,3); 
+    var str2 = str.substring(3,12);
+    
+
+    if (this.state.password == this.state.confirmpassword)
+    {
+      if(str1 == "C2K" || str1 == "I2K" || str1 == "E2K" && str.length==11)
+      {
+
       const { username, password, emailId } = this.state;
       const { authType } = this.props;
       e.preventDefault();
       this.props.authUser(authType || "login", { username, password, emailId });
+      }
+      else
+      {
+        alert("Invalid ID, Please check again ");
+      }
     } else {
-      alert("Error! Check form fields again...");
+      alert("Error! Check form fields again... ");
     }
+         
+    
   }
   handleConfirmPassword(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -59,8 +78,10 @@ class Auth_2 extends Component {
                   type="text"
                   value={username}
                   name="username"
-                  placeholder="Username"
+                  placeholder="Registration ID (eg: C2K...)"
                   className="form-control"
+                  minLength = "11"
+                  maxLength = "11"
                   autoComplete="off"
                   onChange={this.handleChange}
                 />
