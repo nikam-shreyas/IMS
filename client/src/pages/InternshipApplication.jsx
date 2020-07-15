@@ -1,23 +1,26 @@
-import React, { Component } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React from "react";
+import DatePicker from "react-datepicker"; 
+import "react-datepicker/dist/react-datepicker.css"; 
 import { createInternship } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import axios,{post} from 'axios';
+
 class InternshipApplication extends React.Component {
   state = {
-    startDate: new Date()
+    startDate: new Date(),
+    fileName:""
   };
   constructor(props) {
     super(props);
     this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitFile=this.submitFile.bind(this);
   }
-  
-  handleChange = date => {
+  handleChange = (date) => {
     this.setState({
-      startDate: date
+      startDate: date,
     });
   };
 
@@ -34,11 +37,26 @@ class InternshipApplication extends React.Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = "TemporaryString";
+    data["application"]["offerLetter"] = formData.get('offerLetter');
+  
+  
     const { createInternship } = this.props;
 
     createInternship(data).then(() => {
       this.props.history.push("/student");
+    });
+  }
+  submitFile(event){
+    let files=event.target.files;
+    console.log(files[0])
+    let reader=new FileReader();
+    reader.readAsDataURL(files[0]);
+    let formData = new FormData();
+    formData.append('offerLetter', files[0]);
+
+    axios.post("http://localhost:4002/api/internships/uploadDocument", formData)
+    .then((response) => {
+      console.log("done",response)
     });
   }
   render() {
@@ -79,25 +97,24 @@ class InternshipApplication extends React.Component {
                       id="workplace"
                       className="form-control"
                       placeholder="eg. Google"
+                      
                       required
                     />
                   </div>
                   <div className="col-sm-3">
-                    Start Date:
-                    <div className="input-group">                           
+                    Start Date:  
+                    <div className="input-group">                                                        
                       <DatePicker
                         name="startDate"
                         id="startDate"
                         className="form-control"
-                        dateFormat="dd/MM/yyyy"
-                        z-index = "10"
+                        dateFormat="yyyy/MM/dd"
                         selected={this.state.startDate}
                         onChange={this.handleChange}
                         minDate={new Date()}
-                        // maxDate={addMonths(new Date(), 5)}
                         showDisabledMonthNavigation
                       />
-                    </div>
+                    </div>                    
                   </div>
                   <div className="col-sm-3">
                     Duration:
@@ -165,28 +182,13 @@ class InternshipApplication extends React.Component {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="col-sm-12">
-                    Upload Offer Letter:
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        name="offerLetter"
-                        id="offerLetter"
-                        onChange={() =>
-                          this.handleUpload("offerLetter", "offerLetterLabel")
-                        }
-                        required
-                      />
-                      <label
-                        className="custom-file-label"
-                        id="offerLetterLabel"
-                        htmlFor="offerLetter"
-                      >
-                        Choose file
-                      </label>
-                    </div>
-                  </div>
+               {/* <form method="post" encType="multipart/form-data" onSubmit="/internship/uploadDocument">
+                <input type="file" name="offerLetter" />
+                <button type="submit" className="btn btn-dark">
+                  Submit
+                </button>
+    </form>*/}
+              <input type="file" name="offerLetter" onChange={this.submitFile} />
                 </div>
               </div>
               <hr />
@@ -197,8 +199,8 @@ class InternshipApplication extends React.Component {
                 <button type="submit" className="btn btn-dark">
                   Submit
                 </button>
-              </div>
-            </form>
+              </div>                        
+                </form>
           </div>
         </div>
       </div>

@@ -29,17 +29,18 @@ class Auth extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
     const { username, password, User_type } = this.state;
     const { authType } = this.props;
-    e.preventDefault();
+    const { authUser, authUser_a, authUser_f } = this.props;
     if (User_type === "1") {
-      this.props.authUser(authType || "login", { username, password });
+      authUser(authType || "login", { username, password });
     }
     if (User_type === "2") {
-      this.props.authUser_f("login_faculty", { username, password });
+      authUser_f("login_faculty", { username, password });
     }
     if (User_type === "3") {
-      this.props.authUser_a("login_admin", { username, password });
+      authUser_a("login_admin", { username, password });
     }
   }
 

@@ -33,6 +33,7 @@ class ViewApprovedInternship extends Component {
         rollNo: null,
         prevSemAttendance: null,
       },
+      approvedBy: [],
       holder: { id: null, designation: null },
       completionStatus: null,
       comments: null,
@@ -93,7 +94,7 @@ class ViewApprovedInternship extends Component {
                             this.state.data.student.currentClass.div}
                         </small>
                       </div>
-                      <table className="table table-hover table-striped table-bordered my-3">
+                      <table className="table table-hover table-sm table-striped table-bordered my-3">
                         <tbody>
                           <tr>
                             <td>ID</td>
@@ -139,6 +140,21 @@ class ViewApprovedInternship extends Component {
                           )}
                         </tbody>
                       </table>
+                      {this.state.data.approvedBy.length > 0 && (
+                        <>
+                          Remarks: <br />
+                          <table className="table tbale-sm">
+                            <tbody>
+                              {this.state.data.approvedBy.map((p) => (
+                                <tr key={p.designation}>
+                                  <td>@{p.designation}</td>
+                                  <td>{p.remark}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </>
+                      )}
                       <table className="table table-hover table-sm">
                         <thead className="thead-dark">
                           <tr>

@@ -4,7 +4,6 @@ import { getApprovedInternships } from "../store/actions";
 import { Link } from "react-router-dom";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 import SideNav_f from "../components/SideNav_f";
-import { RiThunderstormsLine } from "react-icons/ri";
 class Internships extends Component {
   constructor(props) {
     super(props);
@@ -269,6 +268,7 @@ class Internships extends Component {
                               </tr>
                             </tbody>
                           </table>
+                          
                           {internship.completionStatus === "N" && (
                             <>
                               Application is currently viewed by:{" "}
