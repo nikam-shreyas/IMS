@@ -80,7 +80,7 @@ class InternshipView extends Component {
         approveInternship(data);
         alert("Application Approved!");
       }
-      this.props.history.push("/faculty");
+      this.props.history.push("/approvedinternships");
     }
   }
   loadData(internship) {

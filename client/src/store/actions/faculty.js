@@ -47,6 +47,7 @@ export const authUser_f = (path, data) => {
     try {
       const { token, ...user } = await api.call("post", `auth/${path}`, data);
       localStorage.setItem("jwtToken", token);
+      localStorage.setItem("user", "faculty");
       api.setToken(token);
       dispatch(setCurrentUser_f(user));
       dispatch(removeError());
@@ -62,6 +63,7 @@ export const authUser_a = (path, data) => {
     try {
       const { token, ...user } = await api.call("post", `admin/${path}`, data);
       localStorage.setItem("jwtToken", token);
+      localStorage.setItem("user", "admin");
       api.setToken(token);
       dispatch(setCurrentUser_a(user));
       dispatch(removeError());
