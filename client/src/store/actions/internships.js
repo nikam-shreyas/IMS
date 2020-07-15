@@ -1,11 +1,10 @@
 import api from "../../services/api";
-import {
-  SET_CURRENT_INTERNSHIP,
-  SET_INTERNSHIPS,
-  FORWARD_INTERNSHIP,
-  APPROVE_INTERNSHIP,
-} from "../actionTypes";
+
+import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP, APPROVE_INTERNSHIP ,UPDATE_INTERNSHIP} from "../actionTypes";
+
 import { addError, removeError } from "./error";
+//import { internships } from "../reducers/internships";
+//import { Internship } from "../../../server/models";
 
 export const setInternships = (internships) => ({
   type: SET_INTERNSHIPS,
@@ -26,6 +25,14 @@ export const AllowInternship = (internship) => ({
   type: APPROVE_INTERNSHIP,
   internship,
 });
+
+
+export const ChangeInternship=(internship)=>({
+  type:UPDATE_INTERNSHIP,
+  internship,
+})
+
+
 
 export const getInternships = () => {
   return async (dispatch) => {
@@ -147,6 +154,7 @@ export const updateInternship = (data) => {
   };
 };
 
+
 export const rejectInternship = (data) => {
   return async (dispatch) => {
     try {
@@ -159,3 +167,22 @@ export const rejectInternship = (data) => {
     }
   };
 };
+
+export const UpdateInternship=(data)=>{
+  return async(dispatch)=>{
+    try{
+      const internship=await api.call("post","internships/update",data);
+      dispatch(ChangeInternship(internship));
+      dispatch(removeError());
+    }
+    catch(err){
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  }
+}
+
+
+
+
+

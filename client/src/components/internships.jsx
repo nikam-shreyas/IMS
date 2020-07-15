@@ -282,7 +282,6 @@ class Internships extends Component {
     );
   }
 }
-
 export default connect(
   (store) => ({
     auth: store.auth,
