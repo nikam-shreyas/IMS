@@ -4,6 +4,7 @@ import {
   SET_INTERNSHIPS,
   FORWARD_INTERNSHIP,
   APPROVE_INTERNSHIP,
+  SET_CHART
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess } from "./success";
@@ -27,7 +28,10 @@ export const AllowInternship = (internship) => ({
   type: APPROVE_INTERNSHIP,
   internship,
 });
-
+export const analysis=(chart)=>({
+  type: SET_CHART,
+  chart,
+});
 export const getInternships = () => {
   return async (dispatch) => {
     try {
@@ -171,6 +175,19 @@ export const rejectInternship = (data) => {
     } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));
+    }
+  };
+};
+
+export const getAllInternships = () => {
+  return async (dispatch) => {
+    try {
+      const chart = await api.call("get", "internships/all");
+      dispatch(analysis(chart));
+      dispatch(removeError());
+    } catch (err) {
+      const error = "Could not load data";
+      dispatch(addError(error));
     }
   };
 };
