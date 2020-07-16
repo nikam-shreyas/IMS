@@ -13,4 +13,5 @@ router
 
 router.route("/student/reset/:id").put(auth, handle.resetStudentPassword);
 
+
 module.exports = router;
