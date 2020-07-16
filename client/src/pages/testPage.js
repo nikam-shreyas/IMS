@@ -25,22 +25,23 @@ class TestPage extends Component {
     } = this.props;
     getFaculty().then(console.log(this.props));
   }
-  download() {
-    // fake server request, getting the file url as response
-    setTimeout(() => {
-      const response = {
-        file: 'http://releases.ubuntu.com/12.04.5/ubuntu-12.04.5-alternate-amd64.iso',
-      };
-      // server sent the url to the file!
-      // now, let's download:
-      window.open(response.file);
-      // you could also do:
-      // window.location.href = response.file;
-    }, 100);
-  }
+  downloadEmployeeData = () => {
+		fetch('http://localhost:8080/employees/download')
+			.then(response => {
+				response.blob().then(blob => {
+					let url = window.URL.createObjectURL(blob);
+					let a = document.createElement('a');
+					a.href = url;
+					a.download = 'employees.json';
+					a.click();
+				});
+				//window.location.href = response.url;
+		});
+	}
   render() {
     console.log(this.props.faculty);
     return <Fragment>
+    <button onClick={this.downloadEmployeeData}>Download</button>
     {this.download}
     </Fragment>;
   }

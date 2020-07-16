@@ -423,3 +423,90 @@ exports.rejectInternship = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getStats = async (req, res, next) => {
+  try {
+    const internshipReceived = await db.Internship.aggregate(
+      [
+        {
+          $match:{"completionStatus":"N"}
+        },{
+          $group: {
+            _id: { $substr : ["$application.submittedDate", 5, 2 ] },
+            "count" : { $sum: 1 } 
+          }
+        }
+      ]
+      );
+      const internshipRejected = await db.Internship.aggregate(
+        [
+          {
+            $match:{"completionStatus":"R"}
+          },{
+            $group: {
+              _id: { $substr : ["$application.submittedDate", 5, 2 ] },
+              "count" : { $sum: 1 } 
+            }
+          }
+        ]
+        );
+        const internshipAccepted = await db.Internship.aggregate(
+          [
+            {
+              $match:{"completionStatus":"C"}
+            },{
+              $group: {
+                _id: { $substr : ["$application.submittedDate", 5, 2 ] },
+                "count" : { $sum: 1 } 
+              }
+            }
+          ]
+          );
+      let label=[],recev=[],bg=[],reject=[],bg1=[],accept=[],bg2=[];
+      if(internshipReceived!=null){
+        internshipReceived.forEach(element => {
+              label.push(parseInt(element._id));
+              recev.push(parseInt(element.count));
+              bg.push('#4198D8');
+          }); 
+    } 
+    if(internshipRejected!=null){
+      internshipRejected.forEach(element => {
+            reject.push(parseInt(element.count));
+            bg1.push('#F5C767');
+        }); 
+    } 
+   if(internshipAccepted!=null){
+    internshipAccepted.forEach(element => {
+          accept.push(parseInt(element.count));
+          bg2.push('#7A61BA');
+    }); 
+    } 
+    let chartData1={
+      labels:label,
+         datasets:[{
+              label:'Received',
+              data:recev,
+              backgroundColor: bg
+          },
+          {
+              label:'Rejected',
+              data:reject,
+              backgroundColor: bg1
+          },
+          {
+              label:'Approved',
+              data:accept,
+              backgroundColor: bg2
+          }
+      ]
+  }
+console.log(chartData1)
+    res.status(200).json(chartData1);
+  } catch (err) {
+    next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};

@@ -41,7 +41,7 @@ router.route("/uploadDocument").post(auth,upload.single('offerLetter'), (req, re
   res.setHeader('Content-Type', 'application/json');
   res.json(req.file);
 });
-
+router.route("/all").get(auth, handle.getStats);
 
 
 router
