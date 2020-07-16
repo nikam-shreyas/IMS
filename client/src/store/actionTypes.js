@@ -33,3 +33,4 @@ export const IDENTIFY_USER="IDENTIFY_USER";
 
 export const UPDATE_INTERNSHIP="UPDATE_INTERNSHIP";
 
+export const SET_CHART="SET_CHART";

@@ -1,7 +1,7 @@
 import React from "react";
 import DatePicker from "react-datepicker"; 
 import "react-datepicker/dist/react-datepicker.css"; 
-import { createInternship } from "../store/actions";
+import { createInternship, uploadDocument} from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -10,7 +10,7 @@ import axios,{post} from 'axios';
 class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
-    fileName:""
+    fileName:null
   };
   constructor(props) {
     super(props);
@@ -37,28 +37,35 @@ class InternshipApplication extends React.Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = formData.get('offerLetter');
+    data["application"]["offerLetter"] = "/public/Documents"
+    
+    const formDataFile = new FormData();
+    formDataFile.append('offerLetter',this.state.file);
+    const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+    };
+    // axios.post("http://localhost:4002/api/internships/uploadDocument",formDataFile,config)
+    //     .then((response) => {
+    //         alert("The file is successfully uploaded");
+    //     }).catch((error) => {
+    // });
   
-  
-    const { createInternship } = this.props;
+    const { uploadDocument,createInternship } = this.props;
+    uploadDocument(formDataFile,config).then(()=>{
+        console.log("done")
+    });
 
     createInternship(data).then(() => {
       this.props.history.push("/student");
     });
   }
+ 
   submitFile(event){
-    let files=event.target.files;
-    console.log(files[0])
-    let reader=new FileReader();
-    reader.readAsDataURL(files[0]);
-    let formData = new FormData();
-    formData.append('offerLetter', files[0]);
-
-    axios.post("http://localhost:4002/api/internships/uploadDocument", formData)
-    .then((response) => {
-      console.log("done",response)
-    });
+    this.setState({file:event.target.files[0]});
   }
+
   render() {
     return (
       <div className="row no-gutters">
@@ -214,6 +221,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { createInternship }
+    { createInternship,uploadDocument }
   )(InternshipApplication)
 );

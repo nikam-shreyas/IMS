@@ -28,9 +28,10 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ApprovedInternships from "../pages/ApprovedInternships";
 import ViewApprovedInternship from "../pages/ViewApprovedInternship";
 import Restricted from "../pages/Restricted";
+import Analytics from "../pages/Analytics";
+
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
-
   return (
     <main>
       <Switch>
@@ -135,6 +136,7 @@ const RouteViews = ({ auth }) => {
         <Route exact path="/settings" render={() => {if(user==="admin"){return <AdminSetting />}else return <Restricted/>}} />
         <Route exact path="/facultyNotices" render={() => {  if(user==="faculty"){ return <FacultyNotices />}else return <Restricted/>}} />
         <Route exact path="/changepassword" render={() =>{ if(user==="student") { return <ChangePassword />}else return <Restricted/>}} />
+
         <Route
           exact
           path="/facultysetting"

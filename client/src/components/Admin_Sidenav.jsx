@@ -9,6 +9,7 @@ import {
   MdAddCircle,
   MdFormatListBulleted,
   MdDelete,
+  MdEqualizer
 } from "react-icons/md";
 
 class Admin_Sidenav extends Component {
@@ -60,8 +61,16 @@ class Admin_Sidenav extends Component {
               Delete Faculty
             </li>
           </Link>
+          <Link to="/stats">
+          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+            <span className="mx-2">
+              <MdEqualizer style={{ margin: -1, padding: -1 }} />
+            </span>
+           Stats
+          </li>
+        </Link>
           <Link to="/settings">
-            <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>

@@ -1,8 +1,15 @@
 import api from "../../services/api";
 
-import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP, APPROVE_INTERNSHIP ,UPDATE_INTERNSHIP} from "../actionTypes";
-
+import {
+  SET_CURRENT_INTERNSHIP,
+  SET_INTERNSHIPS,
+  FORWARD_INTERNSHIP,
+  APPROVE_INTERNSHIP,
+  SET_CHART,
+  UPDATE_INTERNSHIP
+} from "../actionTypes";
 import { addError, removeError } from "./error";
+import { addSuccess } from "./success";
 
 
 export const setInternships = (internships) => ({
@@ -33,6 +40,10 @@ export const ChangeInternship=(internship)=>({
 
 
 
+export const analysis=(chart)=>({
+  type: SET_CHART,
+  chart,
+});
 export const getInternships = () => {
   return async (dispatch) => {
     try {
@@ -127,6 +138,20 @@ export const forwardInternship = (data) => {
   };
 };
 
+export const uploadDocument=(data,config)=>{
+  return async (dispatch) => {
+    try {
+      console.log("im in upload ");
+      const internship = await api.call("post", "internships/uploadDocument", data,config);
+      dispatch(addSuccess("Document Uploaded Successfully"));
+      dispatch(removeError());   
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
 export const approveInternship = (data) => {
   return async (dispatch) => {
     try {
@@ -181,7 +206,15 @@ export const UpdateInternship=(data)=>{
   }
 }
 
-
-
-
-
+export const getAllInternships = () => {
+  return async (dispatch) => {
+    try {
+      const chart = await api.call("get", "internships/all");
+      dispatch(analysis(chart));
+      dispatch(removeError());
+    } catch (err) {
+      const error = "Could not load data";
+      dispatch(addError(error));
+    }
+  };
+};

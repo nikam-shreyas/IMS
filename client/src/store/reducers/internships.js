@@ -1,4 +1,5 @@
-import { SET_CURRENT_INTERNSHIP,UPDATE_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP,APPROVE_INTERNSHIP } from "../actionTypes";
+
+import { SET_CURRENT_INTERNSHIP, SET_INTERNSHIPS,FORWARD_INTERNSHIP,APPROVE_INTERNSHIP, SET_CHART, UPDATE_INTERNSHIP } from "../actionTypes";
 //import { SET_CURRENT_INTERNSHIPS } from '../actionTypes';
 
 export const internships = (state = [], action) => {
@@ -54,3 +55,11 @@ export const update_Internship=(state={},action)=>{
 
   }
 };
+export const charts=(state={},action)=>{
+switch(action.type){
+  case SET_CHART:
+    return action.chart;
+  default:
+    return state;
+}
+}
