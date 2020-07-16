@@ -28,11 +28,7 @@ class InternshipApplication extends React.Component {
   //   x.open('GET','https:localhost:4002/index.js',true);
 
   // }
-  handleUpload(id, labelId) {
-    var fileName = document.getElementById(id).value.split("\\").pop();
-    document.getElementById(labelId).classList.add("selected");
-    document.getElementById(labelId).innerHTML = fileName;
-  }
+  handleUpload(id, labelId) {}
   handleSubmit(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
@@ -41,7 +37,7 @@ class InternshipApplication extends React.Component {
       data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = formData.get("offerLetter");
+    data["application"]["offerLetter"] = "path/roll_name.pdf";
 
     const { createInternship } = this.props;
 
@@ -50,6 +46,12 @@ class InternshipApplication extends React.Component {
     });
   }
   submitFile(event) {
+    var fileName = document
+      .getElementById("offerLetter")
+      .value.split("\\")
+      .pop();
+    document.getElementById("offerLetterLabel").classList.add("selected");
+    document.getElementById("offerLetterLabel").innerHTML = fileName;
     let files = event.target.files;
     console.log(files[0]);
     let reader = new FileReader();
@@ -76,8 +78,7 @@ class InternshipApplication extends React.Component {
               className="alert alert-secondary alert-dismissible fade show"
               role="alert"
             >
-              <strong>P.S. </strong> Please complete your profile before
-              applying.
+              <strong>P.S. </strong> Please update your profile before applying.
               <button
                 type="button"
                 className="close"
@@ -104,7 +105,21 @@ class InternshipApplication extends React.Component {
                       required
                     />
                   </div>
-
+                  <div className="col-sm-3">
+                    Start Date:
+                    <div className="input-group">
+                      <DatePicker
+                        name="startDate"
+                        id="startDate"
+                        className="form-control"
+                        dateFormat="yyyy/MM/dd"
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                      />
+                    </div>
+                  </div>
                   <div className="col-sm-3">
                     Duration:
                     <div className="input-group">
@@ -121,19 +136,29 @@ class InternshipApplication extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-3">
-                    Start Date:
-                    <div className="input-group">
-                      <DatePicker
-                        name="startDate"
-                        id="startDate"
-                        className="form-control"
-                        dateFormat="yyyy/MM/dd"
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
-                        minDate={new Date()}
-                        showDisabledMonthNavigation
+                </div>
+                <div className="row">
+                  <div className="col-sm-12">
+                    Upload Offer Letter:{" "}
+                    <small className="text-danger">
+                      (Files to be uploaded strictly in PDF format.)
+                    </small>
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="offerLetter"
+                        id="offerLetter"
+                        onChange={this.submitFile}
+                        required
                       />
+                      <label
+                        className="custom-file-label"
+                        id="offerLetterLabel"
+                        htmlFor="offerLetter"
+                      >
+                        Choose file
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -185,19 +210,22 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="form-row">
+
+                {/* <div className="form-row">
                   {/* <form method="post" encType="multipart/form-data" onSubmit="/internship/uploadDocument">
                 <input type="file" name="offerLetter" />
                 <button type="submit" className="btn btn-dark">
                   Submit
                 </button>
-    </form>*/}
+    </form>
+
                   <input
+                    className="form-control"
                     type="file"
                     name="offerLetter"
                     onChange={this.submitFile}
                   />
-                </div>
+                </div> */}
               </div>
               <hr />
               <div className="text-right">

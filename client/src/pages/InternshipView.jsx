@@ -65,9 +65,8 @@ class InternshipView extends Component {
   }
   handleClick(data) {
     let remark = prompt("Enter a remark: ");
-    if (remark) {
-      this.state.data.remark = remark;
-    }
+
+    this.state.data.remark = remark;
     if (window.confirm("Are you sure?")) {
       if (this.state.data.holder.designation !== "Principal") {
         const { forwardInternship, updateInternship } = this.props;

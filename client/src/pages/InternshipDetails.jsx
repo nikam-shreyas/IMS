@@ -33,6 +33,7 @@ class InternshipDetails extends Component {
         rollNo: null,
         prevSemAttendance: null,
       },
+      approvedBy: [],
       holder: { id: null, designation: null },
       completionStatus: null,
       comments: null,
@@ -83,7 +84,15 @@ class InternshipDetails extends Component {
                     </div>
                     <div className="card-body">
                       {this.state.data.comments && (
-                        <div className="alert alert-danger">
+                        <div
+                          className={
+                            this.state.data.comments.indexOf(
+                              "Congratulations"
+                            ) >= 0
+                              ? "alert alert-success"
+                              : "alert alert-danger"
+                          }
+                        >
                           {this.state.data.comments}
                         </div>
                       )}
@@ -144,6 +153,21 @@ class InternshipDetails extends Component {
                           )}
                         </tbody>
                       </table>
+                      {this.state.data.approvedBy.length > 0 && (
+                        <>
+                          Remarks: <br />
+                          <table className="table tbale-sm">
+                            <tbody>
+                              {this.state.data.approvedBy.map((p) => (
+                                <tr key={p.designation}>
+                                  <td>@{p.designation}</td>
+                                  <td>{p.remark}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </>
+                      )}
                       <table className="table table-hover table-sm">
                         <thead className="thead-dark">
                           <tr>

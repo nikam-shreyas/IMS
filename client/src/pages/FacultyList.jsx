@@ -136,7 +136,7 @@ class FacultyList extends Component {
                         color="blue"
                       />
                     </span>
-                  ) : designation === "DepartmentIntershipCoordinator" ? (
+                  ) : designation === "DepartmentInternshipCoordinator" ? (
                     <span className="mx-1">
                       <MdAssignmentInd
                         style={{ margin: -1, padding: -1 }}
@@ -161,7 +161,8 @@ class FacultyList extends Component {
               </div>
               <div className="card-body">
                 <b> Current Class : </b>
-                {currentClass.year + " " + currentClass.div}
+                {currentClass.year}{" "}
+                {currentClass.div === 0 ? "" : currentClass.div}
                 <br />
                 <b> Department : </b>
                 {department}

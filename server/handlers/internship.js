@@ -4,8 +4,7 @@ let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
 const { application } = require("express");
 require("dotenv").config();
-const multer=require('multer');
-
+const multer = require("multer");
 
 //mailing options and transportor
 var options = {
@@ -227,7 +226,7 @@ exports.updateInternship = async (req, res, next) => {
     for (var key of Object.keys(details)) {
       internship[key.toString()] = details[key];
     }
-    internship.comments += "\nApplication status changed! Please check.";
+    internship.comments = "\nApplication status changed! Please check.";
     await internship.save();
 
     //console.log(internship);
@@ -240,7 +239,7 @@ exports.updateInternship = async (req, res, next) => {
 };
 
 exports.approveInternship = async (req, res, next) => {
-  const { _id: internshipId } = req.body;
+  const { _id: internshipId, remark } = req.body;
   const { id: facultyId } = req.decoded;
   try {
     let internship = await db.Internship.findById(internshipId);
@@ -255,6 +254,7 @@ exports.approveInternship = async (req, res, next) => {
     );
     internship.approvedBy.push({
       designation: faculty.designation,
+      remark: remark,
     });
     await faculty.save();
     internship.comments =
@@ -308,7 +308,7 @@ exports.forwardInternship = async (req, res, next) => {
     internship.holder = {
       designation: forwardToFaculty.designation,
     };
-    internship.comments +=
+    internship.comments =
       "\nApplication id: " +
       internship._id +
       " has been approved by " +
@@ -380,9 +380,12 @@ exports.rejectInternship = async (req, res, next) => {
       faculty.applicationsReceived.indexOf(internshipId),
       1
     );
+
     faculty.applicationsApproved.push(internshipId);
     internship.comments =
-      "Your application has been rejected by " +
+      "Your application " +
+      internshipId +
+      " has been rejected by " +
       faculty.designation +
       " because " +
       comments +
