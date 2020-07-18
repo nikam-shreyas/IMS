@@ -1,9 +1,8 @@
 import React from 'react';
 // import 'office-ui-fabric-react/dist/css/fabric.css';
 // import '../App.css';
-
-import FinancialCharts from './AnalyticsCharts';
 import Admin_Sidenav from '../components/Admin_Sidenav';
+import AnalyticsCharts from "./AnalysisChart";
 
 const Analytics= () =>{
 return(  
@@ -19,7 +18,7 @@ return(
                     <h3 style={{color:'black'}}>Monthly Application Analysis</h3>           
               </div>
               <div className="ms-Grid-row">
-                <FinancialCharts />
+                <AnalyticsCharts />
               </div>
             </div>
     </div>          
