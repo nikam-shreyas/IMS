@@ -190,6 +190,34 @@ class MainContent extends Component {
                       <small className="text-muted">{internship._id}</small>
                     </div>
                     <div className="card-body">
+                      {internship.completionStatus !== "N" && (
+                        <div className="mb-4">
+                          <div className="form-row">
+                            <div className="col-sm-12">
+                              Completion Certificate:{" "}
+                              <small className="text-info">
+                                (Upload certificate after completion of
+                                internship)
+                              </small>
+                              <div className="custom-file">
+                                <input
+                                  type="file"
+                                  className="custom-file-input"
+                                  name="completionCertificate"
+                                  id="completionCertificate"
+                                />
+                                <label
+                                  className="custom-file-label"
+                                  id="completionCertificateLabel"
+                                  htmlFor="completionCertificate"
+                                >
+                                  Choose file
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       <table className="table table-hover table-sm">
                         <thead className="thead-dark">
                           <tr>

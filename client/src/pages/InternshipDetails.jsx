@@ -96,6 +96,34 @@ class InternshipDetails extends Component {
                           {this.state.data.comments}
                         </div>
                       )}
+                      {this.state.data.completionStatus !== "N" && (
+                        <div className="mb-4">
+                          <div className="form-row">
+                            <div className="col-sm-12">
+                              Completion Certificate:{" "}
+                              <small className="text-info">
+                                (Upload certificate after completion of
+                                internship)
+                              </small>
+                              <div className="custom-file">
+                                <input
+                                  type="file"
+                                  className="custom-file-input"
+                                  name="completionCertificate"
+                                  id="completionCertificate"
+                                />
+                                <label
+                                  className="custom-file-label"
+                                  id="completionCertificateLabel"
+                                  htmlFor="completionCertificate"
+                                >
+                                  Choose file
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       <div className="card-title">
                         {this.state.data.student.name.firstname +
                           " " +
