@@ -38,7 +38,11 @@ const RouteViews = ({ auth }) => {
         <Route
           exact
           path="/notifications"
-          render={() => {if(user==="student"){return <StudentNotifications />}else return <Restricted/>}}
+          render={() => {
+            if (user === "student") {
+              return <StudentNotifications />;
+            } else return <Restricted />;
+          }}
         />
         <Route exact path="/test" render={() => <TestPage />} />
         <Route
@@ -47,33 +51,29 @@ const RouteViews = ({ auth }) => {
           render={() => {
             if (user === "student") {
               return <StudentDocuments />;
-            }
-             else return <Restricted />;
+            } else return <Restricted />;
           }}
         />
 
-          <Route
+        <Route
           exact
           path="/facultyprofile"
           render={() => {
             if (user === "faculty") {
-              return <FacultyProfile/>;
-            }
-             else return <Restricted />;
+              return <FacultyProfile />;
+            } else return <Restricted />;
           }}
         />
 
-          <Route
+        <Route
           exact
           path="/admin"
           render={() => {
             if (user === "admin") {
-              return <AdminProfile/>;
-            }
-             else return <Restricted />;
+              return <AdminProfile />;
+            } else return <Restricted />;
           }}
         />
-
 
         <Route
           exact
@@ -110,56 +110,164 @@ const RouteViews = ({ auth }) => {
           )}
         />
 
-        <Route exact
-         path="/notices" 
-         render={() => {
-           if(user==="faculty"){
-           return <Notices />
-          }else return <Restricted/> }} />
+        <Route
+          exact
+          path="/notices"
+          render={() => {
+            if (user === "faculty") {
+              return <Notices />;
+            } else return <Restricted />;
+          }}
+        />
 
-        <Route exact path="/internships" render={() =>{if(user==="faculty"){ return <Internships />}else return <Restricted/>  }} />
+        <Route
+          exact
+          path="/internships"
+          render={() => {
+            if (user === "faculty") {
+              return <Internships />;
+            } else return <Restricted />;
+          }}
+        />
         <Route
           exact
           path="/approvedinternships"
-          render={() =>{
-            if(user==="faculty"){
-           return <ApprovedInternships />}
-          else return <Restricted/>}}
+          render={() => {
+            if (user === "faculty") {
+              return <ApprovedInternships />;
+            } else return <Restricted />;
+          }}
         />
-        <Route exact path="/student" render={()  =>{ if(user==="student") {return <Student_Home />}else return <Restricted/>}} />
-        <Route exact path="/createnotice" render={() =>{ if(user==="faculty"){return <CreateNotice />}else return <Restricted/>}} />
+        <Route
+          exact
+          path="/student"
+          render={() => {
+            if (user === "student") {
+              return <Student_Home />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/createnotice"
+          render={() => {
+            if (user === "faculty") {
+              return <CreateNotice />;
+            } else return <Restricted />;
+          }}
+        />
         {/* <Route exact path="/admin" render={() => <AdminProfile />} /> */}
-        <Route exact path="/add" render={() =>{ if(user==="admin") { return <AddFaculty />} else return <Restricted/>} }/>
-        <Route exact path="/all" render={() =>{ if(user==="admin") { return <FacultyList />}else return <Restricted/>}} />
+        <Route
+          exact
+          path="/add"
+          render={() => {
+            if (user === "admin") {
+              return <AddFaculty />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/all"
+          render={() => {
+            if (user === "admin") {
+              return <FacultyList />;
+            } else return <Restricted />;
+          }}
+        />
         {/* <Route exact path="/facultyprofile" render={() => <FacultyProfile />} /> */}
-        <Route exact path="/deleteFaculty" render={() => { if(user==="admin"){return  <DeleteFaculty />}else return <Restricted/>}} />
-        <Route exact path="/settings" render={() => {if(user==="admin"){return <AdminSetting />}else return <Restricted/>}} />
-        <Route exact path="/facultyNotices" render={() => {  if(user==="faculty"){ return <FacultyNotices />}else return <Restricted/>}} />
-        <Route exact path="/changepassword" render={() =>{ if(user==="student") { return <ChangePassword />}else return <Restricted/>}} />
+        <Route
+          exact
+          path="/deleteFaculty"
+          render={() => {
+            if (user === "admin") {
+              return <DeleteFaculty />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/settings"
+          render={() => {
+            if (user === "admin") {
+              return <AdminSetting />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/facultyNotices"
+          render={() => {
+            if (user === "faculty") {
+              return <FacultyNotices />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/changepassword"
+          render={() => {
+            if (user === "student") {
+              return <ChangePassword />;
+            } else return <Restricted />;
+          }}
+        />
 
         <Route
           exact
           path="/facultysetting"
-          render={() => { if(user==="faculty"){ return <FacultyChangePassword />}else return <Restricted/>}}
+          render={() => {
+            if (user === "faculty") {
+              return <FacultyChangePassword />;
+            } else return <Restricted />;
+          }}
         />
         <Route
           exact
           path="/internshipdetails/:internshipid"
-          render={() =>{if(user==="student") { return <InternshipDetails />}else return <Restricted/>}}
+          render={() => {
+            if (user === "student") {
+              return <InternshipDetails />;
+            } else return <Restricted />;
+          }}
         />
         <Route
           exact
           path="/internshipview/:internshipid"
-
-          render={() => {if(user==="faculty"){ return <InternshipView />}else return <Restricted/>}}
+          render={() => {
+            if (user === "faculty") {
+              return <InternshipView />;
+            } else return <Restricted />;
+          }}
         />
+
         <Route
           exact
           path="/internshipviewapproved/:internshipid"
-          render={() =>{ if(user==="faculty"){return <ViewApprovedInternship />}else return <Restricted/>}}
+          render={() => {
+            if (user === "faculty") {
+              return <ViewApprovedInternship />;
+            } else return <Restricted />;
+          }}
         />
-        <Route exact path="/apply" render={() =>{ if(user==="student"){return <InternshipApplication />} else return <Restricted/>}} />
-        <Route exact path="/studentprofile" render={() => { if(user==="student"){return <StudentProfile />}else return <Restricted/>}} />
+        <Route
+          exact
+          path="/apply"
+          render={() => {
+            if (user === "student") {
+              return <InternshipApplication />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/studentprofile"
+          render={() => {
+            if (user === "student") {
+              return <StudentProfile />;
+            } else return <Restricted />;
+          }}
+        />
         <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
         <Route component={NotFoundPage} />
       </Switch>

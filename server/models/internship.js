@@ -43,6 +43,9 @@ const internshipSchema = new mongoose.Schema({
     approvedDate: {
       type: Date,
     },
+    internshipType: {
+      type: String,
+    },
     startDate: {
       type: Date,
     },
@@ -61,7 +64,13 @@ const internshipSchema = new mongoose.Schema({
       type: Number,
     },
     offerLetter: {
-      type:String
+      type: String,
+    },
+    NOC: {
+      type: String,
+    },
+    NOCRequired: {
+      type: Boolean,
     },
   },
   approvedBy: [

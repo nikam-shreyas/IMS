@@ -14,7 +14,6 @@ class InternshipApplication extends React.Component {
   };
   constructor(props) {
     super(props);
-    this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitFile = this.submitFile.bind(this);
   }
@@ -28,7 +27,6 @@ class InternshipApplication extends React.Component {
   //   x.open('GET','https:localhost:4002/index.js',true);
 
   // }
-  handleUpload(id, labelId) {}
   handleSubmit(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
@@ -38,7 +36,9 @@ class InternshipApplication extends React.Component {
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
     data["application"]["offerLetter"] = "/public/Documents";
-
+    data["application"]["NOCRequired"] = document.getElementById(
+      "NOCRequired"
+    ).checked;
     const formDataFile = new FormData();
     formDataFile.append("offerLetter", this.state.file);
     const config = {
@@ -52,14 +52,14 @@ class InternshipApplication extends React.Component {
     //     }).catch((error) => {
     // });
 
-    const { uploadDocument, createInternship } = this.props;
-    uploadDocument(formDataFile, config).then(() => {
-      console.log("done");
-    });
+    // const { uploadDocument, createInternship } = this.props;
+    // uploadDocument(formDataFile, config).then(() => {
+    //   console.log("done");
+    // });
 
-    createInternship(data).then(() => {
-      this.props.history.push("/student");
-    });
+    // createInternship(data).then(() => {
+    //   this.props.history.push("/student");
+    // });
   }
 
   submitFile(event) {
@@ -72,7 +72,7 @@ class InternshipApplication extends React.Component {
         <div className="col-sm-2 sidenav">
           <Sidenav activeComponent="3" />
         </div>
-        <div className="col-sm-10">
+        <div className="col-sm-10 of">
           <div className="container-fluid">
             <h4 className="mt-2">Apply</h4>
             <div
@@ -138,33 +138,19 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col-sm-12">
-                    Upload Offer Letter:{" "}
-                    <small className="text-danger">
-                      (Files to be uploaded strictly in PDF format.)
-                    </small>
-                    <div className="custom-file">
-                      <input
-                        type="file"
-                        className="custom-file-input"
-                        name="offerLetter"
-                        id="offerLetter"
-                        onChange={this.submitFile}
-                        required
-                      />
-                      <label
-                        className="custom-file-label"
-                        id="offerLetterLabel"
-                        htmlFor="offerLetter"
-                      >
-                        Choose file
-                      </label>
-                    </div>
-                  </div>
-                </div>
                 <div className="form-row my-2">
-                  <div className="col-sm-5">
+                  <div className="col-sm-6">
+                    Type of Internship:
+                    <input
+                      type="text"
+                      name="internshipType"
+                      id="internshipType"
+                      className="form-control"
+                      placeholder="eg. Work from home"
+                    />
+                  </div>
+
+                  <div className="col-sm-6">
                     Stipend:
                     <div className="input-group">
                       <div className="input-group-prepend">
@@ -189,7 +175,19 @@ class InternshipApplication extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-sm-7">
+                </div>
+                <div className="form-row my-2">
+                  <div className="col-sm-6">
+                    NOC required:
+                    <input
+                      type="text"
+                      name="NOCRequired"
+                      id="NOCRequired"
+                      className="form-control"
+                      placeholder="Yes/No"
+                    />
+                  </div>
+                  <div className="col-sm-6">
                     Reference:
                     <div className="input-group">
                       <div className="input-group-prepend">
@@ -211,7 +209,6 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                 </div>
-
                 {/* <div className="form-row">
                   {/* <form method="post" encType="multipart/form-data" onSubmit="/internship/uploadDocument">
                 <input type="file" name="offerLetter" />
@@ -229,7 +226,144 @@ class InternshipApplication extends React.Component {
                 </div> */}
               </div>
               <hr />
-              <div className="text-right">
+              Upload documents:{" "}
+              <small className="text-danger">
+                (Files to be uploaded strictly in PDF format.)
+              </small>
+              <hr />
+              <div className="container-fluid">
+                <div className="form-row">
+                  <div className="col-sm-6">
+                    No Objection Certificate:{" "}
+                    <small className="text-info">
+                      (Upload file if NOC is required in a specific format)
+                    </small>
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="NOC"
+                        id="NOC"
+                        onChange={this.submitNOCFile}
+                      />
+                      <label
+                        className="custom-file-label"
+                        id="NOCLabel"
+                        htmlFor="NOC"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-sm-6">
+                    Upload Offer Letter:
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="offerLetter"
+                        id="offerLetter"
+                        onChange={this.submitFile}
+                        required
+                      />
+                      <label
+                        className="custom-file-label"
+                        id="offerLetterLabel"
+                        htmlFor="offerLetter"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              Marksheets:
+              <hr />
+              <div className="container-fluid">
+                <div className="form-row">
+                  <div className="col-sm-6">
+                    FE Marksheet:
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="FEMarksheet"
+                        id="FEMarksheet"
+                        onChange={this.submitFile}
+                      />
+                      <label
+                        className="custom-file-label"
+                        id="FEMarksheetLabel"
+                        htmlFor="FEMarksheet"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-sm-6">
+                    SE Marksheet:
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="SEMarksheet"
+                        id="SEMarksheet"
+                        onChange={this.submitFile}
+                      />
+                      <label
+                        className="custom-file-label"
+                        id="SEMarksheetLabel"
+                        htmlFor="SEMarksheet"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="col-sm-6">
+                    TE Marksheet:
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="TEMarksheet"
+                        id="TEMarksheet"
+                        onChange={this.submitFile}
+                      />
+                      <label
+                        className="custom-file-label"
+                        id="SEMarksheet"
+                        htmlFor="TEMarksheet"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-sm-6">
+                    BE Marksheet:
+                    <div className="custom-file">
+                      <input
+                        type="file"
+                        className="custom-file-input"
+                        name="BEMarksheet"
+                        id="BEMarksheet"
+                        onChange={this.submitFile}
+                      />
+                      <label
+                        className="custom-file-label"
+                        id="BEMarksheetLabel"
+                        htmlFor="BEMarksheet"
+                      >
+                        Choose file
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div className="text-right mb-2">
                 <button className="btn border-dark mx-2" type="reset">
                   Reset
                 </button>
