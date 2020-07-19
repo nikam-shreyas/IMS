@@ -141,10 +141,15 @@ export const forwardInternship = (data) => {
 export const uploadDocument=(data,config)=>{
   return async (dispatch) => {
     try {
-      console.log("im in upload ");
-      const internship = await api.call("post", "internships/uploadDocument", data,config);
-      dispatch(addSuccess("Document Uploaded Successfully"));
-      dispatch(removeError());   
+      const docs = await api.call("post", "internships/uploadDocument", data,config);
+      if(docs.message==="Error"){
+        dispatch(addError("Error Uploading try again"));
+      }else{
+        dispatch(addSuccess("Document Uploaded Successfully"));
+        dispatch(removeError());   
+      }
+      // dispatch(addSuccess("Document Uploaded Successfully"));
+      // dispatch(removeError());   
     } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));

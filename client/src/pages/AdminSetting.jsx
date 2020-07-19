@@ -6,8 +6,6 @@ import {
   resetPassword,
   removeSuccess,
 } from "../store/actions";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
 import Admin_Sidenav from "../components/Admin_Sidenav";
@@ -164,7 +162,6 @@ class AdminSetting extends Component {
                   </div>
                 </form>
               }
-              <ToastContainer />
             </div>
           </div>
         </div>
