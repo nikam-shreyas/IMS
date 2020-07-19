@@ -1,16 +1,16 @@
 const router = require("express").Router();
 const handle = require("../handlers");
 const auth = require("../middlewares/auth");
-const multer = require('multer');
+const multer = require("multer");
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'public/Documents');
-    },
+  destination: (req, file, cb) => {
+    cb(null, "public/Documents");
+  },
 
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
 });
 
 const FileFilter = (req, file, cb) => {
@@ -45,7 +45,6 @@ router.route("/uploadDocument").post(auth,upload.array('docs',6), (req, res) => 
   }
 });
 router.route("/all").get(auth, handle.getStats);
-
 
 router
   .route("/:id")

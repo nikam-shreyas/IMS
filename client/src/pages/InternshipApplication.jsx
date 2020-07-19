@@ -1,7 +1,8 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { createInternship, uploadDocument } from "../store/actions";
+import { createInternship, uploadDocument,
+  removeSuccess,removeError } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -19,6 +20,11 @@ class InternshipApplication extends React.Component {
     fileTE:null,
     fileBE:null,
   };
+  componentWillUnmount(){
+    const { removeSuccess,removeError } = this.props;
+    removeSuccess();
+    removeError();
+  }
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -432,6 +438,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { createInternship, uploadDocument }
+    { createInternship, uploadDocument,removeSuccess,removeError }
   )(InternshipApplication)
 );

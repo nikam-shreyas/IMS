@@ -1,0 +1,10 @@
+//top 5 workplaces-info
+db.internships.aggregate([{$group:{_id:"$application.workplace",count:{$sum:1}}},{$sort:{count:-1}},{$limit:5}])
+//datewise status-bar
+db.internships.aggregate([{$group:{_id:{sdate:{$dateToString:{format:"%Y-%m",date:"$application.submittedDate",onNull:"2020-05"}},status:"$completionStatus"},count:{$sum:1}}}])
+//yearwise-polar
+db.internships.aggregate([{$group:{_id:"$student.currentClass.year",count:{$sum:1}}}])
+//class wise in each year-doughnut
+db.internships.aggregate([{$group:{_id:{year:"$student.currentClass.year",div:"$student.currentClass.div"},count:{$sum:1}}}])
+//monthwise-line
+db.internships.aggregate([{$group:{_id:{sdate:{$dateToString:{format:"%Y-%m",date:"$application.startDate",onNull:"2020-05"}}},count:{$sum:1}}},{$limit:48}])

@@ -5,6 +5,7 @@ import {
   getAdmin,
   resetPassword,
   removeSuccess,
+  removeError
 } from "../store/actions";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
@@ -45,8 +46,9 @@ class AdminSetting extends Component {
     this.setState({ data: user });
   }
   componentWillUnmount() {
-    const { removeSuccess } = this.props;
+    const { removeSuccess,removeError } = this.props;
     removeSuccess();
+    removeError();
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -179,5 +181,6 @@ export default connect(
     getAdmin,
     resetPassword,
     removeSuccess,
+    removeError
   }
 )(AdminSetting);
