@@ -28,7 +28,7 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ApprovedInternships from "../pages/ApprovedInternships";
 import ViewApprovedInternship from "../pages/ViewApprovedInternship";
 import Restricted from "../pages/Restricted";
-import Analytics from "../pages/Analytics";
+import Analytics from "../pages/Analysis"
 
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
@@ -166,6 +166,17 @@ const RouteViews = ({ auth }) => {
             } else return <Restricted />;
           }}
         />
+
+        <Route
+        exact
+        path="/stats"
+        render={() => {
+          if (user === "admin") {
+            return <Analytics />;
+          } else return <Restricted />;
+        }}
+      />
+       
         <Route
           exact
           path="/all"
