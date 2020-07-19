@@ -428,87 +428,155 @@ exports.rejectInternship = async (req, res, next) => {
 
 exports.getStats = async (req, res, next) => {
   try {
-    const internshipReceived = await db.Internship.aggregate([
-      {
-        $match: { completionStatus: "N" },
-      },
+    //top 5 workplaces-info
+    const top5workplaces = await db.Internship.aggregate([
+      { $group: { _id: "$application.workplace", count: { $sum: 1 } } },
+      { $sort: { count: -1 } },
+      { $limit: 5 },
+    ]);
+    //datewise status-bar
+    const datewiseStatusDistribution = await db.Internship.aggregate([
       {
         $group: {
-          _id: { $substr: ["$application.submittedDate", 5, 2] },
+          _id: {
+            sdate: {
+              $dateToString: {
+                format: "%Y-%m",
+                date: "$application.submittedDate",
+                onNull: "2020-05",
+              },
+            },
+            status: "$completionStatus",
+          },
           count: { $sum: 1 },
         },
       },
     ]);
-    const internshipRejected = await db.Internship.aggregate([
-      {
-        $match: { completionStatus: "R" },
-      },
+    //yearwise-polar
+    const yearwiseDistribution = await db.Internship.aggregate([
+      { $group: { _id: "$student.currentClass.year", count: { $sum: 1 } } },
+    ]);
+    //class wise in each year-doughnut
+    const classwiseDistribution = await db.Internship.aggregate([
       {
         $group: {
-          _id: { $substr: ["$application.submittedDate", 5, 2] },
+          _id: {
+            year: "$student.currentClass.year",
+            div: "$student.currentClass.div",
+          },
           count: { $sum: 1 },
         },
       },
     ]);
-    const internshipAccepted = await db.Internship.aggregate([
-      {
-        $match: { completionStatus: "C" },
-      },
+    //monthwise-line
+    const totalMonthwise = await db.Internship.aggregate([
       {
         $group: {
-          _id: { $substr: ["$application.submittedDate", 5, 2] },
+          _id: {
+            sdate: {
+              $dateToString: {
+                format: "%Y-%m",
+                date: "$application.startDate",
+                onNull: "2020-05",
+              },
+            },
+          },
           count: { $sum: 1 },
         },
       },
+      { $limit: 48 },
     ]);
-    let label = [],
-      recev = [],
-      bg = [],
-      reject = [],
-      bg1 = [],
-      accept = [],
-      bg2 = [];
-    if (internshipReceived != null) {
-      internshipReceived.forEach((element) => {
-        label.push(parseInt(element._id));
-        recev.push(parseInt(element.count));
-        bg.push("#4198D8");
-      });
-    }
-    if (internshipRejected != null) {
-      internshipRejected.forEach((element) => {
-        reject.push(parseInt(element.count));
-        bg1.push("#F5C767");
-      });
-    }
-    if (internshipAccepted != null) {
-      internshipAccepted.forEach((element) => {
-        accept.push(parseInt(element.count));
-        bg2.push("#7A61BA");
-      });
-    }
-    let chartData1 = {
-      labels: label,
-      datasets: [
-        {
-          label: "Received",
-          data: recev,
-          backgroundColor: bg,
-        },
-        {
-          label: "Rejected",
-          data: reject,
-          backgroundColor: bg1,
-        },
-        {
-          label: "Approved",
-          data: accept,
-          backgroundColor: bg2,
-        },
-      ],
-    };
-    console.log(chartData1);
-    res.status(200).json(chartData1);
+    let data = {};
+    data["top5workplaces"] = top5workplaces;
+    data["datewiseStatusDistribution"] = datewiseStatusDistribution;
+    data["yearwiseDistribution"] = yearwiseDistribution;
+    data["classwiseDistribution"] = classwiseDistribution;
+    data["totalMonthwise"] = totalMonthwise;
+    // const internshipReceived = await db.Internship.aggregate([
+    //   {
+    //     $match: { completionStatus: "N" },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: { $substr: ["$application.submittedDate", 5, 2] },
+    //       count: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
+    // const internshipRejected = await db.Internship.aggregate([
+    //   {
+    //     $match: { completionStatus: "R" },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: { $substr: ["$application.submittedDate", 5, 2] },
+    //       count: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
+    // const internshipAccepted = await db.Internship.aggregate([
+    //   {
+    //     $match: { completionStatus: "A" },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: { $substr: ["$application.submittedDate", 5, 2] },
+    //       count: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
+    // let label = [],
+    //   recev = [],
+    //   bg = [],
+    //   reject = [],
+    //   bg1 = [],
+    //   accept = [],
+    //   bg2 = [];
+    // if (internshipReceived != null) {
+    //   internshipReceived.forEach((element) => {
+    //     label.push(parseInt(element._id));
+    //     recev.push(parseInt(element.count));
+    //     bg.push("#4198D8");
+    //   });
+    // }
+    // if (internshipRejected != null) {
+    //   internshipRejected.forEach((element) => {
+    //     reject.push(parseInt(element.count));
+    //     bg1.push("#F5C767");
+    //   });
+    // }
+    // console.log(internshipRejected);
+    // if (internshipAccepted != null) {
+    //   internshipAccepted.forEach((element) => {
+    //     accept.push(parseInt(element.count));
+    //     bg2.push("#7A61BA");
+    //   });
+    // }
+
+    // console.log(internshipAccepted, internshipReceived);
+    // let chartData1 = {
+    //   totalInternships: totalInternships,
+    //   labels: label,
+    //   datasets: [
+    //     {
+    //       label: "Received",
+    //       data: recev,
+    //       backgroundColor: bg,
+    //     },
+    //     {
+    //       label: "Rejected",
+    //       data: reject,
+    //       backgroundColor: bg1,
+    //     },
+    //     {
+    //       label: "Approved",
+    //       data: accept,
+    //       backgroundColor: bg2,
+    //     },
+    //   ],
+    // };
+    // console.log(chartData1);
+    res.status(200).json(data);
   } catch (err) {
     next({
       status: 400,

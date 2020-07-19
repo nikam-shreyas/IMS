@@ -11,17 +11,8 @@ const Analytics = () => {
         <div className="col-sm-2 sidenav">
           <Admin_Sidenav activeComponent="5" />
         </div>
-        <div className="col-sm-10">
-          <div className="container-fluid mt-2">
-            <div className="main-element ms-Grid-col ms-sm10 ms-xl10">
-              <div className="ms-Grid-row">
-                <h3 style={{ color: "black" }}>Monthly Application Analysis</h3>
-              </div>
-              <div className="ms-Grid-row">
-                <AnalyticsCharts />
-              </div>
-            </div>
-          </div>
+        <div className="col-sm-10 of">
+          <AnalyticsCharts />
         </div>
       </div>
     </div>
