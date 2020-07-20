@@ -190,7 +190,7 @@ class MainContent extends Component {
                       <small className="text-muted">{internship._id}</small>
                     </div>
                     <div className="card-body">
-                      {internship.completionStatus !== "N" && (
+                      {internship.completionStatus === "Approved" && (
                         <div className="mb-4">
                           <div className="form-row">
                             <div className="col-sm-12">

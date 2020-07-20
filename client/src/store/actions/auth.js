@@ -14,10 +14,10 @@ export const setToken = (token) => {
 
 export const logout = () => {
   return (dispatch) => {
+    window.location = "/login";
     localStorage.clear();
     api.setToken(null);
     dispatch(setCurrentUser({}));
-    window.location = "/login";
     dispatch(removeError());
   };
 };
@@ -96,12 +96,9 @@ export const forgotPassword = (data) => {
   };
 };
 
-export const getUserType=(data)=>{
+export const getUserType = (data) => {
   return async (dispatch) => {
-    try{
-      
-    } catch(err) {
-
-    }
-  }
-}
+    try {
+    } catch (err) {}
+  };
+};

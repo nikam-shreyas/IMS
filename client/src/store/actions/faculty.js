@@ -33,11 +33,11 @@ export const setCurrentFaculty = (faculty) => ({
 
 export const logout_f = () => {
   return (dispatch) => {
+    window.location = "/login";
     localStorage.clear();
     api.setToken(null);
     dispatch(setCurrentUser_f({}));
     dispatch(setCurrentUser_a({}));
-    window.location = "/";
     dispatch(removeError());
   };
 };
