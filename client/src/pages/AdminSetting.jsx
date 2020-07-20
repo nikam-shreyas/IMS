@@ -5,9 +5,8 @@ import {
   getAdmin,
   resetPassword,
   removeSuccess,
+  removeError
 } from "../store/actions";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
 import Admin_Sidenav from "../components/Admin_Sidenav";
@@ -47,8 +46,9 @@ class AdminSetting extends Component {
     this.setState({ data: user });
   }
   componentWillUnmount() {
-    const { removeSuccess } = this.props;
+    const { removeSuccess,removeError } = this.props;
     removeSuccess();
+    removeError();
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -164,7 +164,6 @@ class AdminSetting extends Component {
                   </div>
                 </form>
               }
-              <ToastContainer />
             </div>
           </div>
         </div>
@@ -182,5 +181,6 @@ export default connect(
     getAdmin,
     resetPassword,
     removeSuccess,
+    removeError
   }
 )(AdminSetting);

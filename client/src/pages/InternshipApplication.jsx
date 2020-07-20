@@ -1,21 +1,58 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { createInternship, uploadDocument } from "../store/actions";
+import { createInternship, uploadDocument,
+  removeSuccess,removeError } from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import axios, { post } from "axios";
-
+import ErrorMessage from "../components/ErrorMessage";
+import SuccessMessage from "../components/SuccessMessage";
 class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
-    fileName: null,
+    fileName: [],
+    fileNOC:null,
+    fileOL:null,
+    fileFE:null,
+    fileSE:null,
+    fileTE:null,
+    fileBE:null,
   };
+  componentWillUnmount(){
+    const { removeSuccess,removeError } = this.props;
+    removeSuccess();
+    removeError();
+  }
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.submitFile = this.submitFile.bind(this);
+    this.submitNOCFile = this.submitNOCFile.bind(this);
+    this.submitOL = this.submitOL.bind(this);
+    this.submitFE = this.submitFE.bind(this);
+    this.submitSE = this.submitSE.bind(this);
+    this.submitTE = this.submitTE.bind(this);
+    this.submitBE = this.submitBE.bind(this);
+  }
+  submitNOCFile(event) {
+    this.setState({ fileNOC: event.target.files[0]});
+  }
+  submitOL(event) {
+    this.setState({ fileOL: event.target.files[0]});
+  }
+
+  submitFE(event) {
+    this.setState({ fileFE: event.target.files[0]});
+  }
+  submitSE(event) {
+    this.setState({ fileSE: event.target.files[0]});
+  }
+  submitTE(event) {
+    this.setState({ fileTE: event.target.files[0]});
+  }
+  submitBE(event) {
+    this.setState({ fileBE: event.target.files[0]});
   }
   handleChange = (date) => {
     this.setState({
@@ -40,10 +77,29 @@ class InternshipApplication extends React.Component {
       "NOCRequired"
     ).checked;
     const formDataFile = new FormData();
-    formDataFile.append("offerLetter", this.state.file);
+
+    formDataFile.append("docs", this.state.fileOL);
+    formDataFile.append("docs", this.state.fileFE);
+    formDataFile.append("docs", this.state.fileSE);
+    formDataFile.append("docs", this.state.fileTE);
+    formDataFile.append("docs", this.state.fileBE);
+    console.log(this.state.fileNOC)
+      if(this.state.fileNOC!=null){
+        console.log(this.state.fileNOC)
+        formDataFile.append("docs", this.state.fileNOC);
+      }else{
+        console.log("Null NOC")
+      }
+
+    // let datafiles={};
+    // for (let i = 0 ; i < this.state.fileName.length ; i++) {
+    //   formDataFile.append("docs", this.state.fileName[i]);
+    // }
+    // datafiles["offerLetter"]=this.state.fileName;
+    // formDataFile.append("offerLetter", this.state.fileName);
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
     };
     // axios.post("http://localhost:4002/api/internships/uploadDocument",formDataFile,config)
@@ -51,20 +107,12 @@ class InternshipApplication extends React.Component {
     //         alert("The file is successfully uploaded");
     //     }).catch((error) => {
     // });
-
-    // const { uploadDocument, createInternship } = this.props;
-    // uploadDocument(formDataFile, config).then(() => {
-    //   console.log("done");
-    // });
-
-    // createInternship(data).then(() => {
-    //   this.props.history.push("/student");
-    // });
+    
+    const { uploadDocument, createInternship } = this.props;
+    uploadDocument(formDataFile, config);
   }
 
-  submitFile(event) {
-    this.setState({ file: event.target.files[0] });
-  }
+
 
   render() {
     return (
@@ -263,7 +311,7 @@ class InternshipApplication extends React.Component {
                         className="custom-file-input"
                         name="offerLetter"
                         id="offerLetter"
-                        onChange={this.submitFile}
+                        onChange={this.submitOL}
                         required
                       />
                       <label
@@ -290,7 +338,7 @@ class InternshipApplication extends React.Component {
                         className="custom-file-input"
                         name="FEMarksheet"
                         id="FEMarksheet"
-                        onChange={this.submitFile}
+                        onChange={this.submitFE}
                       />
                       <label
                         className="custom-file-label"
@@ -309,7 +357,7 @@ class InternshipApplication extends React.Component {
                         className="custom-file-input"
                         name="SEMarksheet"
                         id="SEMarksheet"
-                        onChange={this.submitFile}
+                        onChange={this.submitSE}
                       />
                       <label
                         className="custom-file-label"
@@ -330,7 +378,7 @@ class InternshipApplication extends React.Component {
                         className="custom-file-input"
                         name="TEMarksheet"
                         id="TEMarksheet"
-                        onChange={this.submitFile}
+                        onChange={this.submitTE}
                       />
                       <label
                         className="custom-file-label"
@@ -349,7 +397,7 @@ class InternshipApplication extends React.Component {
                         className="custom-file-input"
                         name="BEMarksheet"
                         id="BEMarksheet"
-                        onChange={this.submitFile}
+                        onChange={this.submitBE}
                       />
                       <label
                         className="custom-file-label"
@@ -370,10 +418,15 @@ class InternshipApplication extends React.Component {
                 <button type="submit" className="btn btn-dark">
                   Submit
                 </button>
+                <span  className="col-sm-6 mt-4">
+                <ErrorMessage />
+                <SuccessMessage />
+                </span>
               </div>
             </form>
           </div>
         </div>
+      
       </div>
     );
   }
@@ -385,6 +438,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { createInternship, uploadDocument }
+    { createInternship, uploadDocument,removeSuccess,removeError }
   )(InternshipApplication)
 );
