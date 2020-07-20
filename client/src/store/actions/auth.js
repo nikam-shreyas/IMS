@@ -14,7 +14,6 @@ export const setToken = (token) => {
 
 export const logout = () => {
   return (dispatch) => {
-    window.location = "/login";
     localStorage.clear();
     api.setToken(null);
     dispatch(setCurrentUser({}));

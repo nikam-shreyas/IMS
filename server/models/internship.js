@@ -70,7 +70,7 @@ const internshipSchema = new mongoose.Schema({
       type: String,
     },
     NOCRequired: {
-      type: Boolean,
+      type: String,
     },
   },
   approvedBy: [

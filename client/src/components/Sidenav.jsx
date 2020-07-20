@@ -20,6 +20,7 @@ class Sidenav extends Component {
   handleLogout() {
     const { logout } = this.props;
     logout();
+    window.location.href = "/login";
   }
   state = {};
   render() {

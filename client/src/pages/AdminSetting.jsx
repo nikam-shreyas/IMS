@@ -5,7 +5,7 @@ import {
   getAdmin,
   resetPassword,
   removeSuccess,
-  removeError
+  removeError,
 } from "../store/actions";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
@@ -46,7 +46,7 @@ class AdminSetting extends Component {
     this.setState({ data: user });
   }
   componentWillUnmount() {
-    const { removeSuccess,removeError } = this.props;
+    const { removeSuccess, removeError } = this.props;
     removeSuccess();
     removeError();
   }
@@ -73,8 +73,6 @@ class AdminSetting extends Component {
 
   handleconfirmPassword(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.newpassword);
-    console.log(e.target.value);
 
     if (this.state.newpassword !== e.target.value) {
       this.setState({ message: "Passwords do not match!" });
@@ -84,7 +82,6 @@ class AdminSetting extends Component {
     this.setState({ confirmPassword: e.target.value });
   }
   render() {
-    console.log(this.state.data);
     return (
       <div>
         <div className="row no-gutters">
@@ -181,6 +178,6 @@ export default connect(
     getAdmin,
     resetPassword,
     removeSuccess,
-    removeError
+    removeError,
   }
 )(AdminSetting);

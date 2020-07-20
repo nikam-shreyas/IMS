@@ -21,6 +21,7 @@ class Sidenav_f extends Component {
   handleLogout() {
     const { logout } = this.props;
     logout();
+    window.location.href = "/";
   }
   render() {
     const activeNow = this.props.activeComponent;
