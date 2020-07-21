@@ -160,7 +160,7 @@ class ViewApprovedInternship extends Component {
                           <tr>
                             <th>Status</th>
                             <th>
-                              {this.state.data.completionStatus === "N"
+                              {this.state.data.completionStatus === "Pending"
                                 ? "Pending"
                                 : "Approved"}
                             </th>
@@ -169,7 +169,8 @@ class ViewApprovedInternship extends Component {
                         <tbody>
                           <tr
                             className={
-                              this.state.data.docs.AttendanceStatus === "N"
+                              this.state.data.docs.AttendanceStatus ===
+                              "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -179,7 +180,8 @@ class ViewApprovedInternship extends Component {
                           </tr>
                           <tr
                             className={
-                              this.state.data.docs.ApplicationStatus === "N"
+                              this.state.data.docs.ApplicationStatus ===
+                              "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -189,7 +191,8 @@ class ViewApprovedInternship extends Component {
                           </tr>
                           <tr
                             className={
-                              this.state.data.docs.UndertakingStatus === "N"
+                              this.state.data.docs.UndertakingStatus ===
+                              "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -199,7 +202,8 @@ class ViewApprovedInternship extends Component {
                           </tr>
                           <tr
                             className={
-                              this.state.data.docs.OfferLetterStatus === "N"
+                              this.state.data.docs.OfferLetterStatus ===
+                              "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -209,7 +213,8 @@ class ViewApprovedInternship extends Component {
                           </tr>
                           <tr
                             className={
-                              this.state.data.docs.MarksheetsStatus === "N"
+                              this.state.data.docs.MarksheetsStatus ===
+                              "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -219,7 +224,7 @@ class ViewApprovedInternship extends Component {
                           </tr>
                         </tbody>
                       </table>
-                      {this.state.data.completionStatus === "N" && (
+                      {this.state.data.completionStatus === "Pending" && (
                         <>
                           Application is currently viewed by:{" "}
                           {this.state.data.holder.designation} <br />

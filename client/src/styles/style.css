@@ -1,7 +1,6 @@
 .section {
   position: relative;
   min-height: 100vh;
-  background: url("../assets/images/bg4.jpg");
   display: flex;
   justify-content: center;
   align-items: center;

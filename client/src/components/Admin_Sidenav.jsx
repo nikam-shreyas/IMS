@@ -63,21 +63,21 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/stats">
-          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdEqualizer style={{ margin: -1, padding: -1 }} />
-            </span>
-           Stats
-          </li>
-        </Link>
-        <Link to="/studentReport">
-          <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdAssignment style={{ margin: -1, padding: -1 }} />
-            </span>
-           Students' Report
-          </li>
-        </Link>
+            <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdEqualizer style={{ margin: -1, padding: -1 }} />
+              </span>
+              Statistics
+            </li>
+          </Link>
+          <Link to="/studentReport">
+            <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdAssignment style={{ margin: -1, padding: -1 }} />
+              </span>
+              Report
+            </li>
+          </Link>
           <Link to="/settings">
             <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
               <span className="mx-2">

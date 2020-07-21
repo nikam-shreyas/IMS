@@ -15,7 +15,6 @@ const Analytics = () => {
           <AnalyticsCharts />
         </div>
       </div>
-     
     </div>
   );
 };

@@ -81,10 +81,10 @@ class InternshipApplication extends React.Component {
     for (var [key, value] of formData.entries()) {
       data["application"][key] = value;
     }
-    console.log(this.state.fileOL)
+    console.log(this.state.fileOL);
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = "/public/Documents/"+this.state.fileOL.name;
-
+    data["application"]["offerLetter"] =
+      "/public/Documents/" + this.state.fileOL.name;
 
     data["application"]["NOCRequired"] = document.getElementById(
       "NOCRequired"
@@ -92,26 +92,31 @@ class InternshipApplication extends React.Component {
     const formDataFile = new FormData();
     formDataFile.append("docs", this.state.fileOL);
 
-    if(this.state.fileFE!=null){
-      data["application"]["FEMarksheet"] = "/public/Documents/"+this.state.fileFE.name;
+    if (this.state.fileFE != null) {
+      data["application"]["FEMarksheet"] =
+        "/public/Documents/" + this.state.fileFE.name;
       formDataFile.append("docs", this.state.fileFE);
     }
-    if(this.state.fileSE!=null){
-      data["application"]["SEMarksheet"] = "/public/Documents/"+this.state.fileSE.name;
+    if (this.state.fileSE != null) {
+      data["application"]["SEMarksheet"] =
+        "/public/Documents/" + this.state.fileSE.name;
       formDataFile.append("docs", this.state.fileSE);
     }
-    if(this.state.fileTE!=null){
-      data["application"]["TEMarksheet"] = "/public/Documents/"+this.state.fileTE.name;
+    if (this.state.fileTE != null) {
+      data["application"]["TEMarksheet"] =
+        "/public/Documents/" + this.state.fileTE.name;
       formDataFile.append("docs", this.state.fileTE);
     }
-    if(this.state.fileBE!=null){
-      data["application"]["BEMarksheet"] = "/public/Documents/"+this.state.fileBE.name;
+    if (this.state.fileBE != null) {
+      data["application"]["BEMarksheet"] =
+        "/public/Documents/" + this.state.fileBE.name;
       formDataFile.append("docs", this.state.fileBE);
     }
-    if(this.state.fileNOC!=null){
+    if (this.state.fileNOC != null) {
       formDataFile.append("docs", this.state.fileNOC);
-      data["application"]["NOC"] = "/public/Documents"+this.state.fileNOC.name;
-    }else{
+      data["application"]["NOC"] =
+        "/public/Documents" + this.state.fileNOC.name;
+    } else {
       data["application"]["NOC"] = "";
     }
     // let datafiles={};
@@ -130,7 +135,7 @@ class InternshipApplication extends React.Component {
     //         alert("The file is successfully uploaded");
     //     }).catch((error) => {
     // });
-    console.log(data)
+    console.log(data);
     const { uploadDocument, createInternship } = this.props;
     uploadDocument(formDataFile, config);
     createInternship(data).then((window.location.href = "/student"));
