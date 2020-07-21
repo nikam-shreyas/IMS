@@ -37,7 +37,6 @@ export const logout_f = () => {
     api.setToken(null);
     dispatch(setCurrentUser_f({}));
     dispatch(setCurrentUser_a({}));
-    window.location = "/";
     dispatch(removeError());
   };
 };

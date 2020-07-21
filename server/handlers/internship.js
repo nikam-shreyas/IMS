@@ -141,7 +141,20 @@ exports.showInternships = async (req, res, next) => {
     });
   }
 };
-
+exports.showAllInternships = async (req, res, next) => {
+  try {
+    //const internships = await db.internships.find().populate('student',['studentname','id']);
+    const { id } = req.decoded;
+    let internships = await db.Internship.find();
+    // console.log(internships);
+    res.status(200).json(internships);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
 exports.showApprovedInternships = async (req, res, next) => {
   try {
     //const internships = await db.internships.find().populate('student',['studentname','id']);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MdPermIdentity } from "react-icons/md";
+import { MdPermIdentity, MdAssignment } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -9,7 +9,7 @@ import {
   MdAddCircle,
   MdFormatListBulleted,
   MdDelete,
-  MdEqualizer
+  MdEqualizer,
 } from "react-icons/md";
 
 class Admin_Sidenav extends Component {
@@ -17,6 +17,7 @@ class Admin_Sidenav extends Component {
   handleLogout() {
     const { logout } = this.props;
     logout();
+    window.location.href = "/";
   }
   constructor(props) {
     super(props);
@@ -77,6 +78,15 @@ class Admin_Sidenav extends Component {
            Stats
           </li>
         </Link>
+          <Link to="/settings">
+            <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
+
+              <span className="mx-2">
+                <MdAssignment style={{ margin: -1, padding: -1 }} />
+              </span>
+              Report
+            </li>
+          </Link>
           <Link to="/settings">
             <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
               <span className="mx-2">

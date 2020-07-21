@@ -50,7 +50,6 @@ class MainContent extends Component {
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
       cardContent = cards[i].querySelector(".individual-card");
-      console.log(cardContent.innerText);
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -168,7 +167,7 @@ class MainContent extends Component {
                 <div
                   key={internship._id}
                   className={
-                    internship.completionStatus === "N"
+                    internship.completionStatus === "Pending"
                       ? "card my-3 border-secondary"
                       : "card my-3 border-success"
                   }
@@ -190,7 +189,7 @@ class MainContent extends Component {
                       <small className="text-muted">{internship._id}</small>
                     </div>
                     <div className="card-body">
-                      {internship.completionStatus !== "N" && (
+                      {internship.completionStatus === "Approved" && (
                         <div className="mb-4">
                           <div className="form-row">
                             <div className="col-sm-12">
@@ -223,7 +222,7 @@ class MainContent extends Component {
                           <tr>
                             <th>Status</th>
                             <th>
-                              {internship.completionStatus === "N"
+                              {internship.completionStatus === "Pending"
                                 ? "Pending"
                                 : "Approved"}
                             </th>
@@ -232,7 +231,7 @@ class MainContent extends Component {
                         <tbody>
                           <tr
                             className={
-                              internship.docs.AttendanceStatus === "N"
+                              internship.docs.AttendanceStatus === "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -242,7 +241,7 @@ class MainContent extends Component {
                           </tr>
                           <tr
                             className={
-                              internship.docs.ApplicationStatus === "N"
+                              internship.docs.ApplicationStatus === "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -252,7 +251,7 @@ class MainContent extends Component {
                           </tr>
                           <tr
                             className={
-                              internship.docs.UndertakingStatus === "N"
+                              internship.docs.UndertakingStatus === "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -262,7 +261,7 @@ class MainContent extends Component {
                           </tr>
                           <tr
                             className={
-                              internship.docs.OfferLetterStatus === "N"
+                              internship.docs.OfferLetterStatus === "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -272,7 +271,7 @@ class MainContent extends Component {
                           </tr>
                           <tr
                             className={
-                              internship.docs.MarksheetsStatus === "N"
+                              internship.docs.MarksheetsStatus === "Pending"
                                 ? "table-warning"
                                 : "table-success"
                             }
@@ -282,7 +281,7 @@ class MainContent extends Component {
                           </tr>
                         </tbody>
                       </table>
-                      {internship.completionStatus === "N" && (
+                      {internship.completionStatus === "Pending" && (
                         <>
                           Application is currently viewed by:{" "}
                           {internship.holder.designation} <br />

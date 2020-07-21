@@ -1,11 +1,12 @@
 .section {
   position: relative;
-  min-height: 80vh;
-  background: #fff;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  margin-top: -4vh;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .section .container {
@@ -37,7 +38,7 @@
   position: relative;
   width: 50%;
   height: 100%;
-  background: #2b2b2b;
+  background: #212121;
   transition: 0.5s;
 }
 
@@ -65,7 +66,7 @@
   position: relative;
   width: 50%;
   height: 100%;
-  background: #424242;
+  background: #e7e7e7;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +82,7 @@
   text-align: center;
   width: 100%;
   margin-bottom: 10px;
-  color: white;
+  color: black;
 }
 .btn-custom,
 Link {
