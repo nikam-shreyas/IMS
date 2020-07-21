@@ -48,7 +48,6 @@ class DeleteFaulty extends Component {
     const { getCurrentTeacher } = this.props;
     var formData = new FormData(event.target);
     const username = formData.get("username") || null;
-    console.log(username);
     getCurrentTeacher(username).then(() => this.loadData(this.props.teacher));
   }
   //  handleChange({ target }) {

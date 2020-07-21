@@ -42,6 +42,7 @@ class InternshipView extends Component {
         },
         rollNo: null,
         prevSemAttendance: null,
+        emailId: null,
       },
       approvedBy: [],
       holder: { id: null, designation: null },
@@ -85,38 +86,38 @@ class InternshipView extends Component {
   loadData(internship) {
     this.setState({ data: internship });
     for (const [key, value] of Object.entries(this.state.data.docs)) {
-      if (value === "N") this.setState({ showButton: true });
+      if (value === "Pending") this.setState({ showButton: true });
     }
   }
   updateStatus(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
     if (
-      this.state.data.docs.AttendanceStatus === "N" &&
+      this.state.data.docs.AttendanceStatus === "Pending" &&
       formData.get("AttendanceStatus") === "on"
     ) {
       this.state.data.docs.AttendanceStatus = "Approved";
     }
     if (
-      this.state.data.docs.ApplicationStatus === "N" &&
+      this.state.data.docs.ApplicationStatus === "Pending" &&
       formData.get("ApplicationStatus") === "on"
     ) {
       this.state.data.docs.ApplicationStatus = "Approved";
     }
     if (
-      this.state.data.docs.UndertakingStatus === "N" &&
+      this.state.data.docs.UndertakingStatus === "Pending" &&
       formData.get("UndertakingStatus") === "on"
     ) {
       this.state.data.docs.UndertakingStatus = "Approved";
     }
     if (
-      this.state.data.docs.OfferLetterStatus === "N" &&
+      this.state.data.docs.OfferLetterStatus === "Pending" &&
       formData.get("OfferLetterStatus") === "on"
     ) {
       this.state.data.docs.OfferLetterStatus = "Approved";
     }
     if (
-      this.state.data.docs.MarksheetsStatus === "N" &&
+      this.state.data.docs.MarksheetsStatus === "Pending" &&
       formData.get("MarksheetsStatus") === "on"
     ) {
       this.state.data.docs.MarksheetsStatus = "Approved";
@@ -196,6 +197,10 @@ class InternshipView extends Component {
                             </td>
                           </tr>
                           <tr>
+                            <td>Email: </td>
+                            <td>{this.state.data.student.emailId}</td>
+                          </tr>
+                          <tr>
                             <td>Submitted On</td>
                             <td>
                               {new Date(
@@ -238,7 +243,7 @@ class InternshipView extends Component {
                             <tr>
                               <th>Status</th>
                               <th>
-                                {this.state.data.completionStatus === "N"
+                                {this.state.data.completionStatus === "Pending"
                                   ? "Pending"
                                   : "Approved"}
                               </th>
@@ -248,7 +253,8 @@ class InternshipView extends Component {
                           <tbody>
                             <tr
                               className={
-                                this.state.data.docs.AttendanceStatus === "N"
+                                this.state.data.docs.AttendanceStatus ===
+                                "Pending"
                                   ? "table-warning"
                                   : "table-success"
                               }
@@ -273,7 +279,8 @@ class InternshipView extends Component {
                             </tr>
                             <tr
                               className={
-                                this.state.data.docs.ApplicationStatus === "N"
+                                this.state.data.docs.ApplicationStatus ===
+                                "Pending"
                                   ? "table-warning"
                                   : "table-success"
                               }
@@ -298,7 +305,8 @@ class InternshipView extends Component {
                             </tr>
                             <tr
                               className={
-                                this.state.data.docs.UndertakingStatus === "N"
+                                this.state.data.docs.UndertakingStatus ===
+                                "Pending"
                                   ? "table-warning"
                                   : "table-success"
                               }
@@ -323,7 +331,8 @@ class InternshipView extends Component {
                             </tr>
                             <tr
                               className={
-                                this.state.data.docs.OfferLetterStatus === "N"
+                                this.state.data.docs.OfferLetterStatus ===
+                                "Pending"
                                   ? "table-warning"
                                   : "table-success"
                               }
@@ -348,7 +357,8 @@ class InternshipView extends Component {
                             </tr>
                             <tr
                               className={
-                                this.state.data.docs.MarksheetsStatus === "N"
+                                this.state.data.docs.MarksheetsStatus ===
+                                "Pending"
                                   ? "table-warning"
                                   : "table-success"
                               }
@@ -386,7 +396,7 @@ class InternshipView extends Component {
                           </tbody>
                         </table>
                       </form>
-                      {/* {this.state.data.completionStatus === "N" && (
+                      {/* {this.state.data.completionStatus === "Pending" && (
                         <>
                           Application is currently viewed by:{" "}
                           {this.state.data.holder.designation} <br />

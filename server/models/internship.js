@@ -70,7 +70,7 @@ const internshipSchema = new mongoose.Schema({
       type: String,
     },
     NOCRequired: {
-      type: Boolean,
+      type: String,
     },
   },
   approvedBy: [
@@ -82,28 +82,28 @@ const internshipSchema = new mongoose.Schema({
   docs: {
     ApplicationStatus: {
       type: String,
-      default: "N",
+      default: "Pending",
     },
     UndertakingStatus: {
       type: String,
-      default: "N",
+      default: "Pending",
     },
     OfferLetterStatus: {
       type: String,
-      default: "N",
+      default: "Pending",
     },
     MarksheetsStatus: {
       type: String,
-      default: "N",
+      default: "Pending",
     },
     AttendanceStatus: {
       type: String,
-      default: "N",
+      default: "Pending",
     },
   },
   completionStatus: {
     type: String,
-    default: "N",
+    default: "Pending",
   },
   holder: {
     designation: String,

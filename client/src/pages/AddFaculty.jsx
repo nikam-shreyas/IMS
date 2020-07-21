@@ -54,7 +54,7 @@ class AddFaculty extends Component {
     data["password"] = formData.get("password") || this.state.data.password;
     data["emailId"] = formData.get("emailId") || this.state.data.emailId;
 
-    createTeacher(data).then(console.log(this.props));
+    createTeacher(data);
     // .catch(toast('Cannot update! Try again later.'));
     // alert("Faculty Added!");
     // window.location.reload(false);
