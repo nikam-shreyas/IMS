@@ -115,6 +115,18 @@ class InternshipApplication extends React.Component {
 
 
   render() {
+    const divstyle = {
+      border : "2px solid #f44336",
+      background : "#ffcdd2",
+      color: "#f44336",
+      borderRadius : "5px",
+      margin: "0.5rem",
+      padding : "0.5rem"
+    };
+
+    const headingstyle = {
+      color: "#f44336"
+    }
     return (
       <div className="row no-gutters">
         <div className="col-sm-2 sidenav">
@@ -137,7 +149,15 @@ class InternshipApplication extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <hr />
+            <hr/>
+            <div className="guidlinesbox" style={divstyle}>
+              {/* <h6 style={headingstyle}>Guidlines :</h6> */}
+              <a><strong>Guidelines</strong></a><br></br>
+              <a> 1. Eligibilty criteria : Minimum 75% attendance is compulsory and more than 7 CGPA in previous consecutive years.</a><br></br>
+              <a> 2. Student has to upload all the below mentioned documents for approval of internship. </a><br></br>
+              <a> 3. After completion of internship student has to submit completion of internship certificate. </a>
+            </div>
+            <hr />            
             <form onSubmit={this.handleSubmit}>
               Internship Details:
               <hr />
@@ -424,9 +444,11 @@ class InternshipApplication extends React.Component {
                 </span>
               </div>
             </form>
+            
+
           </div>
         </div>
-      
+        
       </div>
     );
   }
