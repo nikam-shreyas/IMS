@@ -17,7 +17,7 @@ export const setFaculty = (faculty) => ({
   faculty,
 });
 
-export const getStudent = (students) => ({
+export const getStudents = (students) => ({
   type: GET_STUDENT_LIST,
   students,
 });
@@ -130,7 +130,7 @@ export const getStudentList = () => {
   return async (dispatch) => {
     try {
       const students = await api.call("get", "admin/allStudents");
-      dispatch(getStudent(students));
+      dispatch(getStudents(students));
       dispatch(removeError());
     } catch (err) {
       const error = err.response.data;

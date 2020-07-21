@@ -24,7 +24,7 @@ class StudentList extends Component {
           //   name: { firstname: "", lastname: "" },
           //   currentClass: { year: "", div: "" },
           //   rollNo: "",
-          username: "",
+          // username: "",
           // emailId: "",
         },
       ],
@@ -83,22 +83,22 @@ class StudentList extends Component {
       const {
         _id,
         username,
-        //name,
+        // name,
         //currentClass,
-        //rollNo,
-        //emailId,
+        // rollNo,
+        // emailId,
       } = students; //destructuring
       return (
         <div
           className="col-sm-6"
           key={_id}
           id={
-            username //+
+            username
             // name.firstname +
             // name.lastname +
             // currentClass.year +
             // currentClass.div +
-            // rollNo
+            //rollNo
           }
         >
           <div className="card my-2">
