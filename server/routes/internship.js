@@ -44,7 +44,8 @@ router.route("/uploadDocument").post(auth,upload.array('docs',6), (req, res) => 
     return res.json({message:"Error"});
   }
 });
-router.route("/all").get(auth, handle.getStats);
+router.route("/allStats").get(auth, handle.getStats);
+router.route("/all").get(auth, handle.showAllInternships);
 
 router
   .route("/:id")

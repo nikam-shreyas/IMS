@@ -42,6 +42,7 @@ class InternshipView extends Component {
         },
         rollNo: null,
         prevSemAttendance: null,
+        emailId: null,
       },
       approvedBy: [],
       holder: { id: null, designation: null },
@@ -194,6 +195,10 @@ class InternshipView extends Component {
                                 this.state.data.application.startDate
                               ).toDateString()}
                             </td>
+                          </tr>
+                          <tr>
+                            <td>Email: </td>
+                            <td>{this.state.data.student.emailId}</td>
                           </tr>
                           <tr>
                             <td>Submitted On</td>

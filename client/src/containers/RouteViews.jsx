@@ -29,6 +29,8 @@ import ApprovedInternships from "../pages/ApprovedInternships";
 import ViewApprovedInternship from "../pages/ViewApprovedInternship";
 import Restricted from "../pages/Restricted";
 import Analytics from "../pages/Analysis"
+import StudentReport from "../pages/StudentReport";
+import GuidelinesInternship from "../pages/GuidelinesInternship";
 
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
@@ -279,6 +281,25 @@ const RouteViews = ({ auth }) => {
             } else return <Restricted />;
           }}
         />
+        <Route
+        exact
+        path="/studentReport"
+        render={() => {
+          if (user === "admin") {
+            return <StudentReport />;
+          } else return <Restricted />;
+        }}
+      />
+      <Route
+          exact
+          path="/guidelines"
+          render={() => {
+            if (user === "student") {
+              return <GuidelinesInternship />;
+            } else return <Restricted />;
+          }}
+      />
+
         <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
         <Route component={NotFoundPage} />
       </Switch>

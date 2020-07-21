@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { HorizontalBar, Doughnut, Line, Radar, Pie } from "react-chartjs-2";
-import { getAllInternships } from "../store/actions";
+import { HorizontalBar, Doughnut, Line, Bar,Radar, Pie } from "react-chartjs-2";
+import { getAllInternshipStats } from "../store/actions";
 import { connect } from "react-redux";
 class AnalyticsCharts extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +11,7 @@ class AnalyticsCharts extends Component {
       doughnutData: { datasets: [{ data: [0, 0, 0, 0] }] },
       lineChartData: {},
       radarChartData: {},
+      mBarData: {},
     };
     this.setData = this.setData.bind(this);
   }
@@ -38,6 +38,50 @@ class AnalyticsCharts extends Component {
       llabel.push(element._id.sdate);
       ldata.push(element.count);
     }
+    let tdata = {},
+      tdatasets = [];
+    for (let i = 0; i < chartsData.datewiseStatusDistribution.length; i++) {
+      const element = chartsData.datewiseStatusDistribution[i];
+      tdata[element._id.sdate] = tdata[element._id.sdate] || {
+        N: 0,
+        Approved: 0,
+        Rejected: 0,
+      };
+      tdata[element._id.sdate][element._id.status] = element.count;
+    }
+    let set = { Pending: [], Approved: [], Rejected: [] };
+    let tdate = [];
+    for (const k in tdata) {
+      if (tdata.hasOwnProperty(k)) {
+        const element = tdata[k];
+        tdate.push(k);
+        set["Pending"].push(element["N"]);
+        set["Approved"].push(element["Approved"]);
+        set["Rejected"].push(element["Rejected"]);
+      }
+    }
+    this.setState({
+      mBarData: {
+        labels: tdate,
+        datasets: [
+          {
+            label: "Pending",
+            data: set["Pending"],
+            backgroundColor: "#FF6384",
+          },
+          {
+            label: "Approved",
+            data: set["Approved"],
+            backgroundColor: "#36A2EB",
+          },
+          {
+            label: "Rejected",
+            data: set["Rejected"],
+            backgroundColor: "#FFCE56",
+          },
+        ],
+      },
+    });
     let rdata = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let rdataset = {
       FE: [
@@ -131,8 +175,6 @@ class AnalyticsCharts extends Component {
     this.setState({
       radarChartData: rdataset,
     });
-    console.log(this.state.radarChartData);
-    console.log(this.state.radarChartData);
     this.setState({
       lineChartData: {
         labels: llabel,
@@ -162,6 +204,7 @@ class AnalyticsCharts extends Component {
         labels: hlabel,
         datasets: [
           {
+            label: "Companies",
             backgroundColor: "rgba(255,99,132,0.2)",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 1,
@@ -177,17 +220,9 @@ class AnalyticsCharts extends Component {
   }
 
   async componentDidMount() {
-    const { getAllInternships } = this.props;
-    getAllInternships().then(() => this.setData(this.props.chart));
+    const { getAllInternshipStats } = this.props;
+    getAllInternshipStats().then(() => this.setData(this.props.chart));
   }
-  componentWillMount() {
-    this._isMounted = false;
-  }
-  static defaultProps = {
-    displayTitle: true,
-    displayLegend: true,
-    legendPosition: "right",
-  };
 
   render() {
     return (
@@ -240,6 +275,17 @@ class AnalyticsCharts extends Component {
             >
               Division-wise
             </a>
+            <a
+              class="nav-item nav-link"
+              id="nav-ovw-tab"
+              data-toggle="tab"
+              href="#nav-ovw"
+              role="tab"
+              aria-controls="nav-ovw"
+              aria-selected="false"
+            >
+              Overview
+            </a>
           </div>
         </nav>
         <div className="tab-content" id="nav-tabContent">
@@ -277,6 +323,8 @@ class AnalyticsCharts extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+            <div>           
             </div>
           </div>
           <div
@@ -449,6 +497,25 @@ class AnalyticsCharts extends Component {
               </div>
             </div>
           </div>
+          <div
+            class="tab-pane fade"
+            id="nav-ovw"
+            role="tabpanel"
+            aria-labelledby="nav-ovw-tab"
+          >
+            <div className="container">
+              <div className="card card-body mt-2">
+                <div className="row">
+                  <div className="col-sm-10 offset-1">
+                    <div className="my-2" style={{ textAlign: "center" }}>
+                      Month-wise Distribution of Internship Status
+                    </div>
+                    <Bar data={this.state.mBarData} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -460,5 +527,5 @@ export default connect(
     auth: store.auth,
     chart: store.charts,
   }),
-  { getAllInternships }
+  { getAllInternshipStats }
 )(AnalyticsCharts);
