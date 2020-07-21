@@ -33,14 +33,12 @@ export const currentTeacher = (state = {}, action) => {
   }
 };
 
-export const studentlist = (state = {}, action) => {
-  console.log("im here ");
+export const studentlist = (state = [], action) => {
   switch (action.type) {
     case GET_STUDENT_LIST:
-     
+      console.log(action.students);
       return action.students;
     default:
-      console.log("no im here ");
       return state;
   }
 };

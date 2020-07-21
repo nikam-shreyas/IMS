@@ -3,6 +3,7 @@ import { getCurrentInternship, deleteInternship } from "../store/actions";
 import { connect } from "react-redux";
 import Sidenav from "../components/Sidenav";
 import { withRouter } from "react-router-dom";
+import { MdAccountCircle, MdAssignmentInd } from "react-icons/md";
 class InternshipDetails extends Component {
   state = {
     isLoading: true,
@@ -72,7 +73,7 @@ class InternshipDetails extends Component {
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid">
-              <h4 className="mt-2">Application:</h4>
+              {/* <h4 className="mt-2">Application:</h4>
               <hr />
               <div className="card m-3 border-dark" id="card">
                 {this.state.isLoading && <>Loading...</>}
@@ -284,7 +285,95 @@ class InternshipDetails extends Component {
                     )}
                   </>
                 }
-              </div>
+              </div>*/}
+              {
+                <>
+                  <h4 className="mt-2">
+                    <MdAccountCircle
+                      style={{ marginBottom: -4, marginRight: 5 }}
+                    />
+                    {this.state.data.student.name.firstname +
+                      " " +
+                      this.state.data.student.name.lastname}
+                  </h4>
+                  <hr />
+                  <div class="form-row">
+                    <div class="col-sm-5">
+                      <div class="card card-body">
+                        <strong>
+                          <MdAssignmentInd
+                            color="cadetblue"
+                            style={{
+                              marginBottom: -5,
+                              marginRight: 2,
+                              height: 22,
+                              width: 22,
+                            }}
+                          />{" "}
+                          Personal Details:
+                        </strong>
+                        <table class="table table-sm table-hover mt-2">
+                          <tbody>
+                            <tr>
+                              <td>Class</td>
+                              <td>
+                                {this.state.data.student.currentClass.year +
+                                  " " +
+                                  this.state.data.student.currentClass.div}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Roll No</td>
+                              <td>{this.state.data.student.rollNo}</td>
+                            </tr>
+                            <tr>
+                              <td>Attendance</td>
+                              <td>
+                                {this.state.data.student.prevSemAttendance}
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <td>Email ID</td>
+                              <td>{this.state.data.student.emailId}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-sm-7">
+                      <div class="card card-body">
+                        <strong>Internship Details:</strong>
+                        Workplace:
+                        <small class="text-muted">
+                          {this.state.data.application.workplace}
+                        </small>
+                        <br />
+                        Start Date:
+                        <small class="text-muted">
+                          {this.state.data.application.startDate}
+                        </small>
+                        <br />
+                        Duration:
+                        <small class="text-muted">
+                          {this.state.data.application.durationOfInternship}
+                        </small>
+                        <br />
+                        Workplace:
+                        <small class="text-muted">
+                          {this.state.data.application.workplace}
+                        </small>
+                        <br />
+                        Workplace:
+                        <small class="text-muted">
+                          {this.state.data.application.workplace}
+                        </small>
+                        <br />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              }
             </div>
           </div>
         </div>

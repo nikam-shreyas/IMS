@@ -21,18 +21,20 @@ class StudentList extends Component {
       students: [
         {
           _id: "",
-        //   name: { firstname: "", lastname: "" },
-        //   currentClass: { year: "", div: "" },
-        //   rollNo: "",
+          //   name: { firstname: "", lastname: "" },
+          //   currentClass: { year: "", div: "" },
+          //   rollNo: "",
           username: "",
-         // emailId: "",
+          // emailId: "",
         },
       ],
     };
   }
+
   async componentDidMount() {
     const { getStudentList } = this.props;
     getStudentList()
+      .then(console.log(this.props))
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.students));
   }
@@ -106,7 +108,7 @@ class StudentList extends Component {
                 onClick={this.expandInline.bind(this)}
               >
                 {/* Prof. {name.firstname + " " + name.lastname} */}
-                
+
                 <br />
                 <small className="text-muted">Username: {username}</small>
               </div>
@@ -115,7 +117,7 @@ class StudentList extends Component {
                 {/* {currentClass.year}{" "}
                 {currentClass.div === 0 ? "" : currentClass.div} */}
                 <br />
-               
+
                 <b> RollNo : </b>
                 {/* {rollNo} */}
                 <br />
@@ -212,7 +214,7 @@ class StudentList extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    students: store.students,
+    students: store.studentlist,
   }),
   { getStudentList }
 )(StudentList);

@@ -3,7 +3,7 @@ import {
   SET_CURRENT_SELECTED_ADMIN,
   SET_CURRENT_SELECTED_TEACHER,
   SET_FACULTY,
-  GET_STUDENT_LIST
+  GET_STUDENT_LIST,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess, removeSuccessMessage } from "./success";
@@ -39,8 +39,6 @@ export const getAdmin = (path) => {
     }
   };
 };
-
-
 
 export const createTeacher = (data) => {
   return async (dispatch) => {
@@ -115,7 +113,6 @@ export const resetPassword = (path, data) => {
   };
 };
 
-
 export const getFaculty = () => {
   return async (dispatch) => {
     try {
@@ -129,13 +126,10 @@ export const getFaculty = () => {
   };
 };
 
-
-
 export const getStudentList = () => {
   return async (dispatch) => {
     try {
       const students = await api.call("get", "admin/allStudents");
-      console.log("ashil , this was called ");
       dispatch(getStudent(students));
       dispatch(removeError());
     } catch (err) {
