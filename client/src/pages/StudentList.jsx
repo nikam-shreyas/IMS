@@ -24,7 +24,7 @@ class StudentList extends Component {
         //   name: { firstname: "", lastname: "" },
         //   currentClass: { year: "", div: "" },
         //   rollNo: "",
-          username: "",
+         // username: "",
          // emailId: "",
         },
       ],
@@ -81,22 +81,22 @@ class StudentList extends Component {
       const {
         _id,
         username,
-        //name,
+        // name,
         //currentClass,
-        //rollNo,
-        //emailId,
+        // rollNo,
+        // emailId,
       } = students; //destructuring
       return (
         <div
           className="col-sm-6"
           key={_id}
           id={
-            username //+
+            username 
             // name.firstname +
             // name.lastname +
             // currentClass.year +
             // currentClass.div +
-            // rollNo
+            //rollNo
           }
         >
           <div className="card my-2">
@@ -134,13 +134,13 @@ class StudentList extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="3" />
+            <Admin_Sidenav activeComponent="2" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid">
               {/* {<MDBDataTable dark data={this.state.faculties} />} */}
               <h4 className="mt-2">
-                Student List
+                Faculty List
                 <div className="float-right">
                   <div
                     className="btn-group btn-group-toggle btn-sm"
