@@ -96,7 +96,7 @@ class InternshipDetails extends Component {
                           {this.state.data.comments}
                         </div>
                       )}
-                      {this.state.data.completionStatus !== "N" && (
+                      {this.state.data.completionStatus === "Approved" && (
                         <div className="mb-4">
                           <div className="form-row">
                             <div className="col-sm-12">

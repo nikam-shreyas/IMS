@@ -1,8 +1,12 @@
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { createInternship, uploadDocument,
-  removeSuccess,removeError } from "../store/actions";
+import {
+  createInternship,
+  uploadDocument,
+  removeSuccess,
+  removeError,
+} from "../store/actions";
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -12,15 +16,15 @@ class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
     fileName: [],
-    fileNOC:null,
-    fileOL:null,
-    fileFE:null,
-    fileSE:null,
-    fileTE:null,
-    fileBE:null,
+    fileNOC: null,
+    fileOL: null,
+    fileFE: null,
+    fileSE: null,
+    fileTE: null,
+    fileBE: null,
   };
-  componentWillUnmount(){
-    const { removeSuccess,removeError } = this.props;
+  componentWillUnmount() {
+    const { removeSuccess, removeError } = this.props;
     removeSuccess();
     removeError();
   }
@@ -33,25 +37,32 @@ class InternshipApplication extends React.Component {
     this.submitSE = this.submitSE.bind(this);
     this.submitTE = this.submitTE.bind(this);
     this.submitBE = this.submitBE.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
   }
   submitNOCFile(event) {
-    this.setState({ fileNOC: event.target.files[0]});
+    this.setState({ fileNOC: event.target.files[0] });
+    this.handleUpload("NOC", "NOCLabel");
   }
   submitOL(event) {
-    this.setState({ fileOL: event.target.files[0]});
+    this.setState({ fileOL: event.target.files[0] });
+    this.handleUpload("offerLetter", "offerLetterLabel");
   }
 
   submitFE(event) {
-    this.setState({ fileFE: event.target.files[0]});
+    this.setState({ fileFE: event.target.files[0] });
+    this.handleUpload("FEMarksheet", "FEMarksheetLabel");
   }
   submitSE(event) {
-    this.setState({ fileSE: event.target.files[0]});
+    this.setState({ fileSE: event.target.files[0] });
+    this.handleUpload("SEMarksheet", "SEMarksheetLabel");
   }
   submitTE(event) {
-    this.setState({ fileTE: event.target.files[0]});
+    this.setState({ fileTE: event.target.files[0] });
+    this.handleUpload("TEMarksheet", "TEMarksheetLabel");
   }
   submitBE(event) {
-    this.setState({ fileBE: event.target.files[0]});
+    this.setState({ fileBE: event.target.files[0] });
+    this.handleUpload("BEMarksheet", "BEMarksheetLabel");
   }
   handleChange = (date) => {
     this.setState({
@@ -100,6 +111,8 @@ class InternshipApplication extends React.Component {
     if(this.state.fileNOC!=null){
       formDataFile.append("docs", this.state.fileNOC);
       data["application"]["NOC"] = "/public/Documents"+this.state.fileNOC.name;
+    }else{
+      data["application"]["NOC"] = "";
     }
     // let datafiles={};
     // for (let i = 0 ; i < this.state.fileName.length ; i++) {
@@ -109,7 +122,7 @@ class InternshipApplication extends React.Component {
     // formDataFile.append("offerLetter", this.state.fileName);
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     };
     // axios.post("http://localhost:4002/api/internships/uploadDocument",formDataFile,config)
@@ -120,10 +133,13 @@ class InternshipApplication extends React.Component {
     console.log(data)
     const { uploadDocument, createInternship } = this.props;
     uploadDocument(formDataFile, config);
+    createInternship(data).then((window.location.href = "/student"));
   }
-
-
-
+  handleUpload(id, labelId) {
+    var fileName = document.getElementById(id).value.split("\\").pop();
+    document.getElementById(labelId).classList.add("selected");
+    document.getElementById(labelId).innerHTML = fileName;
+  }
   render() {
     return (
       <div className="row no-gutters">
@@ -288,12 +304,15 @@ class InternshipApplication extends React.Component {
               <small className="text-danger">
                 (Files to be uploaded strictly in PDF format.)
               </small>
+              <small className="text-primary float-right">
+                (File name: Roll_FileInitials, eg. 41244_NOC.pdf)
+              </small>
               <hr />
               <div className="container-fluid">
                 <div className="form-row">
                   <div className="col-sm-6">
                     No Objection Certificate:{" "}
-                    <small className="text-info">
+                    <small className="text-secondary">
                       (Upload file if NOC is required in a specific format)
                     </small>
                     <div className="custom-file">
@@ -314,7 +333,7 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    Upload Offer Letter:
+                    Offer Letter:
                     <div className="custom-file">
                       <input
                         type="file"
@@ -336,7 +355,10 @@ class InternshipApplication extends React.Component {
                 </div>
               </div>
               <hr />
-              Marksheets:
+              Marksheets:{" "}
+              <small className="text-primary float-right">
+                (File name: Roll_Year, eg: 41244_FE.pdf)
+              </small>
               <hr />
               <div className="container-fluid">
                 <div className="form-row">
@@ -428,15 +450,10 @@ class InternshipApplication extends React.Component {
                 <button type="submit" className="btn btn-dark">
                   Submit
                 </button>
-                <span  className="col-sm-6 mt-4">
-                <ErrorMessage />
-                <SuccessMessage />
-                </span>
               </div>
             </form>
           </div>
         </div>
-      
       </div>
     );
   }
@@ -448,6 +465,6 @@ export default withRouter(
       auth: store.auth,
       internships: store.internships,
     }),
-    { createInternship, uploadDocument,removeSuccess,removeError }
+    { createInternship, uploadDocument, removeSuccess, removeError }
   )(InternshipApplication)
 );

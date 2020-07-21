@@ -54,7 +54,6 @@ class Internships extends Component {
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
       cardContent = cards[i].querySelector(".individual-card");
-      console.log(cardContent.innerText);
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -64,7 +63,7 @@ class Internships extends Component {
   }
   componentDidMount() {
     const { getInternships } = this.props;
-    getInternships().then(console.log(this.props));
+    getInternships();
   }
 
   loadData(internships) {

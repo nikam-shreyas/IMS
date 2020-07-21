@@ -9,7 +9,7 @@ import {
   MdAddCircle,
   MdFormatListBulleted,
   MdDelete,
-  MdEqualizer
+  MdEqualizer,
 } from "react-icons/md";
 
 class Admin_Sidenav extends Component {
@@ -17,6 +17,7 @@ class Admin_Sidenav extends Component {
   handleLogout() {
     const { logout } = this.props;
     logout();
+    window.location.href = "/";
   }
   constructor(props) {
     super(props);
