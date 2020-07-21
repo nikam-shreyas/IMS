@@ -28,7 +28,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 import ApprovedInternships from "../pages/ApprovedInternships";
 import ViewApprovedInternship from "../pages/ViewApprovedInternship";
 import Restricted from "../pages/Restricted";
-import Analytics from "../pages/Analysis"
+import Analytics from "../pages/Analysis";
+import StudentList from "../pages/StudentList";
 import StudentReport from "../pages/StudentReport";
 import GuidelinesInternship from "../pages/GuidelinesInternship";
 
@@ -170,15 +171,15 @@ const RouteViews = ({ auth }) => {
         />
 
         <Route
-        exact
-        path="/stats"
-        render={() => {
-          if (user === "admin") {
-            return <Analytics />;
-          } else return <Restricted />;
-        }}
-      />
-       
+          exact
+          path="/stats"
+          render={() => {
+            if (user === "admin" || user === "faculty") {
+              return <Analytics />;
+            } else return <Restricted />;
+          }}
+        />
+
         <Route
           exact
           path="/all"
@@ -195,6 +196,15 @@ const RouteViews = ({ auth }) => {
           render={() => {
             if (user === "admin") {
               return <DeleteFaculty />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/allStudents"
+          render={() => {
+            if (user === "admin") {
+              return <StudentList/>;
             } else return <Restricted />;
           }}
         />

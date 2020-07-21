@@ -64,7 +64,7 @@ class AddFaculty extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="3" />
+            <Admin_Sidenav activeComponent="4" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid">

@@ -46,8 +46,16 @@ class Admin_Sidenav extends Component {
               Faculty List
             </li>
           </Link>
-          <Link to="/add">
+          <Link to="/allStudents">
             <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
+              </span>
+              Student List
+            </li>
+          </Link>
+          <Link to="/add">
+            <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAddCircle style={{ margin: -1, padding: -1 }} />
               </span>
@@ -55,7 +63,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/deleteFaculty">
-            <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdDelete style={{ margin: -1, padding: -1 }} />
               </span>
@@ -63,21 +71,22 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/stats">
-          <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+          <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
             <span className="mx-2">
               <MdEqualizer style={{ margin: -1, padding: -1 }} />
             </span>
            Stats
           </li>
         </Link>
-        <Link to="/studentReport">
-          <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdAssignment style={{ margin: -1, padding: -1 }} />
-            </span>
-           Students' Report
-          </li>
-        </Link>
+          <Link to="/settings">
+            <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
+
+              <span className="mx-2">
+                <MdAssignment style={{ margin: -1, padding: -1 }} />
+              </span>
+              Report
+            </li>
+          </Link>
           <Link to="/settings">
             <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
               <span className="mx-2">

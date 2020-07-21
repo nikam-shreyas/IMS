@@ -3,6 +3,7 @@ import {
   SET_CURRENT_SELECTED_ADMIN,
   SET_CURRENT_SELECTED_TEACHER,
   SET_FACULTY,
+  GET_STUDENT_LIST,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess, removeSuccessMessage } from "./success";
@@ -14,6 +15,11 @@ export const setCurrentAdmin = (admin) => ({
 export const setFaculty = (faculty) => ({
   type: SET_FACULTY,
   faculty,
+});
+
+export const getStudents = (students) => ({
+  type: GET_STUDENT_LIST,
+  students,
 });
 
 export const setCurrentTeacher = (teacher) => ({
@@ -34,18 +40,7 @@ export const getAdmin = (path) => {
   };
 };
 
-export const getFaculty = () => {
-  return async (dispatch) => {
-    try {
-      const faculty = await api.call("get", "admin/all");
-      dispatch(setFaculty(faculty));
-      dispatch(removeError());
-    } catch (err) {
-      const error = err.response.data;
-      dispatch(addError(error.message));
-    }
-  };
-};
+
 
 export const createTeacher = (data) => {
   return async (dispatch) => {
@@ -115,6 +110,35 @@ export const resetPassword = (path, data) => {
     } catch (err) {
       const error = err.response.data;
       dispatch(removeSuccessMessage());
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+
+export const getFaculty = () => {
+  return async (dispatch) => {
+    try {
+      const faculty = await api.call("get", "admin/all");
+      dispatch(setFaculty(faculty));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
+
+
+
+export const getStudentList = () => {
+  return async (dispatch) => {
+    try {
+      const students = await api.call("get", "admin/allStudents");
+      dispatch(getStudents(students));
+      dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
       dispatch(addError(error.message));
     }
   };

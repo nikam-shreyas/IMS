@@ -177,7 +177,7 @@ class Internships extends Component {
                     <div
                       key={internship._id}
                       className={
-                        internship.completionStatus === "N"
+                        internship.completionStatus === "Pending"
                           ? "card my-3 border-secondary"
                           : "card my-3 border-success"
                       }
@@ -208,7 +208,7 @@ class Internships extends Component {
                               <tr>
                                 <th>Status</th>
                                 <th>
-                                  {internship.completionStatus === "N"
+                                  {internship.completionStatus === "Pending"
                                     ? "Pending"
                                     : "Approved"}
                                 </th>
@@ -217,7 +217,7 @@ class Internships extends Component {
                             <tbody>
                               <tr
                                 className={
-                                  internship.docs.AttendanceStatus === "N"
+                                  internship.docs.AttendanceStatus === "Pending"
                                     ? "table-warning"
                                     : "table-success"
                                 }
@@ -227,7 +227,8 @@ class Internships extends Component {
                               </tr>
                               <tr
                                 className={
-                                  internship.docs.ApplicationStatus === "N"
+                                  internship.docs.ApplicationStatus ===
+                                  "Pending"
                                     ? "table-warning"
                                     : "table-success"
                                 }
@@ -237,7 +238,8 @@ class Internships extends Component {
                               </tr>
                               <tr
                                 className={
-                                  internship.docs.UndertakingStatus === "N"
+                                  internship.docs.UndertakingStatus ===
+                                  "Pending"
                                     ? "table-warning"
                                     : "table-success"
                                 }
@@ -247,7 +249,8 @@ class Internships extends Component {
                               </tr>
                               <tr
                                 className={
-                                  internship.docs.OfferLetterStatus === "N"
+                                  internship.docs.OfferLetterStatus ===
+                                  "Pending"
                                     ? "table-warning"
                                     : "table-success"
                                 }
@@ -257,7 +260,7 @@ class Internships extends Component {
                               </tr>
                               <tr
                                 className={
-                                  internship.docs.MarksheetsStatus === "N"
+                                  internship.docs.MarksheetsStatus === "Pending"
                                     ? "table-warning"
                                     : "table-success"
                                 }
@@ -268,7 +271,7 @@ class Internships extends Component {
                             </tbody>
                           </table>
 
-                          {internship.completionStatus === "N" && (
+                          {internship.completionStatus === "Pending" && (
                             <>
                               Application is currently viewed by:{" "}
                               {internship.holder.designation} <br />
