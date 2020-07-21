@@ -238,16 +238,13 @@ exports.resetPassword = async (req, res, next) => {
   }
 };
 
-
 exports.findAllStudents = async (req, res, next) => {
   try {
-    const faculties = await db.Student.find().populate();
-    console.log("im here in handers for all students");
-    res.status(200).json(faculties);
-  }catch (err) {
+    const students = await db.Student.find().populate();
+    res.status(200).json(students);
+  } catch (err) {
     err.status(400);
     next(err);
   }
 };
 //console
-
