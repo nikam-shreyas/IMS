@@ -211,11 +211,24 @@ export const UpdateInternship=(data)=>{
   }
 }
 
+export const getAllInternshipStats = () => {
+  return async (dispatch) => {
+    try {
+      const chart = await api.call("get", "internships/allStats");
+      dispatch(analysis(chart));
+      dispatch(removeError());
+    } catch (err) {
+      const error = "Could not load data";
+      dispatch(addError(error));
+    }
+  };
+};
+
 export const getAllInternships = () => {
   return async (dispatch) => {
     try {
-      const chart = await api.call("get", "internships/all");
-      dispatch(analysis(chart));
+      const internships = await api.call("get", "internships/all");
+      dispatch(setInternships(internships));
       dispatch(removeError());
     } catch (err) {
       const error = "Could not load data";

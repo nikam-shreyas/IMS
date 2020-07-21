@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { HorizontalBar, Doughnut, Line, Radar, Pie } from "react-chartjs-2";
-import { getAllInternships } from "../store/actions";
+import { getAllInternshipStats } from "../store/actions";
 import { connect } from "react-redux";
 class AnalyticsCharts extends Component {
   _isMounted = false;
@@ -177,8 +177,8 @@ class AnalyticsCharts extends Component {
   }
 
   async componentDidMount() {
-    const { getAllInternships } = this.props;
-    getAllInternships().then(() => this.setData(this.props.chart));
+    const { getAllInternshipStats } = this.props;
+    getAllInternshipStats().then(() => this.setData(this.props.chart));
   }
   componentWillMount() {
     this._isMounted = false;
@@ -277,6 +277,8 @@ class AnalyticsCharts extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+            <div>           
             </div>
           </div>
           <div
@@ -460,5 +462,5 @@ export default connect(
     auth: store.auth,
     chart: store.charts,
   }),
-  { getAllInternships }
+  { getAllInternshipStats }
 )(AnalyticsCharts);

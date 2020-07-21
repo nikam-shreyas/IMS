@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MdPermIdentity } from "react-icons/md";
+import { MdPermIdentity, MdAssignment } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -69,8 +69,16 @@ class Admin_Sidenav extends Component {
            Stats
           </li>
         </Link>
+        <Link to="/studentReport">
+          <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
+            <span className="mx-2">
+              <MdAssignment style={{ margin: -1, padding: -1 }} />
+            </span>
+           Students' Report
+          </li>
+        </Link>
           <Link to="/settings">
-            <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>

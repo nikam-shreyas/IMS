@@ -6,7 +6,6 @@ import { createInternship, uploadDocument,
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import axios, { post } from "axios";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
 class InternshipApplication extends React.Component {
@@ -71,26 +70,37 @@ class InternshipApplication extends React.Component {
     for (var [key, value] of formData.entries()) {
       data["application"][key] = value;
     }
+    console.log(this.state.fileOL)
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] = "/public/Documents";
+    data["application"]["offerLetter"] = "/public/Documents/"+this.state.fileOL.name;
+
+
     data["application"]["NOCRequired"] = document.getElementById(
       "NOCRequired"
     ).checked;
     const formDataFile = new FormData();
-
     formDataFile.append("docs", this.state.fileOL);
-    formDataFile.append("docs", this.state.fileFE);
-    formDataFile.append("docs", this.state.fileSE);
-    formDataFile.append("docs", this.state.fileTE);
-    formDataFile.append("docs", this.state.fileBE);
-    console.log(this.state.fileNOC)
-      if(this.state.fileNOC!=null){
-        console.log(this.state.fileNOC)
-        formDataFile.append("docs", this.state.fileNOC);
-      }else{
-        console.log("Null NOC")
-      }
 
+    if(this.state.fileFE!=null){
+      data["application"]["FEMarksheet"] = "/public/Documents/"+this.state.fileFE.name;
+      formDataFile.append("docs", this.state.fileFE);
+    }
+    if(this.state.fileSE!=null){
+      data["application"]["SEMarksheet"] = "/public/Documents/"+this.state.fileSE.name;
+      formDataFile.append("docs", this.state.fileSE);
+    }
+    if(this.state.fileTE!=null){
+      data["application"]["TEMarksheet"] = "/public/Documents/"+this.state.fileTE.name;
+      formDataFile.append("docs", this.state.fileTE);
+    }
+    if(this.state.fileBE!=null){
+      data["application"]["BEMarksheet"] = "/public/Documents/"+this.state.fileBE.name;
+      formDataFile.append("docs", this.state.fileBE);
+    }
+    if(this.state.fileNOC!=null){
+      formDataFile.append("docs", this.state.fileNOC);
+      data["application"]["NOC"] = "/public/Documents"+this.state.fileNOC.name;
+    }
     // let datafiles={};
     // for (let i = 0 ; i < this.state.fileName.length ; i++) {
     //   formDataFile.append("docs", this.state.fileName[i]);
@@ -107,7 +117,7 @@ class InternshipApplication extends React.Component {
     //         alert("The file is successfully uploaded");
     //     }).catch((error) => {
     // });
-    
+    console.log(data)
     const { uploadDocument, createInternship } = this.props;
     uploadDocument(formDataFile, config);
   }
@@ -382,7 +392,7 @@ class InternshipApplication extends React.Component {
                       />
                       <label
                         className="custom-file-label"
-                        id="SEMarksheet"
+                        id="TEMarksheet"
                         htmlFor="TEMarksheet"
                       >
                         Choose file
