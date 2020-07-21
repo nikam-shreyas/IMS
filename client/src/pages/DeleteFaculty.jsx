@@ -93,7 +93,7 @@ class DeleteFaulty extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="4" />
+            <Admin_Sidenav activeComponent="5" />
           </div>
           <div className="col-sm-10">
             <div className="container-fluid mt-2">
