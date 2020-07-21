@@ -146,6 +146,18 @@ class InternshipApplication extends React.Component {
     document.getElementById(labelId).innerHTML = fileName;
   }
   render() {
+    const divstyle = {
+      border : "2px solid #f44336",
+      background : "#ffcdd2",
+      color: "#f44336",
+      borderRadius : "5px",
+      margin: "0.5rem",
+      padding : "0.5rem"
+    };
+
+    const headingstyle = {
+      color: "#f44336"
+    }
     return (
       <div className="row no-gutters">
         <div className="col-sm-2 sidenav">
@@ -168,7 +180,8 @@ class InternshipApplication extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <hr />
+            <hr/>            
+                       
             <form onSubmit={this.handleSubmit}>
               Internship Details:
               <hr />
@@ -457,6 +470,8 @@ class InternshipApplication extends React.Component {
                 </button>
               </div>
             </form>
+            
+
           </div>
         </div>
       </div>

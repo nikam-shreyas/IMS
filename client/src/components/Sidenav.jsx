@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { logout } from "../store/actions";
 import { connect } from "react-redux";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { BsListCheck } from "react-icons/bs";
 import {
   MdDescription,
   MdNotifications,
@@ -68,6 +69,14 @@ class Sidenav extends Component {
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>
               Change Password
+            </li>
+          </Link>
+          <Link to="/guidelines">
+            <li id="li" className={activeNow === "7" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <BsListCheck style={{ margin: -1, padding: -1 }} />
+              </span>
+              Guidelines
             </li>
           </Link>
           <li id="li" className="nav-item float-bottom">

@@ -31,6 +31,7 @@ import Restricted from "../pages/Restricted";
 import Analytics from "../pages/Analysis";
 import StudentList from "../pages/StudentList";
 import StudentReport from "../pages/StudentReport";
+import GuidelinesInternship from "../pages/GuidelinesInternship";
 
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
@@ -291,14 +292,23 @@ const RouteViews = ({ auth }) => {
           }}
         />
         <Route
+        exact
+        path="/studentReport"
+        render={() => {
+          if (user === "admin") {
+            return <StudentReport />;
+          } else return <Restricted />;
+        }}
+      />
+      <Route
           exact
-          path="/studentReport"
+          path="/guidelines"
           render={() => {
-            if (user === "admin" || user === "faculty") {
-              return <StudentReport />;
+            if (user === "student") {
+              return <GuidelinesInternship />;
             } else return <Restricted />;
           }}
-        />
+      />
 
         <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
         <Route component={NotFoundPage} />

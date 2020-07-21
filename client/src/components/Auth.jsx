@@ -47,6 +47,7 @@ class Auth extends Component {
   render() {
     const { username, password } = this.state;
     return (
+     
       <div className="section">
         <div className="container">
           <div className="user signinBx">
@@ -116,6 +117,7 @@ class Auth extends Component {
           </div>
         </div>
       </div>
+      
     );
   }
 }
