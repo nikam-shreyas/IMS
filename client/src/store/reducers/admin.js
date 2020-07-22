@@ -37,6 +37,7 @@ export const studentlist = (state = [], action) => {
   console.log(action.type);
   switch (action.type) {
     case GET_STUDENT_LIST:
+      console.log("in reducers", action.students);
       return action.students;
     default:
       return state;

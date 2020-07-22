@@ -39,11 +39,11 @@ export const getAdmin = (path) => {
     }
   };
 };
-export const deleteStudents=(data)=>{
+export const deleteStudents = (data) => {
   return async (dispatch) => {
     try {
-      console.log(data)
-      const admin = await api.call("put", "admin/deletestudent",data);
+      console.log(data);
+      const admin = await api.call("put", "admin/deletestudent", data);
       // console.log(admin);
       dispatch(addSuccess(admin));
       dispatch(removeError());
@@ -53,7 +53,6 @@ export const deleteStudents=(data)=>{
     }
   };
 };
-
 
 export const createTeacher = (data) => {
   return async (dispatch) => {
@@ -145,6 +144,7 @@ export const getStudentList = () => {
   return async (dispatch) => {
     try {
       const students = await api.call("get", "admin/allStudents");
+      console.log("in actions", students);
       dispatch(getStudents(students));
       dispatch(removeError());
     } catch (err) {
