@@ -248,3 +248,29 @@ exports.findAllStudents = async (req, res, next) => {
   }
 };
 //console
+// exports.findAllStudents = async (req, res, next) => {
+//   try {
+//     const students = await db.Student.findOne({currentClass:{year:"BE",div:"2"}});
+//     res.status(200).json(students);
+//   } catch (err) {
+//     err.status(400);
+//     next(err);
+//   }
+// };
+
+exports.deletestudent = async (req, res, next) => {
+  try {
+    console.log("im here");
+    const { id } = req.params;
+    const student = await db.Student.findById({ _id: id });
+    if (!student) throw new Error("Student not found");
+    await student.remove();
+    return res.status(200).json("Student deleted");
+  } catch (error) {
+    console.log("im in catch");
+    next({
+      status: 400,
+      message: error.message,
+    });
+  }
+};
