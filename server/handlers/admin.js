@@ -247,6 +247,23 @@ exports.findAllStudents = async (req, res, next) => {
     next(err);
   }
 };
+
+
+
+
+exports.SomeStudents = async (req, res, next) => {
+  try {
+    let {YEAR , DIV}=req.body;
+    console.log(YEAR + DIV);
+    const students = await db.Student.find().populate();
+    res.status(200).json(students);
+  } catch (err) {
+    err.status(400);
+    next(err);
+  }
+};
+
+
 //console
 // exports.findAllStudents = async (req, res, next) => {
 //   try {

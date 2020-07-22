@@ -8,6 +8,9 @@ router.route("/all").get(auth, handle.findAll);
 
 router.route("/allStudents").get(auth, handle.findAllStudents);
 
+
+router.route("/somestudents").get(auth, handle.SomeStudents);
+
 router.route("/deletestudent/:id").delete(handle.deletestudent);
 
 router.route("/update/:id").put(auth, handle.updateProfile);
