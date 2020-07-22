@@ -40,6 +40,8 @@ export const getAdmin = (path) => {
   };
 };
 
+
+
 export const createTeacher = (data) => {
   return async (dispatch) => {
     try {
@@ -113,6 +115,7 @@ export const resetPassword = (path, data) => {
   };
 };
 
+
 export const getFaculty = () => {
   return async (dispatch) => {
     try {
@@ -126,6 +129,8 @@ export const getFaculty = () => {
   };
 };
 
+
+
 export const getStudentList = () => {
   return async (dispatch) => {
     try {
@@ -137,4 +142,18 @@ export const getStudentList = () => {
       dispatch(addError(error.message));
     }
   };
+};
+
+
+export const Search=(data)=>{
+return async (dispatch)=> {
+  try{
+    const {YEAR , DIV }=data;
+    console.log(YEAR+DIV+"year div ");
+    const students = await api.call("get", "admin/somestudents",data);
+  }catch(err){
+    const error = err.response.data;
+      dispatch(addError(error.message));
+  }
+}
 };
