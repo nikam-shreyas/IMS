@@ -262,7 +262,8 @@ exports.deletestudent = async (req, res, next) => {
   try {
     console.log("im here");
     const { id } = req.params;
-    const student = await db.Student.findById({ _id: id });
+    const student = await db.Student.findById(id);
+    console.log(student);
     if (!student) throw new Error("Student not found");
     await student.remove();
     return res.status(200).json("Student deleted");
