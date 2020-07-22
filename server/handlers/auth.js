@@ -5,7 +5,6 @@ const nodemailer = require("nodemailer");
 const transport = require("nodemailer-smtp-transport");
 require("dotenv").config();
 
-//mailing options and transportor
 const options = {
   service: "gmail",
   auth: {
@@ -24,18 +23,11 @@ exports.register = async (req, res, next) => {
     if (student) {
       let link =
         "<h2>Welcome to IMS!</h2><br/><h4>Your registration to IMS as a student was successful.</h4><br/>";
-      // link =
-      //   link +
-      //   "Your default username is : <b>" +
-      //   student.username +
-      //   "</b><br/>Your default password is : <b>" +
-      //   student.password +
-      //   "</b><br/><a href='http://localhost:3000/login'>Click here to login.</a>";
+     
       var email = {
         from: process.env.EMAILFROM,
         to: student.emailId,
-        subject: "Registration Successful",
-        // text:'You have been added to IMS',
+        subject: "Registration Successful",        
         html: link,
       };
       client.sendMail(email, (err, info) => {
@@ -58,7 +50,7 @@ exports.register = async (req, res, next) => {
     next(err);
   }
 };
-//console
+
 exports.login = async (req, res, next) => {
   try {
     const student = await db.Student.findOne({ username: req.body.username });
@@ -122,8 +114,7 @@ exports.forgotPassword = async (req, res, next) => {
           "</b>",
       };
       client.sendMail(email, (err, info) => {
-        if (err) {
-          console.log(err);
+        if (err) {          
           err.message = "Could not send email" + err;
         } else if (info) {
           let message = "Email sent successfully";
@@ -131,8 +122,7 @@ exports.forgotPassword = async (req, res, next) => {
         }
       });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (err) {    
     err.message = "Could not reset password. Please try again.";
     next(err);
   }
@@ -147,8 +137,7 @@ exports.updateStudent = async (req, res, next) => {
     for (var key of Object.keys(details)) {
       student[key.toString()] = details[key];
     }
-    student.save();
-    //console.log(student);
+    student.save();    
     const { name, currentClass, rollNo, prevSemAttendance, emailId } = student;
     res
       .status(200)
@@ -166,12 +155,9 @@ exports.getStudentDetails = async (req, res, next) => {
     const student = await db.Student.findById(id);
     if (!student) {
       throw new Error("No student found");
-    }
-
-    // const { name, currentClass, rollNo, prevSemAttendance, emailId,_id } = student;
+    }    
     res
-      .status(200)
-      // .json({ name, currentClass, rollNo, prevSemAttendance, emailId,_id });
+      .status(200)      
       .json(student);
   } catch (err) {
     next({
@@ -182,10 +168,8 @@ exports.getStudentDetails = async (req, res, next) => {
 };
 
 exports.resetStudentPassword = async (req, res, next) => {
-  console.log("here");
   const { oldpassword, newpassword } = req.body;
-  const { id } = req.decoded;
-  console.log(id);
+  const { id } = req.decoded;  
   try {
     const Stud = await db.Student.findById({ _id: id });
     const valid = await Stud.comparePassword(oldpassword);
@@ -208,8 +192,7 @@ exports.resetStudentPassword = async (req, res, next) => {
     } else {
       throw new Error("Old password is wrong!");
     }
-  } catch (err) {
-    // err.message = "Invalid username/password";
+  } catch (err) {    
     next(err);
   }
 };

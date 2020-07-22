@@ -17,8 +17,7 @@ class StudentReport extends Component {
     const { getAllInternships } = this.props;
     getAllInternships().then(() => this.loadData(this.props.internships));
   }
-  loadData(internship) {
-    console.log(internship.length);
+  loadData(internship) {    
     this.setState({ internships: internship });
     this.setState({ count: internship.length });
     internship.forEach((element) => {
@@ -31,11 +30,9 @@ class StudentReport extends Component {
         date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       csv["Duration"] = element.application.durationOfInternship;
       csv["Stipend"] = element.application.stipend;
-      csv["Status"] = element.completionStatus;
-      // console.log(csv)
+      csv["Status"] = element.completionStatus;      
       this.setState({ csvData: this.state.csvData.concat(csv) });
-    });
-    console.log(this.state.csvData);
+    });    
   }
   renderRows() {
     return this.state.internships.map((internship) => {
@@ -68,7 +65,7 @@ class StudentReport extends Component {
     });
   }
   filter(e) {
-    var filter, cards, cardContent, i;
+    var filter, cards, i;
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("application");
     for (i = 0; i < cards.length; i++) {
@@ -79,8 +76,7 @@ class StudentReport extends Component {
       }
     }
   }
-  render() {
-    // console.log(this.state.csvData);
+  render() {    
     return (
       <div>
         <div className="row no-gutters">

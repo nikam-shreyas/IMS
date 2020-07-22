@@ -154,12 +154,7 @@ class InternshipView extends Component {
                       {this.state.data.application.workplace}
                       <br />
                     </div>
-                    <div className="card-body">
-                      {/* {this.state.data.comments && (
-                        <div className="alert alert-danger">
-                          Reason: {this.state.data.comments}
-                        </div>
-                      )} */}
+                    <div className="card-body">                      
                       <div className="card-title">
                         Name:{" "}
                         {this.state.data.student.name.firstname +
@@ -396,12 +391,7 @@ class InternshipView extends Component {
                           </tbody>
                         </table>
                       </form>
-                      {/* {this.state.data.completionStatus === "Pending" && (
-                        <>
-                          Application is currently viewed by:{" "}
-                          {this.state.data.holder.designation} <br />
-                        </>
-                      )} */}
+                      
                     </div>
                     <div className="card-footer text-right">
                       <button

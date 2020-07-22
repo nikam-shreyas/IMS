@@ -1,6 +1,4 @@
 import React from "react";
-// import 'office-ui-fabric-react/dist/css/fabric.css';
-// import '../App.css';
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import AnalyticsCharts from "./AnalysisChart";
 

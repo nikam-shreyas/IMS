@@ -15,8 +15,7 @@ class ForgotPassword extends Component {
     var formData = new FormData(e.target);
     let data = {};
     data["username"] = formData.get("username");
-    data["emailId"] = formData.get("emailId");
-    console.log(data["emailId"]);
+    data["emailId"] = formData.get("emailId");    
     data["role"] = formData.get("role");
     const { forgotPassword } = this.props;
     forgotPassword(data);

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Sidenav_f from "../components/SideNav_f";
-import { updateStudent, getStudent } from "../store/actions";
 import { getFacultyProfile } from "../store/actions/faculty";
 import { updateFaculty } from "../store/actions/faculty";
 import { connect } from "react-redux";
@@ -34,41 +33,12 @@ class FacultyProfile extends Component {
   loadData(user) {
     if (user.designation !== undefined) this.setState({ data: user });
   }
-  handleSubmit(event) {
-    //  event.preventDefault();
-    //  const { updateFaculty } = this.props;
-    //  var formData = new FormData(event.target);
-    //  const data1 = {};
-    //  data1["name"] = {
-    //    firstname: formData.get("firstname") || this.state.data.name.firstname,
-    //    lastname: formData.get("lastname") || this.state.data.name.lastname,
-    //  };
-    //  data1["currentClass"] = {
-    //    year: formData.get("year") || this.state.data.currentClass.year,
-    //    div: formData.get("div") || this.state.data.currentClass.div,
-    //  };
-
-    //  data1["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    //  data1["department"] = formData.get("department") || this.state.data.department;
-    //  data1["username"] = formData.get("username") || this.state.data.username;
-    //  data1["designation"] = formData.get("designation") || this.state.data.designation;
-
-    //  console.log("this is data 1 "+data1);
-    //  updateFaculty(this.state.data._id,data1);
-    // //  updateFaculty(data);
-    //  alert("Profile Updated!");
-
-    //  window.location.reload(false);
-    //  console.log("this is data 1 "+data1);
+  handleSubmit(event) {    
 
     event.preventDefault();
     const { updateFaculty } = this.props;
     var formData = new FormData(event.target);
-    const updatedata = {};
-    // updatedata["name"] = {
-    //   firstname: formData.get("firstname") || this.state.data.name.firstname,
-    //   lastname: formData.get("lastname") || this.state.data.name.lastname,
-    // };
+    const updatedata = {};    
     updatedata["firstname"] =
       formData.get("firstname") || this.state.data.name.firstname;
     updatedata["lastname"] =
@@ -83,8 +53,7 @@ class FacultyProfile extends Component {
     updatedata["username"] =
       formData.get("username") || this.state.data.username;
     updatedata["emailId"] = formData.get("emailId") || this.state.data.emailId;
-    console.log(updatedata);
-    console.log(this.state.data._id);
+   
     updateFaculty(this.state.data._id, updatedata).then(
       console.log(this.props.faculty)
     );
@@ -244,20 +213,7 @@ class FacultyProfile extends Component {
                           {options}
                         </select>
                       </div>
-                    </div>
-                    {/* <div className="form-row my-2">
-                      <div className="col-sm-12">
-                        Email Id:
-                        <input
-                          readOnly
-                          type="email"
-                          name="emailId"
-                          id="emailId"
-                          placeholder={this.state.data.emailId}
-                          className="form-control"
-                        />
-                      </div>
-                    </div> */}
+                    </div>                    
                   </div>
                   <hr />
                   <div className="text-right">

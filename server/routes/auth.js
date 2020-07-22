@@ -5,7 +5,6 @@ const auth = require("../middlewares/auth");
 router.post("/register", handle.register);
 router.post("/login", handle.login);
 router.post("/forgotpassword", handle.forgotPassword);
-//router.post('/register_faculty',handle.register_faculty);
 router.post("/login_faculty", handle.login_faculty);
 router
   .post("/student", auth, handle.updateStudent)

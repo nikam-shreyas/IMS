@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getAdmin,
@@ -17,48 +17,16 @@ class TestPage extends Component {
     this.state={
       imgSrc:""
     }
-    const {
-      getAdmin,
-      getCurrentTeacher,
-      getFaculty,
-      deleteTeacher,
-      setCurrentTeacher,
-      createTeacher,
-      setCurrentAdmin,
-      setFaculty,
+    const {      
+      getFaculty,      
     } = this.props;
     getFaculty().then(console.log(this.props));
   }
   async componentDidMount(){
-  //   var file ="server/public/Documents/41244_ShreyasNikam.pdf";
-  //   var reader = new FileReader();
-  //   var url = reader.readAsDataURL(file);
-  //   reader.onloadend = function (e) {
-  //      this.setState({
-  //          imgSrc: reader.result
-  //      })
-  //    }.bind(this);
-  //  console.log(url) 
+  
   }
-  // downloadEmployeeData = () => {
-	// 	fetch('http://localhost:8080/employees/download')
-	// 		.then(response => {
-	// 			response.blob().then(blob => {
-	// 				let url = window.URL.createObjectURL(blob);
-	// 				let a = document.createElement('a');
-	// 				a.href = url;
-	// 				a.download = 'employees.json';
-	// 				a.click();
-	// 			});
-	// 			//window.location.href = response.url;
-	// 	});
-	// }
-  render() {
-    console.log(this.props.faculty);
-    // return <Fragment>
-    // <button onClick={this.downloadEmployeeData}>Download</button>
-    // {this.download}
-    // </Fragment>;
+  
+  render() {    
     return(
         <div>
         <Link to="IMS/server/public/Documents/41244_ShreyasNikam.pdf" target="_blank" download>Download</Link>

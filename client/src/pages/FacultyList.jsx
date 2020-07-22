@@ -12,21 +12,11 @@ import {
   MdSearch,
 } from "react-icons/md";
 class FacultyList extends Component {
-  //   state={
-  //     isLoading: true,
-  //     dataNew:{
-  //         username:"Srushti",
-  //         address:"pune",
-  //         email:"s@gmail.com",
-  //         phonenumber:"7896541230",
-  //     },
-  // };
-
+  
   constructor(props) {
-    super(props);
-    //since we are extending class Table so we have to use super in order to override Component class constructor
+    super(props);    
     this.state = {
-      //state is by default an object
+      
       isLoading: true,
       faculties: [
         {
@@ -61,8 +51,7 @@ class FacultyList extends Component {
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
-      cardContent = cards[i].querySelector(".individual-card");
-      console.log(cardContent.innerText);
+      cardContent = cards[i].querySelector(".individual-card");      
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -79,14 +68,7 @@ class FacultyList extends Component {
   expandInline(e) {
     e.target.parentElement.lastChild.style.display = "block";
   }
-  // handlefilter(e) {
-  //   if (e.target.value !== "") {
-  //     var elements = document.querySelectorAll(
-  //       "div[id='*" + e.target.value + "*']"
-  //     );
-  //     console.log(elements);
-  //   }
-  // }
+
   renderCardData() {
     return this.state.faculties.map((faculty) => {
       const {
@@ -97,7 +79,7 @@ class FacultyList extends Component {
         department,
         designation,
         emailId,
-      } = faculty; //destructuring
+      } = faculty; 
       return (
         <div
           className="col-sm-6"
@@ -188,8 +170,7 @@ class FacultyList extends Component {
             <Admin_Sidenav activeComponent="2" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container-fluid">
-              {/* {<MDBDataTable dark data={this.state.faculties} />} */}
+            <div className="container-fluid">              
               <h4 className="mt-2">
                 Faculty List
                 <div className="float-right">

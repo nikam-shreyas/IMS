@@ -63,8 +63,7 @@ class Auth_2 extends Component {
       <div className="section">
         <div className="container">
           <div className="user signinBx">
-            <div className="imgBx">
-              {/* <img src={image} /> */}
+            <div className="imgBx">              
               <p>Internship Management System</p>
             </div>
             <div className="formBx">

@@ -1,19 +1,9 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-
 import { getStudentList , deleteStudents ,Search } from "../store/actions/admin";
-
-
 import { MdDone, MdDelete } from "react-icons/md";
-
-import {
-  MdFormatListBulleted,
-  MdAssignmentInd,
-  MdSupervisorAccount,
-  MdViewAgenda,
-  MdLocalLibrary,
-  MdBuild,
+import {  
   MdSearch,
 } from "react-icons/md";
 import SuccessMessage from "../components/SuccessMessage";
@@ -31,8 +21,7 @@ class StudentList extends Component {
            name: { firstname: null, lastname: null },
            currentClass: { year: null, div: null },
            rollNo: null,
-          username: null,
-         // emailId: "",
+          username: null,         
          YEAR:"",
          DIV:"",
 
@@ -49,8 +38,7 @@ class StudentList extends Component {
 
   }
   async componentDidMount() {
-    const { getStudentList } = this.props;
-    console.log(this.props);
+    const { getStudentList } = this.props;    
     getStudentList()
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.students));
@@ -69,8 +57,7 @@ class StudentList extends Component {
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
-      cardContent = cards[i].querySelector(".individual-card");
-      console.log(cardContent.innerText);
+      cardContent = cards[i].querySelector(".individual-card");      
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -86,19 +73,9 @@ class StudentList extends Component {
   }
   expandInline(e) {
     e.target.parentElement.lastChild.style.display = "block";
-  }
-  // handlefilter(e) {
-  //   if (e.target.value !== "") {
-  //     var elements = document.querySelectorAll(
-  //       "div[id='*" + e.target.value + "*']"
-  //     );
-  //     console.log(elements);
-  //   }
-  // }
-  selectall() {
-    // alert("no");
-    var p = document.getElementsByName("check");
-    console.log(p.length + "lengh is ");
+  }  
+  selectall() {    
+    var p = document.getElementsByName("check");    
     if (this.state.allSelected) {
       for (var i = 0; i < p.length; i++) {
         p[i].checked = false;
@@ -111,11 +88,10 @@ class StudentList extends Component {
     this.setState({ allSelected: !this.state.allSelected });
   }
 
-  deletesingle = (e) => {
-    console.log(e.target.value);
+  deletesingle = (e) => {    
     var g = document.getElementById(e.target.value);
     if (g.checked == true) {
-      console.log("selected");
+      
     } else {
       alert("Not Selected");
     }
@@ -129,8 +105,7 @@ class StudentList extends Component {
         obj.push(p[i].id);
       }
     }
-
-    console.log(obj.length);
+    
     if (obj.length == 0) {
       alert("No Students to delete.");
     } else {
@@ -154,8 +129,7 @@ async search(){
     alert("division not selected");
   }else{
    const {YEAR , DIV} =this.state;
-   const { Search }=this.props;
-   console.log({YEAR }+{DIV});
+   const { Search }=this.props;   
    Search({YEAR ,DIV });
 
   
@@ -168,10 +142,9 @@ renderCardData1() {
       username,
        name,
       currentClass,
-       rollNo,
-      // emailId,
+       rollNo,      
       created,
-    } = students; //destructuring
+    } = students; 
     return (
       <tr key={_id} className="application">
           <td>
@@ -196,10 +169,8 @@ renderCardData1() {
         name,
         currentClass,
         rollNo,
-        created,
-        // emailId,
-      } = students; //destructuring
-      console.log(username);
+        created,        
+      } = students;     
       return (
         <tr key={_id} className="application">
           <td>
@@ -216,7 +187,7 @@ renderCardData1() {
   }
 
   filter(e) {
-    var filter, cards, cardContent, i;
+    var filter, cards, i;
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("application");
     for (i = 0; i < cards.length; i++) {
@@ -373,8 +344,7 @@ renderCardData1() {
 export default connect(
   (store) => ({
     auth: store.auth,
-    students: store.studentlist,
-    //students: store.someStudentlist,
+    students: store.studentlist,    
   }),
 
   { getStudentList,deleteStudents , Search }

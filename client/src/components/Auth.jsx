@@ -10,8 +10,6 @@ import {
   logout_f,
   authUser_a,
 } from "../store/actions";
-//import NavBar from "../containers/NavBar";
-//import { Redirect } from 'react-router-dom';
 
 class Auth extends Component {
   constructor(props) {
@@ -54,8 +52,7 @@ class Auth extends Component {
         
           <div className="user signinBx">
 
-            <div className="imgBx">
-              {/* <img src={image} /> */}
+            <div className="imgBx">              
               <p>Internship Management System</p>
             </div>
             

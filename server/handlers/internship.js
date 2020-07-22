@@ -99,24 +99,19 @@ exports.addNewInternship = async (req, res, next) => {
     };
 
     client.sendMail(email, (err, info) => {
-      if (err) {
-        console.log(err);
-      } else if (info) {
-        console.log(info);
+      if (err) {        
+      } else if (info) {        
       }
     });
 
     client.sendMail(emailFac, (err, info) => {
-      if (err) {
-        console.log(err);
-      } else if (info) {
-        console.log(info);
+      if (err) {        
+      } else if (info) {        
       }
     });
 
     return res.status(201).json({ ...internship._doc, student: student._id });
-  } catch (err) {
-    console.log(err);
+  } catch (err) {    
     next({
       status: 400,
       message: err.message,
@@ -125,14 +120,12 @@ exports.addNewInternship = async (req, res, next) => {
 };
 
 exports.showInternships = async (req, res, next) => {
-  try {
-    //const internships = await db.internships.find().populate('student',['studentname','id']);
+  try {    
     const { id } = req.decoded;
     let faculty = await db.Faculty.findById(id).populate({
       path: "applicationsReceived",
       model: "Internship",
-    });
-    console.log(id);
+    });  
     res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
     return next({
@@ -142,11 +135,9 @@ exports.showInternships = async (req, res, next) => {
   }
 };
 exports.showAllInternships = async (req, res, next) => {
-  try {
-    //const internships = await db.internships.find().populate('student',['studentname','id']);
+  try {    
     const { id } = req.decoded;
-    let internships = await db.Internship.find();
-    // console.log(internships);
+    let internships = await db.Internship.find();    
     res.status(200).json(internships);
   } catch (err) {
     return next({
@@ -156,14 +147,12 @@ exports.showAllInternships = async (req, res, next) => {
   }
 };
 exports.showApprovedInternships = async (req, res, next) => {
-  try {
-    //const internships = await db.internships.find().populate('student',['studentname','id']);
+  try {    
     const { id } = req.decoded;
     let faculty = await db.Faculty.findById(id).populate({
       path: "applicationsApproved",
       model: "Internship",
-    });
-    console.log(faculty.applicationsApproved);
+    });    
     res.status(200).json(faculty.applicationsApproved);
   } catch (err) {
     return next({
@@ -208,8 +197,7 @@ exports.deleteInternship = async (req, res, next) => {
   const { id: studentId } = req.decoded;
   try {
     let student = await db.Student.findById(studentId);
-    if (student.internships) {
-      // not sure if necessary either...
+    if (student.internships) {      
       student.internships = student.internships.filter((studentInternship) => {
         return studentInternship._id.toString() !== internshipId.toString(); // not sure if necessary to use toString()
       });
@@ -240,12 +228,9 @@ exports.updateInternship = async (req, res, next) => {
       internship[key.toString()] = details[key];
     }
     internship.comments = "\nApplication status changed! Please check.";
-    await internship.save();
-
-    //console.log(internship);
+    await internship.save();    
     res.status(200).json(internship);
-  } catch (err) {
-    console.log(err);
+  } catch (err) {    
     err.message = "Could not update";
     next(err);
   }
@@ -319,7 +304,7 @@ exports.forwardInternship = async (req, res, next) => {
     if (!forwardToFaculty) {
       throw new Error("Next point of contact unavailable.");
     }
-    console.log(forwardToFaculty.designation);
+    
     internship.holder = {
       designation: forwardToFaculty.designation,
     };
@@ -378,8 +363,7 @@ exports.forwardInternship = async (req, res, next) => {
       }
     });
     res.status(200).json(internship);
-  } catch (err) {
-    console.log(err);
+  } catch (err) {    
     err.message = "Could not forward";
     next(err);
   }

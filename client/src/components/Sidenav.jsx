@@ -5,8 +5,7 @@ import { logout } from "../store/actions";
 import { connect } from "react-redux";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { BsListCheck } from "react-icons/bs";
-import {
-  MdDescription,
+import {  
   MdNotifications,
   MdAddCircle,
   MdDns,

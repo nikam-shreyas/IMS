@@ -52,8 +52,7 @@ exports.login_faculty = async (req, res, next) => {
 exports.login_admin = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.findOne({ username: req.body.username });
-    const { id, username, designation } = Fac;
-    console.log(id);
+    const { id, username, designation } = Fac;    
     if (designation !== "Admin") {
       throw new Error();
     }
@@ -161,10 +160,8 @@ exports.deleteFaculty = async (req, res, next) => {
 
 exports.showProfile = async (req, res, next) => {
   try {
-    const { id } = req.decoded;
-    //console.log("here is the id "+id)
-    const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });
-    //console.log("This is profile "+Profile);
+    const { id } = req.decoded;    
+    const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });    
     if (Profile) {
       return res.status(200).json(Profile);
     } else {
@@ -232,8 +229,7 @@ exports.resetPassword = async (req, res, next) => {
     } else {
       throw new Error("Old password is wrong!");
     }
-  } catch (err) {
-    // err.message = "Invalid username/password";
+  } catch (err) {    
     next(err);
   }
 };
@@ -252,36 +248,20 @@ exports.findAllStudents = async (req, res, next) => {
 
 
 exports.SomeStudents = async (req, res, next) => {
-  try {
-    // console.log("console logged here");
-    //console.log(req.body);
-    const {YEAR , DIV}=req.body;
-    // console.log(YEAR + DIV+ "im still here ");
+  try {    
+    const {YEAR , DIV}=req.body;    
     const students = await db.Student.findOne({ "currentClass.year" : YEAR, "currentClass.div": DIV });
     res.status(200).json(students);
-  } catch (err) {
-    console.log("im in catch");
+  } catch (err) {    
     err.status(400);
     next(err);
   }
 };
 
 
-//console
-// exports.findAllStudents = async (req, res, next) => {
-//   try {
-//     const students = await db.Student.findOne({currentClass:{year:"BE",div:"2"}});
-//     res.status(200).json(students);
-//   } catch (err) {
-//     err.status(400);
-//     next(err);
-//   }
-// };
-
 exports.deletestudent = async (req, res, next) => {
   try {
-
-    console.log(req.body);
+    
     const arr=req.body;
     const student = await db.Student.deleteMany(
       {
@@ -290,8 +270,7 @@ exports.deletestudent = async (req, res, next) => {
         }
       });
       
-      // const { id } = req.body;
-    // const student = await db.Student.findById({ _id: id });
+      
     if (!student){
       throw new Error("Student not found");
     }     
@@ -300,7 +279,7 @@ exports.deletestudent = async (req, res, next) => {
     } 
 
   } catch (error) {
-    console.log("im in catch");
+    
     next({
       status: 400,
       message: error.message,

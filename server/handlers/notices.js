@@ -45,8 +45,7 @@ exports.addNewNotice = async (req, res, next) => {
 };
 
 exports.showNotices = async (req, res, next) => {
-  try {
-    //const internships = await db.internships.find().populate('student',['studentname','id']);
+  try {    
     const notices = await db.Notices.find();
     res.status(200).json(notices);
   } catch (err) {
@@ -57,13 +56,12 @@ exports.showNotices = async (req, res, next) => {
 
 exports.studentsNotices = async (req, res, next) => {
   try {
-    const { id } = req.decoded;
-   // console.log(id);
+    const { id } = req.decoded;   
     const studentInternships = await db.Student.findById(id).populate(
       "internships",
       "comments"
     );
-  //console.log(studentInternships["internships"]);
+  
     res.status(200).json(studentInternships["internships"]);
   } catch (err) {
     return next({

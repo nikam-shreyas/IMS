@@ -4,10 +4,8 @@ const jwt = require("jsonwebtoken");
 
 exports.showFacultyProfile = async (req, res, next) => {
   try {
-    const { id } = req.decoded;
-    console.log("here is the id " + id);
-    const Profile = await db.Faculty.findOne({ _id: id });
-    // console.log("This is profile "+Profile);
+    const { id } = req.decoded;    
+    const Profile = await db.Faculty.findOne({ _id: id });    
     if (Profile) {
       return res.json(Profile);
     } else {
@@ -21,31 +19,9 @@ exports.showFacultyProfile = async (req, res, next) => {
   }
 };
 
-// module.exports={
-//   showFacultyProfile:function(req,res){
-//     try {
-//             const { id } = req.decoded;
-//            // console.log("here is the id "+id)
-//             const Profile = db.Faculty.findOne({ _id: id});
-//            // console.log("This is profile "+Profile);
-//             if (Profile) {
-//               return res.json(Profile);
-//             } else {
-//               throw new Error("Not an admin");
-//             }
-//           } catch (error) {
-//             next({
-//               status: 400,
-//               message: error.message,
-//             });
-//           }
-//   }
-// }
-
 exports.updateFProfile = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    console.log("im in update function of faculty ");
+    const { id } = req.params;    
     const Profile = await db.Faculty.findOneAndUpdate(
       { _id: id },
       {

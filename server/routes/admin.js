@@ -8,15 +8,11 @@ router.route("/all").get(auth, handle.findAll);
 
 router.route("/allStudents").get(auth, handle.findAllStudents);
 
-
-
 router.route("/somestudents").get(auth, handle.SomeStudents);
-
 
 router
 .route("/deletestudent")
 .put(auth, handle.deletestudent);
-
 
 router.route("/update/:id").put(auth, handle.updateProfile);
 
@@ -30,10 +26,6 @@ router
 router.route("/update/:id").put(auth, handle.updateProfile);
 
 router.route("/reset/:id").put(auth, handle.resetPassword);
-
-//router.post('/login_faculty',handle.login_faculty);
-
-// router.post('/register_faculty',handle.register_faculty);
 
 router.post("/login_admin", handle.login_admin);
 

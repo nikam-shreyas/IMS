@@ -10,8 +10,6 @@ import {
 import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import ErrorMessage from "../components/ErrorMessage";
-import SuccessMessage from "../components/SuccessMessage";
 class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
@@ -80,8 +78,7 @@ class InternshipApplication extends React.Component {
     const data = { application: {} };
     for (var [key, value] of formData.entries()) {
       data["application"][key] = value;
-    }
-    console.log(this.state.fileOL);
+    }    
     data["application"]["submittedDate"] = new Date().toUTCString();
     data["application"]["offerLetter"] =
       "/public/Documents/" + this.state.fileOL.name;
@@ -119,23 +116,13 @@ class InternshipApplication extends React.Component {
     } else {
       data["application"]["NOC"] = "";
     }
-    // let datafiles={};
-    // for (let i = 0 ; i < this.state.fileName.length ; i++) {
-    //   formDataFile.append("docs", this.state.fileName[i]);
-    // }
-    // datafiles["offerLetter"]=this.state.fileName;
-    // formDataFile.append("offerLetter", this.state.fileName);
+    
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     };
-    // axios.post("http://localhost:4002/api/internships/uploadDocument",formDataFile,config)
-    //     .then((response) => {
-    //         alert("The file is successfully uploaded");
-    //     }).catch((error) => {
-    // });
-    console.log(data);
+    
     const { uploadDocument, createInternship } = this.props;
     uploadDocument(formDataFile, config);
     createInternship(data).then((window.location.href = "/student"));
@@ -145,19 +132,7 @@ class InternshipApplication extends React.Component {
     document.getElementById(labelId).classList.add("selected");
     document.getElementById(labelId).innerHTML = fileName;
   }
-  render() {
-    const divstyle = {
-      border: "2px solid #f44336",
-      background: "#ffcdd2",
-      color: "#f44336",
-      borderRadius: "5px",
-      margin: "0.5rem",
-      padding: "0.5rem",
-    };
-
-    const headingstyle = {
-      color: "#f44336",
-    };
+  render() {    
     return (
       <div className="row no-gutters">
         <div className="col-sm-2 sidenav">
@@ -302,21 +277,6 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                 </div>
-                {/* <div className="form-row">
-                  {/* <form method="post" encType="multipart/form-data" onSubmit="/internship/uploadDocument">
-                <input type="file" name="offerLetter" />
-                <button type="submit" className="btn btn-dark">
-                  Submit
-                </button>
-    </form>
-
-                  <input
-                    className="form-control"
-                    type="file"
-                    name="offerLetter"
-                    onChange={this.submitFile}
-                  />
-                </div> */}
               </div>
               <hr />
               Upload documents:{" "}
