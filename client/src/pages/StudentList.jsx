@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList , deleteStudents ,Search } from "../store/actions/admin";
+import { getStudentList , deleteStudents ,searchStudents } from "../store/actions/admin";
 import { MdDone, MdDelete } from "react-icons/md";
 import {  
   MdSearch,
@@ -129,11 +129,17 @@ async search(){
     alert("division not selected");
   }else{
    const {YEAR , DIV} =this.state;
-   const { Search }=this.props;   
-   Search({YEAR ,DIV });
-
-  
+   const { searchStudents }=this.props;   
+   let data={};
+   data["YEAR"]=YEAR;
+   data["DIV"]=DIV;   
+   searchStudents(data).then(()=>{
+     this.loadSomeStudents(this.props.someStudents);
+   });  
   }
+}
+loadSomeStudents(student){
+  this.setState({students:student});
 }
 renderCardData1() {
   return this.state.students.map((students) => {
@@ -170,7 +176,8 @@ renderCardData1() {
         currentClass,
         rollNo,
         created,        
-      } = students;     
+      } = students; 
+   
       return (
         <tr key={_id} className="application">
           <td>
@@ -218,12 +225,12 @@ renderCardData1() {
               </div>
             </div>
             <hr />
-            <div class="row">
-              <div class="col-sm-7">
+            <div className="row">
+              <div className="col-sm-7">
                 <span>
-                  <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-sm">
+                  <div className="input-group input-group-sm mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="inputGroup-sizing-sm">
                         <MdSearch />
                       </span>
                     </div>
@@ -239,16 +246,16 @@ renderCardData1() {
                   </div>
                 </span>
               </div>
-              <div class="col-sm-5">
-                <div class="container">
-                  <div class="row no-gutters">
-                    <div class="col-sm-8">
+              <div className="col-sm-5">
+                <div className="container">
+                  <div className="row no-gutters">
+                    <div className="col-sm-8">
                       <span>
                         <div
-                          class="btn-group bg-secondary"
+                        className="btn-group bg-secondary"
                           style={{ borderRadius: 5 }}
                         >
-                          <button class="btn btn-sm">Filter: </button>
+                          <button className="btn btn-sm">Filter: </button>
                           <select
                             className="btn btn-secondary btn-sm"
                             id="year"
@@ -344,8 +351,9 @@ renderCardData1() {
 export default connect(
   (store) => ({
     auth: store.auth,
-    students: store.studentlist,    
+    students: store.studentlist,
+    someStudents: store.someStudentlist,
   }),
 
-  { getStudentList,deleteStudents , Search }
+  { getStudentList,deleteStudents , searchStudents }
 )(StudentList);

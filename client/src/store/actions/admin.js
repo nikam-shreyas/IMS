@@ -165,14 +165,19 @@ export const getStudentList = () => {
 };
 
 
-export const Search=(data)=>{
+export const searchStudents=(data)=>{
 return async (dispatch)=> {
   try{
     const {YEAR , DIV }=data;
     console.log(YEAR+DIV+"year div ");
-    const students = await api.call("get", "admin/somestudents",{YEAR , DIV });
-    dispatch(getSomeStudents(students));
-    dispatch(removeError());
+    let path="?YEAR="+YEAR+"&DIV="+DIV;
+    const students = await api.call("get", `admin/findStudents/${path}`);
+    if(students.length==0){
+        dispatch(addError("No students Found"))
+    }else{
+      dispatch(getSomeStudents(students));
+      dispatch(removeError());
+    }
   }catch(err){
     const error = err.response.data;
       dispatch(addError(error.message));
