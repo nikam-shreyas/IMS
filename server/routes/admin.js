@@ -8,6 +8,10 @@ router.route("/all").get(auth, handle.findAll);
 
 router.route("/allStudents").get(auth, handle.findAllStudents);
 
+router
+.route("/deletestudent/:id")
+.delete(auth, handle.deletestudent);
+
 router.route("/update/:id").put(auth, handle.updateProfile);
 
 router.route("/add").post(auth, handle.addFaculty);
