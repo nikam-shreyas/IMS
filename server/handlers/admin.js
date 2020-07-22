@@ -254,10 +254,11 @@ exports.findAllStudents = async (req, res, next) => {
 exports.SomeStudents = async (req, res, next) => {
   try {
     // console.log("console logged here");
-    //console.log(req.body);
-    const {YEAR , DIV}=req.body;
-    // console.log(YEAR + DIV+ "im still here ");
-    const students = await db.Student.findOne({ "currentClass.year" : YEAR, "currentClass.div": DIV });
+    console.log(req.body);
+    const YEAR =req.query.YEAR;
+    const DIV=req.query.DIV;
+    const students = await db.Student.find({ "currentClass.year" : YEAR, "currentClass.div": DIV });
+    console.log(students)
     res.status(200).json(students);
   } catch (err) {
     console.log("im in catch");

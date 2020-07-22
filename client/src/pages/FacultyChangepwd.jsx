@@ -89,7 +89,7 @@ class FacultyChangePassword extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <SideNav_f activeComponent="6" />
+            <SideNav_f activeComponent="7" />
           </div>
           <div className="col-sm-10">
             <div className="container-fluid mt-2">

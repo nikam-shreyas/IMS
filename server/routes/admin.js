@@ -10,7 +10,7 @@ router.route("/allStudents").get(auth, handle.findAllStudents);
 
 
 
-router.route("/somestudents").get(auth, handle.SomeStudents);
+router.route("/findStudents").get(auth, handle.SomeStudents);
 
 
 router
