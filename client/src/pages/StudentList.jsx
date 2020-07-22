@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList ,Search} from "../store/actions/admin";
+import { getStudentList , deleteStudents } from "../store/actions/admin";
 import {
   MdFormatListBulleted,
   MdAssignmentInd,
@@ -11,6 +11,8 @@ import {
   MdBuild,
   MdSearch,
 } from "react-icons/md";
+import SuccessMessage from "../components/SuccessMessage";
+import ErrorMessage from "../components/ErrorMessage";
 class StudentList extends Component {
   constructor(props) {
     super(props);
@@ -25,12 +27,12 @@ class StudentList extends Component {
            currentClass: { year: "", div: "" },
            rollNo: "",
           username: "",
-         YEAR:"--",
-         DIV:"--",
+         // emailId: "",
         },
       ],
+      ids:[],
     };
-    this.search = this.search.bind(this);
+    this.deleteall=this.deleteall.bind(this);
   }
   async componentDidMount() {
     const { getStudentList } = this.props;
@@ -80,7 +82,7 @@ class StudentList extends Component {
   //   }
   // }
 selectall(){
-  alert("no");
+  // alert("no");
   var p=document.getElementsByName("check");
   console.log(p.length+"lengh is ");
   for(var i=0;i<p.length;i++){
@@ -106,28 +108,27 @@ deleteall(){
   for(var i=0;i<p.length;i++){
     if(p[i].checked===true){
       obj.push(p[i].id);
-      console.log(p[i].id);
     }
   }
 
+  console.log(obj.length);
+  if(obj.length==0){
+    alert("No Students to delete.")
+  }else{
+    const { deleteStudents }=this.props;
+    deleteStudents(obj);
+  }
 }
 
-async search(){
+search(){
   var year=document.getElementById("year");
   var div=document.getElementById("div");
-  await this.setState({ YEAR: year.value });
-  await this.setState({ DIV:  div.value}); 
   if(year.value=="--"){
-alert("year not selected");
+  alert("year not selected");
   }else if(div.value=="--"){
     alert("division not selected");
-  }else{ 
+  }else{
 
-    console.log(this.state.YEAR);
-    const { Search } = this.props;
-    const { YEAR , DIV} = this.state;
-    Search({YEAR , DIV });
-    
   }
 }
 
@@ -143,7 +144,7 @@ alert("year not selected");
       } = students; //destructuring
       return (
         
-        <tr>
+        <tr key={_id}>
           <td>{username}</td>
           <td>{rollNo}</td>
         <td>{name.firstname}</td>
@@ -202,6 +203,10 @@ alert("year not selected");
             <button id="deleteselected" onClick={this.deleteall}  className="btn btn-danger"> 
               Delete Selected
             </button>
+            <div className="col-sm-6 mt-4">
+            <ErrorMessage />
+            <SuccessMessage />
+          </div>
           </div>
           <hr/>
           <table  className="table" style={{width:"100%"}}>
@@ -217,7 +222,7 @@ alert("year not selected");
               </tr>
             </thead>
             <tbody>
-                {this.state.isLoading==true? "":this.renderCardData()}
+                {this.state.isLoading==true? <p>No data</p>:this.renderCardData()}
                 
                  
             </tbody>
@@ -237,5 +242,5 @@ export default connect(
     auth: store.auth,
     students: store.studentlist,
   }),
-  { getStudentList ,Search}
+  { getStudentList,deleteStudents }
 )(StudentList);

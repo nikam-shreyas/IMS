@@ -277,15 +277,25 @@ exports.SomeStudents = async (req, res, next) => {
 
 exports.deletestudent = async (req, res, next) => {
   try {
-    console.log("im here");
-    const { id } = req.params;
 
-    const student = await db.Student.findById(id);
-    console.log(student);
+    console.log(req.body);
+    const arr=req.body;
+    const student = await db.Student.deleteMany(
+      {
+        _id: {
+          $in: arr
+        }
+      });
+      
+      // const { id } = req.body;
+    // const student = await db.Student.findById({ _id: id });
+    if (!student){
+      throw new Error("Student not found");
+    }     
+    else{
+      return res.status(200).json("Student deleted");
+    } 
 
-    if (!student) throw new Error("Student not found");
-    await student.remove();
-    return res.status(200).json("Student deleted");
   } catch (error) {
     console.log("im in catch");
     next({

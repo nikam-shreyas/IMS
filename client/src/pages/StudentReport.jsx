@@ -85,7 +85,7 @@ class StudentReport extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="6" />
+            <Admin_Sidenav activeComponent="7" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid mt-2">
