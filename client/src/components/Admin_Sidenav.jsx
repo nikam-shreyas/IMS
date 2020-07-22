@@ -78,9 +78,8 @@ class Admin_Sidenav extends Component {
            Stats
           </li>
         </Link>
-          <Link to="/settings">
+          <Link to="/studentReport">
             <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
-
               <span className="mx-2">
                 <MdAssignment style={{ margin: -1, padding: -1 }} />
               </span>
@@ -88,7 +87,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/settings">
-            <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow == 8 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList } from "../store/actions/admin";
+import { getStudentList , deleteStudents } from "../store/actions/admin";
 import {
   MdFormatListBulleted,
   MdAssignmentInd,
@@ -28,6 +28,7 @@ class StudentList extends Component {
          // emailId: "",
         },
       ],
+      ids:[],
     };
   }
   async componentDidMount() {
@@ -78,7 +79,7 @@ class StudentList extends Component {
   //   }
   // }
 selectall(){
-  alert("no");
+  // alert("no");
   var p=document.getElementsByName("check");
   console.log(p.length+"lengh is ");
   for(var i=0;i<p.length;i++){
@@ -104,17 +105,19 @@ deleteall(){
   for(var i=0;i<p.length;i++){
     if(p[i].checked===true){
       obj.push(p[i].id);
-      console.log(p[i].id);
     }
   }
 
+  console.log(obj);
+//  const { deleteStudents }=this.props;
+//  deleteStudents(obj);
 }
 
 search(){
   var year=document.getElementById("year");
   var div=document.getElementById("div");
   if(year.value=="--"){
-alert("year not selected");
+  alert("year not selected");
   }else if(div.value=="--"){
     alert("division not selected");
   }else{
@@ -134,7 +137,7 @@ alert("year not selected");
       } = students; //destructuring
       return (
         
-        <tr>
+        <tr key={_id}>
           <td>{username}</td>
           <td>{rollNo}</td>
         <td>{name.firstname}</td>
@@ -228,5 +231,5 @@ export default connect(
     auth: store.auth,
     students: store.studentlist,
   }),
-  { getStudentList }
+  { getStudentList,deleteStudents }
 )(StudentList);

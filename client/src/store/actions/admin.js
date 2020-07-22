@@ -39,7 +39,18 @@ export const getAdmin = (path) => {
     }
   };
 };
-
+export const deleteStudents=(data)=>{
+  return async (dispatch) => {
+    try {
+      const admin = await api.call("delete", "admin/deletestudent",data);
+      // dispatch(setCurrentAdmin(admin));
+      // dispatch(removeError());
+    } catch (err) {
+      const error = err.response.data;
+      dispatch(addError(error.message));
+    }
+  };
+};
 
 
 export const createTeacher = (data) => {
