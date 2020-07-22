@@ -254,7 +254,7 @@ exports.findAllStudents = async (req, res, next) => {
 exports.SomeStudents = async (req, res, next) => {
   try {
     // console.log("console logged here");
-    console.log(req.body);
+    //console.log(req.body);
     const {YEAR , DIV}=req.body;
     // console.log(YEAR + DIV+ "im still here ");
     const students = await db.Student.findOne({ "currentClass.year" : YEAR, "currentClass.div": DIV });
