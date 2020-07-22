@@ -147,17 +147,17 @@ class InternshipApplication extends React.Component {
   }
   render() {
     const divstyle = {
-      border : "2px solid #f44336",
-      background : "#ffcdd2",
+      border: "2px solid #f44336",
+      background: "#ffcdd2",
       color: "#f44336",
-      borderRadius : "5px",
+      borderRadius: "5px",
       margin: "0.5rem",
-      padding : "0.5rem"
+      padding: "0.5rem",
     };
 
     const headingstyle = {
-      color: "#f44336"
-    }
+      color: "#f44336",
+    };
     return (
       <div className="row no-gutters">
         <div className="col-sm-2 sidenav">
@@ -180,15 +180,15 @@ class InternshipApplication extends React.Component {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <hr/>            
-                       
+            <hr />
+
             <form onSubmit={this.handleSubmit}>
               Internship Details:
               <hr />
               <div className="container-fluid">
                 <div className="form-row my-2">
                   <div className="col-sm-6">
-                    Company:
+                    Company: <span className="text-danger">*</span>
                     <input
                       type="text"
                       name="workplace"
@@ -199,7 +199,7 @@ class InternshipApplication extends React.Component {
                     />
                   </div>
                   <div className="col-sm-3">
-                    Start Date:
+                    Start Date: <span className="text-danger">*</span>
                     <div className="input-group">
                       <DatePicker
                         name="startDate"
@@ -214,7 +214,7 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                   <div className="col-sm-3">
-                    Duration:
+                    Duration: <span className="text-danger">*</span>
                     <div className="input-group">
                       <input
                         type="number"
@@ -232,18 +232,19 @@ class InternshipApplication extends React.Component {
                 </div>
                 <div className="form-row my-2">
                   <div className="col-sm-6">
-                    Type of Internship:
+                    Type of Internship: <span className="text-danger">*</span>
                     <input
                       type="text"
                       name="internshipType"
                       id="internshipType"
                       className="form-control"
                       placeholder="eg. Work from home"
+                      required
                     />
                   </div>
 
                   <div className="col-sm-6">
-                    Stipend:
+                    Stipend: <span className="text-danger">*</span>
                     <div className="input-group">
                       <div className="input-group-prepend">
                         <span
@@ -270,7 +271,7 @@ class InternshipApplication extends React.Component {
                 </div>
                 <div className="form-row my-2">
                   <div className="col-sm-6">
-                    NOC required:
+                    NOC required: <span className="text-danger">*</span>
                     <input
                       type="text"
                       name="NOCRequired"
@@ -280,7 +281,7 @@ class InternshipApplication extends React.Component {
                     />
                   </div>
                   <div className="col-sm-6">
-                    Reference:
+                    Reference: <span className="text-danger">*</span>
                     <div className="input-group">
                       <div className="input-group-prepend">
                         <span
@@ -351,7 +352,7 @@ class InternshipApplication extends React.Component {
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    Offer Letter:
+                    Offer Letter: <span className="text-danger">*</span>
                     <div className="custom-file">
                       <input
                         type="file"
@@ -470,8 +471,6 @@ class InternshipApplication extends React.Component {
                 </button>
               </div>
             </form>
-            
-
           </div>
         </div>
       </div>

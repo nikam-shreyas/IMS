@@ -3,6 +3,12 @@ import { getCurrentInternship, deleteInternship } from "../store/actions";
 import { connect } from "react-redux";
 import Sidenav from "../components/Sidenav";
 import { withRouter } from "react-router-dom";
+import {
+  MdAccountCircle,
+  MdAssignmentInd,
+  MdLocationCity,
+} from "react-icons/md";
+import { IoMdCalendar } from "react-icons/io";
 class InternshipDetails extends Component {
   state = {
     isLoading: true,

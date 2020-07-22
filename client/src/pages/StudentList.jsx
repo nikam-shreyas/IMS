@@ -21,19 +21,21 @@ class StudentList extends Component {
       students: [
         {
           _id: "",
-           name: { firstname: "", lastname: "" },
-           currentClass: { year: "", div: "" },
-           rollNo: "",
+          name: { firstname: "", lastname: "" },
+          currentClass: { year: "", div: "" },
+          rollNo: "",
           username: "",
-         // emailId: "",
+          // emailId: "",
         },
       ],
     };
   }
+
   async componentDidMount() {
     const { getStudentList } = this.props;
     console.log(this.props);
     getStudentList()
+      .then(console.log(this.props))
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.students));
   }
@@ -77,91 +79,92 @@ class StudentList extends Component {
   //     console.log(elements);
   //   }
   // }
-selectall(){
-  alert("no");
-  var p=document.getElementsByName("check");
-  console.log(p.length+"lengh is ");
-  for(var i=0;i<p.length;i++){
-    p[i].checked=true;
-  }
-}
-
-
-deletesingle=(e)=>{
-console.log(e.target.value);
-var g=document.getElementById(e.target.value);
-if(g.checked==true){
-console.log("selected");
-}else{
-  alert("Not Selected");
-}
-}
-
-
-deleteall(){
-  var p=document.getElementsByName("check");
-  var obj=[];
-  for(var i=0;i<p.length;i++){
-    if(p[i].checked===true){
-      obj.push(p[i].id);
-      console.log(p[i].id);
+  selectall() {
+    alert("no");
+    var p = document.getElementsByName("check");
+    console.log(p.length + "lengh is ");
+    for (var i = 0; i < p.length; i++) {
+      p[i].checked = true;
     }
   }
 
-}
+  deletesingle = (e) => {
+    console.log(e.target.value);
+    var g = document.getElementById(e.target.value);
+    if (g.checked == true) {
+      console.log("selected");
+    } else {
+      alert("Not Selected");
+    }
+  };
 
-search(){
-  var year=document.getElementById("year");
-  var div=document.getElementById("div");
-  if(year.value=="--"){
-alert("year not selected");
-  }else if(div.value=="--"){
-    alert("division not selected");
-  }else{
-
+  deleteall() {
+    var p = document.getElementsByName("check");
+    var obj = [];
+    for (var i = 0; i < p.length; i++) {
+      if (p[i].checked === true) {
+        obj.push(p[i].id);
+        console.log(p[i].id);
+      }
+    }
   }
-}
+
+  search() {
+    var year = document.getElementById("year");
+    var div = document.getElementById("div");
+    if (year.value == "--") {
+      alert("year not selected");
+    } else if (div.value == "--") {
+      alert("division not selected");
+    } else {
+    }
+  }
 
   renderCardData() {
     return this.state.students.map((students) => {
       const {
         _id,
         username,
-         name,
+        name,
         currentClass,
-         rollNo,
+        rollNo,
         // emailId,
       } = students; //destructuring
       return (
-        
         <tr>
           <td>{username}</td>
           <td>{rollNo}</td>
-        <td>{name.firstname}</td>
-        <td>{name.lastname}</td>
-      <td>{currentClass.year}</td>
-      <td>{currentClass.div}</td>
-      <td>
-        <input type="checkbox" name="check" id={_id} value={_id}/>
-        <button className="btn btn-danger" onClick={this.deletesingle} value={_id}>Delete</button>
-    </td>
+          <td>{name.firstname}</td>
+          <td>{name.lastname}</td>
+          <td>{currentClass.year}</td>
+          <td>{currentClass.div}</td>
+          <td>
+            <input type="checkbox" name="check" id={_id} value={_id} />
+            <button
+              className="btn btn-danger"
+              onClick={this.deletesingle}
+              value={_id}
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       );
     });
   }
-  
+
   render() {
     return (
       <div className="row no-gutters">
-         <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="3" />
-          </div>
+        <div className="col-sm-2 sidenav">
+          <Admin_Sidenav activeComponent="3" />
+        </div>
         {/* <div>Student List</div>
         <hr/>
         <div></div> */}
-        <div className="col-sm-10 of" style={{padding:"1%"}}>
-          <h2 style={{textAlign:"center"}}>Student List</h2>
-          <hr/>
+        <div className="col-sm-10 of" style={{ padding: "1%" }}>
+          <h2 style={{ textAlign: "center" }}>Student List</h2>
+          <hr />
           <div>
             <select id="year">
               <option value="--">--</option>
@@ -184,18 +187,30 @@ alert("year not selected");
               <option value="10">10</option>
               <option value="11">11</option>
             </select>
-            <button id="search_button" onClick={this.search} className="btn btn-primary"> 
+            <button
+              id="search_button"
+              onClick={this.search}
+              className="btn btn-primary"
+            >
               Search
             </button>
-            <button id="selectall" onClick={this.selectall}  className="btn btn-primary"> 
+            <button
+              id="selectall"
+              onClick={this.selectall}
+              className="btn btn-primary"
+            >
               Select all
             </button>
-            <button id="deleteselected" onClick={this.deleteall}  className="btn btn-danger"> 
+            <button
+              id="deleteselected"
+              onClick={this.deleteall}
+              className="btn btn-danger"
+            >
               Delete Selected
             </button>
           </div>
-          <hr/>
-          <table  className="table" style={{width:"100%"}}>
+          <hr />
+          <table className="table" style={{ width: "100%" }}>
             <thead>
               <tr className="thead-dark">
                 <th>Username</th>
@@ -208,17 +223,15 @@ alert("year not selected");
               </tr>
             </thead>
             <tbody>
-                {this.state.isLoading==true? <p>No data</p>:this.renderCardData()}
-                
-                 
+              {this.state.isLoading == true ? (
+                <p>No data</p>
+              ) : (
+                this.renderCardData()
+              )}
             </tbody>
           </table>
         </div>
-       
       </div>
-
-      
-
     );
   }
 }

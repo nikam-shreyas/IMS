@@ -29,5 +29,4 @@ router.route("/reset/:id").put(auth, handle.resetPassword);
 
 router.post("/login_admin", handle.login_admin);
 
-
 module.exports = router;
