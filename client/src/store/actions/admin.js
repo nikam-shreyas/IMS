@@ -4,6 +4,7 @@ import {
   SET_CURRENT_SELECTED_TEACHER,
   SET_FACULTY,
   GET_STUDENT_LIST,
+  GET_SOME_STUDENT_LIST
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess, removeSuccessMessage } from "./success";
@@ -19,6 +20,11 @@ export const setFaculty = (faculty) => ({
 
 export const getStudents = (students) => ({
   type: GET_STUDENT_LIST,
+  students,
+});
+
+export const getSomeStudents = (students) => ({
+  type: GET_SOME_STUDENT_LIST,
   students,
 });
 
@@ -166,6 +172,8 @@ return async (dispatch)=> {
     const {YEAR , DIV }=data;
     console.log(YEAR+DIV+"year div ");
     const students = await api.call("get", "admin/somestudents",data);
+    dispatch(getSomeStudents(students));
+    dispatch(removeError());
   }catch(err){
     const error = err.response.data;
       dispatch(addError(error.message));

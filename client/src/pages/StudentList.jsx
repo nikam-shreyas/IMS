@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList , deleteStudents } from "../store/actions/admin";
+import { getStudentList , deleteStudents ,Search } from "../store/actions/admin";
 import {
   MdFormatListBulleted,
   MdAssignmentInd,
@@ -28,11 +28,14 @@ class StudentList extends Component {
            rollNo: "",
           username: "",
          // emailId: "",
+         YEAR:"",
+         DIV:"",
         },
       ],
       ids:[],
     };
     this.deleteall=this.deleteall.bind(this);
+    this.search=this.search.bind(this);
   }
   async componentDidMount() {
     const { getStudentList } = this.props;
@@ -120,17 +123,52 @@ deleteall(){
   }
 }
 
-search(){
+async search(){
+
   var year=document.getElementById("year");
   var div=document.getElementById("div");
+  await this.setState({ YEAR: year.value });
+  await this.setState({ DIV: div.value });
+  
   if(year.value=="--"){
   alert("year not selected");
   }else if(div.value=="--"){
     alert("division not selected");
   }else{
-
+   const {YEAR , DIV} =this.state;
+   const { Search }=this.props;
+   console.log({YEAR }+{DIV});
+   Search({YEAR ,DIV });
   }
 }
+
+renderCardData1() {
+  return this.state.students.map((students) => {
+    const {
+      _id,
+      username,
+       name,
+      currentClass,
+       rollNo,
+      // emailId,
+    } = students; //destructuring
+    return (
+      
+      <tr key={_id}>
+        <td>{username}</td>
+        <td>{rollNo}</td>
+      <td>{name.firstname}</td>
+      <td>{name.lastname}</td>
+    <td>{currentClass.year}</td>
+    <td>{currentClass.div}</td>
+    <td>
+      
+  </td>
+      </tr>
+    );
+  });
+}
+
 
   renderCardData() {
     return this.state.students.map((students) => {
@@ -222,7 +260,7 @@ search(){
               </tr>
             </thead>
             <tbody>
-                {this.state.isLoading==true? <p>No data</p>:this.renderCardData()}
+                {this.state.isLoading==true? this.renderCardData1():this.renderCardData()}
                 
                  
             </tbody>
@@ -240,7 +278,8 @@ search(){
 export default connect(
   (store) => ({
     auth: store.auth,
-    students: store.studentlist,
+    //students: store.studentlist,
+    students: store.someStudentlist,
   }),
-  { getStudentList,deleteStudents }
+  { getStudentList,deleteStudents , Search }
 )(StudentList);
