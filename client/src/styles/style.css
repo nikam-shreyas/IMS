@@ -2,6 +2,7 @@
   position: relative;
   min-height: 100vh;
   display: flex;
+  background: url("../assets/images/bg4.jpg");
   justify-content: center;
   align-items: center;
   margin-top: -4vh;
@@ -187,9 +188,4 @@ Link:hover {
   .section .container .user .formBx {
     width: 100%;
   }
-}
-
-
-.guidlinesbox{
-  border: #212121;
 }

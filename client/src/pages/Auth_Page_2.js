@@ -10,9 +10,9 @@ const Auth_Page_2 = ({ authType, isAuthenticated }) => {
 
   return (
     <div>
-      <div className="my-4 text-center">
+      {/* <div className="my-4 text-center">
         <ErrorMessage />
-      </div>
+      </div> */}
       <Auth_2 authType={authType} />
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import ErrorMessage from "../components/ErrorMessage";
 
 import {
   authUser,
@@ -50,13 +51,22 @@ class Auth extends Component {
      
       <div className="section">
         <div className="container">
+        
           <div className="user signinBx">
+
             <div className="imgBx">
               {/* <img src={image} /> */}
               <p>Internship Management System</p>
             </div>
+            
             <div className="formBx">
+            
               <form onSubmit={this.handleSubmit}>
+              <div className="Errorbox">
+              <div className="my-4 text-center" style={{zIndex:"10"}}>
+               <ErrorMessage />
+              </div>
+              </div>
                 <h2>Sign In</h2>
                 <input
                   required

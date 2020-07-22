@@ -12,9 +12,9 @@ const Auth_Page = ({ authType }) => {
 
   return (
     <div>
-      <div className="my-4 text-center">
+      {/* <div className="my-4 text-center">
         <ErrorMessage />
-      </div>
+      </div> */}
       <Auth authType={authType} />
     </div>
   );

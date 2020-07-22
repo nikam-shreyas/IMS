@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { authUser, logout } from "../store/actions";
 import { Link } from "react-router-dom";
 import { MdError } from "react-icons/md";
+import ErrorMessage from "../components/ErrorMessage";
+
 class Auth_2 extends Component {
   constructor(props) {
     super(props);
@@ -67,6 +69,11 @@ class Auth_2 extends Component {
             </div>
             <div className="formBx">
               <form onSubmit={this.handleSubmit}>
+              <div className="Errorbox">
+              <div className="my-4 text-center" style={{zIndex:"10"}}>
+               <ErrorMessage />
+              </div>
+              </div>
                 <h2>Student Registration</h2>
                 <input
                   required
