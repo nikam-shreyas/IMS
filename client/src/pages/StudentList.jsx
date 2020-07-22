@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList, deleteStudents } from "../store/actions/admin";
+
+import { getStudentList , deleteStudents ,Search } from "../store/actions/admin";
+
+
 import { MdDone, MdDelete } from "react-icons/md";
+
 import {
   MdFormatListBulleted,
   MdAssignmentInd,
@@ -23,16 +27,26 @@ class StudentList extends Component {
       students: [
         {
           _id: "",
-          name: { firstname: "", lastname: "" },
-          currentClass: { year: "", div: "" },
-          rollNo: "",
-          username: "",
+
+           name: { firstname: null, lastname: null },
+           currentClass: { year: null, div: null },
+           rollNo: null,
+          username: null,
+         // emailId: "",
+         YEAR:"",
+         DIV:"",
+
         },
       ],
       ids: [],
     };
-    this.deleteall = this.deleteall.bind(this);
+
+    this.deleteall=this.deleteall.bind(this);
+    this.search=this.search.bind(this);
+
+   
     this.selectall = this.selectall.bind(this);
+
   }
   async componentDidMount() {
     const { getStudentList } = this.props;
@@ -125,16 +139,54 @@ class StudentList extends Component {
     }
   }
 
-  search() {
-    var year = document.getElementById("year");
-    var div = document.getElementById("div");
-    if (year.value == "--") {
-      alert("year not selected");
-    } else if (div.value == "--") {
-      alert("division not selected");
-    } else {
-    }
+
+
+async search(){
+
+  var year=document.getElementById("year");
+  var div=document.getElementById("div");
+  await this.setState({ YEAR: year.value });
+  await this.setState({ DIV: div.value });
+  
+  if(year.value=="--"){
+  alert("year not selected");
+  }else if(div.value=="--"){
+    alert("division not selected");
+  }else{
+   const {YEAR , DIV} =this.state;
+   const { Search }=this.props;
+   console.log({YEAR }+{DIV});
+   Search({YEAR ,DIV });
+
+  
   }
+}
+renderCardData1() {
+  return this.state.students.map((students) => {
+    const {
+      _id,
+      username,
+       name,
+      currentClass,
+       rollNo,
+      // emailId,
+      created,
+    } = students; //destructuring
+    return (
+      <tr key={_id} className="application">
+          <td>
+            <input type="checkbox" name="check" id={_id} value={_id} />
+          </td>
+          <td>{username}</td>
+          <td>{rollNo}</td>
+          <td>{name.firstname + " " + name.lastname}</td>
+          <td>{currentClass.year + " " + currentClass.div}</td>
+          <td>{new Date(created).toDateString()}</td>
+        </tr>
+    );
+  });
+}
+
 
   renderCardData() {
     return this.state.students.map((students) => {
@@ -147,6 +199,7 @@ class StudentList extends Component {
         created,
         // emailId,
       } = students; //destructuring
+      console.log(username);
       return (
         <tr key={_id} className="application">
           <td>
@@ -312,6 +365,7 @@ class StudentList extends Component {
           </div>
         </div>
       </div>
+
     );
   }
 }
@@ -320,6 +374,8 @@ export default connect(
   (store) => ({
     auth: store.auth,
     students: store.studentlist,
+    //students: store.someStudentlist,
   }),
-  { getStudentList, deleteStudents }
+
+  { getStudentList,deleteStudents , Search }
 )(StudentList);

@@ -247,6 +247,26 @@ exports.findAllStudents = async (req, res, next) => {
     next(err);
   }
 };
+
+
+
+
+exports.SomeStudents = async (req, res, next) => {
+  try {
+    // console.log("console logged here");
+    //console.log(req.body);
+    const {YEAR , DIV}=req.body;
+    // console.log(YEAR + DIV+ "im still here ");
+    const students = await db.Student.findOne({ "currentClass.year" : YEAR, "currentClass.div": DIV });
+    res.status(200).json(students);
+  } catch (err) {
+    console.log("im in catch");
+    err.status(400);
+    next(err);
+  }
+};
+
+
 //console
 // exports.findAllStudents = async (req, res, next) => {
 //   try {
@@ -260,6 +280,7 @@ exports.findAllStudents = async (req, res, next) => {
 
 exports.deletestudent = async (req, res, next) => {
   try {
+
     console.log(req.body);
     const arr=req.body;
     const student = await db.Student.deleteMany(
@@ -277,6 +298,7 @@ exports.deletestudent = async (req, res, next) => {
     else{
       return res.status(200).json("Student deleted");
     } 
+
   } catch (error) {
     console.log("im in catch");
     next({

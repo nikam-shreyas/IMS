@@ -6,7 +6,7 @@ import { currentAdmin, faculty, currentTeacher } from "./admin";
 import { internships, currentInternship, charts } from "./internships";
 import { notices, studentsNotices } from "./notices";
 import { get_Faculty_Profile } from "./faculty";
-import { studentlist } from "./admin";
+import { studentlist , someStudentlist} from "./admin";
 export default combineReducers({
   auth,
   error,
@@ -21,4 +21,5 @@ export default combineReducers({
   success,
   charts,
   studentlist,
+  someStudentlist,
 });

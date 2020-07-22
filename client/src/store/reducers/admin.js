@@ -4,6 +4,7 @@ import {
   SET_CURRENT_SELECTED_TEACHER,
   GET_STUDENT_LIST,
   GET_FACULTY_PROFILE,
+  GET_SOME_STUDENT_LIST,
 } from "../actionTypes";
 
 export const currentAdmin = (state = {}, action) => {
@@ -43,3 +44,14 @@ export const studentlist = (state = [], action) => {
       return state;
   }
 };
+
+export const someStudentlist = (state = [], action) => {
+  console.log(action.type);
+  switch (action.type) {
+    case GET_SOME_STUDENT_LIST:
+      return action.students;
+    default:
+      return state;
+  }
+};
+
