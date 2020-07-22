@@ -171,7 +171,7 @@ return async (dispatch)=> {
   try{
     const {YEAR , DIV }=data;
     console.log(YEAR+DIV+"year div ");
-    const students = await api.call("get", "admin/somestudents",data);
+    const students = await api.call("put", "admin/somestudents",{YEAR , DIV });
     dispatch(getSomeStudents(students));
     dispatch(removeError());
   }catch(err){

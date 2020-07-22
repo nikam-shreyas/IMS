@@ -23,10 +23,10 @@ class StudentList extends Component {
       students: [
         {
           _id: "",
-           name: { firstname: "", lastname: "" },
-           currentClass: { year: "", div: "" },
-           rollNo: "",
-          username: "",
+           name: { firstname: null, lastname: null },
+           currentClass: { year: null, div: null },
+           rollNo: null,
+          username: null,
          // emailId: "",
          YEAR:"",
          DIV:"",
@@ -180,6 +180,7 @@ renderCardData1() {
          rollNo,
         // emailId,
       } = students; //destructuring
+      console.log(username);
       return (
         
         <tr key={_id}>
@@ -191,7 +192,7 @@ renderCardData1() {
       <td>{currentClass.div}</td>
       <td>
         <input type="checkbox" name="check" id={_id} value={_id}/>
-        <button className="btn btn-danger" onClick={this.deletesingle} value={_id}>Delete</button>
+        
     </td>
         </tr>
       );
