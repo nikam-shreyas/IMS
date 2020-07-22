@@ -21,10 +21,10 @@ class StudentList extends Component {
       students: [
         {
           _id: "",
-          //   name: { firstname: "", lastname: "" },
-          //   currentClass: { year: "", div: "" },
-          //   rollNo: "",
-          // username: "",
+          name: { firstname: "", lastname: "" },
+          currentClass: { year: "", div: "" },
+          rollNo: "",
+          username: "",
           // emailId: "",
         },
       ],
@@ -33,6 +33,7 @@ class StudentList extends Component {
 
   async componentDidMount() {
     const { getStudentList } = this.props;
+    console.log(this.props);
     getStudentList()
       .then(console.log(this.props))
       .then(this.setState({ isLoading: false }))
@@ -78,133 +79,157 @@ class StudentList extends Component {
   //     console.log(elements);
   //   }
   // }
+  selectall() {
+    alert("no");
+    var p = document.getElementsByName("check");
+    console.log(p.length + "lengh is ");
+    for (var i = 0; i < p.length; i++) {
+      p[i].checked = true;
+    }
+  }
+
+  deletesingle = (e) => {
+    console.log(e.target.value);
+    var g = document.getElementById(e.target.value);
+    if (g.checked == true) {
+      console.log("selected");
+    } else {
+      alert("Not Selected");
+    }
+  };
+
+  deleteall() {
+    var p = document.getElementsByName("check");
+    var obj = [];
+    for (var i = 0; i < p.length; i++) {
+      if (p[i].checked === true) {
+        obj.push(p[i].id);
+        console.log(p[i].id);
+      }
+    }
+  }
+
+  search() {
+    var year = document.getElementById("year");
+    var div = document.getElementById("div");
+    if (year.value == "--") {
+      alert("year not selected");
+    } else if (div.value == "--") {
+      alert("division not selected");
+    } else {
+    }
+  }
+
   renderCardData() {
     return this.state.students.map((students) => {
       const {
         _id,
         username,
-        // name,
-        //currentClass,
-        // rollNo,
+        name,
+        currentClass,
+        rollNo,
         // emailId,
       } = students; //destructuring
       return (
-        <div
-          className="col-sm-6"
-          key={_id}
-          id={
-            username
-            // name.firstname +
-            // name.lastname +
-            // currentClass.year +
-            // currentClass.div +
-            //rollNo
-          }
-        >
-          <div className="card my-2">
-            <div className="individual-card">
-              <div
-                className="card-header"
-                onClick={this.expandInline.bind(this)}
-              >
-                {/* Prof. {name.firstname + " " + name.lastname} */}
-
-                <br />
-                <small className="text-muted">Username: {username}</small>
-              </div>
-              <div className="card-body">
-                <b> Current Class : </b>
-                {/* {currentClass.year}{" "}
-                {currentClass.div === 0 ? "" : currentClass.div} */}
-                <br />
-
-                <b> RollNo : </b>
-                {/* {rollNo} */}
-                <br />
-                <b> Email Id : </b>
-                {/* {emailId} */}
-                <br />
-              </div>
-            </div>
-          </div>
-        </div>
+        <tr>
+          <td>{username}</td>
+          <td>{rollNo}</td>
+          <td>{name.firstname}</td>
+          <td>{name.lastname}</td>
+          <td>{currentClass.year}</td>
+          <td>{currentClass.div}</td>
+          <td>
+            <input type="checkbox" name="check" id={_id} value={_id} />
+            <button
+              className="btn btn-danger"
+              onClick={this.deletesingle}
+              value={_id}
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
       );
     });
   }
+
   render() {
     return (
-      <div>
-        <div className="row no-gutters">
-          <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="2" />
+      <div className="row no-gutters">
+        <div className="col-sm-2 sidenav">
+          <Admin_Sidenav activeComponent="3" />
+        </div>
+        {/* <div>Student List</div>
+        <hr/>
+        <div></div> */}
+        <div className="col-sm-10 of" style={{ padding: "1%" }}>
+          <h2 style={{ textAlign: "center" }}>Student List</h2>
+          <hr />
+          <div>
+            <select id="year">
+              <option value="--">--</option>
+              <option value="FE">FE</option>
+              <option value="SE">SE</option>
+              <option value="TE">TE</option>
+              <option value="BE">BE</option>
+            </select>
+            <select id="div">
+              <option value="--">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+            </select>
+            <button
+              id="search_button"
+              onClick={this.search}
+              className="btn btn-primary"
+            >
+              Search
+            </button>
+            <button
+              id="selectall"
+              onClick={this.selectall}
+              className="btn btn-primary"
+            >
+              Select all
+            </button>
+            <button
+              id="deleteselected"
+              onClick={this.deleteall}
+              className="btn btn-danger"
+            >
+              Delete Selected
+            </button>
           </div>
-          <div className="col-sm-10 of">
-            <div className="container-fluid">
-              {/* {<MDBDataTable dark data={this.state.faculties} />} */}
-              <h4 className="mt-2">
-                Faculty List
-                <div className="float-right">
-                  <div
-                    className="btn-group btn-group-toggle btn-sm"
-                    data-toggle="buttons"
-                  >
-                    <label
-                      className="btn btn-secondary btn-sm"
-                      onClick={this.handleListView}
-                    >
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option1"
-                        autoComplete="off"
-                      />
-                      <MdFormatListBulleted
-                        style={{ margin: -1, padding: -1 }}
-                        color="white"
-                      />
-                    </label>
-                    <label
-                      className="btn btn-secondary active btn-sm"
-                      onClick={this.handleCardView}
-                    >
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option2"
-                        autoComplete="off"
-                      />
-                      <MdViewAgenda
-                        style={{ margin: -1, padding: -1 }}
-                        color="white"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </h4>
-              <hr />
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="filtersearch">
-                    <span>
-                      <MdSearch style={{ padding: -2, margin: -2 }} />
-                      {"  "} Search
-                    </span>
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  name="filter"
-                  id="filter"
-                  className="form-control"
-                  placeholder="Filter Faculty"
-                  onChange={this.filter}
-                  aria-describedby="filtersearch"
-                />
-              </div>
-              <hr />
-              <div className="row">{this.renderCardData()}</div>
-            </div>
-          </div>
+          <hr />
+          <table className="table" style={{ width: "100%" }}>
+            <thead>
+              <tr className="thead-dark">
+                <th>Username</th>
+                <th>Roll No.</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Year</th>
+                <th>Div</th>
+                <th>Option</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.isLoading == true ? (
+                <p>No data</p>
+              ) : (
+                this.renderCardData()
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     );
