@@ -126,7 +126,6 @@ export const resetPassword = (path, data) => {
   };
 };
 
-
 export const getFaculty = () => {
   return async (dispatch) => {
     try {
@@ -139,8 +138,6 @@ export const getFaculty = () => {
     }
   };
 };
-
-
 
 export const getStudentList = () => {
   return async (dispatch) => {

@@ -6,9 +6,6 @@ import {
   GET_FACULTY_PROFILE,
 } from "../actionTypes";
 
-
-
-
 export const currentAdmin = (state = {}, action) => {
   switch (action.type) {
     case SET_CURRENT_SELECTED_ADMIN:
@@ -36,14 +33,12 @@ export const currentTeacher = (state = {}, action) => {
   }
 };
 
-
 export const studentlist = (state = [], action) => {
   console.log(action.type);
   switch (action.type) {
     case GET_STUDENT_LIST:
       return action.students;
     default:
-      console.log("no im here ");
       return state;
   }
 };

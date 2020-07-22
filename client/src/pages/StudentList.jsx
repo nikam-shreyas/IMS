@@ -109,8 +109,8 @@ deleteall(){
   }
 
   console.log(obj);
-//  const { deleteStudents }=this.props;
-//  deleteStudents(obj);
+ const { deleteStudents }=this.props;
+ deleteStudents(obj);
 }
 
 search(){
