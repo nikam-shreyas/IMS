@@ -11,6 +11,8 @@ import {
   MdBuild,
   MdSearch,
 } from "react-icons/md";
+import SuccessMessage from "../components/SuccessMessage";
+import ErrorMessage from "../components/ErrorMessage";
 class StudentList extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,7 @@ class StudentList extends Component {
       ],
       ids:[],
     };
+    this.deleteall=this.deleteall.bind(this);
   }
   async componentDidMount() {
     const { getStudentList } = this.props;
@@ -108,9 +111,13 @@ deleteall(){
     }
   }
 
-  console.log(obj);
- const { deleteStudents }=this.props;
- deleteStudents(obj);
+  console.log(obj.length);
+  if(obj.length==0){
+    alert("No Students to delete.")
+  }else{
+    const { deleteStudents }=this.props;
+    deleteStudents(obj);
+  }
 }
 
 search(){
@@ -196,6 +203,10 @@ search(){
             <button id="deleteselected" onClick={this.deleteall}  className="btn btn-danger"> 
               Delete Selected
             </button>
+            <div className="col-sm-6 mt-4">
+            <ErrorMessage />
+            <SuccessMessage />
+          </div>
           </div>
           <hr/>
           <table  className="table" style={{width:"100%"}}>

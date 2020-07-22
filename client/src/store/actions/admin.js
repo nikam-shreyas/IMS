@@ -42,12 +42,14 @@ export const getAdmin = (path) => {
 export const deleteStudents=(data)=>{
   return async (dispatch) => {
     try {
-      const admin = await api.call("delete", "admin/deletestudent",data);
-      // dispatch(setCurrentAdmin(admin));
-      // dispatch(removeError());
+      console.log(data)
+      const admin = await api.call("put", "admin/deletestudent",data);
+      // console.log(admin);
+      dispatch(addSuccess(admin));
+      dispatch(removeError());
     } catch (err) {
-      const error = err.response.data;
-      dispatch(addError(error.message));
+      // const error = err.response.data;
+      dispatch(addError("Something went wrong. Try again."));
     }
   };
 };
