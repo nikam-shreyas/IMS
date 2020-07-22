@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList } from "../store/actions/admin";
+
+import { getStudentList , deleteStudents ,Search } from "../store/actions/admin";
+
+
+import { MdDone, MdDelete } from "react-icons/md";
+
 import {
   MdFormatListBulleted,
   MdAssignmentInd,
@@ -11,27 +16,41 @@ import {
   MdBuild,
   MdSearch,
 } from "react-icons/md";
+import SuccessMessage from "../components/SuccessMessage";
+import ErrorMessage from "../components/ErrorMessage";
 class StudentList extends Component {
   constructor(props) {
     super(props);
-    //since we are extending class Table so we have to use super in order to override Component class constructor
     this.state = {
-      //state is by default an object
+      allSelected: false,
       isLoading: true,
       students: [
         {
           _id: "",
-        //   name: { firstname: "", lastname: "" },
-        //   currentClass: { year: "", div: "" },
-        //   rollNo: "",
-         // username: "",
+
+           name: { firstname: null, lastname: null },
+           currentClass: { year: null, div: null },
+           rollNo: null,
+          username: null,
          // emailId: "",
+         YEAR:"",
+         DIV:"",
+
         },
       ],
+      ids: [],
     };
+
+    this.deleteall=this.deleteall.bind(this);
+    this.search=this.search.bind(this);
+
+   
+    this.selectall = this.selectall.bind(this);
+
   }
   async componentDidMount() {
     const { getStudentList } = this.props;
+    console.log(this.props);
     getStudentList()
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.students));
@@ -76,135 +95,277 @@ class StudentList extends Component {
   //     console.log(elements);
   //   }
   // }
+  selectall() {
+    // alert("no");
+    var p = document.getElementsByName("check");
+    console.log(p.length + "lengh is ");
+    if (this.state.allSelected) {
+      for (var i = 0; i < p.length; i++) {
+        p[i].checked = false;
+      }
+    } else {
+      for (var i = 0; i < p.length; i++) {
+        p[i].checked = true;
+      }
+    }
+    this.setState({ allSelected: !this.state.allSelected });
+  }
+
+  deletesingle = (e) => {
+    console.log(e.target.value);
+    var g = document.getElementById(e.target.value);
+    if (g.checked == true) {
+      console.log("selected");
+    } else {
+      alert("Not Selected");
+    }
+  };
+
+  deleteall() {
+    var p = document.getElementsByName("check");
+    var obj = [];
+    for (var i = 0; i < p.length; i++) {
+      if (p[i].checked === true) {
+        obj.push(p[i].id);
+      }
+    }
+
+    console.log(obj.length);
+    if (obj.length == 0) {
+      alert("No Students to delete.");
+    } else {
+      const { deleteStudents } = this.props;
+      deleteStudents(obj);
+    }
+  }
+
+
+
+async search(){
+
+  var year=document.getElementById("year");
+  var div=document.getElementById("div");
+  await this.setState({ YEAR: year.value });
+  await this.setState({ DIV: div.value });
+  
+  if(year.value=="--"){
+  alert("year not selected");
+  }else if(div.value=="--"){
+    alert("division not selected");
+  }else{
+   const {YEAR , DIV} =this.state;
+   const { Search }=this.props;
+   console.log({YEAR }+{DIV});
+   Search({YEAR ,DIV });
+
+  
+  }
+}
+renderCardData1() {
+  return this.state.students.map((students) => {
+    const {
+      _id,
+      username,
+       name,
+      currentClass,
+       rollNo,
+      // emailId,
+      created,
+    } = students; //destructuring
+    return (
+      <tr key={_id} className="application">
+          <td>
+            <input type="checkbox" name="check" id={_id} value={_id} />
+          </td>
+          <td>{username}</td>
+          <td>{rollNo}</td>
+          <td>{name.firstname + " " + name.lastname}</td>
+          <td>{currentClass.year + " " + currentClass.div}</td>
+          <td>{new Date(created).toDateString()}</td>
+        </tr>
+    );
+  });
+}
+
+
   renderCardData() {
     return this.state.students.map((students) => {
       const {
         _id,
         username,
-        // name,
-        //currentClass,
-        // rollNo,
+        name,
+        currentClass,
+        rollNo,
+        created,
         // emailId,
       } = students; //destructuring
+      console.log(username);
       return (
-        <div
-          className="col-sm-6"
-          key={_id}
-          id={
-            username 
-            // name.firstname +
-            // name.lastname +
-            // currentClass.year +
-            // currentClass.div +
-            //rollNo
-          }
-        >
-          <div className="card my-2">
-            <div className="individual-card">
-              <div
-                className="card-header"
-                onClick={this.expandInline.bind(this)}
-              >
-                {/* Prof. {name.firstname + " " + name.lastname} */}
-                
-                <br />
-                <small className="text-muted">Username: {username}</small>
-              </div>
-              <div className="card-body">
-                <b> Current Class : </b>
-                {/* {currentClass.year}{" "}
-                {currentClass.div === 0 ? "" : currentClass.div} */}
-                <br />
-               
-                <b> RollNo : </b>
-                {/* {rollNo} */}
-                <br />
-                <b> Email Id : </b>
-                {/* {emailId} */}
-                <br />
-              </div>
-            </div>
-          </div>
-        </div>
+        <tr key={_id} className="application">
+          <td>
+            <input type="checkbox" name="check" id={_id} value={_id} />
+          </td>
+          <td>{username}</td>
+          <td>{rollNo}</td>
+          <td>{name.firstname + " " + name.lastname}</td>
+          <td>{currentClass.year + " " + currentClass.div}</td>
+          <td>{new Date(created).toDateString()}</td>
+        </tr>
       );
     });
   }
+
+  filter(e) {
+    var filter, cards, cardContent, i;
+    filter = e.target.value.toUpperCase();
+    cards = document.getElementsByClassName("application");
+    for (i = 0; i < cards.length; i++) {
+      if (cards[i].innerText.toUpperCase().indexOf(filter) > -1) {
+        cards[i].style.display = "";
+      } else {
+        cards[i].style.display = "none";
+      }
+    }
+  }
   render() {
     return (
-      <div>
-        <div className="row no-gutters">
-          <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="2" />
-          </div>
-          <div className="col-sm-10 of">
-            <div className="container-fluid">
-              {/* {<MDBDataTable dark data={this.state.faculties} />} */}
-              <h4 className="mt-2">
-                Faculty List
-                <div className="float-right">
-                  <div
-                    className="btn-group btn-group-toggle btn-sm"
-                    data-toggle="buttons"
-                  >
-                    <label
-                      className="btn btn-secondary btn-sm"
-                      onClick={this.handleListView}
-                    >
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option1"
-                        autoComplete="off"
-                      />
-                      <MdFormatListBulleted
-                        style={{ margin: -1, padding: -1 }}
-                        color="white"
-                      />
-                    </label>
-                    <label
-                      className="btn btn-secondary active btn-sm"
-                      onClick={this.handleCardView}
-                    >
-                      <input
-                        type="radio"
-                        name="options"
-                        id="option2"
-                        autoComplete="off"
-                      />
-                      <MdViewAgenda
-                        style={{ margin: -1, padding: -1 }}
-                        color="white"
-                      />
-                    </label>
+      <div className="row no-gutters">
+        <div className="col-sm-2 sidenav">
+          <Admin_Sidenav activeComponent="3" />
+        </div>
+        <div className="col-sm-10 of">
+          <div className="container-fluid">
+            <div class="row">
+              <div className="col-sm-2">
+                <h4 className="mt-2">Students List</h4>
+              </div>
+              <div className="col-sm-10 mt-2">
+                <div className="mt-2">
+                  <ErrorMessage />
+                  <SuccessMessage />
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-7">
+                <span>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">
+                        <MdSearch />
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      name="filter"
+                      id="filter"
+                      className="form-control"
+                      placeholder="Filter Students"
+                      onChange={this.filter}
+                      aria-describedby="filtersearch"
+                    />
+                  </div>
+                </span>
+              </div>
+              <div class="col-sm-5">
+                <div class="container">
+                  <div class="row no-gutters">
+                    <div class="col-sm-8">
+                      <span>
+                        <div
+                          class="btn-group bg-secondary"
+                          style={{ borderRadius: 5 }}
+                        >
+                          <button class="btn btn-sm">Filter: </button>
+                          <select
+                            className="btn btn-secondary btn-sm"
+                            id="year"
+                          >
+                            <option value="--">Year</option>
+                            <option value="FE">FE</option>
+                            <option value="SE">SE</option>
+                            <option value="TE">TE</option>
+                            <option value="BE">BE</option>
+                          </select>
+                          <select className="btn btn-secondary btn-sm" id="div">
+                            <option value="--">Div</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                          </select>
+                          <button
+                            id="search_button"
+                            onClick={this.search}
+                            className="btn bg-primary text-white btn-sm"
+                          >
+                            Search
+                          </button>
+                        </div>
+                      </span>
+                    </div>
+                    <div class="col-sm-4">
+                      <span>
+                        <button
+                          id="deleteselected"
+                          onClick={this.deleteall}
+                          className="btn btn-sm btn-danger ml-2"
+                        >
+                          <MdDelete
+                            style={{ marginBottom: -2, marginRight: 3 }}
+                          />
+                          Delete Selected
+                        </button>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </h4>
-              <hr />
-              <div className="input-group mb-3">
-                <div className="input-group-prepend">
-                  <span className="input-group-text" id="filtersearch">
-                    <span>
-                      <MdSearch style={{ padding: -2, margin: -2 }} />
-                      {"  "} Search
-                    </span>
-                  </span>
-                </div>
-                <input
-                  type="text"
-                  name="filter"
-                  id="filter"
-                  className="form-control"
-                  placeholder="Filter Faculty"
-                  onChange={this.filter}
-                  aria-describedby="filtersearch"
-                />
               </div>
-              <hr />
-              <div className="row">{this.renderCardData()}</div>
             </div>
+            <table
+              className="table table-sm table-hover mt-1"
+              style={{ borderRadius: 1 }}
+            >
+              <thead>
+                <tr className="thead-dark">
+                  <th>
+                    <MdDone
+                      style={{
+                        marginBottom: -2,
+                        borderRadius: 2,
+                        border: "1px solid white",
+                        padding: 1,
+                      }}
+                      onClick={this.selectall}
+                    />
+                  </th>
+                  <th>Username</th>
+                  <th>Roll No.</th>
+                  <th>Name</th>
+                  <th>Class</th>
+                  <th>Created On</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.isLoading == true ? (
+                  <p>No data</p>
+                ) : (
+                  this.renderCardData()
+                )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+
     );
   }
 }
@@ -212,7 +373,9 @@ class StudentList extends Component {
 export default connect(
   (store) => ({
     auth: store.auth,
-    students: store.students,
+    students: store.studentlist,
+    //students: store.someStudentlist,
   }),
-  { getStudentList }
+
+  { getStudentList,deleteStudents , Search }
 )(StudentList);

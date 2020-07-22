@@ -4,6 +4,7 @@ import {
   SET_CURRENT_SELECTED_TEACHER,
   SET_FACULTY,
   GET_STUDENT_LIST,
+  GET_SOME_STUDENT_LIST
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess, removeSuccessMessage } from "./success";
@@ -19,6 +20,11 @@ export const setFaculty = (faculty) => ({
 
 export const getStudents = (students) => ({
   type: GET_STUDENT_LIST,
+  students,
+});
+
+export const getSomeStudents = (students) => ({
+  type: GET_SOME_STUDENT_LIST,
   students,
 });
 
@@ -39,7 +45,20 @@ export const getAdmin = (path) => {
     }
   };
 };
-
+export const deleteStudents = (data) => {
+  return async (dispatch) => {
+    try {
+      console.log(data);
+      const admin = await api.call("put", "admin/deletestudent", data);
+      // console.log(admin);
+      dispatch(addSuccess(admin));
+      dispatch(removeError());
+    } catch (err) {
+      // const error = err.response.data;
+      dispatch(addError("Something went wrong. Try again."));
+    }
+  };
+};
 
 
 export const createTeacher = (data) => {
@@ -135,6 +154,7 @@ export const getStudentList = () => {
   return async (dispatch) => {
     try {
       const students = await api.call("get", "admin/allStudents");
+      console.log("in actions", students);
       dispatch(getStudents(students));
       dispatch(removeError());
     } catch (err) {
@@ -142,4 +162,20 @@ export const getStudentList = () => {
       dispatch(addError(error.message));
     }
   };
+};
+
+
+export const Search=(data)=>{
+return async (dispatch)=> {
+  try{
+    const {YEAR , DIV }=data;
+    console.log(YEAR+DIV+"year div ");
+    const students = await api.call("get", "admin/somestudents",{YEAR , DIV });
+    dispatch(getSomeStudents(students));
+    dispatch(removeError());
+  }catch(err){
+    const error = err.response.data;
+      dispatch(addError(error.message));
+  }
+}
 };

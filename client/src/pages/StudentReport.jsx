@@ -3,7 +3,7 @@ import { getAllInternships } from "../store/actions";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { CSVLink } from "react-csv";
-import { MdFileDownload, MdSearch } from "react-icons/md";
+import { MdFileDownload, MdSearch, MdExpandMore } from "react-icons/md";
 class StudentReport extends Component {
   constructor(props) {
     super(props);
@@ -52,8 +52,8 @@ class StudentReport extends Component {
               "-" +
               date.getDate()}
           </td>
-          <td>{application.durationOfInternship}</td>
-          <td>{application.stipend}</td>
+          <td>{application.durationOfInternship} month(s)</td>
+          <td>₹ {application.stipend}/month</td>
           <td>
             {completionStatus === "Approved" ? (
               <span className="text-success">{completionStatus}</span>
@@ -85,7 +85,7 @@ class StudentReport extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="6" />
+            <Admin_Sidenav activeComponent="7" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid mt-2">
@@ -126,15 +126,33 @@ class StudentReport extends Component {
                 </div>
               </div>
               <hr style={{ marginTop: -4 }} />
-              <table className="table table-hover table-sm">
+              <table className="table table-hover">
                 <thead className="thead-light">
                   <tr>
-                    <th>Name</th>
-                    <th>Workplace</th>
-                    <th>Start Date</th>
-                    <th>Duration</th>
-                    <th>Stipend</th>
-                    <th>Status</th>
+                    <th>
+                      Name
+                      <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                    </th>
+                    <th>
+                      Workplace{" "}
+                      <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                    </th>
+                    <th>
+                      Start Date{" "}
+                      <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                    </th>
+                    <th>
+                      Duration{" "}
+                      <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                    </th>
+                    <th>
+                      Stipend{" "}
+                      <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                    </th>
+                    <th>
+                      Status{" "}
+                      <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                    </th>
                   </tr>
                 </thead>
                 <tbody class="applicationstable">{this.renderRows()}</tbody>
