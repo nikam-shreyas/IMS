@@ -7,6 +7,8 @@ import {
   MdDns,
   MdSettings,
   MdDoneAll,
+  MdEqualizer,
+  MdAssignment,
 } from "react-icons/md";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -76,6 +78,22 @@ class Sidenav_f extends Component {
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>
               Change Password
+            </li>
+          </Link>
+          <Link to="/stats">
+            <li id="li" className={activeNow === "7" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdEqualizer style={{ margin: -1, padding: -1 }} />
+              </span>
+              Stats
+            </li>
+          </Link>
+          <Link to="/studentReport">
+            <li id="li" className={activeNow === "8" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdAssignment style={{ margin: -1, padding: -1 }} />
+              </span>
+              Report
             </li>
           </Link>
           <li id="li" className="nav-item">

@@ -174,8 +174,10 @@ const RouteViews = ({ auth }) => {
           exact
           path="/stats"
           render={() => {
-            if (user === "admin" || user === "faculty") {
-              return <Analytics />;
+            if (user === "admin") {
+              return <Analytics user="admin" />;
+            } else if (user === "faculty") {
+              return <Analytics user="faculty" />;
             } else return <Restricted />;
           }}
         />
@@ -204,7 +206,7 @@ const RouteViews = ({ auth }) => {
           path="/allStudents"
           render={() => {
             if (user === "admin") {
-              return <StudentList/>;
+              return <StudentList />;
             } else return <Restricted />;
           }}
         />
@@ -292,15 +294,17 @@ const RouteViews = ({ auth }) => {
           }}
         />
         <Route
-        exact
-        path="/studentReport"
-        render={() => {
-          if (user === "admin") {
-            return <StudentReport />;
-          } else return <Restricted />;
-        }}
-      />
-      <Route
+          exact
+          path="/studentReport"
+          render={() => {
+            if (user === "admin") {
+              return <StudentReport user="admin" />;
+            } else if (user === "faculty") {
+              return <StudentReport user="faculty" />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
           exact
           path="/guidelines"
           render={() => {
@@ -308,7 +312,7 @@ const RouteViews = ({ auth }) => {
               return <GuidelinesInternship />;
             } else return <Restricted />;
           }}
-      />
+        />
 
         <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
         <Route component={NotFoundPage} />

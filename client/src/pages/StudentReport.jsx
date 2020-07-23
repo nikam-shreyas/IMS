@@ -4,6 +4,7 @@ import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { CSVLink } from "react-csv";
 import { MdFileDownload, MdSearch, MdExpandMore } from "react-icons/md";
+import SideNav_f from "../components/SideNav_f";
 class StudentReport extends Component {
   constructor(props) {
     super(props);
@@ -81,7 +82,11 @@ class StudentReport extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <Admin_Sidenav activeComponent="7" />
+            {this.props.user === "admin" ? (
+              <Admin_Sidenav activeComponent="7" />
+            ) : (
+              <SideNav_f activeComponent="8" />
+            )}
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid mt-2">
