@@ -52,7 +52,7 @@ exports.login_faculty = async (req, res, next) => {
 exports.login_admin = async (req, res, next) => {
   try {
     const Fac = await db.Faculty.findOne({ username: req.body.username });
-    const { id, username, designation } = Fac;    
+    const { id, username, designation } = Fac;
     if (designation !== "Admin") {
       throw new Error();
     }
@@ -160,8 +160,8 @@ exports.deleteFaculty = async (req, res, next) => {
 
 exports.showProfile = async (req, res, next) => {
   try {
-    const { id } = req.decoded;    
-    const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });    
+    const { id } = req.decoded;
+    const Profile = await db.Faculty.findOne({ _id: id, designation: "Admin" });
     if (Profile) {
       return res.status(200).json(Profile);
     } else {
@@ -229,7 +229,7 @@ exports.resetPassword = async (req, res, next) => {
     } else {
       throw new Error("Old password is wrong!");
     }
-  } catch (err) {    
+  } catch (err) {
     next(err);
   }
 };
@@ -244,43 +244,36 @@ exports.findAllStudents = async (req, res, next) => {
   }
 };
 
-
-
-
 exports.SomeStudents = async (req, res, next) => {
-  try {    
-    const YEAR =req.query.YEAR;
-    const DIV=req.query.DIV;
-    const students = await db.Student.find({ "currentClass.year" : YEAR, "currentClass.div": DIV });
+  try {
+    const YEAR = req.query.YEAR;
+    const DIV = req.query.DIV;
+    const students = await db.Student.find({
+      "currentClass.year": YEAR,
+      "currentClass.div": DIV,
+    });
     res.status(200).json(students);
-  } catch (err) {    
+  } catch (err) {
     err.status(400);
     next(err);
   }
 };
 
-
 exports.deletestudent = async (req, res, next) => {
   try {
-    
-    const arr=req.body;
-    const student = await db.Student.deleteMany(
-      {
-        _id: {
-          $in: arr
-        }
-      });
-      
-      
-    if (!student){
-      throw new Error("Student not found");
-    }     
-    else{
-      return res.status(200).json("Student deleted");
-    } 
+    const arr = req.body;
+    const student = await db.Student.deleteMany({
+      _id: {
+        $in: arr,
+      },
+    });
 
+    if (!student) {
+      throw new Error("Student not found");
+    } else {
+      return res.status(200).json("Student deleted");
+    }
   } catch (error) {
-    
     next({
       status: 400,
       message: error.message,
