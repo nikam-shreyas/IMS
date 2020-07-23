@@ -67,12 +67,7 @@ class Auth_2 extends Component {
               <p>Internship Management System</p>
             </div>
             <div className="formBx">
-              <form onSubmit={this.handleSubmit}>
-              <div className="Errorbox">
-              <div className="my-4 text-center" style={{zIndex:"10"}}>
-               <ErrorMessage />
-              </div>
-              </div>
+              <form onSubmit={this.handleSubmit}>              
                 <h2>Student Registration</h2>
                 <input
                   required
