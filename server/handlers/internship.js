@@ -63,17 +63,20 @@ exports.addNewInternship = async (req, res, next) => {
       to: student.emailId,
       subject: "New Application Created!",
       html:
+        "Dear student,<br/>"+
         "New Internship Application for <b>" +
         application.durationOfInternship +
         " months</b> at <b>" +
         application.workplace +
-        "</b> created on <b>" +
+        "</b> has been created on <b>" +
         new Date().toDateString() +
         "</b>. <br /><br /> Your application is currently held by: Prof. <b>" +
         faculty.name.firstname +
         " " +
         faculty.name.lastname +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
     var emailFac = {

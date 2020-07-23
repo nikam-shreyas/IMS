@@ -1,6 +1,7 @@
+import React from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import AnalyticsCharts from "./AnalysisChart";
-import { Component } from "react";
+import  {Component}  from "react";
 import SideNav_f from "../components/SideNav_f";
 class Analytics extends Component {
   state = {};
@@ -15,7 +16,7 @@ class Analytics extends Component {
             {this.props.user === "admin" ? (
               <Admin_Sidenav activeComponent="6" />
             ) : (
-              <SideNav_f activeComponent="6" />
+              <SideNav_f activeComponent="7" />
             )}
           </div>
           <div className="col-sm-10 of">
