@@ -154,7 +154,7 @@ class InternshipView extends Component {
                       {this.state.data.application.workplace}
                       <br />
                     </div>
-                    <div className="card-body">                      
+                    <div className="card-body">
                       <div className="card-title">
                         Name:{" "}
                         {this.state.data.student.name.firstname +
@@ -259,7 +259,7 @@ class InternshipView extends Component {
                                 {this.state.data.docs.AttendanceStatus}
                                 <div className="float-right">
                                   {this.state.data.docs.AttendanceStatus ===
-                                  "N" ? (
+                                  "Pending" ? (
                                     <input
                                       className="form-check-input position-static"
                                       name="AttendanceStatus"
@@ -285,7 +285,7 @@ class InternshipView extends Component {
                                 {this.state.data.docs.ApplicationStatus}
                                 <div className="float-right">
                                   {this.state.data.docs.ApplicationStatus ===
-                                  "N" ? (
+                                  "Pending" ? (
                                     <input
                                       className="form-check-input position-static"
                                       name="ApplicationStatus"
@@ -311,7 +311,7 @@ class InternshipView extends Component {
                                 {this.state.data.docs.UndertakingStatus}
                                 <div className="float-right">
                                   {this.state.data.docs.UndertakingStatus ===
-                                  "N" ? (
+                                  "Pending" ? (
                                     <input
                                       className="form-check-input position-static"
                                       name="UndertakingStatus"
@@ -337,7 +337,7 @@ class InternshipView extends Component {
                                 {this.state.data.docs.OfferLetterStatus}
                                 <div className="float-right">
                                   {this.state.data.docs.OfferLetterStatus ===
-                                  "N" ? (
+                                  "Pending" ? (
                                     <input
                                       className="form-check-input position-static"
                                       name="OfferLetterStatus"
@@ -363,7 +363,7 @@ class InternshipView extends Component {
                                 {this.state.data.docs.MarksheetsStatus}
                                 <div className="float-right">
                                   {this.state.data.docs.MarksheetsStatus ===
-                                  "N" ? (
+                                  "Pending" ? (
                                     <input
                                       className="form-check-input position-static"
                                       name="MarksheetsStatus"
@@ -391,7 +391,6 @@ class InternshipView extends Component {
                           </tbody>
                         </table>
                       </form>
-                      
                     </div>
                     <div className="card-footer text-right">
                       <button

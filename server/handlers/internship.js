@@ -502,7 +502,7 @@ exports.getStats = async (req, res, next) => {
 };
 
 exports.getFile = async (req, res, next) => {
-  let p = path.join(__dirname, "../public/Documents/41244_NOC.pdf");
+  let p = path.join(__dirname, "../public/Documents/Resumefinal.pdf");
   res.sendFile(p, (err) => {
     if (err) console.log(err.message);
   });
