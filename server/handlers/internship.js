@@ -61,7 +61,7 @@ exports.addNewInternship = async (req, res, next) => {
     var email = {
       from: process.env.EMAILFROM,
       to: student.emailId,
-      subject: "New Application Created!",
+      subject: "New Internship Application Created",
       html:
         "Dear student,<br/>"+
         "New Internship Application for <b>" +
@@ -75,22 +75,23 @@ exports.addNewInternship = async (req, res, next) => {
         " " +
         faculty.name.lastname +
         "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/>"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
     var emailFac = {
       from: process.env.EMAILFROM,
       to: faculty.emailId,
-      subject: "New Application for Approval!",
+      subject: "New Internship Application for Approval",
       html:
-        "New Internship Application for <b>" +
+        "Respected Coordinator,<br/>"+
+        "New Internship application for <b>" +
         application.durationOfInternship +
         " months</b> at <b>" +
         application.workplace +
-        "</b> created on <b>" +
+        "</b>has been created on <b>" +
         new Date().toDateString() +
-        "</b>. <br /><br /> received from <b>" +
+        "</b>. <br /><br />Application received from <b>" +
         student.name.firstname +
         " " +
         student.name.lastname +
@@ -99,7 +100,9 @@ exports.addNewInternship = async (req, res, next) => {
         " " +
         student.currentClass.div +
         "  </b>" +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
     client.sendMail(email, (err, info) => {
@@ -299,10 +302,12 @@ exports.approveInternship = async (req, res, next) => {
       to: emailId,
       subject: "Internship Application Approved!",
       html:
-        "Hello,<br /> " +
+        "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
-        "</b> has been approved.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b> has been <b>approved</b>.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
       if (err) {
@@ -360,7 +365,7 @@ exports.forwardInternship = async (req, res, next) => {
       to: emailId,
       subject: "Internship Application Status Changed!",
       html:
-        "Hello,<br /> " +
+        "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
         "</b> has been approved by <b>" +
@@ -372,19 +377,24 @@ exports.forwardInternship = async (req, res, next) => {
         " " +
         forwardToFaculty.name.lastname +
         ")" +
-        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     var emailFac = {
       from: process.env.EMAILFROM,
       to: emailId,
       subject: "New Internship Application for Approval!",
       html:
+        "Respected Coordinator,<br/>"+
         "You have a new internship application for approval. Application is approved and forwarded by <b>" +
         faculty.name.firstname +
         " " +
         faculty.name.lastname +
         " " +
-        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
       if (err) {
@@ -431,7 +441,7 @@ exports.rejectInternship = async (req, res, next) => {
       to: internship.student.emailId,
       subject: "Internship Application Rejected!",
       html:
-        "Hello,<br /> " +
+        "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
         "</b> has been rejected by the <b>" +
@@ -442,7 +452,10 @@ exports.rejectInternship = async (req, res, next) => {
         faculty.name.lastname +
         ")" +
         "<br />Reason: </b>" +
-        comments,
+        comments+
+        "<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
       if (err) {
