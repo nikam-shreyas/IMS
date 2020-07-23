@@ -14,18 +14,11 @@ const storage = multer.diskStorage({
 });
 
 const FileFilter = (req, file, cb) => {
-<<<<<<< HEAD
   if (!file.originalname.match(/\.(pdf|PDF)$/)) {
     console.log("only pdf allowed");
     return cb(new Error("You can upload only pdf files!"), false);
   }
   cb(null, true);
-=======
-    if(!file.originalname.match(/\.(pdf|PDF)$/)) {       
-        return cb(new Error('You can upload only pdf files!'), false);
-    }
-    cb(null, true);
->>>>>>> 0aeeb98422d81e8640870760e8827d189819d3f2
 };
 
 const upload = multer({
@@ -55,6 +48,7 @@ router.route("/uploadDocument").post(auth,upload.array('docs',6), (req, res) => 
 });
 router.route("/allStats").get(auth, handle.getStats);
 router.route("/all").get(auth, handle.showAllInternships);
+router.route("/report").get(auth, handle.showReport);
 
 router
   .route("/:id")

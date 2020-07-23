@@ -32,6 +32,7 @@ import Analytics from "../pages/Analysis";
 import StudentList from "../pages/StudentList";
 import StudentReport from "../pages/StudentReport";
 import GuidelinesInternship from "../pages/GuidelinesInternship";
+import FacStudentReport from "../pages/FacStudentReport";
 
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
@@ -159,6 +160,15 @@ const RouteViews = ({ auth }) => {
             } else return <Restricted />;
           }}
         />
+        <Route
+        exact
+        path="/report"
+        render={() => {
+          if (user === "faculty") {
+            return <FacStudentReport />;
+          } else return <Restricted />;
+        }}
+      />
         {/* <Route exact path="/admin" render={() => <AdminProfile />} /> */}
         <Route
           exact

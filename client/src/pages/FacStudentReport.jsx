@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { getAllInternships } from "../store/actions";
+import { facultyGetReport } from "../store/actions";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { CSVLink } from "react-csv";
 import { MdFileDownload, MdSearch, MdExpandMore } from "react-icons/md";
 import SideNav_f from "../components/SideNav_f";
-class StudentReport extends Component {
+class FacStudentReport extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,8 +15,8 @@ class StudentReport extends Component {
     };
   }
   async componentDidMount() {
-    const { getAllInternships } = this.props;
-    getAllInternships().then(() => this.loadData(this.props.internships));
+    const { facultyGetReport } = this.props;
+    facultyGetReport().then(() => this.loadData(this.props.internships));
   }
   loadData(internship) {    
     this.setState({ internships: internship });
@@ -82,7 +82,7 @@ class StudentReport extends Component {
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-              <Admin_Sidenav activeComponent="7" />           
+              <SideNav_f activeComponent="7" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid mt-2">
@@ -167,6 +167,6 @@ export default connect(
     internships: store.internships,
   }),
   {
-    getAllInternships,
+    facultyGetReport,
   }
-)(StudentReport);
+)(FacStudentReport);

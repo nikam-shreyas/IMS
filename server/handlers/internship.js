@@ -163,6 +163,36 @@ exports.showApprovedInternships = async (req, res, next) => {
   }
 };
 
+exports.showReport = async (req, res, next) => {
+  try {    
+    const {id}  =req.decoded;
+    console.log(id);
+    let approved = await db.Faculty.findById(id).populate({
+      path: "applicationsApproved",
+      model: "Internship",
+    });
+    let received= await db.Faculty.findById(id).populate({
+      path: "applicationsReceived",
+      model: "Internship",
+    });  
+    console.log(approved.applicationsApproved)
+    console.log(received.applicationsReceived)  
+    let applications=[];
+    applications=received.applicationsReceived
+    approved.applicationsApproved.forEach(element => {
+      applications.push(element);
+    });
+    console.log(applications)
+    res.status(200).json(applications);
+  } catch (err) {
+    return next({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
+
 exports.studentsInternships = async (req, res, next) => {
   try {
     const { id } = req.decoded;

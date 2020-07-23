@@ -235,3 +235,20 @@ export const getAllInternships = () => {
     }
   };
 };
+
+export const facultyGetReport = () => {
+  return async (dispatch) => {
+    try {
+      const internships = await api.call("get", "internships/report");
+      if(internships.length==0){
+        dispatch(addError("Empty report."));
+      }else{
+        dispatch(setInternships(internships));
+        dispatch(removeError());
+      }
+    } catch (err) {
+      const error = "Could not load data";
+      dispatch(addError(error));
+    }
+  };
+};
