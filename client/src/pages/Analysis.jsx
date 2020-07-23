@@ -1,6 +1,6 @@
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import AnalyticsCharts from "./AnalysisChart";
-import  { Component } from "react";
+import React, { Component } from "react";
 import SideNav_f from "../components/SideNav_f";
 class Analytics extends Component {
   state = {};
