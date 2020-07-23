@@ -1,14 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getApprovedInternships } from "../store/actions";
 import { Link } from "react-router-dom";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 import SideNav_f from "../components/SideNav_f";
 class Internships extends Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   state = {
     displayCount: "null",
     displayCountDiv: "none",
@@ -153,9 +150,7 @@ class Internships extends Component {
                 aria-describedby="filtersearch"
               />
             </div>
-            <hr />
-            {/* <span id="internshipCount" style={{ display: "none" }}></span>
-            <hr /> */}
+            <hr />            
             <div>
               {this.state.internships[0].holder.designation === null && (
                 <div className="alert alert-info">

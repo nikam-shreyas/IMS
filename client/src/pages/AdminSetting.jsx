@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-// import { showProfile } from "../store/actions";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getAdmin,
@@ -59,10 +58,7 @@ class AdminSetting extends Component {
       const { resetPassword } = this.props;
       var formData = new FormData(event.target);
       const updatedata = {};
-      // updatedata["name"] = {
-      //   firstname: formData.get("firstname") || this.state.data.name.firstname,
-      //   lastname: formData.get("lastname") || this.state.data.name.lastname,
-      // };
+
       updatedata["oldpassword"] =
         formData.get("oldpassword") || this.state.data.password;
       updatedata["newpassword"] = formData.get("newpassword");

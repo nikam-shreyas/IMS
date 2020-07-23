@@ -1,9 +1,8 @@
-import React, { Component, useState } from "react";
-// import { showProfile } from "../store/actions";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { getAdmin, updateAdmin } from "../store/actions/admin";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 class AdminProfile extends Component {

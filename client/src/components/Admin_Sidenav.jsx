@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MdPermIdentity, MdAssignment } from "react-icons/md";
+import { MdPermIdentity, MdAssignment, MdViewModule } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -42,7 +42,7 @@ class Admin_Sidenav extends Component {
           <Link to="/all">
             <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
+                <MdViewModule style={{ margin: -1, padding: -1 }} />
               </span>
               Faculty List
             </li>

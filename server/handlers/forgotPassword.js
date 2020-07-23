@@ -23,15 +23,13 @@ module.exports = (app) => {
     app.post('/forgotPassword', (req, res) => {
       if (req.body.email === '') {
         res.status(400).send('email required');
-      }
-      console.error(req.body.email);
+      }      
       Student.findOne({
         where: {
           emailID: req.body.emailID,
         },
       }).then((Student) => {
-        if (Student === null) {
-          console.error('email not in database');
+        if (Student === null) {          
           res.status(403).send('email not in db');
         } else {
           const token = crypto.randomBytes(20).toString('hex');
@@ -49,8 +47,7 @@ module.exports = (app) => {
           });
   
           const mailOptions = {
-            from: process.env.EMAILFROM,
-            // to: `${user.email}`,
+            from: process.env.EMAILFROM,            
             to:Student.emailID,
             subject: 'Link To Reset Password',
             text:
@@ -60,13 +57,12 @@ module.exports = (app) => {
               + 'If you did not request this, please ignore this email and your password will remain unchanged.\n',
           };
   
-          console.log('sending mail');
+          
   
           transporter.sendMail(mailOptions, (err, response) => {
             if (err) {
-              console.error('there was an error: ', err);
-            } else {
-              console.log('here is the res: ', response);
+
+            } else {              
               res.status(200).json('recovery email sent');
             }
           });

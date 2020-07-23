@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import ErrorMessage from "../components/ErrorMessage";
 
 import {
   authUser,
@@ -9,8 +10,6 @@ import {
   logout_f,
   authUser_a,
 } from "../store/actions";
-//import NavBar from "../containers/NavBar";
-//import { Redirect } from 'react-router-dom';
 
 class Auth extends Component {
   constructor(props) {
@@ -50,13 +49,21 @@ class Auth extends Component {
      
       <div className="section">
         <div className="container">
+        
           <div className="user signinBx">
-            <div className="imgBx">
-              {/* <img src={image} /> */}
+
+            <div className="imgBx">              
               <p>Internship Management System</p>
             </div>
+            
             <div className="formBx">
+            
               <form onSubmit={this.handleSubmit}>
+              <div className="Errorbox">
+              <div className="my-4 text-center" style={{zIndex:"10"}}>
+               <ErrorMessage />
+              </div>
+              </div>
                 <h2>Sign In</h2>
                 <input
                   required

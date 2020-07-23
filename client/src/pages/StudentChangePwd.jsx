@@ -1,12 +1,11 @@
-import React, { Component, useState } from "react";
-// import { showProfile } from "../store/actions";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getStudent,
   resetStudentPassword,
   removeSuccess,
 } from "../store/actions";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
@@ -45,8 +44,7 @@ class ChangePassword extends Component {
     removeSuccess();
   }
   loadData(user) {
-    this.setState({ data: user });
-    console.log(this.state.data);
+    this.setState({ data: user });    
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -67,8 +65,7 @@ class ChangePassword extends Component {
 
   handleconfirmPassword(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.newpassword);
-    console.log(e.target.value);
+       
 
     if (this.state.newpassword !== e.target.value) {
       this.setState({ message: "Passwords do not match!" });
@@ -77,8 +74,7 @@ class ChangePassword extends Component {
     }
     this.setState({ confirmPassword: e.target.value });
   }
-  render() {
-    console.log(this.state.data);
+  render() {    
     return (
       <div>
         <div className="row no-gutters">

@@ -5,7 +5,6 @@ import decode from "jwt-decode";
 import { BrowserRouter as Router } from "react-router-dom";
 import { setCurrentUser, addError, setToken } from "../store/actions";
 import RouteViews from "./RouteViews";
-import NavBar from "./NavBar";
 
 if (localStorage.jwtToken) {
   setToken(localStorage.jwtToken);
@@ -20,8 +19,7 @@ if (localStorage.jwtToken) {
 const App = () => (
   <Provider store={store}>
     <Router>
-      <Fragment>
-        {/* <NavBar/> */}
+      <Fragment>        
         <RouteViews />
       </Fragment>
     </Router>

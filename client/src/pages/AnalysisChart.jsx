@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HorizontalBar, Doughnut, Line, Bar,Radar, Pie } from "react-chartjs-2";
+import { HorizontalBar, Doughnut, Line, Bar, Pie } from "react-chartjs-2";
 import { getAllInternshipStats } from "../store/actions";
 import { connect } from "react-redux";
 class AnalyticsCharts extends Component {
@@ -38,8 +38,8 @@ class AnalyticsCharts extends Component {
       llabel.push(element._id.sdate);
       ldata.push(element.count);
     }
-    let tdata = {},
-      tdatasets = [];
+    let tdata = {};
+      
     for (let i = 0; i < chartsData.datewiseStatusDistribution.length; i++) {
       const element = chartsData.datewiseStatusDistribution[i];
       tdata[element._id.sdate] = tdata[element._id.sdate] || {

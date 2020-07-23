@@ -1,5 +1,4 @@
-import React, { Component, useState } from "react";
-// import { showProfile } from "../store/actions";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import {
@@ -7,8 +6,8 @@ import {
   getCurrentTeacher,
   removeSuccess,
 } from "../store/actions";
-import { Card, CardTitle, Button, CardBody, CardText } from "reactstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { Card, CardTitle, Button, CardBody } from "reactstrap";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SuccessMessage from "../components/SuccessMessage";
 class DeleteFaulty extends Component {
@@ -36,8 +35,7 @@ class DeleteFaulty extends Component {
   };
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);    
   }
   componentWillUnmount() {
     const { removeSuccess } = this.props;
@@ -50,20 +48,7 @@ class DeleteFaulty extends Component {
     const username = formData.get("username") || null;
     getCurrentTeacher(username).then(() => this.loadData(this.props.teacher));
   }
-  //  handleChange({ target }) {
-  //   this.setState({
-  //     [target.name]: target.value
-  //   });
-  // }
-  //   async componentDidMount() {
-  //         const {
-  //             getCurrentTeacher
-  //         } = this.props;
-
-  //         getCurrentTeacher()
-  //         .then(this.setState({ isLoading: false }))
-  //         .then(() => this.loadData(this.props.admin));
-  //     }
+  
   loadData(user) {
     if (
       user.department !== undefined &&
@@ -116,8 +101,7 @@ class DeleteFaulty extends Component {
                       <div className="col-sm-6">
                         <button
                           type="submit"
-                          className="btn btn-dark btn-sm mx-2"
-                          //   onClick={this._showMessage(true,this.state.username)}
+                          className="btn btn-dark btn-sm mx-2"                          
                         >
                           Get Information
                         </button>

@@ -1,12 +1,11 @@
-import React, { Component, useState } from "react";
-// import { showProfile } from "../store/actions";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getFacultyProfile,
   resetPassword,
   removeSuccess,
 } from "../store/actions";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";
 import SuccessMessage from "../components/SuccessMessage";
@@ -58,11 +57,7 @@ class FacultyChangePassword extends Component {
     if (this.state.newpassword === this.state.confirmPassword) {
       const { resetPassword } = this.props;
       var formData = new FormData(event.target);
-      const updatedata = {};
-      // updatedata["name"] = {
-      //   firstname: formData.get("firstname") || this.state.data.name.firstname,
-      //   lastname: formData.get("lastname") || this.state.data.name.lastname,
-      // };
+      const updatedata = {};     
       updatedata["oldpassword"] =
         formData.get("oldpassword") || this.state.data.password;
       updatedata["newpassword"] = formData.get("newpassword");
@@ -72,9 +67,7 @@ class FacultyChangePassword extends Component {
   }
 
   handleconfirmPassword(e) {
-    this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state.newpassword);
-    console.log(e.target.value);
+    this.setState({ [e.target.name]: e.target.value });   
 
     if (this.state.newpassword !== e.target.value) {
       this.setState({ message: "Passwords do not match!" });
@@ -83,13 +76,12 @@ class FacultyChangePassword extends Component {
     }
     this.setState({ confirmPassword: e.target.value });
   }
-  render() {
-    console.log(this.state.data);
+  render() {    
     return (
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-            <SideNav_f activeComponent="6" />
+            <SideNav_f activeComponent="7" />
           </div>
           <div className="col-sm-10">
             <div className="container-fluid mt-2">

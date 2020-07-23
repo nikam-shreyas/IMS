@@ -1,15 +1,9 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList, deleteStudents } from "../store/actions/admin";
+import { getStudentList , deleteStudents ,searchStudents } from "../store/actions/admin";
 import { MdDone, MdDelete } from "react-icons/md";
-import {
-  MdFormatListBulleted,
-  MdAssignmentInd,
-  MdSupervisorAccount,
-  MdViewAgenda,
-  MdLocalLibrary,
-  MdBuild,
+import {  
   MdSearch,
 } from "react-icons/md";
 import SuccessMessage from "../components/SuccessMessage";
@@ -23,20 +17,28 @@ class StudentList extends Component {
       students: [
         {
           _id: "",
-          name: { firstname: "", lastname: "" },
-          currentClass: { year: "", div: "" },
-          rollNo: "",
-          username: "",
+
+           name: { firstname: null, lastname: null },
+           currentClass: { year: null, div: null },
+           rollNo: null,
+          username: null,         
+         YEAR:"",
+         DIV:"",
+
         },
       ],
       ids: [],
     };
-    this.deleteall = this.deleteall.bind(this);
+
+    this.deleteall=this.deleteall.bind(this);
+    this.search=this.search.bind(this);
+
+   
     this.selectall = this.selectall.bind(this);
+
   }
   async componentDidMount() {
-    const { getStudentList } = this.props;
-    console.log(this.props);
+    const { getStudentList } = this.props;    
     getStudentList()
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.students));
@@ -55,8 +57,7 @@ class StudentList extends Component {
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
-      cardContent = cards[i].querySelector(".individual-card");
-      console.log(cardContent.innerText);
+      cardContent = cards[i].querySelector(".individual-card");      
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -72,19 +73,9 @@ class StudentList extends Component {
   }
   expandInline(e) {
     e.target.parentElement.lastChild.style.display = "block";
-  }
-  // handlefilter(e) {
-  //   if (e.target.value !== "") {
-  //     var elements = document.querySelectorAll(
-  //       "div[id='*" + e.target.value + "*']"
-  //     );
-  //     console.log(elements);
-  //   }
-  // }
-  selectall() {
-    // alert("no");
-    var p = document.getElementsByName("check");
-    console.log(p.length + "lengh is ");
+  }  
+  selectall() {    
+    var p = document.getElementsByName("check");    
     if (this.state.allSelected) {
       for (var i = 0; i < p.length; i++) {
         p[i].checked = false;
@@ -97,11 +88,10 @@ class StudentList extends Component {
     this.setState({ allSelected: !this.state.allSelected });
   }
 
-  deletesingle = (e) => {
-    console.log(e.target.value);
+  deletesingle = (e) => {    
     var g = document.getElementById(e.target.value);
     if (g.checked == true) {
-      console.log("selected");
+      
     } else {
       alert("Not Selected");
     }
@@ -115,8 +105,7 @@ class StudentList extends Component {
         obj.push(p[i].id);
       }
     }
-
-    console.log(obj.length);
+    
     if (obj.length == 0) {
       alert("No Students to delete.");
     } else {
@@ -125,16 +114,58 @@ class StudentList extends Component {
     }
   }
 
-  search() {
-    var year = document.getElementById("year");
-    var div = document.getElementById("div");
-    if (year.value == "--") {
-      alert("year not selected");
-    } else if (div.value == "--") {
-      alert("division not selected");
-    } else {
-    }
+
+
+async search(){
+
+  var year=document.getElementById("year");
+  var div=document.getElementById("div");
+  await this.setState({ YEAR: year.value });
+  await this.setState({ DIV: div.value });
+  
+  if(year.value=="--"){
+  alert("year not selected");
+  }else if(div.value=="--"){
+    alert("division not selected");
+  }else{
+   const {YEAR , DIV} =this.state;
+   const { searchStudents }=this.props;   
+   let data={};
+   data["YEAR"]=YEAR;
+   data["DIV"]=DIV;   
+   searchStudents(data).then(()=>{
+     this.loadSomeStudents(this.props.someStudents);
+   });  
   }
+}
+loadSomeStudents(student){
+  this.setState({students:student});
+}
+renderCardData1() {
+  return this.state.students.map((students) => {
+    const {
+      _id,
+      username,
+       name,
+      currentClass,
+       rollNo,      
+      created,
+    } = students; 
+    return (
+      <tr key={_id} className="application">
+          <td>
+            <input type="checkbox" name="check" id={_id} value={_id} />
+          </td>
+          <td>{username}</td>
+          <td>{rollNo}</td>
+          <td>{name.firstname + " " + name.lastname}</td>
+          <td>{currentClass.year + " " + currentClass.div}</td>
+          <td>{new Date(created).toDateString()}</td>
+        </tr>
+    );
+  });
+}
+
 
   renderCardData() {
     return this.state.students.map((students) => {
@@ -144,9 +175,9 @@ class StudentList extends Component {
         name,
         currentClass,
         rollNo,
-        created,
-        // emailId,
-      } = students; //destructuring
+        created,        
+      } = students; 
+   
       return (
         <tr key={_id} className="application">
           <td>
@@ -163,7 +194,7 @@ class StudentList extends Component {
   }
 
   filter(e) {
-    var filter, cards, cardContent, i;
+    var filter, cards, i;
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("application");
     for (i = 0; i < cards.length; i++) {
@@ -194,12 +225,12 @@ class StudentList extends Component {
               </div>
             </div>
             <hr />
-            <div class="row">
-              <div class="col-sm-7">
+            <div className="row">
+              <div className="col-sm-7">
                 <span>
-                  <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-sm">
+                  <div className="input-group input-group-sm mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="inputGroup-sizing-sm">
                         <MdSearch />
                       </span>
                     </div>
@@ -215,16 +246,16 @@ class StudentList extends Component {
                   </div>
                 </span>
               </div>
-              <div class="col-sm-5">
-                <div class="container">
-                  <div class="row no-gutters">
-                    <div class="col-sm-8">
+              <div className="col-sm-5">
+                <div className="container">
+                  <div className="row no-gutters">
+                    <div className="col-sm-8">
                       <span>
                         <div
-                          class="btn-group bg-secondary"
+                        className="btn-group bg-secondary"
                           style={{ borderRadius: 5 }}
                         >
-                          <button class="btn btn-sm">Filter: </button>
+                          <button className="btn btn-sm">Filter: </button>
                           <select
                             className="btn btn-secondary btn-sm"
                             id="year"
@@ -312,6 +343,7 @@ class StudentList extends Component {
           </div>
         </div>
       </div>
+
     );
   }
 }
@@ -320,6 +352,8 @@ export default connect(
   (store) => ({
     auth: store.auth,
     students: store.studentlist,
+    someStudents: store.someStudentlist,
   }),
-  { getStudentList, deleteStudents }
+
+  { getStudentList,deleteStudents , searchStudents }
 )(StudentList);

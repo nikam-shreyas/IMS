@@ -11,8 +11,6 @@ const port = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json({limit:'50mb'}));
 
-
-
 app.get("/", (req, res) => res.json({ hello: "World" }));
 app.use("/api/auth", routes.auth);
 app.use("/api/internships", routes.internships);
