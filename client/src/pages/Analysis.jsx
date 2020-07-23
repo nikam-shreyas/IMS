@@ -15,7 +15,7 @@ class Analytics extends Component {
             {this.props.user === "admin" ? (
               <Admin_Sidenav activeComponent="6" />
             ) : (
-              <SideNav_f activeComponent="7" />
+              <SideNav_f activeComponent="6" />
             )}
           </div>
           <div className="col-sm-10 of">

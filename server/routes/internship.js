@@ -49,6 +49,7 @@ router
   });
 router.route("/allStats").get(auth, handle.getStats);
 router.route("/all").get(auth, handle.showAllInternships);
+router.route("/report").get(auth, handle.showReport);
 router.route("/getFile").get(handle.getFile);
 
 router
