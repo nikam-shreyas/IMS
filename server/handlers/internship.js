@@ -100,19 +100,19 @@ exports.addNewInternship = async (req, res, next) => {
     };
 
     client.sendMail(email, (err, info) => {
-      if (err) {        
-      } else if (info) {        
+      if (err) {
+      } else if (info) {
       }
     });
 
     client.sendMail(emailFac, (err, info) => {
-      if (err) {        
-      } else if (info) {        
+      if (err) {
+      } else if (info) {
       }
     });
 
     return res.status(201).json({ ...internship._doc, student: student._id });
-  } catch (err) {    
+  } catch (err) {
     next({
       status: 400,
       message: err.message,
@@ -121,12 +121,12 @@ exports.addNewInternship = async (req, res, next) => {
 };
 
 exports.showInternships = async (req, res, next) => {
-  try {    
+  try {
     const { id } = req.decoded;
     let faculty = await db.Faculty.findById(id).populate({
       path: "applicationsReceived",
       model: "Internship",
-    });  
+    });
     res.status(200).json(faculty.applicationsReceived);
   } catch (err) {
     return next({
@@ -136,9 +136,9 @@ exports.showInternships = async (req, res, next) => {
   }
 };
 exports.showAllInternships = async (req, res, next) => {
-  try {    
+  try {
     const { id } = req.decoded;
-    let internships = await db.Internship.find();    
+    let internships = await db.Internship.find();
     res.status(200).json(internships);
   } catch (err) {
     return next({
@@ -148,12 +148,12 @@ exports.showAllInternships = async (req, res, next) => {
   }
 };
 exports.showApprovedInternships = async (req, res, next) => {
-  try {    
+  try {
     const { id } = req.decoded;
     let faculty = await db.Faculty.findById(id).populate({
       path: "applicationsApproved",
       model: "Internship",
-    });    
+    });
     res.status(200).json(faculty.applicationsApproved);
   } catch (err) {
     return next({
@@ -198,7 +198,7 @@ exports.deleteInternship = async (req, res, next) => {
   const { id: studentId } = req.decoded;
   try {
     let student = await db.Student.findById(studentId);
-    if (student.internships) {      
+    if (student.internships) {
       student.internships = student.internships.filter((studentInternship) => {
         return studentInternship._id.toString() !== internshipId.toString(); // not sure if necessary to use toString()
       });
@@ -229,9 +229,9 @@ exports.updateInternship = async (req, res, next) => {
       internship[key.toString()] = details[key];
     }
     internship.comments = "\nApplication status changed! Please check.";
-    await internship.save();    
+    await internship.save();
     res.status(200).json(internship);
-  } catch (err) {    
+  } catch (err) {
     err.message = "Could not update";
     next(err);
   }
@@ -305,7 +305,7 @@ exports.forwardInternship = async (req, res, next) => {
     if (!forwardToFaculty) {
       throw new Error("Next point of contact unavailable.");
     }
-    
+
     internship.holder = {
       designation: forwardToFaculty.designation,
     };
@@ -364,7 +364,7 @@ exports.forwardInternship = async (req, res, next) => {
       }
     });
     res.status(200).json(internship);
-  } catch (err) {    
+  } catch (err) {
     err.message = "Could not forward";
     next(err);
   }
@@ -502,31 +502,8 @@ exports.getStats = async (req, res, next) => {
 };
 
 exports.getFile = async (req, res, next) => {
-  // let path;
-  // console.log(__dirname)
   let p = path.join(__dirname, "../public/Documents/41244_NOC.pdf");
-  console.log(p);
-  // res.writeHead(200, {
-  //   'Content-Type': 'application/pdf',
-  //   'Content-Disposition': 'attachment; filename=sample.pdf',
-  //   'Content-Transfer-Encoding': 'Binary'
-  // });
-  // res.setContentType( "application/pdf" );
-  // res.setHeader("Content-disposition",
-  //                   "attachment; filename=bonafied3.pdf" +
-  //                   "Example.pdf" );
-
-  // res.setHeader('Content-type', 'application/pdf');
-  // res.sendFile(p);
-
-  const src = fs.createReadStream(
-    "/home/zeronp/Desktop/IMS/server/public/Documents/41244_NOC.pdf"
-  );
-
-  res.writeHead(200, {
-    "Content-Type": "application/pdf",
-    "Content-Disposition": "attachment; filename=sample.pdf",
-    "Content-Transfer-Encoding": "Binary",
+  res.sendFile(p, (err) => {
+    if (err) console.log(err.message);
   });
-  src.pipe(res);
 };

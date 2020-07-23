@@ -49,11 +49,11 @@ router
   });
 router.route("/allStats").get(auth, handle.getStats);
 router.route("/all").get(auth, handle.showAllInternships);
+router.route("/getFile").get(handle.getFile);
 
 router
   .route("/:id")
   .get(handle.getInternship)
   .delete(auth, handle.deleteInternship);
 
-router.route("/getFile").get(handle.getFile);
 module.exports = router;

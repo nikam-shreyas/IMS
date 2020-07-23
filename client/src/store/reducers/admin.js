@@ -35,10 +35,8 @@ export const currentTeacher = (state = {}, action) => {
 };
 
 export const studentlist = (state = [], action) => {
-  console.log(action.type);
   switch (action.type) {
     case GET_STUDENT_LIST:
-      console.log("in reducers", action.students);
       return action.students;
     default:
       return state;
@@ -46,7 +44,6 @@ export const studentlist = (state = [], action) => {
 };
 
 export const someStudentlist = (state = [], action) => {
-  console.log(action.type);
   switch (action.type) {
     case GET_SOME_STUDENT_LIST:
       return action.students;
@@ -54,4 +51,3 @@ export const someStudentlist = (state = [], action) => {
       return state;
   }
 };
-
