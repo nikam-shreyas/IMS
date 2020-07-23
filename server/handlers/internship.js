@@ -5,7 +5,8 @@ let transport = require("nodemailer-smtp-transport");
 const { application } = require("express");
 require("dotenv").config();
 const multer = require("multer");
-
+const path = require("path");
+const fs = require("fs");
 //mailing options and transportor
 var options = {
   service: "gmail",
@@ -514,4 +515,34 @@ exports.getStats = async (req, res, next) => {
       message: err.message,
     });
   }
+};
+
+exports.getFile = async (req, res, next) => {
+  // let path;
+  // console.log(__dirname)
+  let p = path.join(__dirname, "../public/Documents/41244_NOC.pdf");
+  console.log(p);
+  // res.writeHead(200, {
+  //   'Content-Type': 'application/pdf',
+  //   'Content-Disposition': 'attachment; filename=sample.pdf',
+  //   'Content-Transfer-Encoding': 'Binary'
+  // });
+  // res.setContentType( "application/pdf" );
+  // res.setHeader("Content-disposition",
+  //                   "attachment; filename=bonafied3.pdf" +
+  //                   "Example.pdf" );
+
+  // res.setHeader('Content-type', 'application/pdf');
+  // res.sendFile(p);
+
+  const src = fs.createReadStream(
+    "/home/zeronp/Desktop/IMS/server/public/Documents/41244_NOC.pdf"
+  );
+
+  res.writeHead(200, {
+    "Content-Type": "application/pdf",
+    "Content-Disposition": "attachment; filename=sample.pdf",
+    "Content-Transfer-Encoding": "Binary",
+  });
+  src.pipe(res);
 };

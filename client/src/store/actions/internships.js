@@ -6,11 +6,10 @@ import {
   FORWARD_INTERNSHIP,
   APPROVE_INTERNSHIP,
   SET_CHART,
-  UPDATE_INTERNSHIP
+  UPDATE_INTERNSHIP,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess } from "./success";
-
 
 export const setInternships = (internships) => ({
   type: SET_INTERNSHIPS,
@@ -32,15 +31,12 @@ export const AllowInternship = (internship) => ({
   internship,
 });
 
-
-export const ChangeInternship=(internship)=>({
-  type:UPDATE_INTERNSHIP,
+export const ChangeInternship = (internship) => ({
+  type: UPDATE_INTERNSHIP,
   internship,
-})
+});
 
-
-
-export const analysis=(chart)=>({
+export const analysis = (chart) => ({
   type: SET_CHART,
   chart,
 });
@@ -138,18 +134,23 @@ export const forwardInternship = (data) => {
   };
 };
 
-export const uploadDocument=(data,config)=>{
+export const uploadDocument = (data, config) => {
   return async (dispatch) => {
     try {
-      const docs = await api.call("post", "internships/uploadDocument", data,config);
-      if(docs.message==="Error"){
+      const docs = await api.call(
+        "post",
+        "internships/uploadDocument",
+        data,
+        config
+      );
+      if (docs.message === "Error") {
         dispatch(addError("Error Uploading try again"));
-      }else{
+      } else {
         dispatch(addSuccess("Document Uploaded Successfully"));
-        dispatch(removeError());   
+        dispatch(removeError());
       }
       // dispatch(addSuccess("Document Uploaded Successfully"));
-      // dispatch(removeError());   
+      // dispatch(removeError());
     } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));
@@ -183,7 +184,6 @@ export const updateInternship = (data) => {
   };
 };
 
-
 export const rejectInternship = (data) => {
   return async (dispatch) => {
     try {
@@ -197,19 +197,18 @@ export const rejectInternship = (data) => {
   };
 };
 
-export const UpdateInternship=(data)=>{
-  return async(dispatch)=>{
-    try{
-      const internship=await api.call("post","internships/update",data);
+export const UpdateInternship = (data) => {
+  return async (dispatch) => {
+    try {
+      const internship = await api.call("post", "internships/update", data);
       dispatch(ChangeInternship(internship));
       dispatch(removeError());
-    }
-    catch(err){
+    } catch (err) {
       const error = err.response.data;
       dispatch(addError(error.message));
     }
-  }
-}
+  };
+};
 
 export const getAllInternshipStats = () => {
   return async (dispatch) => {

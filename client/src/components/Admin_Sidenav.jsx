@@ -6,6 +6,7 @@ import { logout } from "../store/actions";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import {
   MdSettings,
+  MdRecentActors,
   MdAddCircle,
   MdFormatListBulleted,
   MdDelete,
@@ -49,7 +50,7 @@ class Admin_Sidenav extends Component {
           <Link to="/allStudents">
             <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
+                <MdRecentActors style={{ margin: -1, padding: -1 }} />
               </span>
               Student List
             </li>
@@ -71,13 +72,13 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/stats">
-          <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdEqualizer style={{ margin: -1, padding: -1 }} />
-            </span>
-           Stats
-          </li>
-        </Link>
+            <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdEqualizer style={{ margin: -1, padding: -1 }} />
+              </span>
+              Stats
+            </li>
+          </Link>
           <Link to="/studentReport">
             <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
               <span className="mx-2">

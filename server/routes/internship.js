@@ -14,15 +14,18 @@ const storage = multer.diskStorage({
 });
 
 const FileFilter = (req, file, cb) => {
-    if(!file.originalname.match(/\.(pdf|PDF)$/)) {
-       console.log("only pdf allowed")
-        return cb(new Error('You can upload only pdf files!'), false);
-    }
-    cb(null, true);
+  if (!file.originalname.match(/\.(pdf|PDF)$/)) {
+    console.log("only pdf allowed");
+    return cb(new Error("You can upload only pdf files!"), false);
+  }
+  cb(null, true);
 };
 
-const upload = multer({ storage: storage ,limits: { fieldSize: 5 * 1024 * 1024 }, fileFilter: FileFilter});
-
+const upload = multer({
+  storage: storage,
+  limits: { fieldSize: 5 * 1024 * 1024 },
+  fileFilter: FileFilter,
+});
 
 router
   .route("/")
@@ -37,13 +40,15 @@ router.route("/approve").post(auth, handle.approveInternship);
 router.route("/reject").post(auth, handle.rejectInternship);
 // upload.single('offerLetter')
 // const upld=upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }]);
-router.route("/uploadDocument").post(auth,upload.array('docs',6), (req, res) => {
-  if(res.statusCode === 200){
-    return res.status(200).json({message:"Upload Done"});
-  }else{
-    return res.json({message:"Error"});
-  }
-});
+router
+  .route("/uploadDocument")
+  .post(auth, upload.array("docs", 6), (req, res) => {
+    if (res.statusCode === 200) {
+      return res.status(200).json({ message: "Upload Done" });
+    } else {
+      return res.json({ message: "Error" });
+    }
+  });
 router.route("/allStats").get(auth, handle.getStats);
 router.route("/all").get(auth, handle.showAllInternships);
 
@@ -52,4 +57,5 @@ router
   .get(handle.getInternship)
   .delete(auth, handle.deleteInternship);
 
+router.route("/getFile").get(handle.getFile);
 module.exports = router;
