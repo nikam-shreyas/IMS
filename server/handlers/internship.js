@@ -22,7 +22,7 @@ let client = nodemailer.createTransport(transport(options));
 
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
-  const { application } = req.body;
+  const { application, files } = req.body;
   var path;
 
   try {
@@ -43,6 +43,7 @@ exports.addNewInternship = async (req, res, next) => {
         emailId: student.emailId,
       },
       application,
+      files,
     });
 
     const faculty = await db.Faculty.findOne({
@@ -164,25 +165,25 @@ exports.showApprovedInternships = async (req, res, next) => {
 };
 
 exports.showReport = async (req, res, next) => {
-  try {    
-    const {id}  =req.decoded;
+  try {
+    const { id } = req.decoded;
     console.log(id);
     let approved = await db.Faculty.findById(id).populate({
       path: "applicationsApproved",
       model: "Internship",
     });
-    let received= await db.Faculty.findById(id).populate({
+    let received = await db.Faculty.findById(id).populate({
       path: "applicationsReceived",
       model: "Internship",
-    });  
-    console.log(approved.applicationsApproved)
-    console.log(received.applicationsReceived)  
-    let applications=[];
-    applications=received.applicationsReceived
-    approved.applicationsApproved.forEach(element => {
+    });
+    console.log(approved.applicationsApproved);
+    console.log(received.applicationsReceived);
+    let applications = [];
+    applications = received.applicationsReceived;
+    approved.applicationsApproved.forEach((element) => {
       applications.push(element);
     });
-    console.log(applications)
+    console.log(applications);
     res.status(200).json(applications);
   } catch (err) {
     return next({
@@ -191,7 +192,6 @@ exports.showReport = async (req, res, next) => {
     });
   }
 };
-
 
 exports.studentsInternships = async (req, res, next) => {
   try {
@@ -532,7 +532,9 @@ exports.getStats = async (req, res, next) => {
 };
 
 exports.getFile = async (req, res, next) => {
-  let p = path.join(__dirname, "../public/Documents/Resumefinal.pdf");
+  const { file } = req.body;
+  console.log(file);
+  let p = path.join(__dirname, "../public/Documents/" + file);
   res.sendFile(p, (err) => {
     if (err) console.log(err.message);
   });

@@ -13,7 +13,7 @@ import { withRouter } from "react-router-dom";
 class InternshipApplication extends React.Component {
   state = {
     startDate: new Date(),
-    fileName: [],
+    files: [],
     fileNOC: null,
     fileOL: null,
     fileFE: null,
@@ -40,27 +40,33 @@ class InternshipApplication extends React.Component {
   submitNOCFile(event) {
     this.setState({ fileNOC: event.target.files[0] });
     this.handleUpload("NOC", "NOCLabel");
+    this.state.files.push({ NOC: event.target.files[0].name });
   }
   submitOL(event) {
     this.setState({ fileOL: event.target.files[0] });
     this.handleUpload("offerLetter", "offerLetterLabel");
+    this.state.files.push({ offerLetter: event.target.files[0].name });
   }
 
   submitFE(event) {
     this.setState({ fileFE: event.target.files[0] });
     this.handleUpload("FEMarksheet", "FEMarksheetLabel");
+    this.state.files.push({ FEMarksheet: event.target.files[0].name });
   }
   submitSE(event) {
     this.setState({ fileSE: event.target.files[0] });
     this.handleUpload("SEMarksheet", "SEMarksheetLabel");
+    this.state.files.push({ SEMarksheet: event.target.files[0].name });
   }
   submitTE(event) {
     this.setState({ fileTE: event.target.files[0] });
     this.handleUpload("TEMarksheet", "TEMarksheetLabel");
+    this.state.files.push({ TEMarksheet: event.target.files[0].name });
   }
   submitBE(event) {
     this.setState({ fileBE: event.target.files[0] });
     this.handleUpload("BEMarksheet", "BEMarksheetLabel");
+    this.state.files.push({ BEMarksheet: event.target.files[0].name });
   }
   handleChange = (date) => {
     this.setState({
@@ -78,51 +84,36 @@ class InternshipApplication extends React.Component {
     const data = { application: {} };
     for (var [key, value] of formData.entries()) {
       data["application"][key] = value;
-    }    
+    }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["offerLetter"] =
-      "/public/Documents/" + this.state.fileOL.name;
-
     data["application"]["NOCRequired"] = document.getElementById(
       "NOCRequired"
     ).checked;
     const formDataFile = new FormData();
     formDataFile.append("docs", this.state.fileOL);
-
+    data["files"] = this.state.files;
     if (this.state.fileFE != null) {
-      data["application"]["FEMarksheet"] =
-        "/public/Documents/" + this.state.fileFE.name;
       formDataFile.append("docs", this.state.fileFE);
     }
     if (this.state.fileSE != null) {
-      data["application"]["SEMarksheet"] =
-        "/public/Documents/" + this.state.fileSE.name;
       formDataFile.append("docs", this.state.fileSE);
     }
     if (this.state.fileTE != null) {
-      data["application"]["TEMarksheet"] =
-        "/public/Documents/" + this.state.fileTE.name;
       formDataFile.append("docs", this.state.fileTE);
     }
     if (this.state.fileBE != null) {
-      data["application"]["BEMarksheet"] =
-        "/public/Documents/" + this.state.fileBE.name;
       formDataFile.append("docs", this.state.fileBE);
     }
     if (this.state.fileNOC != null) {
       formDataFile.append("docs", this.state.fileNOC);
-      data["application"]["NOC"] =
-        "/public/Documents" + this.state.fileNOC.name;
-    } else {
-      data["application"]["NOC"] = "";
     }
-    
+
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     };
-    
+
     const { uploadDocument, createInternship } = this.props;
     uploadDocument(formDataFile, config);
     createInternship(data).then((window.location.href = "/student"));
@@ -132,7 +123,7 @@ class InternshipApplication extends React.Component {
     document.getElementById(labelId).classList.add("selected");
     document.getElementById(labelId).innerHTML = fileName;
   }
-  render() {    
+  render() {
     return (
       <div className="row no-gutters">
         <div className="col-sm-2 sidenav">

@@ -3,7 +3,6 @@ import { getCurrentInternship, deleteInternship } from "../store/actions";
 import { connect } from "react-redux";
 import Sidenav from "../components/Sidenav";
 import { withRouter } from "react-router-dom";
-
 class InternshipDetails extends Component {
   state = {
     isLoading: true,
@@ -35,6 +34,7 @@ class InternshipDetails extends Component {
         prevSemAttendance: null,
       },
       approvedBy: [],
+      files: [],
       holder: { id: null, designation: null },
       completionStatus: null,
       comments: null,
@@ -43,6 +43,7 @@ class InternshipDetails extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.loadData = this.loadData.bind(this);
   }
   async componentDidMount() {
     const { getCurrentInternship } = this.props;
@@ -61,8 +62,45 @@ class InternshipDetails extends Component {
       this.props.history.push("/student");
     }
   }
-  loadData(internship) {
+  async loadData(internship) {
+    console.log("_______________", internship);
     this.setState({ data: internship });
+    const fileDiv = document.getElementById("files");
+    console.log(this.state.data.files);
+    for (let i = 0; i < this.state.data.files.length; i++) {
+      for (const key in this.state.data.files[i]) {
+        if (this.state.data.files[i].hasOwnProperty(key)) {
+          const file = this.state.data.files[i][key];
+          const divFileElement = document.createElement("a");
+          const downloadPDFResponse = await fetch(
+            "http://localhost:4002/api/internships/getFile",
+            {
+              method: "post",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ file: file }),
+            }
+          );
+          divFileElement.innerHTML +=
+            '<small className="text-muted"><strong>' +
+            file +
+            "</strong></small>";
+          divFileElement.download = file;
+          divFileElement.style.borderRadius = "10px";
+          divFileElement.style.padding = "5px";
+          divFileElement.style.margin = "10px";
+          divFileElement.className = "col-sm-5 card card-body";
+          const downloadPDFBlob = await downloadPDFResponse.blob();
+          const downloadPDFObjectURL = URL.createObjectURL(downloadPDFBlob);
+          divFileElement.href = downloadPDFObjectURL;
+          fileDiv.appendChild(divFileElement);
+          console.log(divFileElement);
+        }
+      }
+    }
+    console.log(fileDiv);
   }
   render() {
     return (
@@ -266,13 +304,22 @@ class InternshipDetails extends Component {
                           </tr>
                         </tbody>
                       </table>
+
                       {this.state.data.completionStatus === "Pending" && (
                         <>
                           Application is currently viewed by:{" "}
                           {this.state.data.holder.designation} <br />
                         </>
                       )}
+                      {this.state.data.files.length > 0 && (
+                        <>
+                          <hr />
+                          Files:
+                          <div id="files" className="row"></div>
+                        </>
+                      )}
                     </div>
+
                     {this.state.data.completionStatus === "Pending" && (
                       <div className="card-footer text-right">
                         <div

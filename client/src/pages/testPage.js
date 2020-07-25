@@ -18,7 +18,15 @@ class TestPage extends Component {
   async componentDidMount() {
     const downloadPDFLink = document.getElementById("downloadPDFLink");
     const downloadPDFResponse = await fetch(
-      "http://localhost:4002/api/internships/getFile"
+      "http://localhost:4002/api/internships/getFile",
+      {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ files: [{ NOC: "Resumefinal.pdf" }] }),
+      }
     );
     const downloadPDFBlob = await downloadPDFResponse.blob();
     const downloadPDFObjectURL = URL.createObjectURL(downloadPDFBlob);
