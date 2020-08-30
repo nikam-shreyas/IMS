@@ -22,7 +22,7 @@ let client = nodemailer.createTransport(transport(options));
 
 exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
-  const { application } = req.body;
+  const { application, files } = req.body;
   var path;
 
   try {
@@ -43,6 +43,7 @@ exports.addNewInternship = async (req, res, next) => {
         emailId: student.emailId,
       },
       application,
+      files,
     });
 
     const faculty = await db.Faculty.findOne({
@@ -61,33 +62,37 @@ exports.addNewInternship = async (req, res, next) => {
     var email = {
       from: process.env.EMAILFROM,
       to: student.emailId,
-      subject: "New Application Created!",
+      subject: "New Internship Application Created",
       html:
+        "Dear student,<br/>"+
         "New Internship Application for <b>" +
         application.durationOfInternship +
         " months</b> at <b>" +
         application.workplace +
-        "</b> created on <b>" +
+        "</b> has been created on <b>" +
         new Date().toDateString() +
         "</b>. <br /><br /> Your application is currently held by: Prof. <b>" +
         faculty.name.firstname +
         " " +
         faculty.name.lastname +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
     var emailFac = {
       from: process.env.EMAILFROM,
       to: faculty.emailId,
-      subject: "New Application for Approval!",
+      subject: "New Internship Application for Approval",
       html:
-        "New Internship Application for <b>" +
+        "Respected Coordinator,<br/>"+
+        "New Internship application for <b>" +
         application.durationOfInternship +
         " months</b> at <b>" +
         application.workplace +
-        "</b> created on <b>" +
+        "</b>has been created on <b>" +
         new Date().toDateString() +
-        "</b>. <br /><br /> received from <b>" +
+        "</b>. <br /><br />Application received from <b>" +
         student.name.firstname +
         " " +
         student.name.lastname +
@@ -96,7 +101,9 @@ exports.addNewInternship = async (req, res, next) => {
         " " +
         student.currentClass.div +
         "  </b>" +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
     client.sendMail(email, (err, info) => {
@@ -164,25 +171,25 @@ exports.showApprovedInternships = async (req, res, next) => {
 };
 
 exports.showReport = async (req, res, next) => {
-  try {    
-    const {id}  =req.decoded;
+  try {
+    const { id } = req.decoded;
     console.log(id);
     let approved = await db.Faculty.findById(id).populate({
       path: "applicationsApproved",
       model: "Internship",
     });
-    let received= await db.Faculty.findById(id).populate({
+    let received = await db.Faculty.findById(id).populate({
       path: "applicationsReceived",
       model: "Internship",
-    });  
-    console.log(approved.applicationsApproved)
-    console.log(received.applicationsReceived)  
-    let applications=[];
-    applications=received.applicationsReceived
-    approved.applicationsApproved.forEach(element => {
+    });
+    console.log(approved.applicationsApproved);
+    console.log(received.applicationsReceived);
+    let applications = [];
+    applications = received.applicationsReceived;
+    approved.applicationsApproved.forEach((element) => {
       applications.push(element);
     });
-    console.log(applications)
+    console.log(applications);
     res.status(200).json(applications);
   } catch (err) {
     return next({
@@ -191,7 +198,6 @@ exports.showReport = async (req, res, next) => {
     });
   }
 };
-
 
 exports.studentsInternships = async (req, res, next) => {
   try {
@@ -296,10 +302,12 @@ exports.approveInternship = async (req, res, next) => {
       to: emailId,
       subject: "Internship Application Approved!",
       html:
-        "Hello,<br /> " +
+        "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
-        "</b> has been approved.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b> has been <b>approved</b>.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
       if (err) {
@@ -357,7 +365,7 @@ exports.forwardInternship = async (req, res, next) => {
       to: emailId,
       subject: "Internship Application Status Changed!",
       html:
-        "Hello,<br /> " +
+        "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
         "</b> has been approved by <b>" +
@@ -369,19 +377,24 @@ exports.forwardInternship = async (req, res, next) => {
         " " +
         forwardToFaculty.name.lastname +
         ")" +
-        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     var emailFac = {
       from: process.env.EMAILFROM,
       to: emailId,
       subject: "New Internship Application for Approval!",
       html:
+        "Respected Coordinator,<br/>"+
         "You have a new internship application for approval. Application is approved and forwarded by <b>" +
         faculty.name.firstname +
         " " +
         faculty.name.lastname +
         " " +
-        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />This is an automatically generated mail. Please do not respond to this mail.",
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
       if (err) {
@@ -428,7 +441,7 @@ exports.rejectInternship = async (req, res, next) => {
       to: internship.student.emailId,
       subject: "Internship Application Rejected!",
       html:
-        "Hello,<br /> " +
+        "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
         "</b> has been rejected by the <b>" +
@@ -439,7 +452,10 @@ exports.rejectInternship = async (req, res, next) => {
         faculty.name.lastname +
         ")" +
         "<br />Reason: </b>" +
-        comments,
+        comments+
+        "<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
       if (err) {
@@ -532,7 +548,9 @@ exports.getStats = async (req, res, next) => {
 };
 
 exports.getFile = async (req, res, next) => {
-  let p = path.join(__dirname, "../public/Documents/41244_NOC.pdf");
+  const { file } = req.body;
+  console.log(file);
+  let p = path.join(__dirname, "../public/Documents/" + file);
   res.sendFile(p, (err) => {
     if (err) console.log(err.message);
   });

@@ -63,16 +63,11 @@ const internshipSchema = new mongoose.Schema({
     stipend: {
       type: Number,
     },
-    offerLetter: {
-      type: String,
-    },
-    NOC: {
-      type: String,
-    },
     NOCRequired: {
       type: String,
     },
   },
+  files: [],
   approvedBy: [
     {
       designation: String,

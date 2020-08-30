@@ -42,7 +42,7 @@ class Admin_Sidenav extends Component {
           <Link to="/all">
             <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdViewModule style={{ margin: -1, padding: -1 }} />
+                <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
               </span>
               Faculty List
             </li>
