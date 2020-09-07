@@ -1,12 +1,11 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getInternships } from "../store/actions";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 import SideNav_f from "./SideNav_f";
 class Internships extends Component {
-  
   state = {
     internships: [
       {

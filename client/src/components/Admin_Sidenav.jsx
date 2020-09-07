@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { MdPermIdentity, MdAssignment, MdViewModule } from "react-icons/md";
+import {
+  MdPermIdentity,
+  MdAssignment,
+  MdViewModule,
+  MdPoll,
+} from "react-icons/md";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
@@ -91,7 +96,7 @@ class Admin_Sidenav extends Component {
           <Link to="/aicteReport">
             <li id="li" className={activeNow == 8 ? "sidenav-active" : ""}>
               <span className="mx-2">
-                <MdAssignment style={{ margin: -1, padding: -1 }} />
+                <MdPoll style={{ margin: -1, padding: -1 }} />
               </span>
               AICTE Report
             </li>
