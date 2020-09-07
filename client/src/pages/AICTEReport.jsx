@@ -2,8 +2,7 @@ import React from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { getAllInternships } from "../store/actions";
 import { Component } from "react";
-import SideNav_f from "../components/SideNav_f";
-import { MdFileDownload, MdSearch, MdExpandMore } from "react-icons/md";
+import { MdExpandMore } from "react-icons/md";
 import { connect } from "react-redux";
 class Report extends Component {
   constructor(props) {
@@ -470,7 +469,9 @@ class Report extends Component {
             <Admin_Sidenav activeComponent="8" />
           </div>
           <div className="col-sm-10 of">
-            <div>
+            <div className="container mt-2">
+              <h4>AICTE Report</h4>
+              <hr />
               <nav>
                 <div className="nav nav-tabs mt-2" id="nav-tab" role="tablist">
                   <a
@@ -507,10 +508,7 @@ class Report extends Component {
                 aria-labelledby="tab-CurrentYear"
               >
                 <div className="container-fluid mt-2">
-                  <h4>AICTE Report</h4>
-                  <h6>Current Year</h6>
-                  <hr />
-                  <table className="table table-bordered table-hover">
+                  <table className="table table-sm table-bordered table-hover">
                     <thead className="thead-light">
                       <tr>
                         <th>
@@ -550,10 +548,7 @@ class Report extends Component {
                 aria-labelledby="tab-lastYear"
               >
                 <div className="container-fluid mt-2">
-                  <h4>AICTE Report</h4>
-                  <hr />
-
-                  <table className="table table-bordered table-hover">
+                  <table className="table table-sm table-bordered table-hover">
                     <thead className="thead-light">
                       <tr>
                         <th>

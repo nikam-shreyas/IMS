@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  MdPermIdentity,
-  MdAssignment,
-  MdViewModule,
-  MdPoll,
-} from "react-icons/md";
+import { MdPermIdentity, MdAssignment, MdPoll } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions";
