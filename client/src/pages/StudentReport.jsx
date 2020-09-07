@@ -18,7 +18,7 @@ class StudentReport extends Component {
     const { getAllInternships } = this.props;
     getAllInternships().then(() => this.loadData(this.props.internships));
   }
-  loadData(internship) {    
+  loadData(internship) {
     this.setState({ internships: internship });
     this.setState({ count: internship.length });
     internship.forEach((element) => {
@@ -31,9 +31,9 @@ class StudentReport extends Component {
         date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       csv["Duration"] = element.application.durationOfInternship;
       csv["Stipend"] = element.application.stipend;
-      csv["Status"] = element.completionStatus;      
+      csv["Status"] = element.completionStatus;
       this.setState({ csvData: this.state.csvData.concat(csv) });
-    });    
+    });
   }
   renderRows() {
     return this.state.internships.map((internship) => {
@@ -77,12 +77,12 @@ class StudentReport extends Component {
       }
     }
   }
-  render() {    
+  render() {
     return (
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-              <Admin_Sidenav activeComponent="7" />           
+            <Admin_Sidenav activeComponent="7" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid mt-2">
@@ -94,9 +94,12 @@ class StudentReport extends Component {
                   <strong>Total Applications: {this.state.count} </strong>
                 </div>
                 <div className="col-sm-5 offset-2">
-                  <div class="input-group input-group-sm mb-3">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroup-sizing-sm">
+                  <div className="input-group input-group-sm mb-3">
+                    <div className="input-group-prepend">
+                      <span
+                        className="input-group-text"
+                        id="inputGroup-sizing-sm"
+                      >
                         <MdSearch />
                       </span>
                     </div>
@@ -152,7 +155,7 @@ class StudentReport extends Component {
                     </th>
                   </tr>
                 </thead>
-                <tbody class="applicationstable">{this.renderRows()}</tbody>
+                <tbody className="applicationstable">{this.renderRows()}</tbody>
               </table>
             </div>
           </div>

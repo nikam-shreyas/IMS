@@ -84,11 +84,21 @@ class Admin_Sidenav extends Component {
               <span className="mx-2">
                 <MdAssignment style={{ margin: -1, padding: -1 }} />
               </span>
-              Report
+              Student Report
             </li>
           </Link>
-          <Link to="/settings">
+
+          <Link to="/aicteReport">
             <li id="li" className={activeNow == 8 ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdAssignment style={{ margin: -1, padding: -1 }} />
+              </span>
+              AICTE Report
+            </li>
+          </Link>
+
+          <Link to="/settings">
+            <li id="li" className={activeNow == 9 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>

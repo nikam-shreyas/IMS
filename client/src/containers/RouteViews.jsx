@@ -33,6 +33,7 @@ import StudentList from "../pages/StudentList";
 import StudentReport from "../pages/StudentReport";
 import GuidelinesInternship from "../pages/GuidelinesInternship";
 import FacStudentReport from "../pages/FacStudentReport";
+import Report from "../pages/AICTEReport";
 
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
@@ -161,14 +162,14 @@ const RouteViews = ({ auth }) => {
           }}
         />
         <Route
-        exact
-        path="/report"
-        render={() => {
-          if (user === "faculty") {
-            return <FacStudentReport />;
-          } else return <Restricted />;
-        }}
-      />
+          exact
+          path="/report"
+          render={() => {
+            if (user === "faculty") {
+              return <FacStudentReport />;
+            } else return <Restricted />;
+          }}
+        />
         {/* <Route exact path="/admin" render={() => <AdminProfile />} /> */}
         <Route
           exact
@@ -320,6 +321,15 @@ const RouteViews = ({ auth }) => {
           render={() => {
             if (user === "student") {
               return <GuidelinesInternship />;
+            } else return <Restricted />;
+          }}
+        />
+        <Route
+          exact
+          path="/aicteReport"
+          render={() => {
+            if (user === "admin") {
+              return <Report />;
             } else return <Restricted />;
           }}
         />
