@@ -193,19 +193,19 @@ class Report extends Component {
           </td>
         </tr>
         <tr>
-          <td>{year + "-" + year + 1}</td>
+          <td>{year - 1 + "-" + year}</td>
+          <td>0</td>
           <td>{Ccountse1}</td>
           <td>{Ccountte1}</td>
           <td>{Ccountbe1}</td>
-          <td>0</td>
           <td>{Ccountse1 + Ccountte1 + Ccountbe1}</td>
         </tr>
         <tr>
           <td>{year - 2 + "-" + (year - 1)}</td>
+          <td>0</td>
           <td>{Ccountse2}</td>
           <td>{Ccountte2}</td>
           <td>{Ccountbe2}</td>
-          <td>0</td>
           <td>{Ccountse2 + Ccountte2 + Ccountbe2}</td>
         </tr>
         <tr>
@@ -214,19 +214,19 @@ class Report extends Component {
           </td>
         </tr>
         <tr>
-          <td>{year + "-" + year + 1}</td>
+          <td>{year - 1 + "-" + year}</td>
+          <td>0</td>
           <td>{Ecountse1}</td>
           <td>{Ecountte1}</td>
           <td>{Ecountbe1}</td>
-          <td>0</td>
           <td>{Ecountse1 + Ecountte1 + Ecountbe1}</td>
         </tr>
         <tr>
           <td>{year - 2 + "-" + (year - 1)}</td>
+          <td>0</td>
           <td>{Ecountse2}</td>
           <td>{Ecountte2}</td>
           <td>{Ecountbe2}</td>
-          <td>0</td>
           <td>{Ecountse2 + Ecountte2 + Ecountbe2}</td>
         </tr>
         <tr>
@@ -244,10 +244,10 @@ class Report extends Component {
         </tr>
         <tr>
           <td>{year - 2 + "-" + (year - 1)}</td>
+          <td>0</td>
           <td>{Icountse2}</td>
           <td>{Icountte2}</td>
           <td>{Icountbe2}</td>
-          <td>0</td>
           <td>{Icountse2 + Icountte2 + Icountbe2}</td>
         </tr>
         <tr>
@@ -259,10 +259,10 @@ class Report extends Component {
           <td>
             <b>Total</b>
           </td>
+          <td>0</td>
           <td>{SETOTAL}</td>
           <td>{TETOTAL}</td>
           <td>{BETOTAL}</td>
-          <td>0</td>
           <td>{TOTAL}</td>
         </tr>
       </tbody>
@@ -387,18 +387,18 @@ class Report extends Component {
         </tr>
         <tr>
           <td>{"Current Semester"}</td>
+          <td>0</td>
           <td>{Ccountse1}</td>
           <td>{Ccountte1}</td>
           <td>{Ccountbe1}</td>
-          <td>0</td>
           <td>{Ccountse1 + Ccountte1 + Ccountbe1}</td>
         </tr>
         <tr>
           <td>{"Previous Semester"}</td>
+          <td>0</td>
           <td>{Ccountse2}</td>
           <td>{Ccountte2}</td>
           <td>{Ccountbe2}</td>
-          <td>0</td>
           <td>{Ccountse2 + Ccountte2 + Ccountbe2}</td>
         </tr>
         <tr>
@@ -408,18 +408,18 @@ class Report extends Component {
         </tr>
         <tr>
           <td>{"Current Semester"}</td>
+          <td>0</td>
           <td>{Ecountse1}</td>
           <td>{Ecountte1}</td>
           <td>{Ecountbe1}</td>
-          <td>0</td>
           <td>{Ecountse1 + Ecountte1 + Ecountbe1}</td>
         </tr>
         <tr>
           <td>{"Previous Semester"}</td>
+          <td>0</td>
           <td>{Ecountse2}</td>
           <td>{Ecountte2}</td>
           <td>{Ecountbe2}</td>
-          <td>0</td>
           <td>{Ecountse2 + Ecountte2 + Ecountbe2}</td>
         </tr>
         <tr>
@@ -429,18 +429,18 @@ class Report extends Component {
         </tr>
         <tr>
           <td>{"Current Semester"}</td>
+          <td>0</td>
           <td>{Icountse1}</td>
           <td>{Icountte1}</td>
           <td>{Icountbe1}</td>
-          <td>0</td>
           <td>{Icountse1 + Icountte1 + Icountbe1}</td>
         </tr>
         <tr>
           <td>{"Previous Semester"}</td>
+          <td>0</td>
           <td>{Icountse2}</td>
           <td>{Icountte2}</td>
           <td>{Icountbe2}</td>
-          <td>0</td>
           <td>{Icountse2 + Icountte2 + Icountbe2}</td>
         </tr>
         <tr>
@@ -452,10 +452,10 @@ class Report extends Component {
           <td>
             <b>Total</b>
           </td>
+          <td>0</td>
           <td>{SETOTAL}</td>
           <td>{TETOTAL}</td>
           <td>{BETOTAL}</td>
-          <td>0</td>
           <td>{TOTAL}</td>
         </tr>
       </tbody>
@@ -516,6 +516,10 @@ class Report extends Component {
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
                         </th>
                         <th>
+                          FE{" "}
+                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                        </th>
+                        <th>
                           SE{" "}
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
                         </th>
@@ -527,10 +531,7 @@ class Report extends Component {
                           BE{" "}
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
                         </th>
-                        <th>
-                          ME{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
+
                         <th>
                           Total{" "}
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
@@ -556,6 +557,10 @@ class Report extends Component {
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
                         </th>
                         <th>
+                          FE{" "}
+                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
+                        </th>
+                        <th>
                           SE{" "}
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
                         </th>
@@ -567,10 +572,7 @@ class Report extends Component {
                           BE{" "}
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />
                         </th>
-                        <th>
-                          ME{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
+
                         <th>
                           Total{" "}
                           <MdExpandMore style={{ margin: -1, padding: -1 }} />

@@ -15,6 +15,24 @@ class AnalyticsCharts extends Component {
     };
     this.setData = this.setData.bind(this);
   }
+  sortKeys(obj_1) {
+    var key = Object.keys(obj_1).sort(function order(key1, key2) {
+      if (key1 < key2) return -1;
+      else if (key1 > key2) return +1;
+      else return 0;
+    });
+
+    var temp = {};
+
+    for (var i = 0; i < key.length; i++) {
+      temp[key[i]] = obj_1[key[i]];
+      delete obj_1[key[i]];
+    }
+    for (var i = 0; i < key.length; i++) {
+      obj_1[key[i]] = temp[key[i]];
+    }
+    return obj_1;
+  }
   setData(chartsData) {
     let hlabel = [],
       llabel = [],
@@ -39,7 +57,7 @@ class AnalyticsCharts extends Component {
       ldata.push(element.count);
     }
     let tdata = {};
-      
+
     for (let i = 0; i < chartsData.datewiseStatusDistribution.length; i++) {
       const element = chartsData.datewiseStatusDistribution[i];
       tdata[element._id.sdate] = tdata[element._id.sdate] || {
@@ -49,13 +67,14 @@ class AnalyticsCharts extends Component {
       };
       tdata[element._id.sdate][element._id.status] = element.count;
     }
+    this.sortKeys(tdata);
     let set = { Pending: [], Approved: [], Rejected: [] };
     let tdate = [];
     for (const k in tdata) {
       if (tdata.hasOwnProperty(k)) {
         const element = tdata[k];
         tdate.push(k);
-        set["Pending"].push(element["N"]);
+        set["Pending"].push(element["Pending"]);
         set["Approved"].push(element["Approved"]);
         set["Rejected"].push(element["Rejected"]);
       }
@@ -185,6 +204,16 @@ class AnalyticsCharts extends Component {
             data: ldata,
           },
         ],
+        options: {
+          scales: {
+            xAxes: [
+              {
+                type: "date",
+                distribution: "linear",
+              },
+            ],
+          },
+        },
       },
     });
     this.setState({
@@ -324,8 +353,7 @@ class AnalyticsCharts extends Component {
                 </div>
               </div>
             </div>
-            <div>           
-            </div>
+            <div></div>
           </div>
           <div
             className="tab-pane fade"
