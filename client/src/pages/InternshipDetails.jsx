@@ -63,10 +63,8 @@ class InternshipDetails extends Component {
     }
   }
   async loadData(internship) {
-    console.log("_______________", internship);
     this.setState({ data: internship });
     const fileDiv = document.getElementById("files");
-    console.log(this.state.data.files);
     for (let i = 0; i < this.state.data.files.length; i++) {
       for (const key in this.state.data.files[i]) {
         if (this.state.data.files[i].hasOwnProperty(key)) {
@@ -100,7 +98,6 @@ class InternshipDetails extends Component {
         }
       }
     }
-    console.log(fileDiv);
   }
   render() {
     return (

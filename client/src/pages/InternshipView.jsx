@@ -45,6 +45,7 @@ class InternshipView extends Component {
         emailId: null,
       },
       approvedBy: [],
+      files: [],
       holder: { id: null, designation: null },
       completionStatus: null,
       comments: null,
@@ -83,10 +84,45 @@ class InternshipView extends Component {
       this.props.history.push("/approvedinternships");
     }
   }
-  loadData(internship) {
+  async loadData(internship) {
     this.setState({ data: internship });
     for (const [key, value] of Object.entries(this.state.data.docs)) {
       if (value === "Pending") this.setState({ showButton: true });
+    }
+    const fileDiv = document.getElementById("files");
+    for (let i = 0; i < this.state.data.files.length; i++) {
+      for (const key in this.state.data.files[i]) {
+        if (this.state.data.files[i].hasOwnProperty(key)) {
+          const file = this.state.data.files[i][key];
+          const divFileElement = document.createElement("a");
+          const downloadPDFResponse = await fetch(
+            "http://localhost:4002/api/internships/getFile",
+            {
+              method: "post",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ file: file }),
+            }
+          );
+          divFileElement.innerHTML +=
+            '<small className="text-muted"><strong>' +
+            file +
+            "</strong></small>";
+          divFileElement.download = file;
+          divFileElement.style.borderRadius = "10px";
+          divFileElement.style.padding = "5px";
+          divFileElement.style.margin = "10px";
+          divFileElement.style.marginLeft = "20px";
+          divFileElement.className = "col-sm-5 card card-body";
+          const downloadPDFBlob = await downloadPDFResponse.blob();
+          const downloadPDFObjectURL = URL.createObjectURL(downloadPDFBlob);
+          divFileElement.href = downloadPDFObjectURL;
+          fileDiv.appendChild(divFileElement);
+          console.log(divFileElement);
+        }
+      }
     }
   }
   updateStatus(event) {
@@ -390,6 +426,13 @@ class InternshipView extends Component {
                             )}
                           </tbody>
                         </table>
+                        {this.state.data.files.length > 0 && (
+                          <>
+                            <hr />
+                            Files:
+                            <div id="files" className="row"></div>
+                          </>
+                        )}
                       </form>
                     </div>
                     <div className="card-footer text-right">

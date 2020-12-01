@@ -1,12 +1,10 @@
 import React, { Component } from "react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
 
 class Restricted extends Component {
   render() {
-    return (
-      <h2>
-        You do not have access to this page. This incident will be reported.
-      </h2>
-    );
+    return <h4>Loading...</h4>;
   }
 }
 

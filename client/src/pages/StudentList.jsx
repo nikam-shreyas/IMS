@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { getStudentList , deleteStudents ,searchStudents } from "../store/actions/admin";
+import {
+  getStudentList,
+  deleteStudents,
+  searchStudents,
+} from "../store/actions/admin";
 import { MdDone, MdDelete } from "react-icons/md";
-import {  
-  MdSearch,
-} from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 import SuccessMessage from "../components/SuccessMessage";
 import ErrorMessage from "../components/ErrorMessage";
 class StudentList extends Component {
@@ -18,27 +20,24 @@ class StudentList extends Component {
         {
           _id: "",
 
-           name: { firstname: null, lastname: null },
-           currentClass: { year: null, div: null },
-           rollNo: null,
-          username: null,         
-         YEAR:"",
-         DIV:"",
-
+          name: { firstname: null, lastname: null },
+          currentClass: { year: null, div: null },
+          rollNo: null,
+          username: null,
+          YEAR: "",
+          DIV: "",
         },
       ],
       ids: [],
     };
 
-    this.deleteall=this.deleteall.bind(this);
-    this.search=this.search.bind(this);
+    this.deleteall = this.deleteall.bind(this);
+    this.search = this.search.bind(this);
 
-   
     this.selectall = this.selectall.bind(this);
-
   }
   async componentDidMount() {
-    const { getStudentList } = this.props;    
+    const { getStudentList } = this.props;
     getStudentList()
       .then(this.setState({ isLoading: false }))
       .then(() => this.loadData(this.props.students));
@@ -57,7 +56,7 @@ class StudentList extends Component {
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
-      cardContent = cards[i].querySelector(".individual-card");      
+      cardContent = cards[i].querySelector(".individual-card");
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -73,9 +72,9 @@ class StudentList extends Component {
   }
   expandInline(e) {
     e.target.parentElement.lastChild.style.display = "block";
-  }  
-  selectall() {    
-    var p = document.getElementsByName("check");    
+  }
+  selectall() {
+    var p = document.getElementsByName("check");
     if (this.state.allSelected) {
       for (var i = 0; i < p.length; i++) {
         p[i].checked = false;
@@ -88,10 +87,9 @@ class StudentList extends Component {
     this.setState({ allSelected: !this.state.allSelected });
   }
 
-  deletesingle = (e) => {    
+  deletesingle = (e) => {
     var g = document.getElementById(e.target.value);
     if (g.checked == true) {
-      
     } else {
       alert("Not Selected");
     }
@@ -105,7 +103,7 @@ class StudentList extends Component {
         obj.push(p[i].id);
       }
     }
-    
+
     if (obj.length == 0) {
       alert("No Students to delete.");
     } else {
@@ -114,45 +112,35 @@ class StudentList extends Component {
     }
   }
 
+  async search() {
+    var year = document.getElementById("year");
+    var div = document.getElementById("div");
+    await this.setState({ YEAR: year.value });
+    await this.setState({ DIV: div.value });
 
-
-async search(){
-
-  var year=document.getElementById("year");
-  var div=document.getElementById("div");
-  await this.setState({ YEAR: year.value });
-  await this.setState({ DIV: div.value });
-  
-  if(year.value=="--"){
-  alert("year not selected");
-  }else if(div.value=="--"){
-    alert("division not selected");
-  }else{
-   const {YEAR , DIV} =this.state;
-   const { searchStudents }=this.props;   
-   let data={};
-   data["YEAR"]=YEAR;
-   data["DIV"]=DIV;   
-   searchStudents(data).then(()=>{
-     this.loadSomeStudents(this.props.someStudents);
-   });  
+    if (year.value == "--") {
+      alert("Please select Year");
+    } else if (div.value == "--") {
+      alert("Please Select Division");
+    } else {
+      const { YEAR, DIV } = this.state;
+      const { searchStudents } = this.props;
+      let data = {};
+      data["YEAR"] = YEAR;
+      data["DIV"] = DIV;
+      searchStudents(data).then(() => {
+        this.loadSomeStudents(this.props.someStudents);
+      });
+    }
   }
-}
-loadSomeStudents(student){
-  this.setState({students:student});
-}
-renderCardData1() {
-  return this.state.students.map((students) => {
-    const {
-      _id,
-      username,
-       name,
-      currentClass,
-       rollNo,      
-      created,
-    } = students; 
-    return (
-      <tr key={_id} className="application">
+  loadSomeStudents(student) {
+    this.setState({ students: student });
+  }
+  renderCardData1() {
+    return this.state.students.map((students) => {
+      const { _id, username, name, currentClass, rollNo, created } = students;
+      return (
+        <tr key={_id} className="application">
           <td>
             <input type="checkbox" name="check" id={_id} value={_id} />
           </td>
@@ -162,22 +150,14 @@ renderCardData1() {
           <td>{currentClass.year + " " + currentClass.div}</td>
           <td>{new Date(created).toDateString()}</td>
         </tr>
-    );
-  });
-}
-
+      );
+    });
+  }
 
   renderCardData() {
     return this.state.students.map((students) => {
-      const {
-        _id,
-        username,
-        name,
-        currentClass,
-        rollNo,
-        created,        
-      } = students; 
-   
+      const { _id, username, name, currentClass, rollNo, created } = students;
+
       return (
         <tr key={_id} className="application">
           <td>
@@ -230,7 +210,10 @@ renderCardData1() {
                 <span>
                   <div className="input-group input-group-sm mb-3">
                     <div className="input-group-prepend">
-                      <span className="input-group-text" id="inputGroup-sizing-sm">
+                      <span
+                        className="input-group-text"
+                        id="inputGroup-sizing-sm"
+                      >
                         <MdSearch />
                       </span>
                     </div>
@@ -252,7 +235,7 @@ renderCardData1() {
                     <div className="col-sm-8">
                       <span>
                         <div
-                        className="btn-group bg-secondary"
+                          className="btn-group bg-secondary"
                           style={{ borderRadius: 5 }}
                         >
                           <button className="btn btn-sm">Filter: </button>
@@ -343,7 +326,6 @@ renderCardData1() {
           </div>
         </div>
       </div>
-
     );
   }
 }
@@ -355,5 +337,5 @@ export default connect(
     someStudents: store.someStudentlist,
   }),
 
-  { getStudentList,deleteStudents , searchStudents }
+  { getStudentList, deleteStudents, searchStudents }
 )(StudentList);
