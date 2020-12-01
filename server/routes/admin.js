@@ -10,9 +10,7 @@ router.route("/allStudents").get(auth, handle.findAllStudents);
 
 router.route("/findStudents").get(auth, handle.SomeStudents);
 
-router
-.route("/deletestudent")
-.put(auth, handle.deletestudent);
+router.route("/deletestudent").put(auth, handle.deletestudent);
 
 router.route("/update/:id").put(auth, handle.updateProfile);
 

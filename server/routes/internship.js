@@ -52,6 +52,8 @@ router.route("/all").get(auth, handle.showAllInternships);
 router.route("/report").get(auth, handle.showReport);
 router.route("/getFile").post(handle.getFile);
 
+router.route("/aictereport").get(handle.getaictereport);
+
 router
   .route("/:id")
   .get(handle.getInternship)

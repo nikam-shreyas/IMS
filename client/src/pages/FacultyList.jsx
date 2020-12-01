@@ -12,11 +12,9 @@ import {
   MdSearch,
 } from "react-icons/md";
 class FacultyList extends Component {
-  
   constructor(props) {
-    super(props);    
+    super(props);
     this.state = {
-      
       isLoading: true,
       faculties: [
         {
@@ -51,7 +49,7 @@ class FacultyList extends Component {
     filter = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("card");
     for (i = 0; i < cards.length; i++) {
-      cardContent = cards[i].querySelector(".individual-card");      
+      cardContent = cards[i].querySelector(".individual-card");
       if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
         cards[i].style.display = "";
       } else {
@@ -79,11 +77,12 @@ class FacultyList extends Component {
         department,
         designation,
         emailId,
-      } = faculty; 
+      } = faculty;
       return (
         <div
           className="col-sm-6"
           key={_id}
+          name="facultyCard"
           id={
             username +
             name.firstname +
@@ -170,7 +169,7 @@ class FacultyList extends Component {
             <Admin_Sidenav activeComponent="2" />
           </div>
           <div className="col-sm-10 of">
-            <div className="container-fluid">              
+            <div className="container-fluid">
               <h4 className="mt-2">
                 Faculty List
                 <div className="float-right">

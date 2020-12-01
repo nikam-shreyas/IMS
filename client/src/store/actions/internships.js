@@ -240,11 +240,29 @@ export const facultyGetReport = () => {
   return async (dispatch) => {
     try {
       const internships = await api.call("get", "internships/report");
-      if(internships.length==0){
+      if (internships.length == 0) {
         dispatch(addError("Empty report."));
-      }else{
+      } else {
         dispatch(setInternships(internships));
         dispatch(removeError());
+      }
+    } catch (err) {
+      const error = "Could not load data";
+      dispatch(addError(error));
+    }
+  };
+};
+
+export const getAicteReport = () => {
+  return async (dispatch) => {
+    try {
+      const internships = await api.call("get", "internships/aictereport");
+      console.log(internships);
+      if (internships) {
+        dispatch(setInternships(internships));
+        dispatch(removeError());
+      } else {
+        dispatch(addError("Empty"));
       }
     } catch (err) {
       const error = "Could not load data";

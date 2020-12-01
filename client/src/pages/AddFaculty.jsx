@@ -54,7 +54,7 @@ class AddFaculty extends Component {
     data["password"] = formData.get("password") || this.state.data.password;
     data["emailId"] = formData.get("emailId") || this.state.data.emailId;
 
-    createTeacher(data);    
+    createTeacher(data);
   }
   render() {
     return (
@@ -208,7 +208,7 @@ class AddFaculty extends Component {
                     <button className="btn border-dark mx-2" type="reset">
                       Reset
                     </button>
-                    <button type="submit" className="btn btn-dark">
+                    <button type="submit" className="btn btn-dark" name="add">
                       Add Profile
                     </button>
                   </div>

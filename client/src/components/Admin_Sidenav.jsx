@@ -31,7 +31,7 @@ class Admin_Sidenav extends Component {
         <h4 className="text-light text-center mt-2">PICT IMS</h4>
         <p className="mt-4">Menu</p>
         <ul id="ul">
-          <Link to="/admin/">
+          <Link to="/admin/" className="adminProfile">
             <li id="li" className={activeNow == 1 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdPermIdentity style={{ margin: -1, padding: -1 }} />
@@ -39,7 +39,7 @@ class Admin_Sidenav extends Component {
               Profile
             </li>
           </Link>
-          <Link to="/all">
+          <Link to="/all" className="facultyList">
             <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
@@ -47,7 +47,7 @@ class Admin_Sidenav extends Component {
               Faculty List
             </li>
           </Link>
-          <Link to="/allStudents">
+          <Link to="/allStudents" className="studentList">
             <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdRecentActors style={{ margin: -1, padding: -1 }} />
@@ -55,7 +55,7 @@ class Admin_Sidenav extends Component {
               Student List
             </li>
           </Link>
-          <Link to="/add">
+          <Link to="/add" className="addFaculty">
             <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAddCircle style={{ margin: -1, padding: -1 }} />
@@ -63,7 +63,7 @@ class Admin_Sidenav extends Component {
               Add New Faculty
             </li>
           </Link>
-          <Link to="/deleteFaculty">
+          <Link to="/deleteFaculty" className="deleteFaculty">
             <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdDelete style={{ margin: -1, padding: -1 }} />
@@ -71,7 +71,7 @@ class Admin_Sidenav extends Component {
               Delete Faculty
             </li>
           </Link>
-          <Link to="/stats">
+          <Link to="/stats" className="stats">
             <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdEqualizer style={{ margin: -1, padding: -1 }} />
@@ -79,7 +79,7 @@ class Admin_Sidenav extends Component {
               Stats
             </li>
           </Link>
-          <Link to="/studentReport">
+          <Link to="/studentReport" className="studentReport">
             <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAssignment style={{ margin: -1, padding: -1 }} />
@@ -88,7 +88,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
 
-          <Link to="/aicteReport">
+          <Link to="/aicteReport" className="report">
             <li id="li" className={activeNow == 8 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAssignment style={{ margin: -1, padding: -1 }} />
@@ -97,7 +97,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
 
-          <Link to="/settings">
+          <Link to="/settings" className="setting">
             <li id="li" className={activeNow == 9 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
@@ -105,7 +105,7 @@ class Admin_Sidenav extends Component {
               Change Password
             </li>
           </Link>
-          <li id="li" className="nav-item">
+          <li id="li" className="nav-item" className="logout">
             <span className="mx-2">
               <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />
             </span>

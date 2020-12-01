@@ -46,24 +46,20 @@ class Auth extends Component {
   render() {
     const { username, password } = this.state;
     return (
-     
       <div className="section">
         <div className="container">
-        
           <div className="user signinBx">
-
-            <div className="imgBx">              
+            <div className="imgBx">
               <p>Internship Management System</p>
             </div>
-            
+
             <div className="formBx">
-            
               <form onSubmit={this.handleSubmit}>
-              <div className="Errorbox">
-              <div className="my-4 text-center" style={{zIndex:"10"}}>
-               <ErrorMessage />
-              </div>
-              </div>
+                <div className="Errorbox">
+                  <div className="my-4 text-center" style={{ zIndex: "10" }}>
+                    <ErrorMessage />
+                  </div>
+                </div>
                 <h2>Sign In</h2>
                 <input
                   required
@@ -117,14 +113,13 @@ class Auth extends Component {
                   >
                     <b>Register</b>
                   </Link>
-                  <input type="submit" value="Login" />
+                  <input type="submit" value="Login" name="loginBtn" />
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      
     );
   }
 }

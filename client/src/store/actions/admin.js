@@ -4,7 +4,7 @@ import {
   SET_CURRENT_SELECTED_TEACHER,
   SET_FACULTY,
   GET_STUDENT_LIST,
-  GET_SOME_STUDENT_LIST
+  GET_SOME_STUDENT_LIST,
 } from "../actionTypes";
 import { addError, removeError } from "./error";
 import { addSuccess, removeSuccessMessage } from "./success";
@@ -59,7 +59,6 @@ export const deleteStudents = (data) => {
     }
   };
 };
-
 
 export const createTeacher = (data) => {
   return async (dispatch) => {
@@ -134,7 +133,6 @@ export const resetPassword = (path, data) => {
   };
 };
 
-
 export const getFaculty = () => {
   return async (dispatch) => {
     try {
@@ -147,8 +145,6 @@ export const getFaculty = () => {
     }
   };
 };
-
-
 
 export const getStudentList = () => {
   return async (dispatch) => {
@@ -164,23 +160,22 @@ export const getStudentList = () => {
   };
 };
 
-
-export const searchStudents=(data)=>{
-return async (dispatch)=> {
-  try{
-    const {YEAR , DIV }=data;
-    console.log(YEAR+DIV+"year div ");
-    let path="?YEAR="+YEAR+"&DIV="+DIV;
-    const students = await api.call("get", `admin/findStudents/${path}`);
-    if(students.length==0){
-        dispatch(addError("No students Found"))
-    }else{
-      dispatch(getSomeStudents(students));
-      dispatch(removeError());
-    }
-  }catch(err){
-    const error = err.response.data;
+export const searchStudents = (data) => {
+  return async (dispatch) => {
+    try {
+      const { YEAR, DIV } = data;
+      console.log(YEAR + DIV + "year div ");
+      let path = "?YEAR=" + YEAR + "&DIV=" + DIV;
+      const students = await api.call("get", `admin/findStudents/${path}`);
+      if (students.length == 0) {
+        dispatch(addError("No students Found"));
+      } else {
+        dispatch(getSomeStudents(students));
+        dispatch(removeError());
+      }
+    } catch (err) {
+      const error = err.response.data;
       dispatch(addError(error.message));
-  }
-}
+    }
+  };
 };

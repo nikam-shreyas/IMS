@@ -64,7 +64,7 @@ exports.addNewInternship = async (req, res, next) => {
       to: student.emailId,
       subject: "New Internship Application Created",
       html:
-        "Dear student,<br/>"+
+        "Dear student,<br/>" +
         "New Internship Application for <b>" +
         application.durationOfInternship +
         " months</b> at <b>" +
@@ -75,8 +75,8 @@ exports.addNewInternship = async (req, res, next) => {
         faculty.name.firstname +
         " " +
         faculty.name.lastname +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />" +
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>" +
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
@@ -85,7 +85,7 @@ exports.addNewInternship = async (req, res, next) => {
       to: faculty.emailId,
       subject: "New Internship Application for Approval",
       html:
-        "Respected Coordinator,<br/>"+
+        "Respected Coordinator,<br/>" +
         "New Internship application for <b>" +
         application.durationOfInternship +
         " months</b> at <b>" +
@@ -101,8 +101,8 @@ exports.addNewInternship = async (req, res, next) => {
         " " +
         student.currentClass.div +
         "  </b>" +
-        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "</b>. <br /><br /> <a href='https://localhost:3000'>Click here to login and check.</a> <br /><br />" +
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>" +
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
 
@@ -305,8 +305,8 @@ exports.approveInternship = async (req, res, next) => {
         "Dear Student,<br /> " +
         "Your internship application for <b>" +
         internship.application.workplace +
-        "</b> has been <b>approved</b>.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "</b> has been <b>approved</b>.<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />" +
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>" +
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
@@ -377,8 +377,8 @@ exports.forwardInternship = async (req, res, next) => {
         " " +
         forwardToFaculty.name.lastname +
         ")" +
-        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />" +
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>" +
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     var emailFac = {
@@ -386,14 +386,14 @@ exports.forwardInternship = async (req, res, next) => {
       to: emailId,
       subject: "New Internship Application for Approval!",
       html:
-        "Respected Coordinator,<br/>"+
+        "Respected Coordinator,<br/>" +
         "You have a new internship application for approval. Application is approved and forwarded by <b>" +
         faculty.name.firstname +
         " " +
         faculty.name.lastname +
         " " +
-        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        "</b><br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />" +
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>" +
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
@@ -452,9 +452,9 @@ exports.rejectInternship = async (req, res, next) => {
         faculty.name.lastname +
         ")" +
         "<br />Reason: </b>" +
-        comments+
-        "<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />"+
-        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>"+
+        comments +
+        "<br /> <br /> <strong><a href=''>Click Here</a></strong> to login and check.<br /> <br />" +
+        "This is an automatically generated mail. Please do not respond to this mail.<br/><br/>" +
         "Regards<br/>IMS Portal<br/>Pune Institute of Computer Technology",
     };
     client.sendMail(email, (err, info) => {
@@ -554,4 +554,59 @@ exports.getFile = async (req, res, next) => {
   res.sendFile(p, (err) => {
     if (err) console.log(err.message);
   });
+};
+
+exports.getaictereport = async (req, res, next) => {
+  try {
+    const today = new Date();
+
+    const previousYear = await db.Internship.aggregate([
+      {
+        $match: {
+          "application.submittedDate": {
+            $gte: new Date(today.getFullYear() - 1, 6, 1),
+            $lt: new Date(today.getFullYear(), 6, 30),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { department: "$student.currentClass.year" },
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    console.log(previousYear);
+    const lastTYear = await db.Internship.aggregate([
+      {
+        $match: {
+          "application.submittedDate": {
+            $gte: new Date(today.getFullYear() - 2, 6, 1),
+            $lt: new Date(today.getFullYear() - 1, 6, 30),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: { department: "$student.currentClass.year" },
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    console.log(lastTYear);
+    let data = {};
+    data["previousYear"] = previousYear;
+    data["lastTYear"] = lastTYear;
+    console.log(data);
+    if (!data) {
+      throw new Error("Empty");
+    } else {
+      return res.status(200).json(data);
+    }
+  } catch (error) {
+    next({
+      status: 400,
+      message: error.message,
+    });
+  }
 };

@@ -35,7 +35,7 @@ class DeleteFaulty extends Component {
   };
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);    
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentWillUnmount() {
     const { removeSuccess } = this.props;
@@ -48,7 +48,7 @@ class DeleteFaulty extends Component {
     const username = formData.get("username") || null;
     getCurrentTeacher(username).then(() => this.loadData(this.props.teacher));
   }
-  
+
   loadData(user) {
     if (
       user.department !== undefined &&
@@ -101,7 +101,8 @@ class DeleteFaulty extends Component {
                       <div className="col-sm-6">
                         <button
                           type="submit"
-                          className="btn btn-dark btn-sm mx-2"                          
+                          className="btn btn-dark btn-sm mx-2"
+                          name="getinfo"
                         >
                           Get Information
                         </button>
@@ -179,6 +180,7 @@ class DeleteFaulty extends Component {
                                 onClick={() =>
                                   this.handleClick(this.state.data.username)
                                 }
+                                name="deletebtn"
                               >
                                 Delete
                               </Button>
