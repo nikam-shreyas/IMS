@@ -82,9 +82,7 @@ class Sidenav extends Component {
             <span className="mx-2">
               <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />
             </span>
-            <a onClick={this.handleLogout} href="">
-              Logout
-            </a>
+            <a onClick={this.handleLogout}>Logout</a>
           </li>
         </ul>
       </div>
