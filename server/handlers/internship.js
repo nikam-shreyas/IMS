@@ -2,12 +2,8 @@ const db = require("../models");
 const chain = require("./chain");
 let nodemailer = require("nodemailer");
 let transport = require("nodemailer-smtp-transport");
-const { application } = require("express");
 require("dotenv").config();
-const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
-const { createIndexes } = require("../models/student");
 //mailing options and transportor
 var options = {
   service: "gmail",
@@ -232,7 +228,7 @@ exports.getInternship = async (req, res, next) => {
 };
 
 exports.deleteInternship = async (req, res, next) => {
-  console.log("hello");
+  // console.log("hello");
   const { id: internshipId } = req.params;
   const { id: studentId } = req.decoded;
   try {
@@ -250,7 +246,9 @@ exports.deleteInternship = async (req, res, next) => {
       console.log("failed");
       throw new Error("No internship found");
     }
-    if (internship.student.toString() !== studentId) {
+    if (internship.student.id.toString() !== studentId) {
+      console.log("unauthorized");
+      console.log(internship.student, studentId);
       throw new Error("Unauthorized access");
     }
     await student.save();
@@ -259,7 +257,7 @@ exports.deleteInternship = async (req, res, next) => {
     return res.status(200).json({ internship, deleted: true });
   } catch (err) {
     return next({
-      status: 401,
+      status: 400,
       message: err.message,
     });
   }

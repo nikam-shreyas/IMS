@@ -54,6 +54,9 @@ router.route("/getFile").post(handle.getFile);
 
 router.route("/aictereport").get(handle.getaictereport);
 
-router.route("/:id").get(handle.getInternship).delete(handle.deleteInternship);
-// router.route("/delete").post(handle.getInternship);
+router
+  .route("/:id")
+  .get(handle.getInternship)
+  .delete(auth, handle.deleteInternship);
+router.route("/delete").post(handle.deleteInternship);
 module.exports = router;
