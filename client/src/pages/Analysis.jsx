@@ -5,9 +5,7 @@ import { Component } from "react";
 import SideNav_f from "../components/SideNav_f";
 class Analytics extends Component {
   state = {};
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <div>

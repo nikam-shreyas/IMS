@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 import SideNav_f from "../components/SideNav_f";
 class Internships extends Component {
-  
   state = {
     displayCount: "null",
     displayCountDiv: "none",
@@ -145,16 +144,15 @@ class Internships extends Component {
                 name="filter"
                 id="filter"
                 className="form-control"
-                placeholder="Filter Applications"
+                placeholder="Filter Applications (By name, id, holder, ...)"
                 onChange={this.filter}
                 aria-describedby="filtersearch"
               />
             </div>
-            <hr />            
+            <hr />
             <div>
               {this.state.internships[0].holder.designation === null && (
                 <div className="alert alert-info">
-                  No internship applications found.{" "}
                   <b>
                     <span
                       style={{ cursor: "pointer" }}
@@ -163,7 +161,7 @@ class Internships extends Component {
                       Click here
                     </span>
                   </b>{" "}
-                  to refresh.
+                  to fetch applications.
                 </div>
               )}
               {this.state.internships[0].holder.designation !== null &&

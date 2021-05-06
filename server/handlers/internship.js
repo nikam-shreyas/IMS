@@ -431,7 +431,7 @@ exports.rejectInternship = async (req, res, next) => {
       internshipId +
       " has been rejected by " +
       faculty.designation +
-      " because " +
+      ". Reason: " +
       comments +
       "";
     internship.completionStatus = "Rejected";

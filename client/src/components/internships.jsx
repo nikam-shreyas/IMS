@@ -144,7 +144,7 @@ class Internships extends Component {
                 name="filter"
                 id="filter"
                 className="form-control"
-                placeholder="Filter Applications"
+                placeholder="Filter Applications (By name, id, holder, ...)"
                 onChange={this.filter}
                 aria-describedby="filtersearch"
               />
@@ -153,7 +153,6 @@ class Internships extends Component {
             <div>
               {this.state.internships[0].holder.designation === null && (
                 <div className="alert alert-info">
-                  No internship applications found.{" "}
                   <b>
                     <span
                       style={{ cursor: "pointer" }}
@@ -162,7 +161,7 @@ class Internships extends Component {
                       Click here
                     </span>
                   </b>{" "}
-                  to refresh.
+                  to fetch applications.
                 </div>
               )}
               {this.state.internships[0].holder.designation !== null &&

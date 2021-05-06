@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { getStudentInternships } from "../store/actions";
 import { MdFormatListBulleted, MdViewAgenda, MdSearch } from "react-icons/md";
 class MainContent extends Component {
-  
   state = {
     internships: [
       {
@@ -139,7 +138,7 @@ class MainContent extends Component {
               name="filter"
               id="filter"
               className="form-control"
-              placeholder="Filter Applications"
+              placeholder="Filter Applications (By name, id, holder, ...)"
               onChange={this.filter}
               aria-describedby="filtersearch"
             />
@@ -148,7 +147,6 @@ class MainContent extends Component {
           <div>
             {this.state.internships[0].holder.designation === null && (
               <div className="alert alert-info">
-                No internship applications found.{" "}
                 <b>
                   <span
                     style={{ cursor: "pointer" }}
@@ -157,7 +155,7 @@ class MainContent extends Component {
                     Click here
                   </span>
                 </b>{" "}
-                to refresh.
+                to fetch internship applications.
               </div>
             )}
             {this.state.internships[0].holder.designation !== null &&
