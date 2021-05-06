@@ -119,6 +119,8 @@ class InternshipView extends Component {
           const downloadPDFBlob = await downloadPDFResponse.blob();
           const downloadPDFObjectURL = URL.createObjectURL(downloadPDFBlob);
           divFileElement.href = downloadPDFObjectURL;
+          divFileElement.target = "blank";
+          divFileElement.removeAttribute("download");
           fileDiv.appendChild(divFileElement);
           console.log(divFileElement);
         }
