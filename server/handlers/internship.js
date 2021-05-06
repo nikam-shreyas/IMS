@@ -233,7 +233,6 @@ exports.deleteInternship = async (req, res, next) => {
   const { id: studentId } = req.decoded;
   try {
     let student = await db.Student.findById(studentId);
-    console.log(student);
     if (student.internships) {
       student.internships = student.internships.filter((studentInternship) => {
         return studentInternship._id.toString() !== internshipId.toString();
@@ -241,19 +240,14 @@ exports.deleteInternship = async (req, res, next) => {
     }
 
     const internship = await db.Internship.findById(internshipId);
-    console.log(internship);
     if (!internship) {
-      console.log("failed");
       throw new Error("No internship found");
     }
     if (internship.student.id.toString() !== studentId) {
-      console.log("unauthorized");
-      console.log(internship.student, studentId);
       throw new Error("Unauthorized access");
     }
     await student.save();
     await internship.remove();
-    console.log("deleted");
     return res.status(200).json({ internship, deleted: true });
   } catch (err) {
     return next({

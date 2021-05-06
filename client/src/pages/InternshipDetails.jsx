@@ -108,7 +108,17 @@ class InternshipDetails extends Component {
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid">
-              <h4 className="mt-2">Application:</h4>
+              <h4 className="mt-2">
+                <button
+                  className="btn btn-dark"
+                  onClick={() => {
+                    window.history.back();
+                  }}
+                >
+                  Back
+                </button>
+                <span className="ml-2">Application: {this.state.data._id}</span>
+              </h4>
               <hr />
               <div className="card m-3 border-dark" id="card">
                 {this.state.isLoading && <>Loading...</>}
