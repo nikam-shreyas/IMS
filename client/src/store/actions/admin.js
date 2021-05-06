@@ -66,8 +66,9 @@ export const createTeacher = (data) => {
       const teacher = await api.call("post", "admin/add", data);
       dispatch(setCurrentTeacher(teacher));
       const success = "Faculty added!";
-      dispatch(addSuccess(success));
       dispatch(removeError());
+      dispatch(removeSuccessMessage());
+      dispatch(addSuccess(success));
     } catch (err) {
       const error = err.response.data;
       dispatch(removeSuccessMessage());

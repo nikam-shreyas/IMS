@@ -6,6 +6,7 @@ import {
   SET_CURRENT_SELECTED_FACULTY,
 } from "../actionTypes";
 import api from "../../services/api";
+import { addSuccess } from "./success";
 
 export const setCurrentUser_f = (user) => ({
   type: SET_CURRENT_TEACHER,
