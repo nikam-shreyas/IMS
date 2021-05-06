@@ -59,7 +59,7 @@ class InternshipDetails extends Component {
       const { deleteInternship } = this.props;
       deleteInternship(id);
       alert("Application Deleted!");
-      this.props.history.push("/student");
+      // this.props.history.push("/student");
     }
   }
   async loadData(internship) {

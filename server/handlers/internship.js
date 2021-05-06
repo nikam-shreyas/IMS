@@ -7,6 +7,7 @@ require("dotenv").config();
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
+const { createIndexes } = require("../models/student");
 //mailing options and transportor
 var options = {
   service: "gmail",
@@ -214,6 +215,7 @@ exports.studentsInternships = async (req, res, next) => {
 
 exports.getInternship = async (req, res, next) => {
   try {
+    console.log("hello");
     const { id } = req.params;
     const internship = await db.Internship.findById(id);
     if (!internship) {
@@ -230,27 +232,34 @@ exports.getInternship = async (req, res, next) => {
 };
 
 exports.deleteInternship = async (req, res, next) => {
+  console.log("hello");
   const { id: internshipId } = req.params;
   const { id: studentId } = req.decoded;
   try {
     let student = await db.Student.findById(studentId);
+    console.log(student);
     if (student.internships) {
       student.internships = student.internships.filter((studentInternship) => {
-        return studentInternship._id.toString() !== internshipId.toString(); // not sure if necessary to use toString()
+        return studentInternship._id.toString() !== internshipId.toString();
       });
     }
 
     const internship = await db.Internship.findById(internshipId);
-    if (!internship) throw new Error("No internship found");
+    console.log(internship);
+    if (!internship) {
+      console.log("failed");
+      throw new Error("No internship found");
+    }
     if (internship.student.toString() !== studentId) {
       throw new Error("Unauthorized access");
     }
     await student.save();
     await internship.remove();
-    return res.status(202).json({ internship, deleted: true });
+    console.log("deleted");
+    return res.status(200).json({ internship, deleted: true });
   } catch (err) {
     return next({
-      status: 400,
+      status: 401,
       message: err.message,
     });
   }

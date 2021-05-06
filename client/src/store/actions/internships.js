@@ -110,7 +110,9 @@ export const getCurrentInternship = (path) => {
 export const deleteInternship = (path) => {
   return async (dispatch) => {
     try {
+      console.log("deleting...");
       const internship = await api.call("delete", `internships/${path}`);
+      console.log("deleted");
       dispatch(setCurrentInternship(internship));
       dispatch(removeError());
     } catch (err) {
@@ -123,7 +125,6 @@ export const deleteInternship = (path) => {
 export const forwardInternship = (data) => {
   return async (dispatch) => {
     try {
-      console.log("im in forward internship function in actions .....ok (:|) ");
       const internship = await api.call("post", "internships/forward", data);
       dispatch(PushInternship(internship));
       dispatch(removeError());
