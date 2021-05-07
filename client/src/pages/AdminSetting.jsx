@@ -63,7 +63,11 @@ class AdminSetting extends Component {
         formData.get("oldpassword") || this.state.data.password;
       updatedata["newpassword"] = formData.get("newpassword");
       updatedata["newpasswordC"] = formData.get("newpasswordC");
-      resetPassword(this.state.data._id, updatedata).then();
+      resetPassword(this.state.data._id, updatedata).then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      });
     }
   }
 

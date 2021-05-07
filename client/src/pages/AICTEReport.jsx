@@ -11,6 +11,7 @@ class Report extends Component {
       internships: [],
       count: null,
       csvData: [],
+      prevYear: [],
     };
   }
   async componentDidMount() {
@@ -20,9 +21,10 @@ class Report extends Component {
   loadData(internship) {
     this.setState({ internships: internship });
     this.setState({ count: internship.length });
+    this.setState({ prevYear: internship.previousYear });
   }
   renderTable() {
-    console.log(this.state.internships);
+    console.log(this.state.prevYear);
     let Ccountfe1 = 0,
       Ccountfe2 = 0,
       Ccountse1 = 0,
@@ -43,7 +45,8 @@ class Report extends Component {
       Ecountte2 = 0,
       Ecountbe1 = 0,
       Ecountbe2 = 0;
-    this.state.internships.previousYear.forEach((element) => {
+    console.log(this.state.internships.previousYear);
+    this.state.internships.previousYear.map((element) => {
       if (element._id.department === "FE") {
         Ccountfe1 = element.total;
       } else if (element._id.department === "SE") {
@@ -55,7 +58,8 @@ class Report extends Component {
         Ccountbe1 = element.total;
       }
     });
-    // var year = new Date().getFullYear();
+    console.log(Ccountte1);
+    var year = new Date().getFullYear();
     // this.state.internships.forEach((internship) => {
     //   var date = new Date(internship.application.submittedDate);
     //   if (internship.student.currentClass.year === "SE") {
@@ -192,95 +196,95 @@ class Report extends Component {
     //     }
     //   }
     // });
-    // var SETOTAL =
-    //   Ccountse1 + Ccountse2 + Icountse1 + Icountse2 + Ecountse1 + Ecountse2;
-    // var BETOTAL =
-    //   Ccountbe1 + Ccountbe2 + Icountbe1 + Icountbe2 + Ecountbe1 + Ecountbe2;
-    // var TETOTAL =
-    //   Ccountte1 + Ccountte2 + Icountte1 + Icountte2 + Ecountte1 + Ecountte2;
-    // var TOTAL = SETOTAL + BETOTAL + TETOTAL;
-    // return (
-    //   <tbody>
-    //     <tr>
-    //       <td colSpan="6" style={{ textAlign: "center", fontWeight: "bold" }}>
-    //         COMPUTER ENGG
-    //       </td>
-    //     </tr>
-    //     <tr>
-    //       <td>{year - 1 + "-" + year}</td>
-    //       <td>0</td>
-    //       <td>{Ccountse1}</td>
-    //       <td>{Ccountte1}</td>
-    //       <td>{Ccountbe1}</td>
-    //       <td>{Ccountse1 + Ccountte1 + Ccountbe1}</td>
-    //     </tr>
-    //     <tr>
-    //       <td>{year - 2 + "-" + (year - 1)}</td>
-    //       <td>0</td>
-    //       <td>{Ccountse2}</td>
-    //       <td>{Ccountte2}</td>
-    //       <td>{Ccountbe2}</td>
-    //       <td>{Ccountse2 + Ccountte2 + Ccountbe2}</td>
-    //     </tr>
-    //     <tr>
-    //       <td colSpan="6" style={{ textAlign: "center", fontWeight: "bold" }}>
-    //         ENTC ENGG
-    //       </td>
-    //     </tr>
-    //     <tr>
-    //       <td>{year - 1 + "-" + year}</td>
-    //       <td>0</td>
-    //       <td>{Ecountse1}</td>
-    //       <td>{Ecountte1}</td>
-    //       <td>{Ecountbe1}</td>
-    //       <td>{Ecountse1 + Ecountte1 + Ecountbe1}</td>
-    //     </tr>
-    //     <tr>
-    //       <td>{year - 2 + "-" + (year - 1)}</td>
-    //       <td>0</td>
-    //       <td>{Ecountse2}</td>
-    //       <td>{Ecountte2}</td>
-    //       <td>{Ecountbe2}</td>
-    //       <td>{Ecountse2 + Ecountte2 + Ecountbe2}</td>
-    //     </tr>
-    //     <tr>
-    //       <td colSpan="6" style={{ textAlign: "center", fontWeight: "bold" }}>
-    //         IT ENGG
-    //       </td>
-    //     </tr>
-    //     <tr>
-    //       <td>{year - 1 + "-" + year}</td>
-    //       <td>{Icountse1}</td>
-    //       <td>{Icountte1}</td>
-    //       <td>{Icountbe1}</td>
-    //       <td>0</td>
-    //       <td>{Icountse1 + Icountte1 + Icountbe1}</td>
-    //     </tr>
-    //     <tr>
-    //       <td>{year - 2 + "-" + (year - 1)}</td>
-    //       <td>0</td>
-    //       <td>{Icountse2}</td>
-    //       <td>{Icountte2}</td>
-    //       <td>{Icountbe2}</td>
-    //       <td>{Icountse2 + Icountte2 + Icountbe2}</td>
-    //     </tr>
-    //     <tr>
-    //       <td>
-    //         <b> PICT Research Internship</b>
-    //       </td>
-    //     </tr>
-    //     <tr>
-    //       <td>
-    //         <b>Total</b>
-    //       </td>
-    //       <td>0</td>
-    //       <td>{SETOTAL}</td>
-    //       <td>{TETOTAL}</td>
-    //       <td>{BETOTAL}</td>
-    //       <td>{TOTAL}</td>
-    //     </tr>
-    //   </tbody>
-    // );
+    var SETOTAL =
+      Ccountse1 + Ccountse2 + Icountse1 + Icountse2 + Ecountse1 + Ecountse2;
+    var BETOTAL =
+      Ccountbe1 + Ccountbe2 + Icountbe1 + Icountbe2 + Ecountbe1 + Ecountbe2;
+    var TETOTAL =
+      Ccountte1 + Ccountte2 + Icountte1 + Icountte2 + Ecountte1 + Ecountte2;
+    var TOTAL = SETOTAL + BETOTAL + TETOTAL;
+    return (
+      <tbody>
+        <tr>
+          <td colSpan="6" style={{ textAlign: "center", fontWeight: "bold" }}>
+            COMPUTER ENGG
+          </td>
+        </tr>
+        <tr>
+          <td>{year - 1 + "-" + year}</td>
+          <td>0</td>
+          <td>{Ccountse1}</td>
+          <td>{Ccountte1}</td>
+          <td>{Ccountbe1}</td>
+          <td>{Ccountse1 + Ccountte1 + Ccountbe1}</td>
+        </tr>
+        <tr>
+          <td>{year - 2 + "-" + (year - 1)}</td>
+          <td>0</td>
+          <td>{Ccountse2}</td>
+          <td>{Ccountte2}</td>
+          <td>{Ccountbe2}</td>
+          <td>{Ccountse2 + Ccountte2 + Ccountbe2}</td>
+        </tr>
+        <tr>
+          <td colSpan="6" style={{ textAlign: "center", fontWeight: "bold" }}>
+            ENTC ENGG
+          </td>
+        </tr>
+        <tr>
+          <td>{year - 1 + "-" + year}</td>
+          <td>0</td>
+          <td>{Ecountse1}</td>
+          <td>{Ecountte1}</td>
+          <td>{Ecountbe1}</td>
+          <td>{Ecountse1 + Ecountte1 + Ecountbe1}</td>
+        </tr>
+        <tr>
+          <td>{year - 2 + "-" + (year - 1)}</td>
+          <td>0</td>
+          <td>{Ecountse2}</td>
+          <td>{Ecountte2}</td>
+          <td>{Ecountbe2}</td>
+          <td>{Ecountse2 + Ecountte2 + Ecountbe2}</td>
+        </tr>
+        <tr>
+          <td colSpan="6" style={{ textAlign: "center", fontWeight: "bold" }}>
+            IT ENGG
+          </td>
+        </tr>
+        <tr>
+          <td>{year - 1 + "-" + year}</td>
+          <td>{Icountse1}</td>
+          <td>{Icountte1}</td>
+          <td>{Icountbe1}</td>
+          <td>0</td>
+          <td>{Icountse1 + Icountte1 + Icountbe1}</td>
+        </tr>
+        <tr>
+          <td>{year - 2 + "-" + (year - 1)}</td>
+          <td>0</td>
+          <td>{Icountse2}</td>
+          <td>{Icountte2}</td>
+          <td>{Icountbe2}</td>
+          <td>{Icountse2 + Icountte2 + Icountbe2}</td>
+        </tr>
+        <tr>
+          <td>
+            <b> PICT Research Internship</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <b>Total</b>
+          </td>
+          <td>0</td>
+          <td>{SETOTAL}</td>
+          <td>{TETOTAL}</td>
+          <td>{BETOTAL}</td>
+          <td>{TOTAL}</td>
+        </tr>
+      </tbody>
+    );
   }
   renderCurrentYear() {
     var Ccountse1 = 0,
@@ -593,7 +597,11 @@ class Report extends Component {
                         </th>
                       </tr>
                     </thead>
-                    {this.renderTable()}
+                    {this.state.prevYear.length === 0 ? (
+                      <div></div>
+                    ) : (
+                      this.renderTable()
+                    )}
                   </table>
                 </div>
               </div>
