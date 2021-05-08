@@ -524,42 +524,7 @@ class Report extends Component {
                 id="CurrentYear"
                 role="tabpanel"
                 aria-labelledby="tab-CurrentYear"
-              >
-                <div className="container-fluid mt-2">
-                  <table className="table table-sm table-bordered table-hover">
-                    <thead className="thead-light">
-                      <tr>
-                        <th>
-                          Acedemic Year
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
-                        <th>
-                          FE{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
-                        <th>
-                          SE{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
-                        <th>
-                          TE{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
-                        <th>
-                          BE{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
-
-                        <th>
-                          Total{" "}
-                          <MdExpandMore style={{ margin: -1, padding: -1 }} />
-                        </th>
-                      </tr>
-                    </thead>
-                    {/*this.renderCurrentYear()*/}
-                  </table>
-                </div>
-              </div>
+              ></div>
               <div
                 className="tab-pane fade show active"
                 id="lastYear"
