@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Sidenav from "../components/Sidenav";
 import { updateStudent, getStudent } from "../store/actions";
 import { connect } from "react-redux";
+import { BsTriangleHalf } from "react-icons/bs";
 class StudentProfile extends Component {
   state = {
     isLoading: true,
@@ -61,6 +62,9 @@ class StudentProfile extends Component {
     for (var i = 0, len = elements.length; i < len; ++i) {
       elements[i].readOnly = !elements[i].readOnly;
     }
+
+    let ele = document.getElementById("year");
+    ele.disabled = !ele.disabled;
     var updateButton = document.getElementById("updateBtn");
     updateButton.disabled = !updateButton.disabled;
 
@@ -143,14 +147,23 @@ class StudentProfile extends Component {
                     <div className="form-row my-2">
                       <div className="col-sm-6">
                         Year:
-                        <input
+                        <select
                           readOnly
-                          type="text"
+                          disabled
                           name="year"
                           id="year"
-                          placeholder={this.state.data.currentClass.year}
                           className="form-control"
-                        />
+                        >
+                          <option value={this.state.data.currentClass.year}>
+                            {this.state.data.currentClass.year}
+                          </option>
+                          <option disabled>――――――――</option>
+
+                          <option value="FE">FE</option>
+                          <option value="SE">SE</option>
+                          <option value="TE">TE</option>
+                          <option value="BE">BE</option>
+                        </select>
                       </div>
                       <div className="col-sm-6">
                         Division:
@@ -159,6 +172,8 @@ class StudentProfile extends Component {
                           type="number"
                           name="div"
                           id="div"
+                          min="1"
+                          max="11"
                           placeholder={this.state.data.currentClass.div}
                           className="form-control"
                         />
