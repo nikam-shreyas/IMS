@@ -34,7 +34,7 @@ import StudentReport from "../pages/StudentReport";
 import GuidelinesInternship from "../pages/GuidelinesInternship";
 import FacStudentReport from "../pages/FacStudentReport";
 import Report from "../pages/AICTEReport";
-import Setup from "../pages/Setup";
+
 const RouteViews = ({ auth }) => {
   const user = localStorage.getItem("user");
   return (
@@ -333,7 +333,7 @@ const RouteViews = ({ auth }) => {
             } else return <Restricted />;
           }}
         />
-        <Route exact path="/setup" render={() => <Setup />} />
+
         <Route exact path="/forgotpassword" render={() => <ForgotPassword />} />
         <Route component={NotFoundPage} />
       </Switch>

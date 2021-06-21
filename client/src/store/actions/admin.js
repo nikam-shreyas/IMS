@@ -166,7 +166,7 @@ export const searchStudents = (data) => {
       console.log(YEAR + DIV + "year div ");
       let path = "?YEAR=" + YEAR + "&DIV=" + DIV;
       const students = await api.call("get", `admin/findStudents/${path}`);
-      if (students.length == 0) {
+      if (students.length === 0) {
         dispatch(addError("No students Found"));
       } else {
         dispatch(getSomeStudents(students));

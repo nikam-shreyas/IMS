@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Sidenav from "../components/Sidenav";
 import { updateStudent, getStudent } from "../store/actions";
 import { connect } from "react-redux";
-import { BsTriangleHalf } from "react-icons/bs";
 class StudentProfile extends Component {
   state = {
     isLoading: true,

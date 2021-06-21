@@ -63,24 +63,22 @@ class Auth extends Component {
                 <h2>Sign In</h2>
                 <input
                   required
-                  className="input"
                   type="text"
                   value={username}
                   name="username"
                   placeholder="Username"
                   autoComplete="off"
-                  className="form-control"
+                  className="input form-control"
                   onChange={this.handleChange}
                 />
 
                 <input
                   required
-                  className="input"
                   type="password"
                   value={password}
                   name="password"
                   placeholder="Password"
-                  className="form-control"
+                  className="input form-control"
                   autoComplete="off"
                   onChange={this.handleChange}
                 />

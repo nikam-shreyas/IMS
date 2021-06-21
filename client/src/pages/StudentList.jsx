@@ -51,19 +51,7 @@ class StudentList extends Component {
       elements[i].style.display = "none";
     }
   }
-  filter(e) {
-    var filter, cards, cardContent, i;
-    filter = e.target.value.toUpperCase();
-    cards = document.getElementsByClassName("card");
-    for (i = 0; i < cards.length; i++) {
-      cardContent = cards[i].querySelector(".individual-card");
-      if (cardContent.innerText.toUpperCase().indexOf(filter) > -1) {
-        cards[i].style.display = "";
-      } else {
-        cards[i].style.display = "none";
-      }
-    }
-  }
+
   handleCardView() {
     let elements = document.getElementsByClassName("card-body");
     for (let i = 0; i < elements.length; i++) {
@@ -80,8 +68,8 @@ class StudentList extends Component {
         p[i].checked = false;
       }
     } else {
-      for (var i = 0; i < p.length; i++) {
-        p[i].checked = true;
+      for (var j = 0; j < p.length; j++) {
+        p[j].checked = true;
       }
     }
     this.setState({ allSelected: !this.state.allSelected });
@@ -89,7 +77,7 @@ class StudentList extends Component {
 
   deletesingle = (e) => {
     var g = document.getElementById(e.target.value);
-    if (g.checked == true) {
+    if (g.checked === true) {
     } else {
       alert("Not Selected");
     }
@@ -104,7 +92,7 @@ class StudentList extends Component {
       }
     }
 
-    if (obj.length == 0) {
+    if (obj.length === 0) {
       alert("No Students to delete.");
     } else {
       const { deleteStudents } = this.props;
@@ -118,9 +106,9 @@ class StudentList extends Component {
     await this.setState({ YEAR: year.value });
     await this.setState({ DIV: div.value });
 
-    if (year.value == "--") {
+    if (year.value === "--") {
       alert("Please select Year");
-    } else if (div.value == "--") {
+    } else if (div.value === "--") {
       alert("Please Select Division");
     } else {
       const { YEAR, DIV } = this.state;
@@ -174,11 +162,11 @@ class StudentList extends Component {
   }
 
   filter(e) {
-    var filter, cards, i;
-    filter = e.target.value.toUpperCase();
+    var filterText, cards, i;
+    filterText = e.target.value.toUpperCase();
     cards = document.getElementsByClassName("application");
     for (i = 0; i < cards.length; i++) {
-      if (cards[i].innerText.toUpperCase().indexOf(filter) > -1) {
+      if (cards[i].innerText.toUpperCase().indexOf(filterText) > -1) {
         cards[i].style.display = "";
       } else {
         cards[i].style.display = "none";
@@ -316,7 +304,7 @@ class StudentList extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.isLoading == true ? (
+                {this.state.isLoading === true ? (
                   <p>No data</p>
                 ) : (
                   this.renderCardData()

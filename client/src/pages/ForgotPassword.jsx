@@ -15,7 +15,7 @@ class ForgotPassword extends Component {
     var formData = new FormData(e.target);
     let data = {};
     data["username"] = formData.get("username");
-    data["emailId"] = formData.get("emailId");    
+    data["emailId"] = formData.get("emailId");
     data["role"] = formData.get("role");
     const { forgotPassword } = this.props;
     forgotPassword(data);
@@ -69,17 +69,16 @@ class ForgotPassword extends Component {
                       </div>
                       <input
                         type="text"
-                        class="form-control bg-dark text-light"
-                        class="form-control bg-dark text-light"
+                        className="form-control bg-dark text-light"
                         placeholder="Student"
                         disabled
                       />
                     </div>
                   </div>
                   <div className="col-sm-4">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text bg-dark">
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <div className="input-group-text bg-dark">
                           <input
                             type="radio"
                             name="role"

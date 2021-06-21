@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
-import { createTeacher, removeSuccess, removeError } from "../store/actions";
+import { createTeacher, removeSuccess } from "../store/actions";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorMessage from "../components/ErrorMessage";

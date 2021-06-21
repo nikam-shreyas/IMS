@@ -27,6 +27,7 @@ class Notices extends Component {
     }
   }
   constructor(props) {
+    super(props);
     this.state = {
       notices: [
         {
@@ -47,7 +48,6 @@ class Notices extends Component {
         },
       ],
     };
-    super(props);
   }
 
   componentDidMount() {
