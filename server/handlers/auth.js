@@ -23,11 +23,11 @@ exports.register = async (req, res, next) => {
     if (student) {
       let link =
         "<h2>Welcome to IMS!</h2><br/><h4>Your registration to IMS as a student was successful.</h4><br/>";
-     
+
       var email = {
         from: process.env.EMAILFROM,
         to: student.emailId,
-        subject: "Registration Successful",        
+        subject: "Registration Successful",
         html: link,
       };
       client.sendMail(email, (err, info) => {
@@ -71,7 +71,7 @@ exports.login = async (req, res, next) => {
 exports.genPassword = () => {
   var length = 10,
     charset =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()^_+{}[]<>?",
+      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@_",
     retVal = "";
   for (var i = 0, n = charset.length; i < length; ++i) {
     retVal += charset.charAt(Math.floor(Math.random() * n));
@@ -114,7 +114,7 @@ exports.forgotPassword = async (req, res, next) => {
           "</b>",
       };
       client.sendMail(email, (err, info) => {
-        if (err) {          
+        if (err) {
           err.message = "Could not send email" + err;
         } else if (info) {
           let message = "Email sent successfully";
@@ -122,7 +122,7 @@ exports.forgotPassword = async (req, res, next) => {
         }
       });
     }
-  } catch (err) {    
+  } catch (err) {
     err.message = "Could not reset password. Please try again.";
     next(err);
   }
@@ -137,7 +137,7 @@ exports.updateStudent = async (req, res, next) => {
     for (var key of Object.keys(details)) {
       student[key.toString()] = details[key];
     }
-    student.save();    
+    student.save();
     const { name, currentClass, rollNo, prevSemAttendance, emailId } = student;
     res
       .status(200)
@@ -155,10 +155,8 @@ exports.getStudentDetails = async (req, res, next) => {
     const student = await db.Student.findById(id);
     if (!student) {
       throw new Error("No student found");
-    }    
-    res
-      .status(200)      
-      .json(student);
+    }
+    res.status(200).json(student);
   } catch (err) {
     next({
       status: 400,
@@ -169,7 +167,7 @@ exports.getStudentDetails = async (req, res, next) => {
 
 exports.resetStudentPassword = async (req, res, next) => {
   const { oldpassword, newpassword } = req.body;
-  const { id } = req.decoded;  
+  const { id } = req.decoded;
   try {
     const Stud = await db.Student.findById({ _id: id });
     const valid = await Stud.comparePassword(oldpassword);
@@ -192,7 +190,7 @@ exports.resetStudentPassword = async (req, res, next) => {
     } else {
       throw new Error("Old password is wrong!");
     }
-  } catch (err) {    
+  } catch (err) {
     next(err);
   }
 };

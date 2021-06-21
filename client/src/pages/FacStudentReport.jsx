@@ -18,7 +18,9 @@ class FacStudentReport extends Component {
     const { facultyGetReport } = this.props;
     facultyGetReport().then(() => this.loadData(this.props.internships));
   }
-  loadData(internship) {    
+
+  //converts data to csv format as per the required format ref :- https://www.npmjs.com/package/react-csv
+  loadData(internship) {
     this.setState({ internships: internship });
     this.setState({ count: internship.length });
     internship.forEach((element) => {
@@ -31,9 +33,9 @@ class FacStudentReport extends Component {
         date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
       csv["Duration"] = element.application.durationOfInternship;
       csv["Stipend"] = element.application.stipend;
-      csv["Status"] = element.completionStatus;      
+      csv["Status"] = element.completionStatus;
       this.setState({ csvData: this.state.csvData.concat(csv) });
-    });    
+    });
   }
   renderRows() {
     return this.state.internships.map((internship) => {
@@ -77,12 +79,12 @@ class FacStudentReport extends Component {
       }
     }
   }
-  render() {    
+  render() {
     return (
       <div>
         <div className="row no-gutters">
           <div className="col-sm-2 sidenav">
-              <SideNav_f activeComponent="7" />
+            <SideNav_f activeComponent="7" />
           </div>
           <div className="col-sm-10 of">
             <div className="container-fluid mt-2">

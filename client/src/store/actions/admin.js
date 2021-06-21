@@ -50,11 +50,9 @@ export const deleteStudents = (data) => {
     try {
       console.log(data);
       const admin = await api.call("put", "admin/deletestudent", data);
-      // console.log(admin);
       dispatch(addSuccess(admin));
       dispatch(removeError());
     } catch (err) {
-      // const error = err.response.data;
       dispatch(addError("Something went wrong. Try again."));
     }
   };

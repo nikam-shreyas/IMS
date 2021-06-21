@@ -53,8 +53,7 @@ class AddFaculty extends Component {
     data["username"] = formData.get("username") || this.state.data.username;
     data["password"] = formData.get("password") || this.state.data.password;
     data["emailId"] = formData.get("emailId") || this.state.data.emailId;
-
-    console.log(createTeacher(data));
+    createTeacher(data);
   }
   render() {
     return (

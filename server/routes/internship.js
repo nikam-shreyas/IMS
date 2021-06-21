@@ -3,6 +3,7 @@ const handle = require("../handlers");
 const auth = require("../middlewares/auth");
 const multer = require("multer");
 
+//define storage that stores the uploaded documents in public/Documents, keep the original filename
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/Documents");
@@ -13,6 +14,7 @@ const storage = multer.diskStorage({
   },
 });
 
+//define filter that out other files and accept only pdfs, throws error if not pdf
 const FileFilter = (req, file, cb) => {
   if (!file.originalname.match(".(pdf|PDF)$")) {
     return cb(new Error("You can upload only pdf files!"), false);
@@ -20,6 +22,7 @@ const FileFilter = (req, file, cb) => {
   cb(null, true);
 };
 
+//pass the defined options to multer object
 const upload = multer({
   storage: storage,
   limits: { fieldSize: 5 * 1024 * 1024 },
@@ -38,6 +41,7 @@ router.route("/update").post(auth, handle.updateInternship);
 router.route("/approve").post(auth, handle.approveInternship);
 router.route("/reject").post(auth, handle.rejectInternship);
 
+//accepts 6 or less files in an array from client side
 router
   .route("/uploadDocument")
   .post(auth, upload.array("docs", 6), (req, res) => {
