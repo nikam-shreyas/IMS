@@ -211,7 +211,6 @@ exports.studentsInternships = async (req, res, next) => {
 
 exports.getInternship = async (req, res, next) => {
   try {
-    console.log("hello");
     const { id } = req.params;
     const internship = await db.Internship.findById(id);
     if (!internship) {

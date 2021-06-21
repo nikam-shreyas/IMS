@@ -5,6 +5,7 @@
 * {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 .of {
   height: 98vh;
@@ -35,19 +36,18 @@ code {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(27, 25, 25);
-  border-radius: 10px;
+  background: grey;
+
+  border-radius: 10px 0px 0px 10px;
 }
 
 /* Handle on hover */

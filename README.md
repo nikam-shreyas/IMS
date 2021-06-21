@@ -1,5 +1,7 @@
 # IMS
+
 Internship Management System based on MERN Stack.
+
 <h1>Implementation Screenshots:</h1>
 
 <img src="https://github.com/ZeroNP/IMS/blob/master/Screenshots/IMS-06-00.png" alt="imsscreenshot" />
