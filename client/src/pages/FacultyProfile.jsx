@@ -33,12 +33,11 @@ class FacultyProfile extends Component {
   loadData(user) {
     if (user.designation !== undefined) this.setState({ data: user });
   }
-  handleSubmit(event) {    
-
+  handleSubmit(event) {
     event.preventDefault();
     const { updateFaculty } = this.props;
     var formData = new FormData(event.target);
-    const updatedata = {};    
+    const updatedata = {};
     updatedata["firstname"] =
       formData.get("firstname") || this.state.data.name.firstname;
     updatedata["lastname"] =
@@ -53,10 +52,8 @@ class FacultyProfile extends Component {
     updatedata["username"] =
       formData.get("username") || this.state.data.username;
     updatedata["emailId"] = formData.get("emailId") || this.state.data.emailId;
-   
-    updateFaculty(this.state.data._id, updatedata).then(
-      console.log(this.props.faculty)
-    );
+
+    updateFaculty(this.state.data._id, updatedata);
     window.location.reload(false);
   }
   editform() {
@@ -65,8 +62,8 @@ class FacultyProfile extends Component {
     for (var i = 0, len = elements.length - 3; i < len; ++i) {
       elements[i].readOnly = !elements[i].readOnly;
     }
-    elements[elements.length - 4].disabled = !elements[elements.length - 4]
-      .disabled;
+    elements[elements.length - 4].disabled =
+      !elements[elements.length - 4].disabled;
 
     var updateButton = document.getElementById("updateBtn");
     updateButton.disabled = !updateButton.disabled;
@@ -213,7 +210,7 @@ class FacultyProfile extends Component {
                           {options}
                         </select>
                       </div>
-                    </div>                    
+                    </div>
                   </div>
                   <hr />
                   <div className="text-right">

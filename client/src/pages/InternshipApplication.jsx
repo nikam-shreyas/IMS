@@ -41,49 +41,39 @@ class InternshipApplication extends React.Component {
     this.setState({ fileNOC: event.target.files[0] });
     this.handleUpload("NOC", "NOCLabel");
     this.state.files["NOC"] = event.target.files[0].name;
-    // this.state.files.push({ NOC: event.target.files[0].name });
   }
   submitOL(event) {
     this.setState({ fileOL: event.target.files[0] });
     this.handleUpload("offerLetter", "offerLetterLabel");
     this.state.files["offerLetter"] = event.target.files[0].name;
-    // this.state.files.push({ offerLetter: event.target.files[0].name });
   }
 
   submitFE(event) {
     this.setState({ fileFE: event.target.files[0] });
     this.handleUpload("FEMarksheet", "FEMarksheetLabel");
     this.state.files["FEMarksheet"] = event.target.files[0].name;
-    // this.state.files.push({ FEMarksheet: event.target.files[0].name });
   }
   submitSE(event) {
     this.setState({ fileSE: event.target.files[0] });
     this.handleUpload("SEMarksheet", "SEMarksheetLabel");
     this.state.files["SEMarksheet"] = event.target.files[0].name;
-    // this.state.files.push({ SEMarksheet: event.target.files[0].name });
   }
   submitTE(event) {
     this.setState({ fileTE: event.target.files[0] });
     this.handleUpload("TEMarksheet", "TEMarksheetLabel");
     this.state.files["TEMarksheet"] = event.target.files[0].name;
-    // this.state.files.push({ TEMarksheet: event.target.files[0].name });
   }
   submitBE(event) {
     this.setState({ fileBE: event.target.files[0] });
     this.handleUpload("BEMarksheet", "BEMarksheetLabel");
     this.state.files["BEMarksheet"] = event.target.files[0].name;
-    // this.state.files.push({ BEMarksheet: event.target.files[0].name });
   }
   handleChange = (date) => {
     this.setState({
       startDate: date,
     });
   };
-  // downloadFile(){
-  //   var x = new XMLHttpRequest();
-  //   x.open('GET','https:localhost:4002/index.js',true);
 
-  // }
   handleSubmit(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
@@ -93,9 +83,8 @@ class InternshipApplication extends React.Component {
       if (key !== "files") data["application"][key] = value;
     }
     data["application"]["submittedDate"] = new Date().toUTCString();
-    data["application"]["NOCRequired"] = document.getElementById(
-      "NOCRequired"
-    ).checked;
+    data["application"]["NOCRequired"] =
+      document.getElementById("NOCRequired").checked;
     const formDataFile = new FormData();
     formDataFile.append("docs", this.state.fileOL);
     data["files"] = this.state.files;

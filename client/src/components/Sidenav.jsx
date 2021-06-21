@@ -24,7 +24,7 @@ class Sidenav extends Component {
   }
   state = {};
   render() {
-    const activeNow = this.props.activeComponent;
+    const activeNow = this.props.activeComponent; //get the sidenav component number that is currently active/visible
     return (
       <div className="sidenav">
         <h4 className="text-light text-center mt-2">PICT IMS</h4>

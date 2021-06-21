@@ -18,6 +18,8 @@ class StudentReport extends Component {
     const { getAllInternships } = this.props;
     getAllInternships().then(() => this.loadData(this.props.internships));
   }
+
+  //converts data to csv format as per the required format ref :- https://www.npmjs.com/package/react-csv
   loadData(internship) {
     this.setState({ internships: internship });
     this.setState({ count: internship.length });

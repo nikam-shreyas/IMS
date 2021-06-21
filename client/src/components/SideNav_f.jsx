@@ -26,7 +26,7 @@ class Sidenav_f extends Component {
     window.location.href = "/";
   }
   render() {
-    const activeNow = this.props.activeComponent;
+    const activeNow = this.props.activeComponent; //get the sidenav component number that is currently active/visible
     return (
       <div className="sidenav">
         <h4 className="text-light text-center mt-2">PICT IMS</h4>
@@ -72,7 +72,7 @@ class Sidenav_f extends Component {
               Notices
             </li>
           </Link>
-         <Link to="/stats">
+          <Link to="/stats">
             <li id="li" className={activeNow === "6" ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdEqualizer style={{ margin: -1, padding: -1 }} />
@@ -89,13 +89,13 @@ class Sidenav_f extends Component {
             </li>
           </Link>
           <Link to="/facultysetting">
-          <li id="li" className={activeNow === "8" ? "sidenav-active" : ""}>
-            <span className="mx-2">
-              <MdSettings style={{ margin: -1, padding: -1 }} />
-            </span>
-            Change Password
-          </li>
-        </Link>
+            <li id="li" className={activeNow === "8" ? "sidenav-active" : ""}>
+              <span className="mx-2">
+                <MdSettings style={{ margin: -1, padding: -1 }} />
+              </span>
+              Change Password
+            </li>
+          </Link>
           <li id="li" className="nav-item">
             <span className="mx-2">
               <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />

@@ -96,7 +96,6 @@ class InternshipDetails extends Component {
           divFileElement.target = "blank";
           divFileElement.removeAttribute("download");
           fileDiv.appendChild(divFileElement);
-          // console.log(divFileElement);
         }
       }
     }

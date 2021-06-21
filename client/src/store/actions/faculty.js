@@ -79,9 +79,6 @@ export const getFacultyProfile = (path) => {
   return async (dispatch) => {
     try {
       const faculty = await api.call("get", "faculty/profile");
-      console.log("im in actions " + faculty.name.firstname);
-
-      //console.log("can these be admin details "+faculty.department);
       dispatch(get_faculty_profile(faculty));
       dispatch(removeError());
     } catch (err) {

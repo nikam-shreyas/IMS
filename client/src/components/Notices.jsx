@@ -26,27 +26,27 @@ class Notices extends Component {
       }
     }
   }
-  state = {
-    notices: [
-      {
-        subject: null,
-        description: null,
-        link: null,
-        createdDate: null,
-        designation: null,
-        duration: null,
-        stipend: null,
-        workplace: null,
-        contact: null,
-        emailId: null,
-        location: null,
-        positions: null,
-        domain: null,
-        requirements: null,
-      },
-    ],
-  };
   constructor(props) {
+    this.state = {
+      notices: [
+        {
+          subject: null,
+          description: null,
+          link: null,
+          createdDate: null,
+          designation: null,
+          duration: null,
+          stipend: null,
+          workplace: null,
+          contact: null,
+          emailId: null,
+          location: null,
+          positions: null,
+          domain: null,
+          requirements: null,
+        },
+      ],
+    };
     super(props);
   }
 

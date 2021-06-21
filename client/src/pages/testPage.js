@@ -1,3 +1,5 @@
+// ****************************** Trial page not used in application **********************************//
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FaRegFilePdf } from "react-icons/fa";
@@ -107,3 +109,4 @@ export default connect(
     setFaculty,
   }
 )(TestPage);
+// ****************************** Trial page not used in application **********************************//

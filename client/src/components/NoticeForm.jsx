@@ -6,13 +6,7 @@ class NoticeForm extends Component {
   state = {};
   constructor(props) {
     super(props);
-    this.handleUpload = this.handleUpload.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleUpload(id, labelId) {
-    var fileName = document.getElementById(id).value.split("\\").pop();
-    document.getElementById(labelId).classList.add("selected");
-    document.getElementById(labelId).innerHTML = fileName;
   }
   handleSubmit(event) {
     event.preventDefault();
