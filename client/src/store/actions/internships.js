@@ -241,7 +241,7 @@ export const facultyGetReport = () => {
   return async (dispatch) => {
     try {
       const internships = await api.call("get", "internships/report");
-      if (internships.length == 0) {
+      if (internships.length === 0) {
         dispatch(addError("Empty report."));
       } else {
         dispatch(setInternships(internships));

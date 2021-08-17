@@ -11,16 +11,6 @@ import Sidenav from "../components/Sidenav";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 class InternshipApplication extends React.Component {
-  state = {
-    startDate: new Date(),
-    files: {},
-    fileNOC: null,
-    fileOL: null,
-    fileFE: null,
-    fileSE: null,
-    fileTE: null,
-    fileBE: null,
-  };
   componentWillUnmount() {
     const { removeSuccess, removeError } = this.props;
     removeSuccess();
@@ -28,6 +18,16 @@ class InternshipApplication extends React.Component {
   }
   constructor(props) {
     super(props);
+    this.state = {
+      startDate: new Date(),
+      files: {},
+      fileNOC: null,
+      fileOL: null,
+      fileFE: null,
+      fileSE: null,
+      fileTE: null,
+      fileBE: null,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.submitNOCFile = this.submitNOCFile.bind(this);
     this.submitOL = this.submitOL.bind(this);
@@ -40,33 +40,70 @@ class InternshipApplication extends React.Component {
   submitNOCFile(event) {
     this.setState({ fileNOC: event.target.files[0] });
     this.handleUpload("NOC", "NOCLabel");
-    this.state.files["NOC"] = event.target.files[0].name;
+    let filename = event.target.files[0].name;
+    this.setState((prevState) => ({
+      files: {
+        ...prevState.files,
+        ["NOC"]: filename,
+      },
+    }));
   }
   submitOL(event) {
     this.setState({ fileOL: event.target.files[0] });
     this.handleUpload("offerLetter", "offerLetterLabel");
-    this.state.files["offerLetter"] = event.target.files[0].name;
+    let filename = event.target.files[0].name;
+    this.setState((prevState) => ({
+      files: {
+        ...prevState.files,
+        ["offerLetter"]: filename,
+      },
+    }));
   }
 
   submitFE(event) {
     this.setState({ fileFE: event.target.files[0] });
     this.handleUpload("FEMarksheet", "FEMarksheetLabel");
-    this.state.files["FEMarksheet"] = event.target.files[0].name;
+    let filename = event.target.files[0].name;
+
+    this.setState((prevState) => ({
+      files: {
+        ...prevState.files,
+        ["FEMarksheet"]: filename,
+      },
+    }));
   }
   submitSE(event) {
     this.setState({ fileSE: event.target.files[0] });
     this.handleUpload("SEMarksheet", "SEMarksheetLabel");
-    this.state.files["SEMarksheet"] = event.target.files[0].name;
+    let filename = event.target.files[0].name;
+    this.setState((prevState) => ({
+      files: {
+        ...prevState.files,
+        ["SEMarksheet"]: filename,
+      },
+    }));
   }
   submitTE(event) {
     this.setState({ fileTE: event.target.files[0] });
     this.handleUpload("TEMarksheet", "TEMarksheetLabel");
-    this.state.files["TEMarksheet"] = event.target.files[0].name;
+    let filename = event.target.files[0].name;
+    this.setState((prevState) => ({
+      files: {
+        ...prevState.files,
+        ["TEMarksheet"]: filename,
+      },
+    }));
   }
   submitBE(event) {
     this.setState({ fileBE: event.target.files[0] });
     this.handleUpload("BEMarksheet", "BEMarksheetLabel");
-    this.state.files["BEMarksheet"] = event.target.files[0].name;
+    let filename = event.target.files[0].name;
+    this.setState((prevState) => ({
+      files: {
+        ...prevState.files,
+        ["BEMarksheet"]: filename,
+      },
+    }));
   }
   handleChange = (date) => {
     this.setState({
@@ -88,19 +125,20 @@ class InternshipApplication extends React.Component {
     const formDataFile = new FormData();
     formDataFile.append("docs", this.state.fileOL);
     data["files"] = this.state.files;
-    if (this.state.fileFE != null) {
+    console.log(data["files"]);
+    if (this.state.fileFE !== null) {
       formDataFile.append("docs", this.state.fileFE);
     }
-    if (this.state.fileSE != null) {
+    if (this.state.fileSE !== null) {
       formDataFile.append("docs", this.state.fileSE);
     }
-    if (this.state.fileTE != null) {
+    if (this.state.fileTE !== null) {
       formDataFile.append("docs", this.state.fileTE);
     }
-    if (this.state.fileBE != null) {
+    if (this.state.fileBE !== null) {
       formDataFile.append("docs", this.state.fileBE);
     }
-    if (this.state.fileNOC != null) {
+    if (this.state.fileNOC !== null) {
       formDataFile.append("docs", this.state.fileNOC);
     }
 

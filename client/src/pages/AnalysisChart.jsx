@@ -28,8 +28,8 @@ class AnalyticsCharts extends Component {
       temp[key[i]] = obj_1[key[i]];
       delete obj_1[key[i]];
     }
-    for (var i = 0; i < key.length; i++) {
-      obj_1[key[i]] = temp[key[i]];
+    for (var j = 0; j < key.length; j++) {
+      obj_1[key[j]] = temp[key[j]];
     }
     return obj_1;
   }

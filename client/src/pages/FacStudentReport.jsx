@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { facultyGetReport } from "../store/actions";
-import Admin_Sidenav from "../components/Admin_Sidenav";
 import { connect } from "react-redux";
 import { CSVLink } from "react-csv";
 import { MdFileDownload, MdSearch, MdExpandMore } from "react-icons/md";

@@ -27,11 +27,11 @@ class Auth_2 extends Component {
   handleSubmit(e) {
     var str = this.state.username;
     var str1 = str.substring(0, 3);
-    if (this.state.password == this.state.confirmpassword) {
+    if (this.state.password === this.state.confirmpassword) {
       if (
-        str1 == "C2K" ||
-        str1 == "I2K" ||
-        (str1 == "E2K" && str.length == 11)
+        str1 === "C2K" ||
+        str1 === "I2K" ||
+        (str1 === "E2K" && str.length === 11)
       ) {
         const { username, password, emailId } = this.state;
         const { authType } = this.props;
@@ -50,7 +50,7 @@ class Auth_2 extends Component {
   }
   handleConfirmPassword(e) {
     this.setState({ [e.target.name]: e.target.value });
-    if (this.state.password != e.target.value) {
+    if (this.state.password !== e.target.value) {
       this.setState({ message: "Passwords do not match!" });
     } else {
       this.setState({ message: "" });

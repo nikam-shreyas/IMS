@@ -32,7 +32,7 @@ class Admin_Sidenav extends Component {
         <p className="mt-4">Menu</p>
         <ul id="ul">
           <Link to="/admin/" className="adminProfile">
-            <li id="li" className={activeNow == 1 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 1 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdPermIdentity style={{ margin: -1, padding: -1 }} />
               </span>
@@ -40,7 +40,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/all" className="facultyList">
-            <li id="li" className={activeNow == 2 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 2 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdFormatListBulleted style={{ margin: -1, padding: -1 }} />
               </span>
@@ -48,7 +48,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/allStudents" className="studentList">
-            <li id="li" className={activeNow == 3 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 3 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdRecentActors style={{ margin: -1, padding: -1 }} />
               </span>
@@ -56,7 +56,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/add" className="addFaculty">
-            <li id="li" className={activeNow == 4 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 4 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAddCircle style={{ margin: -1, padding: -1 }} />
               </span>
@@ -64,7 +64,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/deleteFaculty" className="deleteFaculty">
-            <li id="li" className={activeNow == 5 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 5 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdDelete style={{ margin: -1, padding: -1 }} />
               </span>
@@ -72,7 +72,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/stats" className="stats">
-            <li id="li" className={activeNow == 6 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 6 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdEqualizer style={{ margin: -1, padding: -1 }} />
               </span>
@@ -80,7 +80,7 @@ class Admin_Sidenav extends Component {
             </li>
           </Link>
           <Link to="/studentReport" className="studentReport">
-            <li id="li" className={activeNow == 7 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 7 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdAssignment style={{ margin: -1, padding: -1 }} />
               </span>
@@ -89,7 +89,7 @@ class Admin_Sidenav extends Component {
           </Link>
 
           <Link to="/aicteReport" className="report">
-            <li id="li" className={activeNow == 8 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 8 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdPoll style={{ margin: -1, padding: -1 }} />
               </span>
@@ -98,14 +98,14 @@ class Admin_Sidenav extends Component {
           </Link>
 
           <Link to="/settings" className="setting">
-            <li id="li" className={activeNow == 9 ? "sidenav-active" : ""}>
+            <li id="li" className={activeNow === 9 ? "sidenav-active" : ""}>
               <span className="mx-2">
                 <MdSettings style={{ margin: -1, padding: -1 }} />
               </span>
               Change Password
             </li>
           </Link>
-          <li id="li" className="nav-item" className="logout">
+          <li id="li" className="nav-item logout">
             <span className="mx-2">
               <RiLogoutBoxLine style={{ margin: -1, padding: -1 }} />
             </span>

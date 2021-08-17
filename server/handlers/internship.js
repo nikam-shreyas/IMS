@@ -21,6 +21,7 @@ exports.addNewInternship = async (req, res, next) => {
   const { id } = req.decoded;
   const { application, files } = req.body;
   var path;
+  console.log(files);
 
   try {
     const student = await db.Student.findById(id);

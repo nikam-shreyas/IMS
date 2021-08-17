@@ -26,7 +26,6 @@ class Report extends Component {
   renderTable() {
     console.log(this.state.prevYear);
     let Ccountfe1 = 0,
-      Ccountfe2 = 0,
       Ccountse1 = 0,
       Ccountse2 = 0,
       Ccountte1 = 0,
@@ -196,6 +195,7 @@ class Report extends Component {
     //     }
     //   }
     // });
+
     var SETOTAL =
       Ccountse1 + Ccountse2 + Icountse1 + Icountse2 + Ecountse1 + Ecountse2;
     var BETOTAL =
@@ -212,7 +212,7 @@ class Report extends Component {
         </tr>
         <tr>
           <td>{year - 1 + "-" + year}</td>
-          <td>0</td>
+          <td>{Ccountfe1}</td>
           <td>{Ccountse1}</td>
           <td>{Ccountte1}</td>
           <td>{Ccountbe1}</td>

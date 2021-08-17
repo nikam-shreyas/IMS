@@ -67,8 +67,12 @@ class InternshipView extends Component {
   }
   handleClick(data) {
     let remark = prompt("Enter a remark: ");
-
-    this.state.data.remark = remark;
+    this.setState((prevState) => ({
+      data: {
+        ...prevState.data,
+        ["remark"]: remark,
+      },
+    }));
     if (window.confirm("Are you sure?")) {
       if (this.state.data.holder.designation !== "Principal") {
         const { forwardInternship, updateInternship } = this.props;
@@ -130,36 +134,41 @@ class InternshipView extends Component {
   updateStatus(event) {
     event.preventDefault();
     var formData = new FormData(event.target);
+
+    var docsStatus = { ...this.state.data };
+    console.log(docsStatus);
     if (
       this.state.data.docs.AttendanceStatus === "Pending" &&
       formData.get("AttendanceStatus") === "on"
     ) {
-      this.state.data.docs.AttendanceStatus = "Approved";
+      docsStatus.docs.AttendanceStatus = "Approved";
     }
     if (
       this.state.data.docs.ApplicationStatus === "Pending" &&
       formData.get("ApplicationStatus") === "on"
     ) {
-      this.state.data.docs.ApplicationStatus = "Approved";
+      docsStatus.docs.ApplicationStatus = "Approved";
     }
     if (
       this.state.data.docs.UndertakingStatus === "Pending" &&
       formData.get("UndertakingStatus") === "on"
     ) {
-      this.state.data.docs.UndertakingStatus = "Approved";
+      docsStatus.docs.UndertakingStatus = "Approved";
     }
     if (
       this.state.data.docs.OfferLetterStatus === "Pending" &&
       formData.get("OfferLetterStatus") === "on"
     ) {
-      this.state.data.docs.OfferLetterStatus = "Approved";
+      docsStatus.docs.OfferLetterStatus = "Approved";
     }
     if (
       this.state.data.docs.MarksheetsStatus === "Pending" &&
       formData.get("MarksheetsStatus") === "on"
     ) {
-      this.state.data.docs.MarksheetsStatus = "Approved";
+      docsStatus.docs.MarksheetsStatus = "Approved";
     }
+    console.log(docsStatus);
+    this.setState({ data: docsStatus });
     alert("Updated!");
   }
   handleReject() {
@@ -167,7 +176,13 @@ class InternshipView extends Component {
       "Enter a reason for the rejection of this application."
     );
     if (reason) {
-      this.state.data.comments = reason;
+      this.setState((prevState) => ({
+        data: {
+          ...prevState.data,
+          ["comment"]: reason,
+        },
+      }));
+
       const { rejectInternship } = this.props;
       rejectInternship(this.state.data).then(alert("Application Rejected"));
       this.props.history.push("/internships");

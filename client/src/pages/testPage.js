@@ -14,9 +14,6 @@ import {
   setFaculty,
 } from "../store/actions/admin";
 class TestPage extends Component {
-  constructor(props) {
-    super(props);
-  }
   async componentDidMount() {
     const downloadPDFLink = document.getElementById("downloadPDFLink");
     const downloadPDFResponse = await fetch(
