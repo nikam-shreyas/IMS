@@ -1,4 +1,7 @@
 # IMS
+
+PS: This project is associated with the internship application process for PICT College and confirms the business logic as specified by the university's requirements. You can feel free to use the project but it would require changes for personal use.
+
 Are you tired of sifting through stacks of paper applications for internships? Say goodbye to the hassle with Internship Master! Our internship application management system streamlines the process for university-level internships.
 
 With our platform, you can:
